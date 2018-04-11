@@ -48,4 +48,26 @@ public class BaseDeDatos {
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+    
+    
+        public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
+        {
+           Statement consulta;
+            try
+            {
+                consulta = conexion.createStatement();
+                consulta.execute("update proveedor set " + 
+                "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = " + mNuevoProveedor.getEmpresa() + 
+                "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");
+                return true;
+            }
+            catch (Exception e)
+            {
+               e.printStackTrace();
+                return false;
+            }
+        }
+>>>>>>> 27b9429d4544a4b3682097afb4d4a154d2a9b307
 }
