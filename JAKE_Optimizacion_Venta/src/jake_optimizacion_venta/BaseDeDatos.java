@@ -6,6 +6,7 @@ package jake_optimizacion_venta;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class BaseDeDatos {
     private Connection conexion;
@@ -31,6 +32,20 @@ public class BaseDeDatos {
             this.conexion.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        }
+    }
+    
+    public boolean eliminarPrenda(Proveedor mProveedor) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from proveedor "
+                    + " where codigo = " + mProveedor.getId_proveedor() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
