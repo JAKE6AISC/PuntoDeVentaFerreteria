@@ -127,7 +127,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         mProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
 
         if (mBD.conectar()) {// se realiza primero la conexion
-            if (mBD.ModificarProveedor(mProveedor,mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
+            if (mBD.modificarProveedor(mProveedor,mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
                                                                      //  a la clase base de datos
                 JOptionPane.showMessageDialog(null, "Datos del Proveedor Modificados Exitosamente");
             } else {

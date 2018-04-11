@@ -50,20 +50,20 @@ public class BaseDeDatos {
     }
     
     
-        public boolean ModificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
+        public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
         {
-           Statement Consulta;
+           Statement consulta;
             try
             {
-                Consulta = conexion.createStatement();
-                Consulta.execute("update proveedor set " + 
+                consulta = conexion.createStatement();
+                consulta.execute("update proveedor set " + 
                 "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = " + mNuevoProveedor.getEmpresa() + 
                 "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");
                 return true;
             }
             catch (Exception e)
             {
-              e.printStackTrace();
+               e.printStackTrace();
                 return false;
             }
         }
