@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Kevin Fabián Cruz Gómez 
+ * Formulario para dar de baja un proveedor
  */
 package jake_optimizacion_venta;
 import javax.swing.JOptionPane;
@@ -105,9 +104,9 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_eliminarActionPerformed
-        mProveedor.setId_proveedor(Integer.parseInt(this.TXTid_prov.getText()));
-        if (mBD.conectar()) {
-            if (mBD.eliminarPrenda(mProveedor)) {
+        mProveedor.setId_proveedor(Integer.parseInt(this.TXTid_prov.getText())); //Se obtiene el id para eliminar el proveedor deseado
+        if (mBD.conectar()) { //Método para conectar con la base de datos
+            if (mBD.eliminarPrenda(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                 JOptionPane.showMessageDialog(null, "Proveedor Eliminado con éxito");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al eliminar");
