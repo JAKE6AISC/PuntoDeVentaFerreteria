@@ -1,7 +1,12 @@
-
-package jake_optimizacion_venta;
 /*
-Jose Andres Chavez Hernandez
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jake_optimizacion_venta;
+
+/*
+ Jose Andres Chavez Hernandez
  Se hizo el formulario del metodo Agregar Proveedor 
  @author Andy
  */

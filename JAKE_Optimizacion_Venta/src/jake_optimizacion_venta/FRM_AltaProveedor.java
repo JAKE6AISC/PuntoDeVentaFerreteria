@@ -96,7 +96,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
                     .addComponent(BTNAtras)
                     .addComponent(BTNGuardar)
                     .addComponent(BTNSalir))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
