@@ -46,6 +46,11 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         BTNAtras.setText("Atras");
 
         BTNGuardar.setText("Guardar");
+        BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNGuardarActionPerformed(evt);
+            }
+        });
 
         BTNSalir.setText("Salir");
 
@@ -101,6 +106,10 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNGuardarActionPerformed
 
     /**
      * @param args the command line arguments

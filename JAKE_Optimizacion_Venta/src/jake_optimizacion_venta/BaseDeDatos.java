@@ -35,7 +35,7 @@ public class BaseDeDatos {
         }
     }
     
-    public boolean eliminarPrenda(Proveedor mProveedor) {
+    public boolean eliminarProveedor(Proveedor mProveedor) {
         Statement consulta;
 
         try {
@@ -48,10 +48,6 @@ public class BaseDeDatos {
             return false;
         }
     }
-<<<<<<< HEAD
-=======
-    
-    
         public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
         {
            Statement consulta;
@@ -69,5 +65,4 @@ public class BaseDeDatos {
                 return false;
             }
         }
->>>>>>> 27b9429d4544a4b3682097afb4d4a154d2a9b307
 }
