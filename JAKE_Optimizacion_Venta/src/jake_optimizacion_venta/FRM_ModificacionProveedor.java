@@ -5,6 +5,8 @@
  */
 package jake_optimizacion_venta;
 
+import javax.swing.JOptionPane;
+
 /**
  * Formulario Modificacion Proveedor agregada por Juanes
  * @author Juanez
@@ -27,21 +29,117 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TXT_Id_Proveedor = new javax.swing.JTextField();
+        TXT_NuevoNombreProveedor = new javax.swing.JTextField();
+        TXT_NuevaEmpresa = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        TXT_ModificarProveedor = new javax.swing.JButton();
+        TXT_Salir = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Modificacion de Proveedores");
+
+        jLabel2.setText("Id_Proveedor");
+
+        jLabel3.setText("Nuevo Nombre");
+
+        jLabel4.setText("Nueva Empresa");
+
+        TXT_ModificarProveedor.setText("Modificar");
+        TXT_ModificarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_ModificarProveedorActionPerformed(evt);
+            }
+        });
+
+        TXT_Salir.setText("Salir");
+        TXT_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TXT_ModificarProveedor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TXT_Id_Proveedor)
+                            .addComponent(TXT_NuevoNombreProveedor)
+                            .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_ModificarProveedor)
+                    .addComponent(TXT_Salir))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TXT_ModificarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ModificarProveedorActionPerformed
+        BaseDeDatos mBD = new BaseDeDatos();
+        Proveedor mProveedor = new Proveedor();// necesitamos de los datos originales el id
+        Proveedor mNuevoProveedor = new Proveedor(); // y los nuevos datos nombre y empresa
+        // se asigna los nuevos valores con el id para la busueda
+        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText()));
+        mProveedor.setNombre(this.TXT_NuevoNombreProveedor.getText());
+        mProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
+
+        if (mBD.conectar()) {// se realiza primero la conexion
+            if (mBD.ModificarProveedor(mProveedor,mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
+                                                                     //  a la clase base de datos
+                JOptionPane.showMessageDialog(null, "Datos del Proveedor Modificados Exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+            mBD.desconectar();// se desconecta
+        }
+    }//GEN-LAST:event_TXT_ModificarProveedorActionPerformed
+
+    private void TXT_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_SalirActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_TXT_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +177,14 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TXT_Id_Proveedor;
+    private javax.swing.JButton TXT_ModificarProveedor;
+    private javax.swing.JTextField TXT_NuevaEmpresa;
+    private javax.swing.JTextField TXT_NuevoNombreProveedor;
+    private javax.swing.JButton TXT_Salir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
