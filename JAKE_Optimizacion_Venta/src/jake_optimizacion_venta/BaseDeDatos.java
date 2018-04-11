@@ -35,7 +35,7 @@ public class BaseDeDatos {
         }
     }
     
-    public boolean eliminarPrenda(Proveedor mProveedor) {
+    public boolean eliminarProveedor(Proveedor mProveedor) {
         Statement consulta;
 
         try {

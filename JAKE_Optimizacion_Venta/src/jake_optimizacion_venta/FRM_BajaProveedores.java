@@ -106,7 +106,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private void BTN_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_eliminarActionPerformed
         mProveedor.setId_proveedor(Integer.parseInt(this.TXTid_prov.getText())); //Se obtiene el id para eliminar el proveedor deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
-            if (mBD.eliminarPrenda(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
+            if (mBD.eliminarProveedor(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                 JOptionPane.showMessageDialog(null, "Proveedor Eliminado con éxito");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al eliminar");
