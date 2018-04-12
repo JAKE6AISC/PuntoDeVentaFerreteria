@@ -89,7 +89,7 @@ public class BaseDeDatos {
             }
         }
         
-            public boolean agregarProducto(Producto mProducto)
+        public boolean agregarProducto(Producto mProducto)
         {
            Statement consulta;
             try
@@ -97,8 +97,8 @@ public class BaseDeDatos {
                 consulta = conexion.createStatement();
                 consulta.execute("insert into producto " +
                             "(id_producto,precio,nombre,tipo,clasificacion) " +
-                            "values ('"
-                            + mProducto.getId_Producto() + "','" + mProducto.getPrecio() + "'," + mProducto.getNombre()+ ",'"
+                            "values ('" + mProducto.getId_Producto() + "','" + mProducto.getPrecio() 
+                            + "'," + mProducto.getNombre()+ ",'"
                             + mProducto.getTipo() + "','" 
                             + mProducto.getClasificacion() + "');");
                 return true;
