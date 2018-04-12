@@ -1,14 +1,18 @@
 package jake_optimizacion_venta;
+
 /**
- * Creacion de la clase Producto hecha por Juanes si falta algun dato 
+ * Creacion de la clase Producto hecha por Juanes si falta algun dato
+ *
  * @author Juanez
  */
 public class Producto {
-    int Id_Producto;
-    String Nombre;
-    String Clasificacion;
-    String Tipo;
-    float Precio;
+
+    private int Id_Producto;
+    private String Nombre;
+    private String Clasificacion;
+    private String Tipo;
+    private float Precio;
+
     public Producto() {
         Id_Producto = 0;
         Nombre = "";
@@ -56,6 +60,5 @@ public class Producto {
     public void setPrecio(float Precio) {
         this.Precio = Precio;
     }
-    
-    
+
 }
