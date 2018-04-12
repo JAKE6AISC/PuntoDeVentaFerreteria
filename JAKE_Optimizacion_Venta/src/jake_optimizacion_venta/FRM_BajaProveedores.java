@@ -33,7 +33,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         LBLid_prov = new javax.swing.JLabel();
         TXTid_prov = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTableProveedor = new javax.swing.JTable();
         BTN_atras = new javax.swing.JButton();
         BTN_eliminar = new javax.swing.JButton();
         BTNsalir = new javax.swing.JButton();
@@ -42,7 +42,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
         LBLid_prov.setText("ID_Proveedor: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -50,7 +50,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_atras.setText("Atrás");
 
@@ -154,9 +154,9 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private javax.swing.JButton BTN_atras;
     private javax.swing.JButton BTN_eliminar;
     private javax.swing.JButton BTNsalir;
+    private javax.swing.JTable JTableProveedor;
     private javax.swing.JLabel LBLid_prov;
     private javax.swing.JTextField TXTid_prov;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
