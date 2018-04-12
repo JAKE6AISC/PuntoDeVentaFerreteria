@@ -5,6 +5,8 @@
  */
 package jake_optimizacion_venta;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andy
@@ -46,6 +48,11 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         BTNAtras.setText("Atras");
 
         BTNGuardar.setText("Guardar");
+        BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNGuardarActionPerformed(evt);
+            }
+        });
 
         BTNSalir.setText("Salir");
 
@@ -101,6 +108,25 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
+       BaseDeDatos mBD = new BaseDeDatos();
+        Proveedor mProveedor = new Proveedor();
+
+        mProveedor.setId_proveedor(Integer.parseInt(this.TXTIDProveedor.getText()));
+        mProveedor.setNombre(this.TXTNombre.getText());
+        mProveedor.setEmpresa(this.TXTEmpresa.getText());
+       
+
+        if (mBD.conectar()) {
+            if (mBD.agregarProveedor(mProveedor)) {
+                JOptionPane.showMessageDialog(null, "Guardado Con Exito...");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error Al Guardar");
+            }
+            mBD.desconectar();
+        }
+    }//GEN-LAST:event_BTNGuardarActionPerformed
 
     /**
      * @param args the command line arguments

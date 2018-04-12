@@ -34,7 +34,22 @@ public class BaseDeDatos {
             System.err.println(e.getMessage());
         }
     }
-    
+    public boolean agregarProveedor(Proveedor mProveedor){
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute ( "insert into proveedor "  +
+                             "(Id_Proveedor, Nombre, Empresa ) " +
+                             "values ('" + mProveedor.getId_proveedor() +
+                             "'" + mProveedor.getNombre() + "," +
+                             "'" + mProveedor.getEmpresa() + "');");
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean eliminarPrenda(Proveedor mProveedor) {
         Statement consulta;
 
@@ -48,9 +63,6 @@ public class BaseDeDatos {
             return false;
         }
     }
-<<<<<<< HEAD
-=======
-    
     
         public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
         {
@@ -69,5 +81,5 @@ public class BaseDeDatos {
                 return false;
             }
         }
->>>>>>> 27b9429d4544a4b3682097afb4d4a154d2a9b307
+
 }
