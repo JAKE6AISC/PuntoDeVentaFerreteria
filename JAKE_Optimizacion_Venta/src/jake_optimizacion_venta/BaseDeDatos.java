@@ -34,6 +34,7 @@ public class BaseDeDatos {
             System.err.println(e.getMessage());
         }
     }
+
     public boolean agregarProveedor(Proveedor mProveedor){
         Statement consulta;
         try {
@@ -50,7 +51,11 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean eliminarPrenda(Proveedor mProveedor) {
+   
+
+    
+    public boolean eliminarProveedor(Proveedor mProveedor) {
+
         Statement consulta;
 
         try {
@@ -63,7 +68,9 @@ public class BaseDeDatos {
             return false;
         }
     }
+
     
+
         public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor)
         {
            Statement consulta;

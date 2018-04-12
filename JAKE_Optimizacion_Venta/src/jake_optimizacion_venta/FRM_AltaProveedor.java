@@ -110,6 +110,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
+
        BaseDeDatos mBD = new BaseDeDatos();
         Proveedor mProveedor = new Proveedor();
 
@@ -126,6 +127,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
             }
             mBD.desconectar();
         }
+
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     /**
