@@ -61,7 +61,7 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("delete from proveedor "
-                    + " where codigo = " + mProveedor.getId_proveedor() + ";");
+                    + " where id_proveedor = " + mProveedor.getId_proveedor() + ";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,6 +80,27 @@ public class BaseDeDatos {
                 consulta.execute("update proveedor set " + 
                 "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = " + mNuevoProveedor.getEmpresa() + 
                 "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");
+                return true;
+            }
+            catch (Exception e)
+            {
+               e.printStackTrace();
+                return false;
+            }
+        }
+        
+            public boolean agregarProducto(Producto mProducto)
+        {
+           Statement consulta;
+            try
+            {
+                consulta = conexion.createStatement();
+                consulta.execute("insert into producto " +
+                            "(id_producto,precio,nombre,tipo,clasificacion) " +
+                            "values ('"
+                            + mProducto.getId_Producto() + "','" + mProducto.getPrecio() + "'," + mProducto.getNombre()+ ",'"
+                            + mProducto.getTipo() + "','" 
+                            + mProducto.getClasificacion() + "');");
                 return true;
             }
             catch (Exception e)
