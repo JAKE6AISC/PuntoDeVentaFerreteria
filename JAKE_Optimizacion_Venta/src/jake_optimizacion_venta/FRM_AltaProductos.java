@@ -15,12 +15,12 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private void initComponents() {
 
         BTN_Salir = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        LBL_Id_Producto = new javax.swing.JLabel();
+        LBL_Nombre_Producto = new javax.swing.JLabel();
+        LBL_Clasificacion = new javax.swing.JLabel();
+        LBL_Tipo = new javax.swing.JLabel();
         TXT_Id_Producto = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        LBL_Precio = new javax.swing.JLabel();
         TXT_Clasificacion = new javax.swing.JTextField();
         TXT_NombreProducto = new javax.swing.JTextField();
         TXT_Tipo = new javax.swing.JTextField();
@@ -28,18 +28,19 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         BTN_Agegar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Alta Productos"); // NOI18N
 
         BTN_Salir.setText("Salir");
 
-        jLabel1.setText("Id_Producto");
+        LBL_Id_Producto.setText("Id_Producto");
 
-        jLabel2.setText("Nombre");
+        LBL_Nombre_Producto.setText("Nombre");
 
-        jLabel3.setText("Clasificacion");
+        LBL_Clasificacion.setText("Clasificacion");
 
-        jLabel4.setText("Tipo");
+        LBL_Tipo.setText("Tipo");
 
-        jLabel5.setText("Precio");
+        LBL_Precio.setText("Precio");
 
         BTN_Agegar.setText("Agregar");
         BTN_Agegar.addActionListener(new java.awt.event.ActionListener() {
@@ -55,11 +56,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(LBL_Id_Producto)
+                    .addComponent(LBL_Nombre_Producto)
+                    .addComponent(LBL_Clasificacion)
+                    .addComponent(LBL_Tipo)
+                    .addComponent(LBL_Precio))
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -81,22 +82,22 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Id_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(LBL_Id_Producto))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_NombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(LBL_Nombre_Producto))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Clasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(LBL_Clasificacion))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(LBL_Tipo))
                         .addGap(18, 18, 18)
                         .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(LBL_Precio, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Agegar)
@@ -162,15 +163,15 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Agegar;
     private javax.swing.JButton BTN_Salir;
+    private javax.swing.JLabel LBL_Clasificacion;
+    private javax.swing.JLabel LBL_Id_Producto;
+    private javax.swing.JLabel LBL_Nombre_Producto;
+    private javax.swing.JLabel LBL_Precio;
+    private javax.swing.JLabel LBL_Tipo;
     private javax.swing.JTextField TXT_Clasificacion;
     private javax.swing.JTextField TXT_Id_Producto;
     private javax.swing.JTextField TXT_NombreProducto;
     private javax.swing.JTextField TXT_Precio;
     private javax.swing.JTextField TXT_Tipo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

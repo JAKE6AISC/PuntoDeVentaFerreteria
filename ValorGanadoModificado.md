@@ -71,16 +71,20 @@
 **TABLA DE ESTIMACIÓN DE VALOR GANADO.**
 
 |Tarea | Hora | VGP | VGA |Due Date| VG|
-| CPV  |  1  |7.6% |7.6% |    1   |   |
-| APV  |  1  |7.6% |15.2%|    1   |   |
-| BPV  |  1  |7.6% |22.8%|    1   |   |
-| MPV  |  1  |7.6% |30.4%|    1   |   |
-| CPV  |  1  |7.6% |38.0%|    2   |   |
-| CPD  |  1  |7.6% |45.6%|    2   |   |
-| APD  |  1  |7.6% |53.7%|    2   |   |
-| BPD  |  1  |7.6% |60.8%|    2   |   |
-| MPD  |  1  |7.6% |68.4%|    3   |   |
-| CPD  |  1  |7.6% |75.6%|    3   |   |
-| RV   |  1  |7.6% |83.6%|    3   |   |
-| RE   |  1  |7.6% |91.2%|    3   |   |
-|menu  |  1  |7.6% |98.8%|    4   |   |
+|---|---|---|---|---|---|
+| Catalogo Proveedor  |  1  |6.6% |6.6% |    1   |   |
+| Alta Proveedor  |  1  |6.6% |13.2%|    1   |   |
+| Baja Proveedor |  1  |6.6% |19.8%|    1   |   |
+| Modif PProveedor  |  1  |6.6% |26.4%|    1   |   |
+| Consulta Proveedor  |  1  |6.6% |33.0%|    2   |   |
+| Catalogo Productos  |  1  |6.6% |39.6%|    2   |   |
+| Alta Producto  |  1  |6.6% |46.2%|    2   |   |
+| Baja Producto  |  1  |6.6% |52.8%|    2   |   |
+| Mofif Productos  |  1  |6.6% |59.4%|    3   |   |
+| Consulta Producto  |  1  |6.6% |66.0%|    3   |   |
+| Reporte Venta   |  1  |6.6% |72.6%|    3   |   |
+| Reporte Existencia   |  1  |6.6% |79.2%|    3   |   |
+| Compra | 1 | 6.6 % | 85.8% | 4 |	|
+| Venta | 1 | 6.6 % | 92.4| | 4	|
+|Menu Principal  |  1  |7.6% |99.0%|    4   |   |
+

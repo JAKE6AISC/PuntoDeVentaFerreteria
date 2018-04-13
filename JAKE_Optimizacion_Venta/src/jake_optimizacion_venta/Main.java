@@ -5,7 +5,8 @@ package jake_optimizacion_venta;
  */
 public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+       Menu mMenu = new Menu();
+       mMenu.show();
     }
     
 }
