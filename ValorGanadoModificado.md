@@ -72,19 +72,19 @@
 
 |Tarea | Hora | VGP | VGA |Due Date| VG|
 |---|---|---|---|---|---|
-| Catalogo Proveedor  |  1  |6.6% |6.6% |    1   |   |
-| Alta Proveedor  |  1  |6.6% |13.2%|    1   |   |
-| Baja Proveedor |  1  |6.6% |19.8%|    1   |   |
-| Modif PProveedor  |  1  |6.6% |26.4%|    1   |   |
-| Consulta Proveedor  |  1  |6.6% |33.0%|    2   |   |
-| Catalogo Productos  |  1  |6.6% |39.6%|    2   |   |
-| Alta Producto  |  1  |6.6% |46.2%|    2   |   |
-| Baja Producto  |  1  |6.6% |52.8%|    2   |   |
-| Mofif Productos  |  1  |6.6% |59.4%|    3   |   |
-| Consulta Producto  |  1  |6.6% |66.0%|    3   |   |
-| Reporte Venta   |  1  |6.6% |72.6%|    3   |   |
+| Alta Proveedor  |  1  |6.6% |6.6% |    1   |   |
+| Baja Proveedor  |  1  |6.6% |13.2%|    1   |   |
+| Cambios Proveedor |  1  |6.6% |19.8%|    1   |   |
+| Consulta Proveedor  |  1  |6.6% |26.4%|    1   |   |
+| Alta Productos  |  1  |6.6% |33.0%|    2   |   |
+| Baja Productos  |  1  |6.6% |39.6%|    2   |   |
+| Cambios Producto  |  1  |6.6% |46.2%|    2   |   |
+| Consulta Producto  |  1  |6.6% |52.8%|    2   |   |
+| Ctalogo Proveedores  |  1  |6.6% |59.4%|    3   |   |
+| Catalogo Productos  |  1  |6.6% |66.0%|    3   |   |
+| Menu Principal  |  1  |6.6% |72.6%|    3   |   |
 | Reporte Existencia   |  1  |6.6% |79.2%|    3   |   |
-| Compra | 1 | 6.6 % | 85.8% | 4 |	|
+| Reporte Venta | 1 | 6.6 % | 85.8% | 4 |	|
 | Venta | 1 | 6.6 % | 92.4| 4 | |
-|Menu Principal  |  1  |7.6% |99.0%|    4   |   |
+| Compra  |  1  |7.6% |99.0%|    4   |   |
 
