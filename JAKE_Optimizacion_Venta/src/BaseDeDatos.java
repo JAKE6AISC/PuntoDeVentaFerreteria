@@ -88,5 +88,24 @@ public class BaseDeDatos {
                 return false;
             }
         }
+        
+        public boolean modificacionProducto(Producto mProducto, Producto mNuevoProducto){
+            
+            Statement consulta;
+            try {
+                consulta = conexion.createStatement();
+                consulta.execute("update producto set" + 
+                        "nombre = '" + mNuevoProducto.getNombre() + "tipo = '" + mNuevoProducto.getTipo() + 
+                        "clasificacion = '" + mNuevoProducto.getClasificacion() + "Precio = " + mNuevoProducto.getPrecio() +
+                        "' where id_producto = '" + mProducto.getId_Producto() + "';");
+                
+                return true;
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                return false;
+            }
+            
+        }
 
 }
