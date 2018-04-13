@@ -5,14 +5,21 @@
  */
 //María Eneida Salas Martínez 
 //El diseño del formulario FRM_ConsultasProveedores
+//***Se agrego la codificación del Botón Buscar
 package jake_optimizacion_venta;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Ene
  */
 public class FRM_ConsultasProveedor extends javax.swing.JFrame {
-
+DefaultTableModel ModeloTabla = new DefaultTableModel();
+ BaseDeDatos mBaseDeDatos= new BaseDeDatos();
+ Proveedor mProveedor = new Proveedor();
     /**
      * Creates new form FRM_ConsultasProveedor
      */
@@ -29,27 +36,32 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Txtid_Proveedor = new javax.swing.JTextField();
+        TXT_Id_Proveedor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        BtnBuscar = new javax.swing.JButton();
+        BTN_Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTableProveedores = new javax.swing.JTable();
-        BtnAtras = new javax.swing.JButton();
-        BtnSalir = new javax.swing.JButton();
+        JTableProveedor = new javax.swing.JTable();
+        BTN_Atras = new javax.swing.JButton();
+        BTN_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Txtid_Proveedor.addActionListener(new java.awt.event.ActionListener() {
+        TXT_Id_Proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Txtid_ProveedorActionPerformed(evt);
+                TXT_Id_ProveedorActionPerformed(evt);
             }
         });
 
         jLabel1.setText("id_Proveedor");
 
-        BtnBuscar.setText("Buscar");
+        BTN_Buscar.setText("Buscar");
+        BTN_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_BuscarActionPerformed(evt);
+            }
+        });
 
-        JTableProveedores.setModel(new javax.swing.table.DefaultTableModel(
+        JTableProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -60,11 +72,11 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(JTableProveedores);
+        jScrollPane1.setViewportView(JTableProveedor);
 
-        BtnAtras.setText("Atras");
+        BTN_Atras.setText("Atras");
 
-        BtnSalir.setText("Salir");
+        BTN_Salir.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,14 +92,14 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
                             .addGap(25, 25, 25)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(Txtid_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(43, 43, 43)
-                            .addComponent(BtnBuscar)))
+                            .addComponent(BTN_Buscar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(BtnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86)
-                        .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BTN_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,24 +107,70 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Txtid_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnBuscar))
+                    .addComponent(BTN_Buscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAtras)
-                    .addComponent(BtnSalir))
+                    .addComponent(BTN_Atras)
+                    .addComponent(BTN_Salir))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Txtid_ProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txtid_ProveedorActionPerformed
+    private void TXT_Id_ProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Txtid_ProveedorActionPerformed
+    }//GEN-LAST:event_TXT_Id_ProveedorActionPerformed
+
+    private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+            int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+        if(mBaseDeDatos.conectar()){
+            ArrayList Catalogo = null;
+            String [] Dato;
+            
+           ModeloTabla.addColumn("id_proveedor");
+           ModeloTabla.addColumn("nombre");
+           ModeloTabla.addColumn("empresa");
+          
+            
+                  
+                Dato = new String[3];
+           
+               mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor);
+                
+                Dato[0] = "" + (mProveedor.getId_proveedor());
+                Dato[1] = mProveedor.getNombre();
+                Dato[2] = mProveedor.getEmpresa();
+                
+                ModeloTabla.addRow(Dato);
+
+            this.JTableProveedor = new javax.swing.JTable();
+            this.JTableProveedor.setModel(ModeloTabla);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+            
+            
+
+            if (this.JTableProveedor.getRowCount() > 0)
+            {
+                this.JTableProveedor.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+        }
+        mBaseDeDatos.desconectar();
+
+        
+    }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,11 +208,11 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAtras;
-    private javax.swing.JButton BtnBuscar;
-    private javax.swing.JButton BtnSalir;
-    private javax.swing.JTable JTableProveedores;
-    private javax.swing.JTextField Txtid_Proveedor;
+    private javax.swing.JButton BTN_Atras;
+    private javax.swing.JButton BTN_Buscar;
+    private javax.swing.JButton BTN_Salir;
+    private javax.swing.JTable JTableProveedor;
+    private javax.swing.JTextField TXT_Id_Proveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

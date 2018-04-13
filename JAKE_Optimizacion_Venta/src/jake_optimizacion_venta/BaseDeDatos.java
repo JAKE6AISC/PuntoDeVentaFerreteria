@@ -6,8 +6,10 @@ package jake_optimizacion_venta;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BaseDeDatos {
 
@@ -111,5 +113,28 @@ public class BaseDeDatos {
             return false;
         }
     }
-
+  public Proveedor consultarProveedor(int id_proveedor) {
+        Proveedor mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+        List<Proveedor> CatalogoBD = new ArrayList<>();
+        
+        try {
+            mProveedor = new Proveedor();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedor " + 
+                    "where id_proveedor = '" + id_proveedor + "';");
+            if (resultado.next()) {
+               
+                mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
+                mProveedor.setNombre(resultado.getString("nombre"));
+                mProveedor.setEmpresa(resultado.getString("empresa"));
+                CatalogoBD.add(mProveedor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return mProveedor;        
+    }   
 }
