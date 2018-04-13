@@ -4,7 +4,9 @@
  */
 package jake_optimizacion_venta;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,6 +15,7 @@ import javax.swing.JOptionPane;
 public class FRM_BajaProductos extends javax.swing.JFrame {
     Producto mProducto = new Producto();
     BaseDeDatos mBD = new BaseDeDatos();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
     /**
      * Creates new form FRM_BajaProductos
      */
@@ -41,14 +44,12 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
         LBLid.setText("ID_Producto: ");
 
-        JTable_Bajas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
+        JTable_Bajas.setModel(modeloTabla);
+        JTable_Bajas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTable_BajasKeyPressed(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(JTable_Bajas);
 
         BTN_atras.setText("Atrás");
@@ -113,6 +114,44 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             mBD.desconectar();
         }
     }//GEN-LAST:event_BTN_EliminarActionPerformed
+
+    private void JTable_BajasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTable_BajasKeyPressed
+        if(mBD.conectar()){
+            ArrayList mListaProductos = mBD.consultarProductos();  
+            String [] Datos;
+        
+            modeloTabla.addColumn("ID");
+            modeloTabla.addColumn("Nombre");
+            modeloTabla.addColumn("Clasificación");
+            modeloTabla.addColumn("Tipo");
+            modeloTabla.addColumn("Precio");
+            
+            for (Object mListaProductos : mListaProductos) {
+                Datos = new String[5];
+                mProducto = (Producto)mListaProductos;
+                Datos[0] = "" + mProducto.getId_Producto();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = mProducto.getClasificacion();
+                Datos[3] = mProducto.getTipo();
+                Datos[4] = "" + mProducto.getPrecio();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            this.JTable_Bajas = new javax.swing.JTable();
+            this.JTable_Bajas.setModel(modeloTabla);
+            this.JTable_Bajas.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTable_Bajas.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.JTable_Bajas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.JTable_Bajas.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.JTable_Bajas.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.JTable_Bajas.getRowCount() > 0) {
+            this.JTable_Bajas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+                System.err.println("Error al consultar producto");
+            }
+        mBD.desconectar();
+    }//GEN-LAST:event_JTable_BajasKeyPressed
 
     /**
      * @param args the command line arguments
