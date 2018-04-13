@@ -32,23 +32,20 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         TXT_Id_Proveedor = new javax.swing.JTextField();
         TXT_NuevoNombreProveedor = new javax.swing.JTextField();
         TXT_NuevaEmpresa = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        LBL_Id_Proveedor = new javax.swing.JLabel();
+        LBL_NuevoNombreProveedor = new javax.swing.JLabel();
+        LBL_NuevaEmpresaProveedor = new javax.swing.JLabel();
         TXT_ModificarProveedor = new javax.swing.JButton();
         TXT_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("Modificacion Proveedor"); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Modificacion de Proveedores");
+        LBL_Id_Proveedor.setText("Id_Proveedor");
 
-        jLabel2.setText("Id_Proveedor");
+        LBL_NuevoNombreProveedor.setText("Nuevo Nombre");
 
-        jLabel3.setText("Nuevo Nombre");
-
-        jLabel4.setText("Nueva Empresa");
+        LBL_NuevaEmpresaProveedor.setText("Nueva Empresa");
 
         TXT_ModificarProveedor.setText("Modificar");
         TXT_ModificarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -69,44 +66,37 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBL_Id_Proveedor)
+                    .addComponent(LBL_NuevoNombreProveedor)
+                    .addComponent(LBL_NuevaEmpresaProveedor))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(TXT_ModificarProveedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TXT_Id_Proveedor)
-                            .addComponent(TXT_NuevoNombreProveedor)
-                            .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(TXT_ModificarProveedor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_Id_Proveedor)
+                    .addComponent(TXT_NuevoNombreProveedor)
+                    .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(LBL_Id_Proveedor))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(LBL_NuevoNombreProveedor))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(LBL_NuevaEmpresaProveedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_ModificarProveedor)
@@ -177,14 +167,13 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LBL_Id_Proveedor;
+    private javax.swing.JLabel LBL_NuevaEmpresaProveedor;
+    private javax.swing.JLabel LBL_NuevoNombreProveedor;
     private javax.swing.JTextField TXT_Id_Proveedor;
     private javax.swing.JButton TXT_ModificarProveedor;
     private javax.swing.JTextField TXT_NuevaEmpresa;
     private javax.swing.JTextField TXT_NuevoNombreProveedor;
     private javax.swing.JButton TXT_Salir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
