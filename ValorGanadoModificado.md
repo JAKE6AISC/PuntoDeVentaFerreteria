@@ -85,6 +85,6 @@
 | Reporte Venta   |  1  |6.6% |72.6%|    3   |   |
 | Reporte Existencia   |  1  |6.6% |79.2%|    3   |   |
 | Compra | 1 | 6.6 % | 85.8% | 4 |	|
-| Venta | 1 | 6.6 % | 92.4| | 4	|
+| Venta | 1 | 6.6 % | 92.4| 4 | |
 |Menu Principal  |  1  |7.6% |99.0%|    4   |   |
 
