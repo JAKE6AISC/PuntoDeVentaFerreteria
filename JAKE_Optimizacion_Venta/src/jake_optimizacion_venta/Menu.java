@@ -95,11 +95,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        setVisible(false);
+        this.setEnabled(false);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_CatalogoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProductosActionPerformed
-            
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setEnabled(true);
     }//GEN-LAST:event_BTN_CatalogoProductosActionPerformed
 
     /**
