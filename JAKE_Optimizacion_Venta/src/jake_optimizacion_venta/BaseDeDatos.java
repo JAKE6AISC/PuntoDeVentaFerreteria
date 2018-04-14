@@ -1,5 +1,6 @@
 /*
  **Kevin Fabian Cruz Gómez
+ **Métodos agregados por los integrantes del equipo
  **Clase Base de datos para la conexión 
  */
 package jake_optimizacion_venta;

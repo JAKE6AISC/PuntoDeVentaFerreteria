@@ -6,7 +6,7 @@ package jake_optimizacion_venta;
 public class Main {
     public static void main(String[] args) {
        Menu mMenu = new Menu();
-       mMenu.show();
+       mMenu.setVisible(true);
     }
     
 }
