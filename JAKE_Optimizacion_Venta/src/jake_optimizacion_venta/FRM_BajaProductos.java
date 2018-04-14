@@ -117,7 +117,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
     private void JTable_BajasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTable_BajasKeyPressed
         if(mBD.conectar()){
-            ArrayList mListaProductos = mBD.consultarProductos();  
+           ArrayList mListaProductos = mBD.consultarProductos();  
             String [] Datos;
         
             modeloTabla.addColumn("ID");
@@ -148,7 +148,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             this.JTable_Bajas.setRowSelectionInterval(0, 0);
             }
         } else {
-                System.err.println("Error al consultar producto");
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
             }
         mBD.desconectar();
     }//GEN-LAST:event_JTable_BajasKeyPressed
