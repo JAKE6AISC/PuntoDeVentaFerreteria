@@ -19,6 +19,7 @@ public class Menu extends javax.swing.JFrame {
         BTN_GeneradorReportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu");
         setName("Menu"); // NOI18N
 
         BTN_CatalogoProductos.setText("Catalogo de Productos");

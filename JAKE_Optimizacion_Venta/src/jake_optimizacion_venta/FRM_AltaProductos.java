@@ -30,6 +30,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         BTN_Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FRM_AltaProductos");
         setName("Alta Productos"); // NOI18N
 
         BTN_Salir.setText("Salir");

@@ -24,6 +24,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         BTN_Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FRM_ModificacionProveedores");
         setName("Modificacion Proveedor"); // NOI18N
 
         TXT_Id_Proveedor.addFocusListener(new java.awt.event.FocusAdapter() {
