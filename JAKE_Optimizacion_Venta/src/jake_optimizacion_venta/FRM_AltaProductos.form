@@ -32,21 +32,23 @@
                   <Component id="LBL_Clasificacion" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="LBL_Tipo" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="LBL_Precio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="BTN_Agegar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="BTN_Salir" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="TXT_NombreProducto" alignment="0" max="32767" attributes="0"/>
+                  <Component id="TXT_NombreProducto" alignment="0" pref="209" max="32767" attributes="0"/>
                   <Component id="TXT_Id_Producto" alignment="0" max="32767" attributes="0"/>
                   <Component id="TXT_Clasificacion" alignment="0" max="32767" attributes="0"/>
                   <Component id="TXT_Tipo" alignment="0" max="32767" attributes="0"/>
                   <Component id="TXT_Precio" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,6 +86,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTN_Agegar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTN_Salir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Atras" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -95,6 +98,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_SalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="LBL_Id_Producto">
       <Properties>
@@ -117,6 +123,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Id_Producto">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_Id_ProductoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="LBL_Precio">
       <Properties>
@@ -124,12 +133,24 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Clasificacion">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_ClasificacionFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_NombreProducto">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_NombreProductoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Tipo">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_TipoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Precio">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_PrecioFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BTN_Agegar">
       <Properties>
@@ -137,6 +158,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_AgegarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BTN_Atras">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atras"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_AtrasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

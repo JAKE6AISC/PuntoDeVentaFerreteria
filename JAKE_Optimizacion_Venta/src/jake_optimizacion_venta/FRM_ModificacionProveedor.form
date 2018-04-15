@@ -25,15 +25,25 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LBL_Id_Proveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_NuevoNombreProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_NuevaEmpresaProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LBL_Id_Proveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_NuevoNombreProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_NuevaEmpresaProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="TXT_ModificarProveedor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="TXT_Salir" min="-2" pref="68" max="-2" attributes="0"/>
@@ -68,6 +78,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TXT_ModificarProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="TXT_Salir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Atras" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -76,10 +87,19 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="TXT_Id_Proveedor">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_Id_ProveedorFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_NuevoNombreProveedor">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_NuevoNombreProveedorFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_NuevaEmpresa">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_NuevaEmpresaFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="LBL_Id_Proveedor">
       <Properties>
@@ -110,6 +130,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_SalirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BTN_Atras">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atras"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_AtrasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
