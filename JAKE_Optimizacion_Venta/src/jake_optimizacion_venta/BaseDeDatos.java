@@ -139,5 +139,29 @@ public class BaseDeDatos {
         return mProveedor;
     }
     
+    public ArrayList consultarProductos() {
+        ArrayList mListaPrendas = new ArrayList();
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from producto;");
+            while (resultado.next()) {
+                mProducto = new Producto();
+                mProducto.setId_Producto(resultado.getInt("id_producto"));
+                mProducto.setPrecio(resultado.getFloat("precio"));
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setTipo(resultado.getString("tipo"));
+                mProducto.setClasificacion(resultado.getString("clasificacion"));
+                mListaPrendas.add(mProducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaPrendas;
+    }
+    
     
 }
