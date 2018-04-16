@@ -37,6 +37,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         BTN_Venta.setText("Venta");
+        BTN_Venta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_VentaActionPerformed(evt);
+            }
+        });
 
         BTN_Salir.setText("Salir");
         BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +103,11 @@ public class Menu extends javax.swing.JFrame {
         FRM_CatalogoProveedor FormCPV = new FRM_CatalogoProveedor();
         FormCPV.setEnabled(true);
     }//GEN-LAST:event_BTN_CatalogoProveedoresActionPerformed
+
+    private void BTN_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VentaActionPerformed
+        FRM_Venta FormVTA = new FRM_Venta();
+        FormVTA.show();
+    }//GEN-LAST:event_BTN_VentaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
