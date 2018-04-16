@@ -1,5 +1,4 @@
 package jake_optimizacion_venta;
-
 /**
  * Creacion de la clase Producto hecha por Juanes si falta algun dato
  *

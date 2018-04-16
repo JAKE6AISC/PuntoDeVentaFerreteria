@@ -1,12 +1,20 @@
 /*
  **Kevin Fabian Cruz Gómez
+ **Métodos agregados por los integrantes del equipo
  **Clase Base de datos para la conexión 
  */
+//Maria Eneida Salas Martínez
+// Se agrego el metodo consultarProveedor 
+//Se agrego el metodo consultaProveedor para hacer una consulta general
+
 package jake_optimizacion_venta;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseDeDatos {
 
@@ -133,4 +141,62 @@ public class BaseDeDatos {
     }
 >>>>>>> 8c617dc54a2a1aadf392f511748fdb042e518a34:JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/BaseDeDatos.java
 
+    public Proveedor consultarProveedor(int id_proveedor) {
+        Proveedor mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+        List<Proveedor> CatalogoBD = new ArrayList<>();
+
+        try {
+            mProveedor = new Proveedor();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedor "
+                    + "where id_proveedor = '" + id_proveedor + "';");
+            if (resultado.next()) {
+                mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
+                mProveedor.setNombre(resultado.getString("nombre"));
+                mProveedor.setEmpresa(resultado.getString("empresa"));
+                CatalogoBD.add(mProveedor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+<<<<<<< HEAD
+            
+        return mProveedor;        
+    }   
+    public ArrayList consultarProveedor(){
+        Proveedor mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+       
+        ArrayList mListaProveedor = new ArrayList();
+        try {
+           mProveedor = new Proveedor();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedor;");
+            
+              while(resultado.next()){
+                mProveedor = new Proveedor();              
+                mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
+                mProveedor.setNombre(resultado.getString("nombre"));
+                mProveedor.setEmpresa(resultado.getString("empresa"));
+              
+                mListaProveedor.add(mProveedor);
+           
+              }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+          return mListaProveedor;  
+            
+    }   
+  
+=======
+
+        return mProveedor;
+    }
+    
+    
+>>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
 }
