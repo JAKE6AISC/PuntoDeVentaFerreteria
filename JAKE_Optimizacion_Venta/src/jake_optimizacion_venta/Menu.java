@@ -90,13 +90,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_CatalogoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProductosActionPerformed
-        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
-        FormCP.setEnabled(true);
+        /*FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setEnabled(true);*/
     }//GEN-LAST:event_BTN_CatalogoProductosActionPerformed
 
     private void BTN_CatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProveedoresActionPerformed
-      /*  FRM_CatalogoProveedores FormCPV = new FRM_CatalogoProveedores();
-        FormCPV.setEnabled(true);*/
+        FRM_CatalogoProveedor FormCPV = new FRM_CatalogoProveedor();
+        FormCPV.setEnabled(true);
     }//GEN-LAST:event_BTN_CatalogoProveedoresActionPerformed
 
     public static void main(String args[]) {
