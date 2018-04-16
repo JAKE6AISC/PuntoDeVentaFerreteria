@@ -1,11 +1,12 @@
 package jake_optimizacion_venta;
 import javax.swing.JOptionPane;
+
 /**
  * Formulario de Alta de productos agregada por Juanes
  * @author Juanez
  */
 public class FRM_AltaProductos extends javax.swing.JFrame {
-
+    
     public FRM_AltaProductos() {
         initComponents();
     }
@@ -14,6 +15,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         BTN_Salir = new javax.swing.JButton();
         LBL_Id_Producto = new javax.swing.JLabel();
         LBL_Nombre_Producto = new javax.swing.JLabel();
@@ -26,11 +28,31 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         TXT_Tipo = new javax.swing.JTextField();
         TXT_Precio = new javax.swing.JTextField();
         BTN_Agegar = new javax.swing.JButton();
+        BTN_Atras = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FRM_AltaProductos");
         setName("Alta Productos"); // NOI18N
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         LBL_Id_Producto.setText("Id_Producto");
 
@@ -40,7 +62,37 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
         LBL_Tipo.setText("Tipo");
 
+        TXT_Id_Producto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_Id_ProductoFocusLost(evt);
+            }
+        });
+
         LBL_Precio.setText("Precio");
+
+        TXT_Clasificacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_ClasificacionFocusLost(evt);
+            }
+        });
+
+        TXT_NombreProducto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_NombreProductoFocusLost(evt);
+            }
+        });
+
+        TXT_Tipo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_TipoFocusLost(evt);
+            }
+        });
+
+        TXT_Precio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_PrecioFocusLost(evt);
+            }
+        });
 
         BTN_Agegar.setText("Agregar");
         BTN_Agegar.addActionListener(new java.awt.event.ActionListener() {
@@ -48,6 +100,36 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 BTN_AgegarActionPerformed(evt);
             }
         });
+
+        BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(51, 255, 102));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Alta Productos");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,24 +142,30 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                     .addComponent(LBL_Nombre_Producto)
                     .addComponent(LBL_Clasificacion)
                     .addComponent(LBL_Tipo)
-                    .addComponent(LBL_Precio))
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LBL_Precio)
+                    .addComponent(BTN_Atras))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TXT_NombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(TXT_Id_Producto)
+                            .addComponent(TXT_Clasificacion)
+                            .addComponent(TXT_Tipo)
+                            .addComponent(TXT_Precio))
+                        .addContainerGap(70, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Agegar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(BTN_Salir))
-                    .addComponent(TXT_NombreProducto)
-                    .addComponent(TXT_Id_Producto)
-                    .addComponent(TXT_Clasificacion)
-                    .addComponent(TXT_Tipo)
-                    .addComponent(TXT_Precio))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(46, 46, 46)
+                        .addComponent(BTN_Salir)
+                        .addGap(51, 51, 51))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -101,13 +189,14 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Agegar)
-                    .addComponent(BTN_Salir))
+                    .addComponent(BTN_Salir)
+                    .addComponent(BTN_Atras))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void BTN_AgegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgegarActionPerformed
         Producto mProducto = new Producto();
         BaseDeDatos mBD = new BaseDeDatos();
@@ -128,6 +217,102 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_AgegarActionPerformed
 
+    private void TXT_Id_ProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProductoFocusLost
+       if(ValidarId_Producto()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXT_Id_Producto.requestFocus();
+       }
+    }//GEN-LAST:event_TXT_Id_ProductoFocusLost
+
+    private void TXT_NombreProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NombreProductoFocusLost
+       if(ValidarNombreProducto()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXT_NombreProducto.requestFocus();
+       }
+    }//GEN-LAST:event_TXT_NombreProductoFocusLost
+
+    private void TXT_ClasificacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_ClasificacionFocusLost
+        if(ValidarClasificacion()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXT_Clasificacion.requestFocus();
+       }
+    }//GEN-LAST:event_TXT_ClasificacionFocusLost
+
+    private void TXT_TipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_TipoFocusLost
+         if(ValidarTipo()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXT_Tipo.requestFocus();
+       }
+    }//GEN-LAST:event_TXT_TipoFocusLost
+
+    private void TXT_PrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_PrecioFocusLost
+         if(ValidarTipo()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXT_Tipo.requestFocus();
+       }
+    }//GEN-LAST:event_TXT_PrecioFocusLost
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
+
+    //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
+    // Id_Producto
+    public boolean ValidarId_Producto(){
+        if(TXT_Id_Producto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    // Nombre del producto
+    public boolean ValidarNombreProducto(){
+        if(TXT_NombreProducto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    //Clsificacion
+    public boolean ValidarClasificacion(){
+        if(TXT_Clasificacion.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    //Tipo de producto
+    public boolean ValidarTipo(){
+        if(TXT_Tipo.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    ///Precio "Float"
+    public boolean ValidarPrecio(){
+        if(TXT_Precio.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -162,6 +347,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Agegar;
+    private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JLabel LBL_Clasificacion;
     private javax.swing.JLabel LBL_Id_Producto;
@@ -173,5 +359,8 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_NombreProducto;
     private javax.swing.JTextField TXT_Precio;
     private javax.swing.JTextField TXT_Tipo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

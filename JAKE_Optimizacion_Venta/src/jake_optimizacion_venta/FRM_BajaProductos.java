@@ -217,6 +217,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
             }
         mBD.desconectar();
+        
     }//GEN-LAST:event_JTable_BajasKeyPressed
 
     private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed

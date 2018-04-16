@@ -2,8 +2,35 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
+<<<<<<< HEAD
             <file>file:/Users/KevinCruz/PuntoVenta/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/Menu.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/Producto.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/Proveedor.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/FRM_BajaProveedores.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/FRM_AltaProveedor.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/Main.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/BaseDeDatos.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/FRM_ConsultasProveedor.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/FRM_ModificacionProducto.java</file>
+            <file>file:/C:/Users/Andy/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/FRM_ModificacionProveedor.java</file>
+=======
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_ConsultasProductos.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_ModificacionProveedor.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_BajaProveedores.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_BajaProductos.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/Producto.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_ConsultasProveedor.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/BaseDeDatos.java</file>
+            <file>file:/C:/Users/Ene/Documents/nacho/Git-Bash/PortableGit/JAKEprograma/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/Proveedor.java</file>
+>>>>>>> 904333c6c85a6d726531ed4143363a7fc2ea82f1
+>>>>>>> d9e97afe565bb54a1900668639c8f0ee81aadd77
         </group>
+=======
+        <group/>
+>>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
     </open-files>
 </project-private>

@@ -6,6 +6,7 @@
 //María Eneida Salas Martínez 
 //El diseño del formulario FRM_ConsultasProveedores
 //***Se agrego la codificación del Botón Buscar
+//***Se agrego el evento activar ventana para mostrar la lista de proveedores 
 package jake_optimizacion_venta;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
         BTN_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         TXT_Id_Proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,8 +136,11 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_Id_ProveedorActionPerformed
 
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-        // TODO add your handling code here:
-        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+       int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+       ModeloTabla.setColumnCount(0);
+        ModeloTabla.setRowCount(0);
+        if(mBaseDeDatos.conectar()){
+        //int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
         if (mBaseDeDatos.conectar()) {
             ArrayList Catalogo = null;
             String[] Dato;
@@ -163,7 +172,55 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
         }
         mBaseDeDatos.desconectar();
+        }
     }//GEN-LAST:event_BTN_BuscarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        ArrayList ListaProveedores;
+        ModeloTabla.setColumnCount(0);
+        ModeloTabla.setRowCount(0);
+        mBaseDeDatos.desconectar();
+        if(mBaseDeDatos.conectar()){
+            ArrayList CatalogoBD = null;
+            String [] Dato;
+ 
+            
+           ModeloTabla.addColumn("id_proveedor");
+           ModeloTabla.addColumn("nombre");
+           ModeloTabla.addColumn("empresa");
+           //ModeloTabla.addColumn("id_producto");
+            
+                  
+                Dato = new String[3];
+                ListaProveedores = mBaseDeDatos.consultarProveedores();
+                for(int i=0; i<ListaProveedores.size(); i++) { 
+                    mProveedor = (Proveedor)ListaProveedores.get(i);
+                
+                    Dato[0] = "" + (mProveedor.getId_proveedor());
+                    Dato[1] = mProveedor.getNombre();
+                    Dato[2] = mProveedor.getEmpresa();
+                
+                    ModeloTabla.addRow(Dato);
+                }
+
+            this.JTableProveedor  = new javax.swing.JTable();
+            this.JTableProveedor.setModel(ModeloTabla);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+            
+            
+
+            if (this.JTableProveedor.getRowCount() > 0)
+            {
+                this.JTableProveedor.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+        }        
+
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

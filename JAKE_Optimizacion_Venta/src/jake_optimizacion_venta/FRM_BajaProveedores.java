@@ -165,9 +165,9 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             modeloTabla.addColumn("Tipo");
             modeloTabla.addColumn("Precio");
 
-            for (Object mListaProveedores : mListaProveedores) {
+            for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                mProveedor = (Proveedor) mListaProveedores;
+                mProveedor = (Proveedor)mListaProveedor;
                 Datos[0] = "" + mProveedor.getId_proveedor();
                 Datos[1] = mProveedor.getNombre();
                 Datos[2] = mProveedor.getEmpresa();

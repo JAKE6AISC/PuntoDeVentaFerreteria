@@ -1,6 +1,6 @@
 /*
- **Kevin Fabian Cruz Gómez
- **Métodos agregados por los integrantes del equipo
+ **JAKE
+ **Métodos agregados por todos los integrantes del equipo
  **Clase Base de datos para la conexión 
  */
 package jake_optimizacion_venta;
@@ -115,6 +115,24 @@ public class BaseDeDatos {
         }
     }
 
+    public boolean modificacionProducto(Producto mProducto, Producto mNuevoProducto) {
+
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update producto set"
+                    + "nombre = '" + mNuevoProducto.getNombre() + "tipo = '" + mNuevoProducto.getTipo()
+                    + "clasificacion = '" + mNuevoProducto.getClasificacion() + "Precio = " + mNuevoProducto.getPrecio()
+                    + "' where id_producto = '" + mProducto.getId_Producto() + "';");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public Proveedor consultarProveedor(int id_proveedor) {
         Proveedor mProveedor = null;
         Statement consulta;
@@ -138,7 +156,7 @@ public class BaseDeDatos {
 
         return mProveedor;
     }
-    
+
     public ArrayList consultarProductos() {
         ArrayList mListaPrendas = new ArrayList();
         Producto mProducto = null;
@@ -162,6 +180,30 @@ public class BaseDeDatos {
         }
         return mListaPrendas;
     }
-    
-    
+
+    public ArrayList consultarProveedores() {
+        Proveedor mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+
+        ArrayList mListaProveedor = new ArrayList();
+        try {
+            mProveedor = new Proveedor();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedor;");
+
+            while (resultado.next()) {
+                mProveedor = new Proveedor();
+                mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
+                mProveedor.setNombre(resultado.getString("nombre"));
+                mProveedor.setEmpresa(resultado.getString("empresa"));
+
+                mListaProveedor.add(mProveedor);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaProveedor;
+    }
 }
