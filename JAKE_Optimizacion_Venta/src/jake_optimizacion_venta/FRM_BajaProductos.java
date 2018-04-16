@@ -151,6 +151,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 System.err.println("Error al consultar producto");
             }
         mBD.desconectar();
+        
     }//GEN-LAST:event_JTable_BajasKeyPressed
 
     /**

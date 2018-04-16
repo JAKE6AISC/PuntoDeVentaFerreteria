@@ -2,6 +2,10 @@
  **Kevin Fabian Cruz Gómez
  **Clase Base de datos para la conexión 
  */
+//Maria Eneida Salas Martínez
+// Se agrego el metodo consultarProveedor 
+//Se agrego el metodo consultaProveedor para hacer una consulta general
+
 package jake_optimizacion_venta;
 
 import java.sql.Connection;
@@ -137,4 +141,31 @@ public class BaseDeDatos {
             
         return mProveedor;        
     }   
+    public ArrayList consultarProveedor(){
+        Proveedor mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+       
+        ArrayList mListaProveedor = new ArrayList();
+        try {
+           mProveedor = new Proveedor();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedor;");
+            
+              while(resultado.next()){
+                mProveedor = new Proveedor();              
+                mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
+                mProveedor.setNombre(resultado.getString("nombre"));
+                mProveedor.setEmpresa(resultado.getString("empresa"));
+              
+                mListaProveedor.add(mProveedor);
+           
+              }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+          return mListaProveedor;  
+            
+    }   
+  
 }
