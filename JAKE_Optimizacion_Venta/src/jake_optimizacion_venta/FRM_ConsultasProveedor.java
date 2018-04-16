@@ -13,14 +13,17 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Ene
  */
 public class FRM_ConsultasProveedor extends javax.swing.JFrame {
-DefaultTableModel ModeloTabla = new DefaultTableModel();
- BaseDeDatos mBaseDeDatos= new BaseDeDatos();
- Proveedor mProveedor = new Proveedor();
+
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
+    Proveedor mProveedor = new Proveedor();
+
     /**
      * Creates new form FRM_ConsultasProveedor
      */
@@ -134,47 +137,45 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
 
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
        ModeloTabla.setColumnCount(0);
         ModeloTabla.setRowCount(0);
         if(mBaseDeDatos.conectar()){
+=======
+        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+        if (mBaseDeDatos.conectar()) {
+>>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
             ArrayList Catalogo = null;
-            String [] Dato;
-            
-           ModeloTabla.addColumn("id_proveedor");
-           ModeloTabla.addColumn("nombre");
-           ModeloTabla.addColumn("empresa");
-          
-            
-                  
-                Dato = new String[3];
-           
-               mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor);
-                
-                Dato[0] = "" + (mProveedor.getId_proveedor());
-                Dato[1] = mProveedor.getNombre();
-                Dato[2] = mProveedor.getEmpresa();
-                
-                ModeloTabla.addRow(Dato);
+            String[] Dato;
+
+            ModeloTabla.addColumn("id_proveedor");
+            ModeloTabla.addColumn("nombre");
+            ModeloTabla.addColumn("empresa");
+
+            Dato = new String[3];
+
+            mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor);
+
+            Dato[0] = "" + (mProveedor.getId_proveedor());
+            Dato[1] = mProveedor.getNombre();
+            Dato[2] = mProveedor.getEmpresa();
+
+            ModeloTabla.addRow(Dato);
 
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(ModeloTabla);
             this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
-            
-            
 
-            if (this.JTableProveedor.getRowCount() > 0)
-            {
+            if (this.JTableProveedor.getRowCount() > 0) {
                 this.JTableProveedor.setRowSelectionInterval(0, 0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
         }
         mBaseDeDatos.desconectar();
-
-        
     }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

@@ -5,6 +5,7 @@
  */
 package jake_optimizacion_venta;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,9 +14,10 @@ import javax.swing.table.DefaultTableModel;
  * @author KevinCruz
  */
 public class FRM_BajaProveedores extends javax.swing.JFrame {
-        DefaultTableModel modeloTabla = new DefaultTableModel();
-        BaseDeDatos mBD = new BaseDeDatos();
-        Proveedor mProveedor = new Proveedor();
+
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    BaseDeDatos mBD = new BaseDeDatos();
+    Proveedor mProveedor = new Proveedor();
 
     /**
      * Creates new form FRM_BajaProveedores
@@ -46,6 +48,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         LBL_IdProveedor.setText("ID_Proveedor: ");
 
         JTableProveedor.setModel(modeloTabla);
+        JTableProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTableProveedorKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_Atras.setText("Atrás");
@@ -110,6 +117,40 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             mBD.desconectar();
         }
     }//GEN-LAST:event_BTN_EliminarActionPerformed
+
+    private void JTableProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTableProveedorKeyTyped
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
+            modeloTabla.addColumn("ID");
+            modeloTabla.addColumn("Nombre");
+            modeloTabla.addColumn("Clasificación");
+            modeloTabla.addColumn("Tipo");
+            modeloTabla.addColumn("Precio");
+
+            for (Object mListaProveedores : mListaProveedores) {
+                Datos = new String[3];
+                mProveedor = (Proveedor) mListaProveedores;
+                Datos[0] = "" + mProveedor.getId_proveedor();
+                Datos[1] = mProveedor.getNombre();
+                Datos[2] = mProveedor.getEmpresa();
+
+                modeloTabla.addRow(Datos);
+            }
+            this.JTableProveedor = new javax.swing.JTable();
+            this.JTableProveedor.setModel(modeloTabla);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(300);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(300);
+            if (this.JTableProveedor.getRowCount() > 0) {
+                this.JTableProveedor.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar proveedor");
+        }
+        mBD.desconectar();
+    }//GEN-LAST:event_JTableProveedorKeyTyped
 
     /**
      * @param args the command line arguments

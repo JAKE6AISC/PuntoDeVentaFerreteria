@@ -53,6 +53,11 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JTable_Bajas);
 
         BTN_atras.setText("Atrás");
+        BTN_atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_atrasActionPerformed(evt);
+            }
+        });
 
         BTN_Eliminar.setText("Eliminar");
         BTN_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +67,11 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         });
 
         BTN_salir.setText("Salir");
+        BTN_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +82,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_atras)
-                        .addGap(66, 66, 66)
+                        .addGap(75, 75, 75)
                         .addComponent(BTN_Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTN_salir))
@@ -148,11 +158,21 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             this.JTable_Bajas.setRowSelectionInterval(0, 0);
             }
         } else {
-                System.err.println("Error al consultar producto");
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
             }
         mBD.desconectar();
         
     }//GEN-LAST:event_JTable_BajasKeyPressed
+
+    private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_atrasActionPerformed
+
+    private void BTN_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_salirActionPerformed
+        this.setEnabled(false);
+    }//GEN-LAST:event_BTN_salirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,6 @@
 /*
  **Kevin Fabian Cruz Gómez
+ **Métodos agregados por los integrantes del equipo
  **Clase Base de datos para la conexión 
  */
 //Maria Eneida Salas Martínez
@@ -117,19 +118,19 @@ public class BaseDeDatos {
             return false;
         }
     }
-  public Proveedor consultarProveedor(int id_proveedor) {
+
+    public Proveedor consultarProveedor(int id_proveedor) {
         Proveedor mProveedor = null;
         Statement consulta;
         ResultSet resultado;
         List<Proveedor> CatalogoBD = new ArrayList<>();
-        
+
         try {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from proveedor " + 
-                    "where id_proveedor = '" + id_proveedor + "';");
+            resultado = consulta.executeQuery("select * from proveedor "
+                    + "where id_proveedor = '" + id_proveedor + "';");
             if (resultado.next()) {
-               
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));
                 mProveedor.setEmpresa(resultado.getString("empresa"));
@@ -138,6 +139,7 @@ public class BaseDeDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
             
         return mProveedor;        
     }   
@@ -168,4 +170,11 @@ public class BaseDeDatos {
             
     }   
   
+=======
+
+        return mProveedor;
+    }
+    
+    
+>>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
 }
