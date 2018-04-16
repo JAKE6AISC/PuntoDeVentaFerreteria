@@ -120,7 +120,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
     private void JTableProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTableProveedorKeyTyped
         if (mBD.conectar()) {
-            ArrayList mListaProveedores = mBD.consultarProveedores();
+            ArrayList mListaProveedores = mBD.consultarProveedor();
             String[] Datos;
 
             modeloTabla.addColumn("ID");

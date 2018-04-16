@@ -117,7 +117,8 @@ public class BaseDeDatos {
             e.printStackTrace();
             return false;
         }
-<<<<<<< HEAD:JAKE_Optimizacion_Venta/src/BaseDeDatos.java
+    }
+//<<<<<<< HEAD:JAKE_Optimizacion_Venta/src/BaseDeDatos.java
         
         public boolean modificacionProducto(Producto mProducto, Producto mNuevoProducto){
             
@@ -137,9 +138,9 @@ public class BaseDeDatos {
             }
             
         }
-=======
-    }
->>>>>>> 8c617dc54a2a1aadf392f511748fdb042e518a34:JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/BaseDeDatos.java
+//=======
+    
+//>>>>>>> 8c617dc54a2a1aadf392f511748fdb042e518a34:JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/BaseDeDatos.java
 
     public Proveedor consultarProveedor(int id_proveedor) {
         Proveedor mProveedor = null;
@@ -161,8 +162,6 @@ public class BaseDeDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-            
         return mProveedor;        
     }   
     public ArrayList consultarProveedor(){
@@ -189,14 +188,6 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
           return mListaProveedor;  
-            
-    }   
-  
-=======
-
-        return mProveedor;
-    }
-    
-    
->>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
+    } 
+      //  return mProveedor;
 }

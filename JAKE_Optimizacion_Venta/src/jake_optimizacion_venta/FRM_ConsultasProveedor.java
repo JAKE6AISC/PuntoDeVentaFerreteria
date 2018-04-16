@@ -136,16 +136,12 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_Id_ProveedorActionPerformed
 
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-        // TODO add your handling code here:
-<<<<<<< HEAD
        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
        ModeloTabla.setColumnCount(0);
         ModeloTabla.setRowCount(0);
         if(mBaseDeDatos.conectar()){
-=======
-        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+        //int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
         if (mBaseDeDatos.conectar()) {
->>>>>>> c0ad0641e3bcaad7e92c657831d35e2c371309a4
             ArrayList Catalogo = null;
             String[] Dato;
 
@@ -176,6 +172,7 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
         }
         mBaseDeDatos.desconectar();
+        }
     }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
