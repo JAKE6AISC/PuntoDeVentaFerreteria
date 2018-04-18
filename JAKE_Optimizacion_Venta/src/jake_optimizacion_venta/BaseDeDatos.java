@@ -262,4 +262,17 @@ public class BaseDeDatos {
 
         return mProducto;
     }
+
+    public boolean realizarCompra(Compra mCompra,int Cant) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update detalle_compra set cantidad ='" + Cant
+                    + "', costo='" + mCompra.getPrecio()+"');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
