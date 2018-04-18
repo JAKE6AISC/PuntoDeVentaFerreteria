@@ -182,6 +182,7 @@ public class BaseDeDatos {
         }
         return mListaProveedor;
     }
+
     public ArrayList consultarProductos() {
         ArrayList mListaPrendas = new ArrayList();
         Producto mProducto = null;
@@ -205,61 +206,60 @@ public class BaseDeDatos {
         }
         return mListaPrendas;
     }
-   
-   
-     public Producto consultarProducto(String nombre) {
+
+    public Producto consultarProducto(String nombre) {
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
         List<Producto> CatalogoBD = new ArrayList<>();
-        
+
         try {
             mProducto = new Producto();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from producto " + 
-                    "where nombre = '" + nombre + "';");
+            resultado = consulta.executeQuery("select * from producto "
+                    + "where nombre = '" + nombre + "';");
             if (resultado.next()) {
-               
+
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setPrecio(resultado.getInt("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
                 mProducto.setTipo(resultado.getString("tipo"));
                 mProducto.setClasificacion(resultado.getString("clasificacion"));
-                
+
                 CatalogoBD.add(mProducto);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
-        return mProducto;        
+
+        return mProducto;
     }
-    
-     public Producto consultarProducto2(String tipo) {
+
+    public Producto consultarProducto2(String tipo) {
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
         List<Producto> CatalogoBD = new ArrayList<>();
-        
+
         try {
             mProducto = new Producto();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from producto " + 
-                    "where tipo = '" + tipo + "';");
+            resultado = consulta.executeQuery("select * from producto "
+                    + "where tipo = '" + tipo + "';");
             if (resultado.next()) {
-               
+
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setPrecio(resultado.getInt("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
                 mProducto.setTipo(resultado.getString("tipo"));
                 mProducto.setClasificacion(resultado.getString("clasificacion"));
-                
+
                 CatalogoBD.add(mProducto);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
-        return mProducto;        
+
+        return mProducto;
     }
 }
