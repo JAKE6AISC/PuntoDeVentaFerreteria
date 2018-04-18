@@ -287,7 +287,7 @@ public class BaseDeDatos {
         try {
             mProducto = new Producto();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from producto " + 
+            resultado = consulta.executeQuery("select * from puntoventa.producto " + 
                     "where id_producto = '" + Id + "';");
             if (resultado.next()) {
                 mProducto.setNombre(resultado.getString("nombre"));
@@ -295,7 +295,7 @@ public class BaseDeDatos {
                 mLista.add(mProducto);
             }
             
-           resultado2 = consulta.executeQuery("update proveedor set "
+           resultado2 = consulta.executeQuery("update detalle_venta set "
                     + "cantidad = cantidad - '" + cant + "';");
             
         } catch (Exception e) {
