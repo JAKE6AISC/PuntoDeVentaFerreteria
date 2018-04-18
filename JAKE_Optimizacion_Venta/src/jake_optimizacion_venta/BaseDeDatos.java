@@ -275,4 +275,33 @@ public class BaseDeDatos {
             return false;
         }
     }
+    
+    
+       public ArrayList realizarVenta(String Id, int cant) {
+        ArrayList mLista = new ArrayList<>();
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        ResultSet resultado2;
+       // List <Producto> CatalogoBD = new ArrayList<>();
+        try {
+            mProducto = new Producto();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from producto " + 
+                    "where id_producto = '" + Id + "';");
+            if (resultado.next()) {
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setPrecio(resultado.getInt("precio"));
+                mLista.add(mProducto);
+            }
+            
+           resultado2 = consulta.executeQuery("update proveedor set "
+                    + "cantidad = cantidad - '" + cant + "';");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return mLista;        
+    }
 }
