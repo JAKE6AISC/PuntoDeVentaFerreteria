@@ -119,17 +119,17 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        this.setEnabled(false);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_CatalogoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProductosActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
-        FormCP.setEnabled(true);
+        FormCP.setVisible(true);
     }//GEN-LAST:event_BTN_CatalogoProductosActionPerformed
 
     private void BTN_CatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProveedoresActionPerformed
         FRM_CatalogoProveedor FormCPV = new FRM_CatalogoProveedor();
-        FormCPV.setEnabled(true);
+        FormCPV.setVisible(true);
     }//GEN-LAST:event_BTN_CatalogoProveedoresActionPerformed
 
     private void BTN_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VentaActionPerformed

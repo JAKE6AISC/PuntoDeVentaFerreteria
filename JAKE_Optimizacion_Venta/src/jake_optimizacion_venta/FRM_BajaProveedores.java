@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Kevin Fabián Cruz Gómez
+ * Formulario para dar de baja un proveedor
  */
 package jake_optimizacion_venta;
 
@@ -47,18 +46,23 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         LBL_IdProveedor.setText("ID_Proveedor: ");
 
         JTableProveedor.setModel(modeloTabla);
-        JTableProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTableProveedorKeyTyped(evt);
-            }
-        });
         jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_Atras.setText("Atrás");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Eliminar.setText("Eliminar");
         BTN_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +158,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
-    private void JTableProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTableProveedorKeyTyped
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
             String[] Datos;
@@ -167,7 +175,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                mProveedor = (Proveedor)mListaProveedor;
+                mProveedor = (Proveedor) mListaProveedor;
                 Datos[0] = "" + mProveedor.getId_proveedor();
                 Datos[1] = mProveedor.getNombre();
                 Datos[2] = mProveedor.getEmpresa();
@@ -186,7 +194,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar proveedor");
         }
         mBD.desconectar();
-    }//GEN-LAST:event_JTableProveedorKeyTyped
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
