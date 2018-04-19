@@ -304,4 +304,26 @@ public class BaseDeDatos {
             
         return mLista;        
     }
+       public ArrayList ListaConsultarProductos() {//Juanes
+        ArrayList ListaProductos = new ArrayList();
+        Producto mProducto = null;
+        Statement Consulta;
+        ResultSet Resultado;
+        
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select * from puntoventa.producto;");
+            while (Resultado.next()) {
+                mProducto = new Producto();
+                mProducto.setNombre(Resultado.getString("nombre"));
+                mProducto.setPrecio(Float.parseFloat(Resultado.getString("precio")));
+                ListaProductos.add(mProducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        return ListaProductos;
+    }
 }

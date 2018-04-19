@@ -1,5 +1,4 @@
 package jake_optimizacion_venta;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,27 +9,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Juanez
  */
 public class FRM_Venta extends javax.swing.JFrame {
-    DefaultTableModel Tabla = new DefaultTableModel();
+    //DefaultTableModel Tabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
    // Producto mProducto = new Producto();
     double Total = 0;
     double SubTotal = 0;
-    Producto mProducto;
+    //Producto mProducto;
     List < Producto> ListaProductos;
      private Connection conexion;
      String Precio = "", Nombre="";
      int Cantidad = 1;
+    DefaultTableModel TablasJuanes = new DefaultTableModel();
+    Producto mProducto = new Producto();
     public FRM_Venta() {
-        Tabla.addColumn("Nombre");
+   /*     Tabla.addColumn("Nombre");
         Tabla.addColumn("Precio");
         Tabla.addColumn("Cantidad");
-        Tabla.addColumn("Sub Total");
+        Tabla.addColumn("Sub Total");*/
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class FRM_Venta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TBL_Venta.setModel(Tabla);
+        TBL_Venta.setModel(TablasJuanes);
         jScrollPane1.setViewportView(TBL_Venta);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -103,12 +103,43 @@ public class FRM_Venta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-        try {
-            AgregarProducto();
-        } catch (SQLException ex) {
-            Logger.getLogger(FRM_Venta.class.getName()).log(Level.SEVERE, null, ex);
+    public void SetConsultas(){
+    if(mBD.conectar()){
+        ArrayList ListaProductoss = mBD.ListaConsultarProductos();
+        String [] DatosTabla;
+        TablasJuanes.addColumn("Id_Producto");
+        TablasJuanes.addColumn("Nombre");
+        TablasJuanes.addColumn("Precio");
+        TablasJuanes.addColumn("Clasificacion");
+        TablasJuanes.addColumn("Cantidad");
+        
+        for (Object ListaProductos : ListaProductoss) {
+            DatosTabla = new String[5];
+            mProducto = (Producto)ListaProductos;
+            DatosTabla[0] = "" + mProducto.getId_Producto();
+            DatosTabla[1] = mProducto.getNombre();
+            DatosTabla[2] = mProducto.getPrecio() + "";
+            DatosTabla[3] = mProducto.getClasificacion();
+            TablasJuanes.addRow(DatosTabla);
+        } 
+        
+        this.TBL_Venta = new javax.swing.JTable();
+        this.TBL_Venta.setModel(TablasJuanes);
+        this.TBL_Venta.getColumnModel().getColumn(0).setPreferredWidth(50);
+        this.TBL_Venta.getColumnModel().getColumn(1).setPreferredWidth(100);
+        this.TBL_Venta.getColumnModel().getColumn(2).setPreferredWidth(400);
+        this.TBL_Venta.getColumnModel().getColumn(3).setPreferredWidth(200);
+        this.TBL_Venta.getColumnModel().getColumn(4).setPreferredWidth(300);
+        if (this.TBL_Venta.getRowCount() > 0) {
+        this.TBL_Venta.setRowSelectionInterval(0, 0);
         }
+    } else {
+             JOptionPane.showMessageDialog(null, ".....Error.....");
+        }
+    mBD.desconectar();
+    }
+    private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
+        SetConsultas();
         LlenarTabla();
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
      public void AgregarProducto() throws SQLException{
