@@ -263,16 +263,66 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    public boolean realizarCompra(Compra mCompra,int Cant) {
+    public boolean realizarCompra(Compra mCompra, int Cant) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update detalle_compra set cantidad ='" + Cant
-                    + "', costo='" + mCompra.getPrecio()+"');");
+            consulta.execute("update detalle_compra set cantidad = cantidad +'" + Cant
+                    + "', costo='" + mCompra.getPrecio() + "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList realizarVenta(String Id, int cant) {
+        ArrayList mLista = new ArrayList<>();
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        ResultSet resultado2;
+        // List <Producto> CatalogoBD = new ArrayList<>();
+        try {
+            mProducto = new Producto();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from puntoventa.producto "
+                    + "where id_producto = '" + Id + "';");
+            if (resultado.next()) {
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setPrecio(resultado.getInt("precio"));
+                mLista.add(mProducto);
+            }
+
+            resultado2 = consulta.executeQuery("update detalle_venta set "
+                    + "cantidad = cantidad - '" + cant + "';");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mLista;
+    }
+
+    public ArrayList ListaConsultarProductos() {//Juanes
+        ArrayList ListaProductos = new ArrayList();
+        Producto mProducto = null;
+        Statement Consulta;
+        ResultSet Resultado;
+
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select * from puntoventa.producto;");
+            while (Resultado.next()) {
+                mProducto = new Producto();
+                mProducto.setNombre(Resultado.getString("nombre"));
+                mProducto.setPrecio(Float.parseFloat(Resultado.getString("precio")));
+                ListaProductos.add(mProducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ListaProductos;
     }
 }
