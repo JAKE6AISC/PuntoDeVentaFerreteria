@@ -99,9 +99,9 @@
 | Catalogo Productos  |  1  |6.2% |62.0%|    4   |   |
 | Menu Principal  |  1  |6.2% |68.2%|    4   |   |
 | Reporte Existencia   |  2  |6.2% |74.4%|    9   |   |
-| Reporte Venta | 2 | 6.2 % | 80.6% | 4 | 9	| |
-| Venta | 3 | 6.2 % | 86.8%| 4 | 11 |  |
-| Compra  |  3  |6.2% | 93.0%|  4  |  11 | |
-| Pruebas | 2 	| 6.2% | 99.2% | 4 | 13 | |
+| Reporte Venta | 2 | 6.2 % | 80.6% | 9 | |
+| Venta | 3 | 6.2 % | 86.8%| 11 |   |
+| Compra  |  3  |6.2% | 93.0%|  11   | |
+| Pruebas | 2 	| 6.2% | 99.2% | 13  | |
 
 
