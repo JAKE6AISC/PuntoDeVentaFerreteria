@@ -20,7 +20,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "", "");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -311,7 +311,7 @@ public class BaseDeDatos {
         ResultSet Resultado;
         try {
             Consulta = conexion.createStatement();
-             Resultado =  Consulta.executeQuery("select * from productos " +
+             Resultado =  Consulta.executeQuery("select * from producto " +
                         "where id_producto = '" + Id + "' OR nombre ='" + Id +"';");
             
             while (Resultado.next()) {
