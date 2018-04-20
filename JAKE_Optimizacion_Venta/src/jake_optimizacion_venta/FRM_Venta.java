@@ -3,8 +3,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,14 +27,19 @@ public class FRM_Venta extends javax.swing.JFrame {
      int Cant = 0;int Id_Venta = 0;
     DefaultTableModel TablasJuanes = new DefaultTableModel();
     Producto mProducto = new Producto();
+    DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+     Calendar fecha = Calendar.getInstance();
+     int year = fecha.get(Calendar.YEAR);
+     int mes = fecha.get(Calendar.MONTH) + 1;
+     int dia = fecha.get(Calendar.DAY_OF_MONTH);
     public FRM_Venta() {
         TablasJuanes.addColumn("Codigo de barras");
         TablasJuanes.addColumn("Nombre");
         TablasJuanes.addColumn("Precio");
         TablasJuanes.addColumn("Cantidad");
         TablasJuanes.addColumn("Sub Total");
-        //TXT_Fecha.setText(""); 
         initComponents();
+        TXT_Fecha.setText(dia + "-" + mes + "-" + year); 
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -249,11 +256,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             }
         });
     }
-    public static String fechaactual() {
-        Date fecha = new Date();
-        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
-        return formatofecha.format(fecha);
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_AgregarProducto;

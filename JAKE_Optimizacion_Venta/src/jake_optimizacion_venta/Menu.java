@@ -131,16 +131,19 @@ public class Menu extends javax.swing.JFrame {
 
     private void BTN_CatalogoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProductosActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+         this.setVisible(false);
         FormCP.setVisible(true);
     }//GEN-LAST:event_BTN_CatalogoProductosActionPerformed
 
     private void BTN_CatalogoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CatalogoProveedoresActionPerformed
         FRM_CatalogoProveedor FormCPV = new FRM_CatalogoProveedor();
+         this.setVisible(false);
         FormCPV.setVisible(true);
     }//GEN-LAST:event_BTN_CatalogoProveedoresActionPerformed
 
     private void BTN_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VentaActionPerformed
         FRM_Venta FormVTA = new FRM_Venta();
+        this.setVisible(false);
         FormVTA.show();
     }//GEN-LAST:event_BTN_VentaActionPerformed
 

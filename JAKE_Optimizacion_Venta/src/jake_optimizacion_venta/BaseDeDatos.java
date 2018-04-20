@@ -86,9 +86,10 @@ public class BaseDeDatos {
 
     public boolean agregarProducto(Producto mProducto) {
         Statement consulta;
+        ResultSet Resultado;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into producto "
+            Resultado =  consulta.executeQuery("insert into producto "
                     + "(id_producto,precio,nombre,tipo,clasificacion) "
                     + "values ('" + mProducto.getId_Producto() + "','" + mProducto.getPrecio()
                     + "'," + mProducto.getNombre() + ",'"
@@ -304,7 +305,7 @@ public class BaseDeDatos {
         return mLista;
     }
 
-    public ArrayList ListaProductos(String Id) {
+    public ArrayList ListaProductos(String Id) { // Hecho por Juanes No Borrar
         ArrayList ListaProductos = new ArrayList();
         Producto mProducto = null;
         Statement Consulta;
