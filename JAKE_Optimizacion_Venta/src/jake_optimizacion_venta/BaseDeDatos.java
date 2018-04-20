@@ -304,25 +304,30 @@ public class BaseDeDatos {
         return mLista;
     }
 
-    public ArrayList ListaConsultarProductos() {//Juanes
+    public ArrayList ListaProductos(String Id) {
         ArrayList ListaProductos = new ArrayList();
         Producto mProducto = null;
         Statement Consulta;
         ResultSet Resultado;
-
         try {
             Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery("select * from puntoventa.producto;");
+             Resultado =  Consulta.executeQuery("select * from productos " +
+                        "where id_producto = '" + Id + "' OR nombre ='" + Id +"';");
+            
             while (Resultado.next()) {
                 mProducto = new Producto();
                 mProducto.setNombre(Resultado.getString("nombre"));
+                mProducto.setId_Producto(Resultado.getInt("id_producto"));
                 mProducto.setPrecio(Float.parseFloat(Resultado.getString("precio")));
+                mProducto.setClasificacion(Resultado.getString("clasificacion"));
+                mProducto.setTipo(Resultado.getString("tipo"));
                 ListaProductos.add(mProducto);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
+        
         return ListaProductos;
-    }
+       }
 }

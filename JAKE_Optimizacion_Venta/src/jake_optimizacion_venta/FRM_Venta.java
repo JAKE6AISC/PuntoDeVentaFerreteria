@@ -23,14 +23,15 @@ public class FRM_Venta extends javax.swing.JFrame {
     List < Producto> ListaProductos;
      private Connection conexion;
      String Precio = "", Nombre="";
-     int Cantidad = 1;
+     int Cant = 0;
     DefaultTableModel TablasJuanes = new DefaultTableModel();
     Producto mProducto = new Producto();
     public FRM_Venta() {
-   /*     Tabla.addColumn("Nombre");
-        Tabla.addColumn("Precio");
-        Tabla.addColumn("Cantidad");
-        Tabla.addColumn("Sub Total");*/
+        TablasJuanes.addColumn("Codigo de barras");
+        TablasJuanes.addColumn("Nombre");
+        TablasJuanes.addColumn("Precio");
+        TablasJuanes.addColumn("Cantidad");
+        TablasJuanes.addColumn("Sub Total");
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -43,6 +44,7 @@ public class FRM_Venta extends javax.swing.JFrame {
         TXT_Total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BTN_AgregarProducto = new javax.swing.JButton();
+        TXT_Cant = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,12 +61,14 @@ public class FRM_Venta extends javax.swing.JFrame {
             }
         });
 
+        TXT_Cant.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -77,7 +81,9 @@ public class FRM_Venta extends javax.swing.JFrame {
                                 .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(185, 185, 185)
-                        .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXT_Cant, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,89 +91,62 @@ public class FRM_Venta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(TXT_Cant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(BTN_AgregarProducto)
-                        .addContainerGap(28, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void SetConsultas(){
-    if(mBD.conectar()){
-        ArrayList ListaProductoss = mBD.ListaConsultarProductos();
+    
+    private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
+        if(mBD.conectar()){
+        ArrayList ListaProductoss = mBD.ListaProductos(TXT_Escaner.getText());
         String [] DatosTabla;
-        TablasJuanes.addColumn("Id_Producto");
-        TablasJuanes.addColumn("Nombre");
-        TablasJuanes.addColumn("Precio");
-        TablasJuanes.addColumn("Clasificacion");
-        TablasJuanes.addColumn("Cantidad");
-        
         for (Object ListaProductos : ListaProductoss) {
             DatosTabla = new String[5];
             mProducto = (Producto)ListaProductos;
-            DatosTabla[0] = "" + mProducto.getId_Producto();
+            DatosTabla[0] = mProducto.getId_Producto() + "";
             DatosTabla[1] = mProducto.getNombre();
             DatosTabla[2] = mProducto.getPrecio() + "";
-            DatosTabla[3] = mProducto.getClasificacion();
+            DatosTabla[3] = "1";
+            DatosTabla[4] = mProducto.getPrecio()+ "";
+            Total = Total + mProducto.getPrecio();
+            TXT_Total.setText(Total + "");
+            Cant = Cant + Integer.parseInt(DatosTabla[3]);
+            TXT_Cant.setText(Cant + "");
+            
             TablasJuanes.addRow(DatosTabla);
+            
         } 
         
         this.TBL_Venta = new javax.swing.JTable();
         this.TBL_Venta.setModel(TablasJuanes);
         this.TBL_Venta.getColumnModel().getColumn(0).setPreferredWidth(50);
         this.TBL_Venta.getColumnModel().getColumn(1).setPreferredWidth(100);
-        this.TBL_Venta.getColumnModel().getColumn(2).setPreferredWidth(400);
-        this.TBL_Venta.getColumnModel().getColumn(3).setPreferredWidth(200);
-        this.TBL_Venta.getColumnModel().getColumn(4).setPreferredWidth(300);
+        this.TBL_Venta.getColumnModel().getColumn(2).setPreferredWidth(150);
+        this.TBL_Venta.getColumnModel().getColumn(3).setPreferredWidth(250);
         if (this.TBL_Venta.getRowCount() > 0) {
         this.TBL_Venta.setRowSelectionInterval(0, 0);
         }
     } else {
              JOptionPane.showMessageDialog(null, ".....Error.....");
         }
-    mBD.desconectar();
-    }
-    private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-        SetConsultas();
-        LlenarTabla();
+     mBD.desconectar();
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
-     public void AgregarProducto() throws SQLException{
-        String Id = TXT_Escaner.getText();
-        Statement consulta;
-        ResultSet resultado;
-            consulta = conexion.createStatement();
-            if (mBD.conectar()) {
-              resultado = consulta.executeQuery("select * from puntoventa.producto " + 
-                    "where id_producto = '" + Id + "';");
-               if (resultado.next()) {
-                mProducto.setNombre(resultado.getString("nombre"));
-                mProducto.setPrecio(resultado.getInt("precio"));
-                ListaProductos.add(mProducto);
-            }
-         }
-    }
-      public void LlenarTabla(){
-       
-        Object[][] Matriz = new Object [ListaProductos.size()][4];
-
-        for(int i =0; i<ListaProductos.size();i++){
-            Matriz[i][0] = ListaProductos.get(i).getNombre();
-            Matriz[i][1] = ListaProductos.get(i).getPrecio();
-            Matriz[i][2] = "1";
-            Matriz[i][3] = ListaProductos.get(i).getPrecio();
-        }
-    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -203,6 +182,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_AgregarProducto;
     private javax.swing.JTable TBL_Venta;
+    private javax.swing.JTextField TXT_Cant;
     private javax.swing.JTextField TXT_Escaner;
     private javax.swing.JTextField TXT_Total;
     private javax.swing.JLabel jLabel1;
