@@ -157,34 +157,35 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
     private void BTN_AltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AltasActionPerformed
         FRM_AltaProductos FormAlt = new FRM_AltaProductos();
         FormAlt.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_AltasActionPerformed
 
     private void BTN_BajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BajasActionPerformed
         FRM_BajaProductos FormBaj = new FRM_BajaProductos();
         FormBaj.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_BajasActionPerformed
 
     private void BTN_CambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CambiosActionPerformed
         FRM_ModificacionProducto FormCam = new FRM_ModificacionProducto();
         FormCam.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_CambiosActionPerformed
 
     private void BTN_ConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ConsultasActionPerformed
         FRM_ConsultasProductos FormCon = new FRM_ConsultasProductos();
         FormCon.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_ConsultasActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         Menu mMenu = new Menu();
         mMenu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**

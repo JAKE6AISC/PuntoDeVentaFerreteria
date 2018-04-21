@@ -108,7 +108,7 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            consulta.execute("delete from productos "
+            consulta.execute("delete from producto "
                     + " where id_producto = " + mProducto.getId_Producto() + ";");
             return true;
         } catch (Exception e) {
@@ -273,11 +273,11 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             consulta.execute("insert into compra (total, nombre) values "
                     + "(" + mCompra.getTotal() + ",'" + Nombre + "');");
-            resultado = consulta.executeQuery("selecto * from compra;");
+            resultado = consulta.executeQuery("select * from compra;");
             while (resultado.next()) {
                 mCompra.setId_Compra(resultado.getInt("id_compra"));
             }
-            resultado = consulta.executeQuery("selecto * from producto;");
+            resultado = consulta.executeQuery("select * from producto;");
             while (resultado.next()) {
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
             }

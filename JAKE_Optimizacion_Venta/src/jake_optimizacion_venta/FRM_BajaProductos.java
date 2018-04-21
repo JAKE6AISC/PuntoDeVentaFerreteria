@@ -186,11 +186,11 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_BTN_atrasActionPerformed
 
     private void BTN_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_salirActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_BTN_salirActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

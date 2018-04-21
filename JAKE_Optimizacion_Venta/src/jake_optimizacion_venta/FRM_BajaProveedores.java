@@ -166,7 +166,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProveedor FormCpr = new FRM_CatalogoProveedor();
         FormCpr.setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -211,7 +211,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**
