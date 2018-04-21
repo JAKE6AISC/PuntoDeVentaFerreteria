@@ -160,13 +160,13 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         Proveedor mNuevoProveedor = new Proveedor(); // y los nuevos datos nombre y empresa
         // se asigna los nuevos valores con el id para la busueda
         mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText()));
-        mProveedor.setNombre(this.TXT_NuevoNombreProveedor.getText());
-        mProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
+        mNuevoProveedor.setNombre(this.TXT_NuevoNombreProveedor.getText());
+        mNuevoProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
 
         if (mBD.conectar()) {// se realiza primero la conexion
             if (mBD.modificarProveedor(mProveedor,mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
                                                                      //  a la clase base de datos
-                JOptionPane.showMessageDialog(null, "Datos del Proveedor Modificados Exitosamente");
+                JOptionPane.showMessageDialog(null, "Proveedor Modificados Exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
             }
