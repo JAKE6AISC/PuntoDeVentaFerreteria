@@ -170,7 +170,9 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_Id_ProveedorActionPerformed
 
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-       int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
+       // Añadido para pruebas de commit de Eneida
+       
+        int id_proveedor = Integer.parseInt(TXT_Id_Proveedor.getText().toUpperCase());
        ModeloTabla.setColumnCount(0);
         ModeloTabla.setRowCount(0);
         if(mBaseDeDatos.conectar()){
