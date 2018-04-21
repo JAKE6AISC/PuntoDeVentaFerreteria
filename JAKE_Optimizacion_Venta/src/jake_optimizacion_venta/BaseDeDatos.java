@@ -1,4 +1,6 @@
-/*
+/* NOTA: EXISTEN 3 Consultas de productos 2 de proveedor, por favor quiten lo inecesario
+/// NOTA: Por motivos de funcionamiento Juanes Agrego 3 metodos que tienen sus 
+// respectivas notas con su funcion 
  **JAKE
  **Métodos agregados por todos los integrantes del equipo
  **Clase Base de datos para la conexión 
@@ -11,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class BaseDeDatos {
 
@@ -20,7 +23,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "", "");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -75,11 +78,11 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("update proveedor set "
-                    + "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = " + mNuevoProveedor.getEmpresa()
+                    + "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = '" + mNuevoProveedor.getEmpresa()
                     + "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error " + e);
             return false;
         }
     }
@@ -88,12 +91,11 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into producto "
-                    + "(id_producto,precio,nombre,tipo,clasificacion) "
-                    + "values ('" + mProducto.getId_Producto() + "','" + mProducto.getPrecio()
-                    + "'," + mProducto.getNombre() + ",'"
-                    + mProducto.getTipo() + "','"
-                    + mProducto.getClasificacion() + "');");
+            consulta.execute("insert into producto (id_producto,precio,nombre,tipo,clasificacion,proveedor_id_proveedor) "
+                    + "values ('" + mProducto.getId_Producto() + "'," + mProducto.getPrecio() + ",'" + mProducto.getNombre()
+                    + "','" + mProducto.getTipo() + "','" + mProducto.getClasificacion() + "','"
+                    + mProducto.getId_Proveedor() + "');");
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -263,27 +265,28 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    /*public boolean guardarPrenda(Prenda mPrenda) {
-        Statement consulta;
-
-        try {
-            consulta = conexion.createStatement();
-            consulta.execute("insert into prendas "
-                    + "(codigo, precio, talla, descripcion) "
-                    + "values (" + mPrenda.getCodigo() + "," + mPrenda.getPrecio() + ",'"
-                    + mPrenda.getTalla() + "','" + mPrenda.getDescripcion() + "');");
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
     public boolean realizarCompra(Compra mCompra, int Cant, String Nombre) {
         Statement consulta;
+        ResultSet resultado;
+        Producto mProducto = null;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into compra (total, nombre) values (" + mCompra.getTotal() + ",'" + Nombre + "');");
-            consulta.execute("insert into detalle_compra (costo) values (" + mCompra.getTotal() + ") where compra_id_compra =" + 2 + ");");
+            consulta.execute("insert into compra (total, nombre) values "
+                    + "(" + mCompra.getTotal() + ",'" + Nombre + "');");
+            resultado = consulta.executeQuery("selecto * from compra;");
+            while (resultado.next()) {
+                mCompra.setId_Compra(resultado.getInt("id_compra"));
+            }
+            resultado = consulta.executeQuery("selecto * from producto;");
+            while (resultado.next()) {
+                mProducto.setId_Producto(resultado.getInt("id_producto"));
+            }
+            consulta.execute("insert into detalle_compra (costo) values "
+                    + "(" + mCompra.getTotal() + ") where compra_id_compra ="
+                    + mCompra.getId_Compra() + " and producto_id_producto ="
+                    + mProducto.getId_Producto() + ");");
+            consulta.execute("update detalle_compra set cantidad = cantidad +" 
+                    + Cant +" where producto_id_producto = "+mProducto.getId_Producto()+";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,47 +294,38 @@ public class BaseDeDatos {
         }
     }
 
-    public ArrayList realizarVenta(String Id, int cant) {
-        ArrayList mLista = new ArrayList<>();
-        Producto mProducto = null;
-        Statement consulta;
-        ResultSet resultado;
-        ResultSet resultado2;
-        // List <Producto> CatalogoBD = new ArrayList<>();
+    public boolean realizarVenta(Venta mVenta) {//Sirve para guardar los datos de la
+        // Venta en la base de datos
+        Statement Consulta;
         try {
-            mProducto = new Producto();
-            consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from puntoventa.producto "
-                    + "where id_producto = '" + Id + "';");
-            if (resultado.next()) {
-                mProducto.setNombre(resultado.getString("nombre"));
-                mProducto.setPrecio(resultado.getInt("precio"));
-                mLista.add(mProducto);
-            }
-
-            resultado2 = consulta.executeQuery("update detalle_venta set "
-                    + "cantidad = cantidad - '" + cant + "';");
-
+            Consulta = conexion.createStatement();
+            Consulta.execute("insert into venta (id_venta, fecha, total) "
+                    + "values ('" + mVenta.Id_Venta + "','" + mVenta.Fecha + "','" + mVenta.Total + "');");
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-
-        return mLista;
     }
 
-    public ArrayList ListaConsultarProductos() {//Juanes
+    public ArrayList listaProductos(String Id) { // Hecho por Juanes No Borrar
+        //Agregar prod x prod a la venta
         ArrayList ListaProductos = new ArrayList();
         Producto mProducto = null;
         Statement Consulta;
         ResultSet Resultado;
-
         try {
             Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery("select * from puntoventa.producto;");
+            Resultado = Consulta.executeQuery("select * from producto "
+                    + "where id_producto = '" + Id + "' OR nombre ='" + Id + "';");
+
             while (Resultado.next()) {
                 mProducto = new Producto();
                 mProducto.setNombre(Resultado.getString("nombre"));
+                mProducto.setId_Producto(Resultado.getInt("id_producto"));
                 mProducto.setPrecio(Float.parseFloat(Resultado.getString("precio")));
+                mProducto.setClasificacion(Resultado.getString("clasificacion"));
+                mProducto.setTipo(Resultado.getString("tipo"));
                 ListaProductos.add(mProducto);
             }
         } catch (Exception e) {
@@ -339,5 +333,26 @@ public class BaseDeDatos {
         }
 
         return ListaProductos;
+    }
+
+    public ArrayList listaVentas() { // Para La venta Agregado por Juanes NO BORRAR
+        // Obtiene el Id de la sig Venta
+        ArrayList LVentas = new ArrayList();
+        Venta mVenta;
+        Statement Consulta;
+        ResultSet Resultado;
+
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select * from venta;");
+            while (Resultado.next()) {
+                mVenta = new Venta();
+                mVenta.setId_Venta(Resultado.getInt("id_venta"));
+                LVentas.add(mVenta);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error: " + e);
+        }
+        return LVentas;
     }
 }

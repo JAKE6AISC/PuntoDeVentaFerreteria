@@ -11,13 +11,22 @@ public class Producto {
     private String Clasificacion;
     private String Tipo;
     private float Precio;
-
+    private int Id_Proveedor;
     public Producto() {
         Id_Producto = 0;
         Nombre = "";
         Clasificacion = "";
         Tipo = "";
         Precio = 0;
+        Id_Proveedor = 0;
+    }
+
+    public int getId_Proveedor() {
+        return Id_Proveedor;
+    }
+
+    public void setId_Proveedor(int Id_Proveedor) {
+        this.Id_Proveedor = Id_Proveedor;
     }
 
     public int getId_Producto() {
