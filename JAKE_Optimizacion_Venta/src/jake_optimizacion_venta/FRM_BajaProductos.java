@@ -186,14 +186,20 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_atrasActionPerformed
 
     private void BTN_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_salirActionPerformed
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_salirActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.TXT_idProducto.setText("");
+        modeloTabla = (DefaultTableModel) JTable_Bajas.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.consultarProductos();
             String[] Datos;

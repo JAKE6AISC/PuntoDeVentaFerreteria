@@ -72,6 +72,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
 
@@ -159,10 +164,18 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
-        this.setVisible(false);
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.TXT_Id_Proveedor.setText("");
+        modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
             String[] Datos;
@@ -195,6 +208,10 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         }
         mBD.desconectar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**
      * @param args the command line arguments

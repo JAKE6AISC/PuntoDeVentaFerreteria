@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Kevin Fabián Cruz Gómez
+ * Formulario catálogo de productos
  */
 package jake_optimizacion_venta;
 
 /**
  *
- * @author Juanez
+ * @author KevinCruz
  */
 public class FRM_CatalogoProductos extends javax.swing.JFrame {
 
@@ -31,11 +30,11 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
         BTN_Bajas = new javax.swing.JButton();
         BTN_Cambios = new javax.swing.JButton();
         BTN_Consultas = new javax.swing.JButton();
+        BTN_Atras = new javax.swing.JButton();
+        BTN_Salir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        BTN_Atras = new javax.swing.JButton();
-        BTN_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +66,10 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
             }
         });
 
+        BTN_Atras.setText("Atrás");
+
+        BTN_Salir.setText("Salir");
+
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -86,7 +89,7 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,10 +101,6 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        BTN_Atras.setText("Atrás");
-
-        BTN_Salir.setText("Salir");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,14 +108,11 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(BTN_Cambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_Altas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BTN_Bajas, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BTN_Consultas))
@@ -126,13 +122,13 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTN_Salir)))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Altas)
                     .addComponent(BTN_Bajas))
@@ -153,25 +149,25 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
     private void BTN_AltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AltasActionPerformed
         FRM_AltaProductos FormAlt = new FRM_AltaProductos();
         FormAlt.setVisible(true);
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_AltasActionPerformed
 
     private void BTN_BajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BajasActionPerformed
         FRM_BajaProductos FormBaj = new FRM_BajaProductos();
         FormBaj.setVisible(true);
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_BajasActionPerformed
 
     private void BTN_CambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CambiosActionPerformed
         FRM_ModificacionProducto FormCam = new FRM_ModificacionProducto();
         FormCam.setVisible(true);
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_CambiosActionPerformed
 
     private void BTN_ConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ConsultasActionPerformed
         FRM_ConsultasProductos FormCon = new FRM_ConsultasProductos();
         FormCon.setVisible(true);
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_BTN_ConsultasActionPerformed
 
     /**

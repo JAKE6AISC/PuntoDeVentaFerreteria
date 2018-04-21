@@ -263,12 +263,27 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    public boolean realizarCompra(Compra mCompra, int Cant) {
+    /*public boolean guardarPrenda(Prenda mPrenda) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into prendas "
+                    + "(codigo, precio, talla, descripcion) "
+                    + "values (" + mPrenda.getCodigo() + "," + mPrenda.getPrecio() + ",'"
+                    + mPrenda.getTalla() + "','" + mPrenda.getDescripcion() + "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }*/
+    public boolean realizarCompra(Compra mCompra, int Cant, String Nombre) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update detalle_compra set cantidad = cantidad +'" + Cant
-                    + "', costo='" + mCompra.getPrecio() + "';");
+            consulta.execute("insert into compra (total, nombre) values (" + mCompra.getTotal() + ",'" + Nombre + "');");
+            consulta.execute("insert into detalle_compra (costo) values (" + mCompra.getTotal() + ") where compra_id_compra =" + 2 + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
