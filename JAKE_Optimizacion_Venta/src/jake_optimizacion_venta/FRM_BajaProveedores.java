@@ -164,8 +164,8 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
-        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
-        FormCP.setVisible(true);
+        FRM_CatalogoProveedor FormCpr = new FRM_CatalogoProveedor();
+        FormCpr.setVisible(true);
         dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
@@ -176,15 +176,16 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         for (int i = a; i >= 0; i--) {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
+
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
             String[] Datos;
-
-            modeloTabla.addColumn("ID");
-            modeloTabla.addColumn("Nombre");
-            modeloTabla.addColumn("Clasificación");
-            modeloTabla.addColumn("Tipo");
-            modeloTabla.addColumn("Precio");
 
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];

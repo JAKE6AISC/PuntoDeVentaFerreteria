@@ -200,15 +200,15 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         for (int i = a; i >= 0; i--) {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
+
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.consultarProductos();
             String[] Datos;
-
-            modeloTabla.addColumn("ID");
-            modeloTabla.addColumn("Nombre");
-            modeloTabla.addColumn("Clasificación");
-            modeloTabla.addColumn("Tipo");
-            modeloTabla.addColumn("Precio");
 
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[5];
