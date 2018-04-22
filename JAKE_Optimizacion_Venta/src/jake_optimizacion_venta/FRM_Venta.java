@@ -32,6 +32,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     String FechaActual = year + "-" + mes + "-" + dia;
     String Hora = hora + ":" + minutos;
     String Ruta = ""; 
+    int ConsultaEx =0; 
     public FRM_Venta() {
         TablasJuanes.addColumn("Codigo de barras");
         TablasJuanes.addColumn("Nombre");
@@ -236,38 +237,46 @@ public class FRM_Venta extends javax.swing.JFrame {
       mBD.desconectar();
 }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-        if(mBD.conectar()){
-        ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
-        String [] DatosTabla;
-        for (Object ListaProductos : ListaProductoss) {
-            DatosTabla = new String[5];
-            mProducto = (Producto)ListaProductos;
-            DatosTabla[0] = mProducto.getId_Producto() + "";
-            DatosTabla[1] = mProducto.getNombre();
-            DatosTabla[2] = mProducto.getPrecio() + "";
-            DatosTabla[3] = "1";
-            DatosTabla[4] = mProducto.getPrecio()+ "";
-            Total = Total + mProducto.getPrecio();
-            TXT_Total.setText(Total + "");
-            Cant = Cant + Integer.parseInt(DatosTabla[3]);
-            TXT_Cant.setText(Cant + "");
-            TablasJuanes.addRow(DatosTabla);
-            Cont++;
-        } 
+         if(mBD.conectar()){
+            ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
+            ConsultaEx =  mBD.ConsultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
+            if (ConsultaEx > 0) {
+                String [] DatosTabla;
+                for (Object ListaProductos : ListaProductoss) {
+                    DatosTabla = new String[5];
+                    mProducto = (Producto)ListaProductos;
+                    DatosTabla[0] = mProducto.getId_Producto() + "";
+                    DatosTabla[1] = mProducto.getNombre();
+                    DatosTabla[2] = mProducto.getPrecio() + "";
+                    DatosTabla[3] = "1";
+                    DatosTabla[4] = mProducto.getPrecio()+ "";
+                    mBD.ModificarExistencias(mProducto.getId_Producto());
+                    Total = Total + mProducto.getPrecio();
+                    TXT_Total.setText(Total + "");
+                    Cant = Cant + Integer.parseInt(DatosTabla[3]);
+                    TXT_Cant.setText(Cant + "");
+                    TablasJuanes.addRow(DatosTabla);
+                    Cont++;
+                }    
         
-        this.TBL_Venta = new javax.swing.JTable();
-        this.TBL_Venta.setModel(TablasJuanes);
-        this.TBL_Venta.getColumnModel().getColumn(0).setPreferredWidth(50);
-        this.TBL_Venta.getColumnModel().getColumn(1).setPreferredWidth(100);
-        this.TBL_Venta.getColumnModel().getColumn(2).setPreferredWidth(150);
-        this.TBL_Venta.getColumnModel().getColumn(3).setPreferredWidth(250);
-        if (this.TBL_Venta.getRowCount() > 0) {
-        this.TBL_Venta.setRowSelectionInterval(0, 0);
-        }
-    } else {
-             JOptionPane.showMessageDialog(null, ".....Error.....");
+                this.TBL_Venta = new javax.swing.JTable();
+                this.TBL_Venta.setModel(TablasJuanes);
+                this.TBL_Venta.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.TBL_Venta.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.TBL_Venta.getColumnModel().getColumn(2).setPreferredWidth(150);
+                this.TBL_Venta.getColumnModel().getColumn(3).setPreferredWidth(250);
+                if (this.TBL_Venta.getRowCount() > 0) {
+                    this.TBL_Venta.setRowSelectionInterval(0, 0);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El producto "
+                + "especificado no tiene piezas disponibles en el Inventario");
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, ".....Error.....");
         }
      mBD.desconectar();
+     
      
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
 
@@ -290,7 +299,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             if(mBD.conectar()) {
                 if (mBD.realizarVenta(mVenta)) {
                     try {
-                        Ruta = "C:\\Users\\Juanez\\Documents\\PortableGit\\PuntoDeVenta\\New\\PuntoDeVentaFerreteria\\JAKE_Optimizacion_Venta\\Tickets\\Ticket" + Id_Ultim + ".txt";
+                        Ruta = "tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta));
                         ArchivoTXT.write("Ferreteria Juanes ");
                         ArchivoTXT.newLine();
@@ -369,11 +378,10 @@ public class FRM_Venta extends javax.swing.JFrame {
         TXT_Cant.setText("");
         TXT_Escaner.setText(""); 
         TXT_Total.setText("");
-        /*for (int i = 0; i < Cont * 5; i++) {
-           //this.TablasJuanes.removeRow(i);
-           TablasJuanes.removeRow(i);
-           
-        }  */
+       for (int i = 0; i < TBL_Venta.getRowCount(); i++) {
+                TablasJuanes.removeRow(i);
+                i-=1;
+        }
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

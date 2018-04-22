@@ -326,4 +326,39 @@ public class BaseDeDatos {
         }
         return LVentas;
     }
+    
+        public boolean ModificarExistencias(int ID_Prod)
+        {
+           Statement Consulta;
+            try
+            {
+                Consulta = conexion.createStatement();
+                Consulta.execute("update existencias set " + 
+                "cantidad = cantidad - 1 where producto_id_producto = '" + ID_Prod + "';");
+                return true;
+            }
+            catch (Exception e)
+            {
+              e.printStackTrace();
+                return false;
+            }
+        }
+
+public int ConsultaExistencias(int id_p) {
+        int cant = 0;
+        Statement Consulta;
+        ResultSet Resultado;
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery(" select cantidad from existencias where producto_id_producto = '" + id_p + "';");
+            while (Resultado.next()) {
+                cant =(Resultado.getInt("cantidad"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        return cant;
+    }
 }
