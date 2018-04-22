@@ -90,6 +90,11 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
         });
 
         BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Salir.setText("Salir");
 
@@ -161,6 +166,12 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
         mCP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_ConsultaActionPerformed
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        Menu mMenu = new Menu();
+        mMenu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     /**
      * @param args the command line arguments

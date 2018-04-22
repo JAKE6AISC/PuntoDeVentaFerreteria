@@ -117,14 +117,17 @@ public class BaseDeDatos {
     }
 
     public boolean modificacionProducto(Producto mProducto, Producto mNuevoProducto) {
-
+        /*update proveedor set "
+                    + "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = '" + mNuevoProveedor.getEmpresa()
+                    + "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");*/
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update producto set"
-                    + "nombre = '" + mNuevoProducto.getNombre() + "tipo = '" + mNuevoProducto.getTipo()
-                    + "clasificacion = '" + mNuevoProducto.getClasificacion() + "precio = " + mNuevoProducto.getPrecio()
-                    + "' where id_producto = '" + mProducto.getId_Producto() + "';");
+            consulta.execute("update producto set "
+                    + "nombre = '" + mNuevoProducto.getNombre() + "'," 
+                    + "tipo = '" + mNuevoProducto.getTipo() + "'," 
+                    + "clasificacion = '" + mNuevoProducto.getClasificacion() + "',"
+                    + "precio = " + mNuevoProducto.getPrecio() + " where id_producto = '" + mProducto.getId_Producto() + "';");
 
             return true;
         } catch (Exception e) {
