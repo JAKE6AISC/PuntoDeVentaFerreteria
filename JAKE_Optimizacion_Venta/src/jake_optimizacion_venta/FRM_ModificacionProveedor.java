@@ -194,7 +194,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     private void TXT_NuevoNombreProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NuevoNombreProveedorFocusLost
         if(ValidarNuevoNombreProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
+    
         }else{
             JOptionPane.showMessageDialog(null,"Campo obligatorio");
             TXT_NuevoNombreProveedor.requestFocus();
@@ -203,7 +203,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     private void TXT_NuevaEmpresaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NuevaEmpresaFocusLost
          if(ValidarNuevaEmpresa()){
-            //JOptionPane.showMessageDialog(null,"Valido");
+            
         }else{
             JOptionPane.showMessageDialog(null,"Campo obligatorio");
             TXT_NuevaEmpresa.requestFocus();

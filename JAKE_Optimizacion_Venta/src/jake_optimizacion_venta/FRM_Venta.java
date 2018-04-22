@@ -30,7 +30,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     int hora =fecha.get(Calendar.HOUR);
     int minutos =fecha.get(Calendar.MINUTE);
     String FechaActual = year + "-" + mes + "-" + dia;
-    String Hora = hora + ":" + minutos;
+    String Hora = "";
     String Ruta = ""; 
     int ConsultaEx =0; 
     public FRM_Venta() {
@@ -43,6 +43,7 @@ public class FRM_Venta extends javax.swing.JFrame {
         ObternerId_Vtas();
         LBL_ID_Venta.setText(Id_Ultim);
         LBL_Fecha.setText(dia + "/" + mes + "/" + year);
+        Hora = hora + ":" + minutos;
         LBL_Hora.setText(Hora);
         
     }
@@ -153,10 +154,10 @@ public class FRM_Venta extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BTN_AgregarProducto)
                                 .addGap(18, 18, 18)
-                                .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                                .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addGap(48, 48, 48)
+                                .addGap(18, 18, 18)
                                 .addComponent(TXT_Cant, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jake_optimizacion_venta;
-
 /**
- *
+ * Detalle venta agregada pot Juanes para almacenar en bd los datos de detalles de venta
  * @author Juanez
  */
 public class Detalle_Venta {

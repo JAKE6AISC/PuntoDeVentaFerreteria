@@ -117,9 +117,6 @@ public class BaseDeDatos {
     }
 
     public boolean modificacionProducto(Producto mProducto, Producto mNuevoProducto) {
-        /*update proveedor set "
-                    + "nombre = '" + mNuevoProveedor.getNombre() + "'," + "empresa = '" + mNuevoProveedor.getEmpresa()
-                    + "' where id_proveedor = '" + mProveedor.getId_proveedor() + "';");*/
         Statement consulta;
         try {
             consulta = conexion.createStatement();
@@ -330,8 +327,7 @@ public class BaseDeDatos {
         return LVentas;
     }
     
-        public boolean ModificarExistencias(int ID_Prod)
-        {
+    public boolean ModificarExistencias(int ID_Prod){// Modifica las existencias NO BORRAR
            Statement Consulta;
             try
             {
@@ -347,7 +343,7 @@ public class BaseDeDatos {
             }
         }
 
-public int ConsultaExistencias(int id_p) {
+    public int ConsultaExistencias(int id_p) {
         int cant = 0;
         Statement Consulta;
         ResultSet Resultado;
