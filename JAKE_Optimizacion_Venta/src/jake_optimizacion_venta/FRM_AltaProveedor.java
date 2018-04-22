@@ -168,7 +168,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
-        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTNAtrasActionPerformed

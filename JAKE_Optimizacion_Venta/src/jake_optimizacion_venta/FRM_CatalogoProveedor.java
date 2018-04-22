@@ -140,22 +140,26 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
 
     private void BTN_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AltaActionPerformed
         FRM_AltaProveedor mAP = new FRM_AltaProveedor();
-        mAP.show();
+        mAP.setVisible(true); 
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_AltaActionPerformed
 
     private void BTN_BajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BajaActionPerformed
          FRM_BajaProveedores mBP = new FRM_BajaProveedores();
-        mBP.show();
+         mBP.setVisible(true);
+         this.setVisible(false);
     }//GEN-LAST:event_BTN_BajaActionPerformed
 
     private void BTN_CambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CambiosActionPerformed
          FRM_ModificacionProveedor mMP = new FRM_ModificacionProveedor();
-        mMP.show();
+         mMP.setVisible(true);
+         this.setVisible(false);
     }//GEN-LAST:event_BTN_CambiosActionPerformed
 
     private void BTN_ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ConsultaActionPerformed
-         FRM_ConsultasProveedor mCP = new FRM_ConsultasProveedor();
-        mCP.show();
+        FRM_ConsultasProveedor mCP = new FRM_ConsultasProveedor();
+        mCP.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_ConsultaActionPerformed
 
     /**

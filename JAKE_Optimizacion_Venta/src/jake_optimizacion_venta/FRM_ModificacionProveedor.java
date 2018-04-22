@@ -186,7 +186,6 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorFocusLost
         if(ValidarId_Proveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
         }else{
             JOptionPane.showMessageDialog(null,"Campo obligatorio");
             TXT_Id_Proveedor.requestFocus();
