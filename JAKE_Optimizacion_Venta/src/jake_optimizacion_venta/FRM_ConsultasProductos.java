@@ -74,8 +74,18 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         });
 
         BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(JTableProductos);
 
@@ -186,8 +196,8 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                   
                 Dato = new String[5];
            
-                mProducto = mBaseDeDatos.consultarProducto(nombre);
-                mProducto = mBaseDeDatos.consultarProducto2(tipo);
+                mProducto = mBaseDeDatos.consultarProducto(nombre,tipo);
+               
                 
                 Dato[0] = "" + (mProducto.getId_Producto());
                 Dato[1] = "" + (mProducto.getPrecio());
@@ -277,6 +287,18 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        // TODO add your handling code here:
+        FRM_CatalogoProductos FormCpr = new FRM_CatalogoProductos();
+        FormCpr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     /**
      * @param args the command line arguments

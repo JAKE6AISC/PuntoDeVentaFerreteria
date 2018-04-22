@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Kevin Fabián Cruz Gómez
+ * Formulario para dar de baja un proveedor
  */
 package jake_optimizacion_venta;
 
@@ -47,18 +46,23 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         LBL_IdProveedor.setText("ID_Proveedor: ");
 
         JTableProveedor.setModel(modeloTabla);
-        JTableProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                JTableProveedorKeyTyped(evt);
-            }
-        });
         jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_Atras.setText("Atrás");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Eliminar.setText("Eliminar");
         BTN_Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +72,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
 
@@ -143,7 +152,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarActionPerformed
-        mProveedor.setId_proveedor(this.JTableProveedor.getSelectedRow()); //Se obtiene el id para eliminar el proveedor deseado
+        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText())); //Se obtiene el id para eliminar el proveedor deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
             if (mBD.eliminarProveedor(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                 JOptionPane.showMessageDialog(null, "Proveedor Eliminado con éxito");
@@ -154,20 +163,33 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
-    private void JTableProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTableProveedorKeyTyped
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        FRM_CatalogoProveedor FormCpr = new FRM_CatalogoProveedor();
+        FormCpr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.TXT_Id_Proveedor.setText("");
+        modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
+
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
             String[] Datos;
 
-            modeloTabla.addColumn("ID");
-            modeloTabla.addColumn("Nombre");
-            modeloTabla.addColumn("Clasificación");
-            modeloTabla.addColumn("Tipo");
-            modeloTabla.addColumn("Precio");
-
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                mProveedor = (Proveedor)mListaProveedor;
+                mProveedor = (Proveedor) mListaProveedor;
                 Datos[0] = "" + mProveedor.getId_proveedor();
                 Datos[1] = mProveedor.getNombre();
                 Datos[2] = mProveedor.getEmpresa();
@@ -186,7 +208,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar proveedor");
         }
         mBD.desconectar();
-    }//GEN-LAST:event_JTableProveedorKeyTyped
+    }//GEN-LAST:event_formWindowActivated
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**
      * @param args the command line arguments

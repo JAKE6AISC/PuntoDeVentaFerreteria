@@ -42,44 +42,51 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LBL_Id_Producto" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_Nombre_Producto" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_Clasificacion" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_Tipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBL_Precio" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="LBL_Id_Proveedor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="TXT_Id_Proveedor" min="-2" pref="209" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LBL_Id_Producto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_Nombre_Producto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_Clasificacion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_Tipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="LBL_Precio" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="TXT_NombreProducto" alignment="0" pref="209" max="32767" attributes="0"/>
+                          <Component id="TXT_NombreProducto" alignment="0" max="32767" attributes="0"/>
                           <Component id="TXT_Id_Producto" alignment="0" max="32767" attributes="0"/>
                           <Component id="TXT_Clasificacion" alignment="0" max="32767" attributes="0"/>
                           <Component id="TXT_Tipo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TXT_Precio" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TXT_Precio" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="70" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                       <Component id="BTN_Agegar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="BTN_Salir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
           </Group>
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -106,7 +113,12 @@
                   </Group>
                   <Component id="LBL_Precio" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="TXT_Id_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LBL_Id_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTN_Agegar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTN_Salir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -233,5 +245,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="LBL_Id_Proveedor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Id_Proovedor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TXT_Id_Proveedor">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TXT_Id_ProveedorFocusLost"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

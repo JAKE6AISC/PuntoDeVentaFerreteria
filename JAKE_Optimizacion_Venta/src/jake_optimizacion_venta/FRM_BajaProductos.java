@@ -13,9 +13,11 @@ import javax.swing.table.DefaultTableModel;
  * @author KevinCruz
  */
 public class FRM_BajaProductos extends javax.swing.JFrame {
+
     Producto mProducto = new Producto();
     BaseDeDatos mBD = new BaseDeDatos();
     DefaultTableModel modeloTabla = new DefaultTableModel();
+
     /**
      * Creates new form FRM_BajaProductos
      */
@@ -46,6 +48,11 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(498, 408));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(408, 52));
@@ -82,11 +89,6 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         LBLid.setText("ID_Producto: ");
 
         JTable_Bajas.setModel(modeloTabla);
-        JTable_Bajas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTable_BajasKeyPressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(JTable_Bajas);
 
         BTN_atras.setText("Atrás");
@@ -181,28 +183,44 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
-    private void JTable_BajasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTable_BajasKeyPressed
-        if(mBD.conectar()){
-           ArrayList mListaProductos = mBD.consultarProductos();  
-            String [] Datos;
-        
-            modeloTabla.addColumn("ID");
-            modeloTabla.addColumn("Nombre");
-            modeloTabla.addColumn("Clasificación");
-            modeloTabla.addColumn("Tipo");
-            modeloTabla.addColumn("Precio");
-            
+    private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_atrasActionPerformed
+
+    private void BTN_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BTN_salirActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.TXT_idProducto.setText("");
+        modeloTabla = (DefaultTableModel) JTable_Bajas.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
+        if (mBD.conectar()) {
+            ArrayList mListaProductos = mBD.consultarProductos();
+            String[] Datos;
+
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[5];
-                mProducto = (Producto)mListaProducto;
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = "" + mProducto.getId_Producto();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = mProducto.getClasificacion();
                 Datos[3] = mProducto.getTipo();
                 Datos[4] = "" + mProducto.getPrecio();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
+            }
             this.JTable_Bajas = new javax.swing.JTable();
             this.JTable_Bajas.setModel(modeloTabla);
             this.JTable_Bajas.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -211,24 +229,14 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             this.JTable_Bajas.getColumnModel().getColumn(3).setPreferredWidth(200);
             this.JTable_Bajas.getColumnModel().getColumn(4).setPreferredWidth(300);
             if (this.JTable_Bajas.getRowCount() > 0) {
-            this.JTable_Bajas.setRowSelectionInterval(0, 0);
+                this.JTable_Bajas.setRowSelectionInterval(0, 0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
-            }
+        }
         mBD.desconectar();
-        
-    }//GEN-LAST:event_JTable_BajasKeyPressed
 
-    private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
-        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
-        FormCP.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_BTN_atrasActionPerformed
-
-    private void BTN_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_salirActionPerformed
-        this.setEnabled(false);
-    }//GEN-LAST:event_BTN_salirActionPerformed
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
