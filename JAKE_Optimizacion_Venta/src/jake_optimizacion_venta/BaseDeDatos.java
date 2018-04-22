@@ -50,8 +50,7 @@ public class BaseDeDatos {
             consulta.execute("insert into proveedor "
                     + "(Id_Proveedor, Nombre, Empresa ) "
                     + "values ('" + mProveedor.getId_proveedor()
-                    + "'" + mProveedor.getNombre() + ","
-                    + "'" + mProveedor.getEmpresa() + "');");
+                    + "','" + mProveedor.getNombre() + "','" + mProveedor.getEmpresa() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
