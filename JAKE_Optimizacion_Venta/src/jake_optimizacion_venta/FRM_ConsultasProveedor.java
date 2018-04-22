@@ -87,8 +87,18 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
 
@@ -257,6 +267,19 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
         }        
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        // TODO add your handling code here:
+        FRM_CatalogoProveedor FormCpr = new FRM_CatalogoProveedor();
+        FormCpr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+        
+    }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**
      * @param args the command line arguments
