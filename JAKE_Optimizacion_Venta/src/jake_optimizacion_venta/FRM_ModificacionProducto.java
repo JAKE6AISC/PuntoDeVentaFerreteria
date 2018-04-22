@@ -39,6 +39,8 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         BTNAtras = new javax.swing.JButton();
         BTNModificar = new javax.swing.JButton();
         BTNSalir = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +55,11 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         jLabel5.setText("Precio");
 
         BTNAtras.setText("Atras");
+        BTNAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNAtrasActionPerformed(evt);
+            }
+        });
 
         BTNModificar.setText("Modificar");
         BTNModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,18 +69,45 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         });
 
         BTNSalir.setText("Salir");
+        BTNSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNSalirActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(51, 255, 102));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Modificacion De Productos");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(381, 381, 381))
+                        .addGap(286, 286, 286))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -86,21 +120,23 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(TXTId_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TXTNuevo_NombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(TXTNuevo_NombreProducto)
                                     .addComponent(TXTNuevo_TipoProducto)
                                     .addComponent(TXTNuevo_ClasificacionProducto)
-                                    .addComponent(TXTNuevo_PrecioProducto)))
+                                    .addComponent(TXTNuevo_PrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(36, 36, 36)
                                 .addComponent(BTNModificar)
                                 .addGap(74, 74, 74)
-                                .addComponent(BTNSalir)))
-                        .addGap(95, 95, 95))))
+                                .addComponent(BTNSalir)))))
+                .addGap(96, 96, 96))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXTId_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,12 +156,12 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(TXTNuevo_PrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNAtras)
                     .addComponent(BTNModificar)
                     .addComponent(BTNSalir))
-                .addGap(45, 45, 45))
+                .addContainerGap())
         );
 
         pack();
@@ -153,6 +189,94 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTNModificarActionPerformed
 
+    private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
+      setVisible(false);
+    }//GEN-LAST:event_BTNSalirActionPerformed
+
+    private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
+         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
+        FormCP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTNAtrasActionPerformed
+
+     private void TXT_IdProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
+        if(ValidarIdProducto()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTId_Producto.requestFocus();
+       }
+    } 
+     
+      private void TXT_NombreProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
+        if(ValidarProducto()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNuevo_NombreProducto.requestFocus();
+       }
+    }
+       private void TXT_TipoProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
+        if(ValidarTipo()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNuevo_TipoProducto.requestFocus();
+       }
+    } 
+        private void TXT_ClasificacionProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
+        if(ValidarClasificacion()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNuevo_ClasificacionProducto.requestFocus();
+       }
+    } 
+         private void TXT_PrecioProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
+        if(ValidarPrecio()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNuevo_PrecioProducto.requestFocus();
+       }
+    } 
+     public boolean ValidarIdProducto(){
+        if(TXTId_Producto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+       public boolean ValidarProducto(){
+        if(TXTNuevo_NombreProducto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+       
+       public boolean ValidarTipo(){
+        if(TXTNuevo_TipoProducto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+     public boolean ValidarClasificacion(){
+        if(TXTNuevo_ClasificacionProducto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+     
+     public boolean ValidarPrecio(){
+        if(TXTNuevo_PrecioProducto.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -202,5 +326,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

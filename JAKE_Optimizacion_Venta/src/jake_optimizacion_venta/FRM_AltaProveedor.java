@@ -48,6 +48,11 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         jLabel3.setText("Empresa");
 
         BTNAtras.setText("Atras");
+        BTNAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNAtrasActionPerformed(evt);
+            }
+        });
 
         BTNGuardar.setText("Guardar");
         BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +62,11 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         });
 
         BTNSalir.setText("Salir");
+        BTNSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Id_Proveedor");
 
@@ -157,6 +167,63 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
+    private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FormCP.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTNAtrasActionPerformed
+
+    private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
+            this.setVisible(false);  
+    }//GEN-LAST:event_BTNSalirActionPerformed
+        private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
+       if(ValidarIdProveedor()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNombre.requestFocus();
+       }
+    }    
+    
+    private void TXT_Nombre_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
+       if(ValidarNombreProveedor()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTNombre.requestFocus();
+       }
+    }                                         
+
+    private void TXT_EmpresaFocusLost(java.awt.event.FocusEvent evt) {                                             
+       if(ValidarNombreProveedor()){
+            //JOptionPane.showMessageDialog(null,"Valido");
+        }else{
+            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+            TXTEmpresa.requestFocus();
+       }
+    }
+    
+    public boolean ValidarIdProveedor(){
+        if(TXTIDProveedor.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    public boolean ValidarNombreProveedor(){
+        if(TXTNombre.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    public boolean ValidarEmpresa(){
+        if(TXTEmpresa.getText().equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
     /**
      * @param args the command line arguments
      */

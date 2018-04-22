@@ -20,7 +20,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "", "");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -122,7 +122,7 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             consulta.execute("update producto set"
                     + "nombre = '" + mNuevoProducto.getNombre() + "tipo = '" + mNuevoProducto.getTipo()
-                    + "clasificacion = '" + mNuevoProducto.getClasificacion() + "Precio = " + mNuevoProducto.getPrecio()
+                    + "clasificacion = '" + mNuevoProducto.getClasificacion() + "precio = " + mNuevoProducto.getPrecio()
                     + "' where id_producto = '" + mProducto.getId_Producto() + "';");
 
             return true;
