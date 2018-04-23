@@ -10,9 +10,12 @@ package jake_optimizacion_venta;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BaseDeDatos {
@@ -121,8 +124,8 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("update producto set "
-                    + "nombre = '" + mNuevoProducto.getNombre() + "'," 
-                    + "tipo = '" + mNuevoProducto.getTipo() + "'," 
+                    + "nombre = '" + mNuevoProducto.getNombre() + "',"
+                    + "tipo = '" + mNuevoProducto.getTipo() + "',"
                     + "clasificacion = '" + mNuevoProducto.getClasificacion() + "',"
                     + "precio = " + mNuevoProducto.getPrecio() + " where id_producto = '" + mProducto.getId_Producto() + "';");
 
@@ -194,7 +197,7 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto;");
             while (resultado.next()) {
-               
+
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setPrecio(resultado.getFloat("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
@@ -208,7 +211,7 @@ public class BaseDeDatos {
         return mListaProductos;
     }
 
-    public Producto consultarProducto(String nombre,String tipo) {
+    public Producto consultarProducto(String nombre, String tipo) {
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
@@ -220,7 +223,6 @@ public class BaseDeDatos {
             resultado = consulta.executeQuery("select * from producto "
                     + "where nombre = '" + nombre + "' OR tipo = '" + tipo + "';");
             if (resultado.next()) {
-
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setPrecio(resultado.getInt("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
@@ -232,37 +234,39 @@ public class BaseDeDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return mProducto;
     }
-    
+
     public boolean realizarCompra(Compra mCompra) {
         Statement consulta;
-        ResultSet resultado;
-        Producto mProducto = null;
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into compra (fecha, total) values "
-                    + "(" + mCompra.getTotal() + ",'" + 2 + "');");
-            resultado = consulta.executeQuery("select * from compra;");
-            while (resultado.next()) {
-                mCompra.setId_Compra(resultado.getInt("id_compra"));
-            }
-            resultado = consulta.executeQuery("select * from producto;");
-            while (resultado.next()) {
-                mProducto.setId_Producto(resultado.getInt("id_producto"));
-            }
-            consulta.execute("insert into detalle_compra (costo) values "
-                    + "(" + mCompra.getTotal() + ") where compra_id_compra ="
-                    + mCompra.getId_Compra() + " and producto_id_producto ="
-                    + mProducto.getId_Producto() + ");");
-            consulta.execute("update existencias set cantidad = cantidad +" 
-                    + 1 +" where producto_id_producto = "+mProducto.getId_Producto()+";");
+                    + "('" + mCompra.getFecha() + "'," + mCompra.getTotal() + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean realizarDetalleCompra() {
+        Statement consulta;
+        Detalle_Compra mDetalle_Compra;
+      
+//        try {
+////            consulta = conexion.createStatement();
+//            
+////                consulta.execute("insert into detalle_compra (costo,"
+////                        + " compra_id_compra, producto_id_producto) values "
+////                        + "("+mDetalle_Compra.getCosto()+", "+mDetalle_Compra.getCompra_id_compra()
+////                        +", "+mDetalle_Compra.getProducto_id_producto()+");");
+//            return true;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+//            return false;
+//        }
+        return true;
     }
 
     public boolean realizarVenta(Venta mVenta) {//Sirve para guardar los datos de la
@@ -326,22 +330,19 @@ public class BaseDeDatos {
         }
         return LVentas;
     }
-    
-    public boolean ModificarExistencias(int ID_Prod){// Modifica las existencias NO BORRAR
-           Statement Consulta;
-            try
-            {
-                Consulta = conexion.createStatement();
-                Consulta.execute("update existencias set " + 
-                "cantidad = cantidad - 1 where producto_id_producto = '" + ID_Prod + "';");
-                return true;
-            }
-            catch (Exception e)
-            {
-              e.printStackTrace();
-                return false;
-            }
+
+    public boolean ModificarExistencias(int ID_Prod) {// Modifica las existencias NO BORRAR
+        Statement Consulta;
+        try {
+            Consulta = conexion.createStatement();
+            Consulta.execute("update existencias set "
+                    + "cantidad = cantidad - 1 where producto_id_producto = '" + ID_Prod + "';");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
+    }
 
     public int ConsultaExistencias(int id_p) {
         int cant = 0;
@@ -351,13 +352,12 @@ public class BaseDeDatos {
             Consulta = conexion.createStatement();
             Resultado = Consulta.executeQuery(" select cantidad from existencias where producto_id_producto = '" + id_p + "';");
             while (Resultado.next()) {
-                cant =(Resultado.getInt("cantidad"));
+                cant = (Resultado.getInt("cantidad"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
+
         return cant;
     }
 }

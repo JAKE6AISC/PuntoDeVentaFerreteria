@@ -195,7 +195,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNSalirActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
-         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
+         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTNAtrasActionPerformed
