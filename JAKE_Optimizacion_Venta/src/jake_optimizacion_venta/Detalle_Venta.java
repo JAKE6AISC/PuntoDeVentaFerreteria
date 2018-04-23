@@ -4,10 +4,10 @@ package jake_optimizacion_venta;
  * @author Juanez
  */
 public class Detalle_Venta {
-   int ID_Detalle_Venta;
-   float Precio;
-   int Venta_Id_Detalle_Venta;
-   int Producto_Id_Producto;
+   private int ID_Detalle_Venta;
+   private float Precio;
+   private int Venta_Id_Detalle_Venta;
+   private int Producto_Id_Producto;
 
     public int getID_Detalle_Venta() {
         return ID_Detalle_Venta;
