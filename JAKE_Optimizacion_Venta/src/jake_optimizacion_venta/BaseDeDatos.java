@@ -236,14 +236,14 @@ public class BaseDeDatos {
         return mProducto;
     }
     
-    public boolean realizarCompra(Compra mCompra, int Cant, String Nombre) {
+    public boolean realizarCompra(Compra mCompra) {
         Statement consulta;
         ResultSet resultado;
         Producto mProducto = null;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into compra (total, nombre) values "
-                    + "(" + mCompra.getTotal() + ",'" + Nombre + "');");
+            consulta.execute("insert into compra (fecha, total) values "
+                    + "(" + mCompra.getTotal() + ",'" + 2 + "');");
             resultado = consulta.executeQuery("select * from compra;");
             while (resultado.next()) {
                 mCompra.setId_Compra(resultado.getInt("id_compra"));
@@ -256,8 +256,8 @@ public class BaseDeDatos {
                     + "(" + mCompra.getTotal() + ") where compra_id_compra ="
                     + mCompra.getId_Compra() + " and producto_id_producto ="
                     + mProducto.getId_Producto() + ");");
-            consulta.execute("update detalle_compra set cantidad = cantidad +" 
-                    + Cant +" where producto_id_producto = "+mProducto.getId_Producto()+";");
+            consulta.execute("update existencias set cantidad = cantidad +" 
+                    + 1 +" where producto_id_producto = "+mProducto.getId_Producto()+";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
