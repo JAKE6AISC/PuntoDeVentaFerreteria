@@ -429,7 +429,7 @@ public class BaseDeDatos {
             {
                 Consulta = conexion.createStatement();
                 Consulta.execute("insert into detalle_venta " +
-                            "(precio, id_producto, id_venta) " +
+                            "(precio, producto_id_producto, venta_id_venta) " +
                             "values ("+ pr + "," + id_p + ","
                             + id_v + ");");
             }
