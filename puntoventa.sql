@@ -95,13 +95,7 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`detalle_venta` (
   `precio` FLOAT NULL,
   `venta_id_venta` INT NOT NULL,
   `producto_id_producto` INT NOT NULL,
-  PRIMARY KEY (`id_detalle_venta`),
-  INDEX `fk_detalle_venta_producto1_idx` (`producto_id_producto` ASC),
-  CONSTRAINT `fk_detalle_venta_producto1`
-    FOREIGN KEY (`producto_id_producto`)
-    REFERENCES `puntoventa`.`producto` (`id_producto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_detalle_venta`))
 ENGINE = InnoDB;
 
 
