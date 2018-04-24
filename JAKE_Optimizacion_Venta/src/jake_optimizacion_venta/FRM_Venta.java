@@ -23,11 +23,11 @@ public class FRM_Venta extends javax.swing.JFrame {
     float Total = 0,SubTotal = 0;
     String Precio = "", Nombre="",Id_Ultim = "";
     int Cant = 0;int Id_Venta = 0,Cont = 1, Anterior = 0;
-    int year = fecha.get(Calendar.YEAR);
-    int mes = fecha.get(Calendar.MONTH) + 1;
-    int dia = fecha.get(Calendar.DAY_OF_MONTH);
-    int hora =fecha.get(Calendar.HOUR);
-    int minutos =fecha.get(Calendar.MINUTE);
+    int year = 0;
+    int mes = 0;
+    int dia = 0;
+    int hora = 0;
+    int minutos = 0;
     String FechaActual = year + "-" + mes + "-" + dia;
     String Hora = "";
     String Ruta = ""; 
@@ -42,9 +42,8 @@ public class FRM_Venta extends javax.swing.JFrame {
         TablasJuanes.addColumn("Sub Total");
         initComponents();
         ObternerId_Vtas();
+        Fecha();
         LBL_ID_Venta.setText(Id_Ultim);
-        LBL_Fecha.setText(dia + "/" + mes + "/" + year);
-        Hora = hora + ":" + minutos;
         LBL_Hora.setText(Hora);
         
     }
@@ -220,10 +219,21 @@ public class FRM_Venta extends javax.swing.JFrame {
          }
       mBD.desconectar();
 }
+    private void Fecha(){
+        year = fecha.get(Calendar.YEAR);
+        mes = fecha.get(Calendar.MONTH) + 1;
+        dia = fecha.get(Calendar.DAY_OF_MONTH);
+        hora =fecha.get(Calendar.HOUR);
+        minutos =fecha.get(Calendar.MINUTE);
+        FechaActual = year + "-" + mes + "-" + dia;
+        LBL_Fecha.setText(dia + "/" + mes + "/" + year);
+        Hora = hora + ":" + minutos;
+    }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
         if(mBD.conectar()){
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
             ConsultaEx =  mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
+            JOptionPane.showMessageDialog(null, ConsultaEx);
             if (ConsultaEx > 0) {
                 String [] DatosTabla;
                 for (Object ListaProductos : ListaProductoss) {
@@ -234,10 +244,10 @@ public class FRM_Venta extends javax.swing.JFrame {
                     DatosTabla[2] = mProducto.getPrecio() + "";
                     DatosTabla[3] = "1";
                     DatosTabla[4] = mProducto.getPrecio()+ "";
+                    mBD.modificarExistencias(mProducto.getId_Producto());
                     ArregloIdProd.add(mProducto.getId_Producto());
                     ArregloPrecios.add(mProducto.getPrecio());
                     Total = Total + mProducto.getPrecio();
-                    //LBL_Total.setText(Total + "");
                     TXT_Total.setText(Total + "");
                     TablasJuanes.addRow(DatosTabla);
                 }    
@@ -251,9 +261,9 @@ public class FRM_Venta extends javax.swing.JFrame {
                 if (this.TBL_Venta.getRowCount() > 0) {
                     this.TBL_Venta.setRowSelectionInterval(0, 0);
                 }
-            } else {
+            } else if (ConsultaEx <= 0){
                 JOptionPane.showMessageDialog(null, "El producto "
-                + "especificado no tiene piezas disponibles en el Inventario");
+                + "especificado no tiene piezas disponibles en existencia");
             }
         }else {
             JOptionPane.showMessageDialog(null, ".....Error.....");
@@ -281,7 +291,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                     float precio;
                     for(int j = 0; j< ArregloPrecios.size(); j++){
                         id_prod = ArregloIdProd.get(j);
-                        mBD.modificarExistencias(id_prod);
+                        
                         precio = ArregloPrecios.get(j);
                         mBD.agregarDetalleVenta(precio, id_prod, id_vta);
                     }

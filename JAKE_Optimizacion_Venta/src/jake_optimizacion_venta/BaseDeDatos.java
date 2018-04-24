@@ -367,7 +367,7 @@ public class BaseDeDatos {
         ResultSet Resultado;
         try {
             Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery(" select cantidad from existencias where producto_id_producto = '" + id_p + "';");
+            Resultado = Consulta.executeQuery("select cantidad from existencias where producto_id_producto = '" + id_p + "';");
             while (Resultado.next()) {
                 cant = (Resultado.getInt("cantidad"));
             }
