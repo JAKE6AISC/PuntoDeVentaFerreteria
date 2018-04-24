@@ -237,6 +237,23 @@ public class BaseDeDatos {
         return mProducto;
     }
 
+    public int consultarIDcompra() {
+        Statement consulta;
+        ResultSet resultado;
+        int id = 0;
+
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT MAX(id_compra) from compra;");
+            while (resultado.next()) {
+                id = resultado.getInt("MAX(id_compra)");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public boolean realizarCompra(Compra mCompra) {
         Statement consulta;
         try {
@@ -250,23 +267,23 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean realizarDetalleCompra() {
+    public boolean realizarDetalleCompra(Compra mCompra) {
         Statement consulta;
-        Detalle_Compra mDetalle_Compra;
-      
-//        try {
-////            consulta = conexion.createStatement();
-//            
-////                consulta.execute("insert into detalle_compra (costo,"
-////                        + " compra_id_compra, producto_id_producto) values "
-////                        + "("+mDetalle_Compra.getCosto()+", "+mDetalle_Compra.getCompra_id_compra()
-////                        +", "+mDetalle_Compra.getProducto_id_producto()+");");
-//            return true;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
-//            return false;
-//        }
-        return true;
+        Detalle_Compra mDetalle_Compra = null;
+        ArrayList ListaProductos = mCompra.getProductos();
+        try {
+            consulta = conexion.createStatement();
+            for (Object ListaProducto : ListaProductos) {
+            consulta.execute("insert into detalle_compra (costo,"
+                    + " compra_id_compra, producto_id_producto) values "
+                    + "(" + mDetalle_Compra.getCosto()+ ", " + mDetalle_Compra.getCompra_id_compra()
+                    + ", " + mDetalle_Compra.getProducto_id_producto() + ");");
+            }
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public boolean realizarVenta(Venta mVenta) {//Sirve para guardar los datos de la
