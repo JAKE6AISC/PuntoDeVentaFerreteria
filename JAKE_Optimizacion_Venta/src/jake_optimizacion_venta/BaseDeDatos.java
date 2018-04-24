@@ -327,28 +327,7 @@ public class BaseDeDatos {
         return ListaProductos;
     }
 
-    public ArrayList listaVentas() { // Para La venta Agregado por Juanes NO BORRAR
-        // Obtiene el Id de la sig Venta
-        ArrayList LVentas = new ArrayList();
-        Venta mVenta;
-        Statement Consulta;
-        ResultSet Resultado;
-
-        try {
-            Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery("select * from venta;");
-            while (Resultado.next()) {
-                mVenta = new Venta();
-                mVenta.setId_Venta(Resultado.getInt("id_venta"));
-                LVentas.add(mVenta);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error: " + e);
-        }
-        return LVentas;
-    }
-
-    public boolean modificarExistencias(int ID_Prod) {// Modifica las existencias NO BORRAR
+    public boolean modificarExistencias(int ID_Prod) {//si se usa
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
@@ -361,7 +340,7 @@ public class BaseDeDatos {
         }
     }
 
-    public int consultaExistencias(int id_p) {
+    public int consultaExistencias(int id_p) {// si se usa
         int cant = 0;
         Statement Consulta;
         ResultSet Resultado;
@@ -405,7 +384,7 @@ public class BaseDeDatos {
         return mListaProducto;
     }
     
-    public int getIdSiguienteVenta() {
+    public int getIdSiguienteVenta() {// Si se usa
         int sig = 0;
         Statement Consulta;
         ResultSet Resultado;
@@ -422,8 +401,7 @@ public class BaseDeDatos {
         return sig;
     }
        
-       public void agregarDetalleVenta(float pr,int id_v,int id_p)
-        {
+       public void agregarDetalleVenta(float pr,int id_p, int id_v){//Si se usa
             Statement Consulta;
             try
             {

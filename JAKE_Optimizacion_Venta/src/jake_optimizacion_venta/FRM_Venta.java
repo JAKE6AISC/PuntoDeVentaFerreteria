@@ -141,32 +141,30 @@ public class FRM_Venta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(BTN_RealizarVenta)
-                                .addGap(9, 9, 9))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(27, 27, 27)
-                        .addComponent(LBL_ID_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(LBL_Fecha)
-                        .addGap(31, 31, 31)
-                        .addComponent(LBL_Hora)
-                        .addGap(19, 19, 19))))
+                .addGap(24, 24, 24)
+                .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BTN_RealizarVenta)
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(LBL_ID_Venta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(LBL_Fecha)
+                .addGap(31, 31, 31)
+                .addComponent(LBL_Hora)
+                .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +231,6 @@ public class FRM_Venta extends javax.swing.JFrame {
         if(mBD.conectar()){
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
             ConsultaEx =  mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
-            JOptionPane.showMessageDialog(null, ConsultaEx);
             if (ConsultaEx > 0) {
                 String [] DatosTabla;
                 for (Object ListaProductos : ListaProductoss) {
@@ -306,11 +303,12 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("Rio Grande\tZacateas\tMexico\t");
+                            ArchivoTXT.write("Lugar de expedicion: Rio Grande\tZacateas\tMexico\tCodigo postal 98400");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia +"/"+mes+"/"+year + "\t Hora " + Hora);
+                            ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
@@ -318,17 +316,17 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.write("\n____________________________________________________________________________");
                             ArchivoTXT.newLine();
                             String Tam = "";
-                            for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){ //realiza un barrido por filas.
+                            for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){
                                 for(int j = 0 ; j < TablasJuanes.getColumnCount();j++){
                                     if (((String)(TablasJuanes.getValueAt(i,j))).length() > 6) {
                                         Tam =(String)(TablasJuanes.getValueAt(i,j)).toString().substring(0,5);
                                         ArchivoTXT.write(Tam);
-                                        if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→"
+                                        if (j < TablasJuanes.getColumnCount() -1) {
                                             ArchivoTXT.write("\t\t");
                                         }
                                     }else{
                                         ArchivoTXT.write((String)(TablasJuanes.getValueAt(i,j)));
-                                        if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→"
+                                        if (j < TablasJuanes.getColumnCount() -1) { 
                                             ArchivoTXT.write("\t\t");
                                         }
                                     }
@@ -340,7 +338,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.write("\n____________________________________________________________________________");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("\t\t\t\t   \tTotal a pagar: $" + Total + " MXN");
+                            ArchivoTXT.write("\t\t\t \t   \tTotal a pagar: $" + Total + " MXN");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
@@ -354,9 +352,9 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.write("!!! Gracias por su compra esperamos verlos pronto!!!");
-                            ArchivoTXT.close(); //cierra archivo!
+                            ArchivoTXT.close();
                         }
-                        JOptionPane.showMessageDialog(null,"Venta Realizada\nTicket " + Id_Ultim + " Guardado");
+                        JOptionPane.showMessageDialog(null,"Venta Realizada\nTicket de venta numero " + Id_Ultim + " Guardado");
                     } catch (IOException | HeadlessException e) {
                         JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
                     } 
@@ -364,7 +362,6 @@ public class FRM_Venta extends javax.swing.JFrame {
                 
                 } else {
                      JOptionPane.showMessageDialog(null, "Error");
-       // }
              mBD.desconectar();
              }
                 ObternerId_Vtas();
