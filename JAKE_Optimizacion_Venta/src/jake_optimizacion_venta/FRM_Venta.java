@@ -1,13 +1,12 @@
 package jake_optimizacion_venta;
+import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.sql.Connection;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -33,6 +32,8 @@ public class FRM_Venta extends javax.swing.JFrame {
     String Hora = "";
     String Ruta = ""; 
     int ConsultaEx =0; 
+    ArrayList<Integer> ArregloIdProd = new ArrayList<>();
+    ArrayList<Float> ArregloPrecios = new ArrayList<>(); 
     public FRM_Venta() {
         TablasJuanes.addColumn("Codigo de barras");
         TablasJuanes.addColumn("Nombre");
@@ -57,9 +58,7 @@ public class FRM_Venta extends javax.swing.JFrame {
         TXT_Total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BTN_AgregarProducto = new javax.swing.JButton();
-        TXT_Cant = new javax.swing.JTextField();
         BTN_Atras = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         BTN_RealizarVenta = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         LBL_Hora = new javax.swing.JLabel();
@@ -77,14 +76,12 @@ public class FRM_Venta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setText("Total   $");
 
-        BTN_AgregarProducto.setText("Agregar Producto");
+        BTN_AgregarProducto.setText("+");
         BTN_AgregarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_AgregarProductoActionPerformed(evt);
             }
         });
-
-        TXT_Cant.setText(" ");
 
         BTN_Atras.setText("<< Atras");
         BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
@@ -92,8 +89,6 @@ public class FRM_Venta extends javax.swing.JFrame {
                 BTN_AtrasActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Cantiad de articulos");
 
         BTN_RealizarVenta.setText("Realizar Venta");
         BTN_RealizarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -149,27 +144,18 @@ public class FRM_Venta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTN_AgregarProducto)
-                                .addGap(18, 18, 18)
-                                .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(TXT_Cant, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(BTN_RealizarVenta)
-                                        .addGap(9, 9, 9))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(BTN_RealizarVenta)
+                                .addGap(9, 9, 9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -186,6 +172,11 @@ public class FRM_Venta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BTN_AgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,45 +193,37 @@ public class FRM_Venta extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_Cant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_AgregarProducto)
-                    .addComponent(jLabel2))
+                    .addComponent(BTN_AgregarProducto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BTN_RealizarVenta))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(BTN_Atras)))
-                .addContainerGap())
+                        .addComponent(BTN_RealizarVenta)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BTN_Atras)
+                        .addGap(23, 23, 23))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ObternerId_Vtas() {
-      if(mBD.conectar()) {
-            ArrayList ListaVentas = mBD.listaVentas();
-            String [] DatosVenta;
-        for (Object ListaVentasss : ListaVentas) {
-            DatosVenta = new String[1];
-            mVenta = (Venta)ListaVentasss;
-            DatosVenta[0] = "" + mVenta.getId_Venta();
-        } 
-           Anterior = mVenta.getId_Venta() + 1;
-           Id_Ultim = "" +  Anterior;
+       if(mBD.conectar()) {
+           Anterior = mBD.getIdSiguienteVenta() + 1;
+           int var = Anterior;
+           Id_Ultim = var + "";
          }
       mBD.desconectar();
 }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-         if(mBD.conectar()){
+        if(mBD.conectar()){
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
-            ConsultaEx =  mBD.ConsultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
+            ConsultaEx =  mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
             if (ConsultaEx > 0) {
                 String [] DatosTabla;
                 for (Object ListaProductos : ListaProductoss) {
@@ -251,13 +234,12 @@ public class FRM_Venta extends javax.swing.JFrame {
                     DatosTabla[2] = mProducto.getPrecio() + "";
                     DatosTabla[3] = "1";
                     DatosTabla[4] = mProducto.getPrecio()+ "";
-                    mBD.ModificarExistencias(mProducto.getId_Producto());
+                    ArregloIdProd.add(mProducto.getId_Producto());
+                    ArregloPrecios.add(mProducto.getPrecio());
                     Total = Total + mProducto.getPrecio();
+                    //LBL_Total.setText(Total + "");
                     TXT_Total.setText(Total + "");
-                    Cant = Cant + Integer.parseInt(DatosTabla[3]);
-                    TXT_Cant.setText(Cant + "");
                     TablasJuanes.addRow(DatosTabla);
-                    Cont++;
                 }    
         
                 this.TBL_Venta = new javax.swing.JTable();
@@ -288,86 +270,91 @@ public class FRM_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_RealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RealizarVentaActionPerformed
-        if (false) {
-            JOptionPane.showMessageDialog(null, "Error imposible realizar venta\n"
-                    + "el producto" + mProducto.getNombre() + " contiene " + 0 + " piezas"
-                    + "en el inventario, si desea continuar con la compra no incluya este articulo");
-        }else {
             LBL_ID_Venta.setText(Id_Ultim);
             mVenta.setFecha(FechaActual);
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
             mVenta.setTotal((float)Total);
             if(mBD.conectar()) {
                 if (mBD.realizarVenta(mVenta)) {
+                    int id_vta = mVenta.getId_Venta();
+                    int id_prod;
+                    float precio;
+                    for(int j = 0; j< ArregloPrecios.size(); j++){
+                        id_prod = ArregloIdProd.get(j);
+                        mBD.modificarExistencias(id_prod);
+                        precio = ArregloPrecios.get(j);
+                        mBD.agregarDetalleVenta(precio, id_prod, id_vta);
+                    }
                     try {
                         Ruta = "tickets\\Ticket_venta_" + Id_Ultim + ".txt";
-                        BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta));
-                        ArchivoTXT.write("Ferreteria Juanes ");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("!!!Gracias por su preferencia!!!");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("Rio Grande\tZacateas\tMexico\t");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia +"/"+mes+"/"+year + "\t Hora " + Hora);
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("\n____________________________________________________________________________");
-                        ArchivoTXT.newLine();
-                        String Tam = "";
-                        for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){ //realiza un barrido por filas.
-                            for(int j = 0 ; j < TablasJuanes.getColumnCount();j++){ 
-                                if (((String)(TablasJuanes.getValueAt(i,j))).length() > 6) {
-                                    Tam =(String)(TablasJuanes.getValueAt(i,j)).toString().substring(0,5);
-                                    ArchivoTXT.write(Tam);
-                                    if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→" 
-                                        ArchivoTXT.write("\t\t");
+                        try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
+                            ArchivoTXT.write("Ferreteria Juanes ");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("!!!Gracias por su preferencia!!!");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("Rio Grande\tZacateas\tMexico\t");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia +"/"+mes+"/"+year + "\t Hora " + Hora);
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("\n____________________________________________________________________________");
+                            ArchivoTXT.newLine();
+                            String Tam = "";
+                            for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){ //realiza un barrido por filas.
+                                for(int j = 0 ; j < TablasJuanes.getColumnCount();j++){
+                                    if (((String)(TablasJuanes.getValueAt(i,j))).length() > 6) {
+                                        Tam =(String)(TablasJuanes.getValueAt(i,j)).toString().substring(0,5);
+                                        ArchivoTXT.write(Tam);
+                                        if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→"
+                                            ArchivoTXT.write("\t\t");
+                                        }
+                                    }else{
+                                        ArchivoTXT.write((String)(TablasJuanes.getValueAt(i,j)));
+                                        if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→"
+                                            ArchivoTXT.write("\t\t");
+                                        }
                                     }
-                                }else{
-                                    ArchivoTXT.write((String)(TablasJuanes.getValueAt(i,j)));
-                                    if (j < TablasJuanes.getColumnCount() -1) { //agrega separador "→" 
-                                        ArchivoTXT.write("\t\t");
-                                    }
+
                                 }
-                                
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
                             }
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
+                            ArchivoTXT.write("\n____________________________________________________________________________");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("\t\t\t\t   \tTotal a pagar: $" + Total + " MXN");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("Version del Software 1.0 todos los derechos reservados a JAKE\n\n");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("Software realizado por la organizacion JAKE\n\n");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("!!! Gracias por su compra esperamos verlos pronto!!!");
+                            ArchivoTXT.close(); //cierra archivo!
                         }
-                         ArchivoTXT.write("\n____________________________________________________________________________");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("\t\t\t\t   \tTotal a pagar: $" + Total + " MXN");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("Version del Software 1.0 todos los derechos reservados a JAKE\n\n");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("Software realizado por la organizacion JAKE\n\n");
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.newLine();
-                        ArchivoTXT.write("!!! Gracias por su compra esperamos verlos pronto!!!");
-                        ArchivoTXT.close(); //cierra archivo!
                         JOptionPane.showMessageDialog(null,"Venta Realizada\nTicket " + Id_Ultim + " Guardado");
-                    } catch (Exception e) {
+                    } catch (IOException | HeadlessException e) {
                         JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
                     } 
                     VaciarCampos();
                 
                 } else {
                      JOptionPane.showMessageDialog(null, "Error");
-        }
+       // }
              mBD.desconectar();
              }
                 ObternerId_Vtas();
@@ -376,7 +363,6 @@ public class FRM_Venta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
      private void VaciarCampos() {
-        TXT_Cant.setText("");
         TXT_Escaner.setText(""); 
         TXT_Total.setText("");
        for (int i = 0; i < TBL_Venta.getRowCount(); i++) {
@@ -425,11 +411,9 @@ public class FRM_Venta extends javax.swing.JFrame {
     private javax.swing.JLabel LBL_Hora;
     private javax.swing.JLabel LBL_ID_Venta;
     private javax.swing.JTable TBL_Venta;
-    private javax.swing.JTextField TXT_Cant;
     private javax.swing.JTextField TXT_Escaner;
     private javax.swing.JTextField TXT_Total;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
