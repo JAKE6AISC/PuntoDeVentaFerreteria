@@ -292,7 +292,7 @@ public class BaseDeDatos {
         try {
             Consulta = conexion.createStatement();
             Consulta.execute("insert into venta (id_venta, fecha, total) "
-                    + "values ('" + mVenta.Id_Venta + "','" + mVenta.Fecha + "','" + mVenta.Total + "');");
+                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -348,7 +348,7 @@ public class BaseDeDatos {
         return LVentas;
     }
 
-    public boolean ModificarExistencias(int ID_Prod) {// Modifica las existencias NO BORRAR
+    public boolean modificarExistencias(int ID_Prod) {// Modifica las existencias NO BORRAR
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
@@ -361,7 +361,7 @@ public class BaseDeDatos {
         }
     }
 
-    public int ConsultaExistencias(int id_p) {
+    public int consultaExistencias(int id_p) {
         int cant = 0;
         Statement Consulta;
         ResultSet Resultado;
@@ -404,4 +404,38 @@ public class BaseDeDatos {
         }
         return mListaProducto;
     }
+    
+    public int getIdSiguienteVenta() {
+        int sig = 0;
+        Statement Consulta;
+        ResultSet Resultado;
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select max(id_venta) as ultimo from venta;");
+            if(Resultado.next()) {
+                sig =(Resultado.getInt("ultimo"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return sig;
+    }
+       
+       public void agregarDetalleVenta(float pr,int id_v,int id_p)
+        {
+            Statement Consulta;
+            try
+            {
+                Consulta = conexion.createStatement();
+                Consulta.execute("insert into detalle_venta " +
+                            "(precio, id_producto, id_venta) " +
+                            "values ("+ pr + "," + id_p + ","
+                            + id_v + ");");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
 }
