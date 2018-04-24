@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group>
+            <file>file:/Users/KevinCruz/PuntoVenta/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/FRM_Compra.java</file>
+            <file>file:/Users/KevinCruz/PuntoVenta/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/BaseDeDatos.java</file>
+        </group>
+=======
         <group/>
+>>>>>>> ec21bd45cef015e9e9792a717f4de838ea482ba8
     </open-files>
 </project-private>

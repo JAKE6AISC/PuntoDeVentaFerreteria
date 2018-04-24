@@ -272,12 +272,12 @@ public class BaseDeDatos {
         Detalle_Compra mDetalle_Compra = null;
         ArrayList ListaProductos = mCompra.getProductos();
         try {
-            consulta = conexion.createStatement();
-            for (Object ListaProducto : ListaProductos) {
-            consulta.execute("insert into detalle_compra (costo,"
-                    + " compra_id_compra, producto_id_producto) values "
-                    + "(" + mDetalle_Compra.getCosto()+ ", " + mDetalle_Compra.getCompra_id_compra()
-                    + ", " + mDetalle_Compra.getProducto_id_producto() + ");");
+            for (Object ListaProducto : ListaProductos) {
+                consulta = conexion.createStatement();
+                consulta.execute("insert into detalle_compra (costo,"
+                        + " compra_id_compra, producto_id_producto) values "
+                        + "(" + mDetalle_Compra.getCosto()+ ", " + mDetalle_Compra.getCompra_id_compra()
+                        + ", " + mDetalle_Compra.getProducto_id_producto() + ");");
             }
             return true;
         } catch (SQLException ex) {
