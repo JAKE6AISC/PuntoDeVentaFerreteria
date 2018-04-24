@@ -377,4 +377,31 @@ public class BaseDeDatos {
 
         return cant;
     }
+    public ArrayList consultarExistencias() {
+        Producto mProducto= null;
+        Statement consulta;
+        ResultSet resultado;
+
+        ArrayList mListaProducto = new ArrayList();
+        try {
+            mProducto = new Producto();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from producto A inner join existencias B ON A.id_producto=B.producto_id_producto;");
+
+            while (resultado.next()) {
+                mProducto= new Producto();
+                mProducto.setId_Producto(resultado.getInt("id_producto"));
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setPrecio(resultado.getInt("precio"));
+                mProducto.setExistencias(resultado.getInt("cantidad"));
+                
+
+                mListaProducto.add(mProducto);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaProducto;
+    }
 }
