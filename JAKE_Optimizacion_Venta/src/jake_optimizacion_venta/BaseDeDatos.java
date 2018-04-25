@@ -341,28 +341,7 @@ public class BaseDeDatos {
         return ListaProductos;
     }
 
-    public ArrayList listaVentas() { // Para La venta Agregado por Juanes NO BORRAR
-        // Obtiene el Id de la sig Venta
-        ArrayList LVentas = new ArrayList();
-        Venta mVenta;
-        Statement Consulta;
-        ResultSet Resultado;
-
-        try {
-            Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery("select * from venta;");
-            while (Resultado.next()) {
-                mVenta = new Venta();
-                mVenta.setId_Venta(Resultado.getInt("id_venta"));
-                LVentas.add(mVenta);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error: " + e);
-        }
-        return LVentas;
-    }
-
-    public boolean modificarExistencias(int ID_Prod) {// Modifica las existencias NO BORRAR
+    public boolean modificarExistencias(int ID_Prod) {//si se usa
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
@@ -375,13 +354,13 @@ public class BaseDeDatos {
         }
     }
 
-    public int consultaExistencias(int id_p) {
+    public int consultaExistencias(int id_p) {// si se usa
         int cant = 0;
         Statement Consulta;
         ResultSet Resultado;
         try {
             Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery(" select cantidad from existencias where producto_id_producto = '" + id_p + "';");
+            Resultado = Consulta.executeQuery("select cantidad from existencias where producto_id_producto = '" + id_p + "';");
             while (Resultado.next()) {
                 cant = (Resultado.getInt("cantidad"));
             }
@@ -418,8 +397,13 @@ public class BaseDeDatos {
         }
         return mListaProducto;
     }
+<<<<<<< HEAD
 
     public int getIdSiguienteVenta() {
+=======
+    
+    public int getIdSiguienteVenta() {// Si se usa
+>>>>>>> 7bd22a5fb957572b34e8cff2806c2287399405fb
         int sig = 0;
         Statement Consulta;
         ResultSet Resultado;
@@ -435,6 +419,7 @@ public class BaseDeDatos {
 
         return sig;
     }
+<<<<<<< HEAD
 
     public void agregarDetalleVenta(float pr, int id_v, int id_p) {
         Statement Consulta;
@@ -446,6 +431,23 @@ public class BaseDeDatos {
                     + id_v + ");");
         } catch (Exception e) {
             e.printStackTrace();
+=======
+       
+       public void agregarDetalleVenta(float pr,int id_p, int id_v){//Si se usa
+            Statement Consulta;
+            try
+            {
+                Consulta = conexion.createStatement();
+                Consulta.execute("insert into detalle_venta " +
+                            "(precio, producto_id_producto, venta_id_venta) " +
+                            "values ("+ pr + "," + id_p + ","
+                            + id_v + ");");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+>>>>>>> 7bd22a5fb957572b34e8cff2806c2287399405fb
         }
     }
 }
