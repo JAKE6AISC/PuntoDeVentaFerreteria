@@ -244,9 +244,9 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("SELECT MAX(id_compra) from compra;");
+            resultado = consulta.executeQuery("SELECT * FROM compra ORDER BY id_compra;");
             while (resultado.next()) {
-                id = resultado.getInt("MAX(id_compra)");
+                id = resultado.getInt("id_compra");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,8 +258,8 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into compra (fecha, total) values "
-                    + "('" + mCompra.getFecha() + "'," + mCompra.getTotal() + ");");
+            consulta.execute("insert into compra (id_compra, fecha, total) values "
+                    + "(null, '" + mCompra.getFecha() + "'," + mCompra.getTotal() + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,21 +267,35 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean realizarDetalleCompra(Compra mCompra) {
+    public boolean realizarDetalleCompra(Compra mCompra, Producto mProducto) {
         Statement consulta;
-        Detalle_Compra mDetalle_Compra = null;
         ArrayList ListaProductos = mCompra.getProductos();
         try {
             for (Object ListaProducto : ListaProductos) {
+                mProducto = (Producto) ListaProducto;
                 consulta = conexion.createStatement();
-                consulta.execute("insert into detalle_compra (costo,"
+                consulta.execute("insert into detalle_compra (id_detalle_compra, costo,"
                         + " compra_id_compra, producto_id_producto) values "
-                        + "(" + mDetalle_Compra.getCosto()+ ", " + mDetalle_Compra.getCompra_id_compra()
-                        + ", " + mDetalle_Compra.getProducto_id_producto() + ");");
+                        + "(null, " + mProducto.getPrecio() + ", " + consultarIDcompra()
+                        + ", " + mProducto.getId_Producto() + ");");
             }
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(BaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public boolean incrementarProductos(int Cantidad, Producto mProducto) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update existencias set cantidad = cantidad + "
+                    + Cantidad + " where producto_id_producto = "
+                    + mProducto.getId_Producto() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -377,8 +391,9 @@ public class BaseDeDatos {
 
         return cant;
     }
+
     public ArrayList consultarExistencias() {
-        Producto mProducto= null;
+        Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
 
@@ -389,12 +404,11 @@ public class BaseDeDatos {
             resultado = consulta.executeQuery("select * from producto A inner join existencias B ON A.id_producto=B.producto_id_producto;");
 
             while (resultado.next()) {
-                mProducto= new Producto();
+                mProducto = new Producto();
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setNombre(resultado.getString("nombre"));
                 mProducto.setPrecio(resultado.getInt("precio"));
                 mProducto.setExistencias(resultado.getInt("cantidad"));
-                
 
                 mListaProducto.add(mProducto);
 
@@ -404,7 +418,7 @@ public class BaseDeDatos {
         }
         return mListaProducto;
     }
-    
+
     public int getIdSiguienteVenta() {
         int sig = 0;
         Statement Consulta;
@@ -412,30 +426,26 @@ public class BaseDeDatos {
         try {
             Consulta = conexion.createStatement();
             Resultado = Consulta.executeQuery("select max(id_venta) as ultimo from venta;");
-            if(Resultado.next()) {
-                sig =(Resultado.getInt("ultimo"));
+            if (Resultado.next()) {
+                sig = (Resultado.getInt("ultimo"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return sig;
     }
-       
-       public void agregarDetalleVenta(float pr,int id_v,int id_p)
-        {
-            Statement Consulta;
-            try
-            {
-                Consulta = conexion.createStatement();
-                Consulta.execute("insert into detalle_venta " +
-                            "(precio, producto_id_producto, venta_id_venta) " +
-                            "values ("+ pr + "," + id_p + ","
-                            + id_v + ");");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+
+    public void agregarDetalleVenta(float pr, int id_v, int id_p) {
+        Statement Consulta;
+        try {
+            Consulta = conexion.createStatement();
+            Consulta.execute("insert into detalle_venta "
+                    + "(precio, producto_id_producto, venta_id_venta) "
+                    + "values (" + pr + "," + id_p + ","
+                    + id_v + ");");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 }

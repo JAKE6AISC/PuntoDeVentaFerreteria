@@ -23,6 +23,11 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
      */
     public FRM_BajaProductos() {
         initComponents();
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
     }
 
     /**
@@ -201,11 +206,6 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
 
-        modeloTabla.addColumn("ID");
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Clasificación");
-        modeloTabla.addColumn("Tipo");
-        modeloTabla.addColumn("Precio");
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.consultarProductos();
             String[] Datos;

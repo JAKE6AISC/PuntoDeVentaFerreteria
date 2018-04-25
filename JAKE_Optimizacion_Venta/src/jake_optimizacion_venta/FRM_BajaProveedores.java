@@ -23,6 +23,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
      */
     public FRM_BajaProveedores() {
         initComponents();
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Precio");
     }
 
     /**
@@ -176,12 +181,6 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         for (int i = a; i >= 0; i--) {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
-        
-        modeloTabla.addColumn("ID");
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Clasificación");
-        modeloTabla.addColumn("Tipo");
-        modeloTabla.addColumn("Precio");
 
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();

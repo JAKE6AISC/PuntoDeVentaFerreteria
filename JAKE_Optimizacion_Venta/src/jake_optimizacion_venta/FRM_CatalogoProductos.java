@@ -155,8 +155,8 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_AltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AltasActionPerformed
-        FRM_AltaProductos FormAlt = new FRM_AltaProductos();
-        FormAlt.setVisible(true);
+        //FRM_AltaProductos FormAlt = new FRM_AltaProductos();
+        //FormAlt.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_AltasActionPerformed
 
