@@ -397,13 +397,8 @@ public class BaseDeDatos {
         }
         return mListaProducto;
     }
-<<<<<<< HEAD
-
-    public int getIdSiguienteVenta() {
-=======
     
     public int getIdSiguienteVenta() {// Si se usa
->>>>>>> 7bd22a5fb957572b34e8cff2806c2287399405fb
         int sig = 0;
         Statement Consulta;
         ResultSet Resultado;
@@ -419,7 +414,7 @@ public class BaseDeDatos {
 
         return sig;
     }
-<<<<<<< HEAD
+
 
     public void agregarDetalleVenta(float pr, int id_v, int id_p) {
         Statement Consulta;
@@ -431,23 +426,6 @@ public class BaseDeDatos {
                     + id_v + ");");
         } catch (Exception e) {
             e.printStackTrace();
-=======
-       
-       public void agregarDetalleVenta(float pr,int id_p, int id_v){//Si se usa
-            Statement Consulta;
-            try
-            {
-                Consulta = conexion.createStatement();
-                Consulta.execute("insert into detalle_venta " +
-                            "(precio, producto_id_producto, venta_id_venta) " +
-                            "values ("+ pr + "," + id_p + ","
-                            + id_v + ");");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
->>>>>>> 7bd22a5fb957572b34e8cff2806c2287399405fb
         }
     }
 }
