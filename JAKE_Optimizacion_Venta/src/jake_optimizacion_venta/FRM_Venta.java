@@ -296,7 +296,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                         mBD.agregarDetalleVenta(precio, id_prod, id_vta);
                     }
                     try {
-                        Ruta = "tickets\\Ticket_venta_" + Id_Ultim + ".txt";
+                        Ruta = "\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
                             ArchivoTXT.write("Ferreteria Juanes ");
                             ArchivoTXT.newLine();
