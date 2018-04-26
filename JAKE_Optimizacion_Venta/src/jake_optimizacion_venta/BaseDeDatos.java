@@ -288,13 +288,17 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean incrementarProductos(int Cantidad, Producto mProducto) {
+    public boolean incrementarProductos(ArrayList ListaProductos) {
         Statement consulta;
+        Producto mProducto = null;
         try {
-            consulta = conexion.createStatement();
+            for (Object ListaProducto : ListaProductos) {
+                mProducto = (Producto) ListaProducto;
+                consulta = conexion.createStatement();
             consulta.execute("update existencias set cantidad = cantidad + "
-                    + Cantidad + " where producto_id_producto = "
+                    + mProducto.getExistencias() + " where producto_id_producto = "
                     + mProducto.getId_Producto() + ";");
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
