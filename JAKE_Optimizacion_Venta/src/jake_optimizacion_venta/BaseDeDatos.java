@@ -197,7 +197,7 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto;");
             while (resultado.next()) {
-
+                mProducto = new Producto();
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setPrecio(resultado.getFloat("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
@@ -244,9 +244,9 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("SELECT * FROM compra ORDER BY id_compra;");
+            resultado = consulta.executeQuery("SELECT MAX(id_compra) FROM compra;");
             while (resultado.next()) {
-                id = resultado.getInt("id_compra");
+                id = resultado.getInt("MAX(id_compra)");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -271,7 +271,7 @@ public class BaseDeDatos {
         Statement consulta;
         ArrayList ListaProductos = mCompra.getProductos();
         try {
-            for (Object ListaProducto : ListaProductos) {
+            for (Object ListaProducto : ListaProductos) {            
                 mProducto = (Producto) ListaProducto;
                 consulta = conexion.createStatement();
                 consulta.execute("insert into detalle_compra (id_detalle_compra, costo,"
