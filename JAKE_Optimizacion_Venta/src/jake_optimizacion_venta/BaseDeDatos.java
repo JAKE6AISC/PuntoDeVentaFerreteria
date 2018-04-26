@@ -97,6 +97,8 @@ public class BaseDeDatos {
                     + "values ('" + mProducto.getId_Producto() + "'," + mProducto.getPrecio() + ",'" + mProducto.getNombre()
                     + "','" + mProducto.getTipo() + "','" + mProducto.getClasificacion() + "','"
                     + mProducto.getId_Proveedor() + "');");
+              consulta.execute("insert into existencias (cantidad, producto_id_producto)"
+                    + "values (0,'" + mProducto.getId_Producto()+"');");
 
             return true;
         } catch (Exception e) {
