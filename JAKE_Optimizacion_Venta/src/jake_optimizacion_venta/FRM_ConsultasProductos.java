@@ -208,7 +208,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                 
                 ModeloTabla.addRow(Dato);
 
-            this.JTableProductos = new javax.swing.JTable();
+            
             this.JTableProductos.setModel(ModeloTabla);
             this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -268,7 +268,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                     ModeloTabla.addRow(Dato);
                 }
 
-            this.JTableProductos= new javax.swing.JTable();
+          
             this.JTableProductos.setModel(ModeloTabla);
             this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProductos.getColumnModel().getColumn(1).setPreferredWidth(100);

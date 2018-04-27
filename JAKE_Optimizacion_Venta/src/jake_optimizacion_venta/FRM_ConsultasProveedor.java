@@ -205,7 +205,6 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
 
             ModeloTabla.addRow(Dato);
 
-            this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(ModeloTabla);
             this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -250,7 +249,7 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
                     ModeloTabla.addRow(Dato);
                 }
 
-            this.JTableProveedor  = new javax.swing.JTable();
+            
             this.JTableProveedor.setModel(ModeloTabla);
             this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
