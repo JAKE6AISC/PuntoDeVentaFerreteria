@@ -7,7 +7,17 @@ package jake_optimizacion_venta;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -16,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class FRM_ReporteExistencias extends javax.swing.JFrame {
 DefaultTableModel ModeloTabla = new DefaultTableModel();
- BaseDeDatos mBaseDeDatos= new BaseDeDatos();
+ BaseDeDatos mBaseDeDatos = new BaseDeDatos();
  Producto mProducto = new Producto();
     /**
      * Creates new form FRM_ReporteExistencias
@@ -41,6 +51,8 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableReporteExistencias = new javax.swing.JTable();
         BTN_Atras = new javax.swing.JButton();
+        BTN_Generar = new javax.swing.JButton();
+        TXT_ID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,7 +85,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,6 +100,13 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
 
         BTN_Atras.setText("Atras");
 
+        BTN_Generar.setText("Reporte");
+        BTN_Generar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_GenerarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,14 +115,17 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
-                        .addGap(55, 55, 55)
+                        .addGap(93, 93, 93)
                         .addComponent(BTN_Imprimir_Reporte)
-                        .addGap(36, 36, 36)
-                        .addComponent(BTN_Salir)
-                        .addGap(0, 67, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTN_Salir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TXT_ID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Generar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,10 +136,14 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_Generar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
                     .addComponent(BTN_Imprimir_Reporte)
                     .addComponent(BTN_Salir))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -182,6 +208,24 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         }
     }//GEN-LAST:event_formWindowActivated
 
+    private void BTN_GenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GenerarActionPerformed
+        String path = "/Users/KevinCruz/OP/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeExistencias.jasper";
+        JasperReport jr = null;
+        Map parametros = new HashMap();
+        
+        try {   
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            parametros.put("ID", TXT_ID.getText());
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBaseDeDatos.conectare());
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+            jv.setTitle(path);
+            this.dispose();
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BTN_GenerarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -219,9 +263,11 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Atras;
+    private javax.swing.JButton BTN_Generar;
     private javax.swing.JButton BTN_Imprimir_Reporte;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JTable JTableReporteExistencias;
+    private javax.swing.JTextField TXT_ID;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

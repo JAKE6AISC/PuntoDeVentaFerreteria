@@ -1,5 +1,13 @@
 package jake_optimizacion_venta;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Juanez
@@ -8,6 +16,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     public FRM_AltaProductos() {
         initComponents();
     }
+    BaseDeDatos mBD = new BaseDeDatos();
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,12 +142,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BTN_Atras)
-                        .addGap(68, 68, 68)
-                        .addComponent(BTN_Agegar)
-                        .addGap(46, 46, 46)
-                        .addComponent(BTN_Salir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LBL_Id_Proveedor)
@@ -158,7 +161,13 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                                     .addComponent(TXT_Clasificacion)
                                     .addComponent(TXT_Tipo)
                                     .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(27, 27, 27)))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BTN_Atras)
+                        .addGap(68, 68, 68)
+                        .addComponent(BTN_Agegar)
+                        .addGap(46, 46, 46)
+                        .addComponent(BTN_Salir)))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -195,7 +204,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                     .addComponent(BTN_Agegar)
                     .addComponent(BTN_Salir)
                     .addComponent(BTN_Atras))
-                .addGap(18, 18, 18))
+                .addGap(35, 35, 35))
         );
 
         pack();

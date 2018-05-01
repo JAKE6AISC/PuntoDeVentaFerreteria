@@ -172,15 +172,18 @@ public class Menu extends javax.swing.JFrame {
         FRM_Compra FormCom = new FRM_Compra();
         this.setVisible(false);
         FormCom.setVisible(true);
-        
     }//GEN-LAST:event_BTN_CompraActionPerformed
 
     private void BTN_Reporte_VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Reporte_VentasActionPerformed
-        // TODO add your handling code here:
+        FRM_ReporteVentas FormRep = new FRM_ReporteVentas();
+        FormRep.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_Reporte_VentasActionPerformed
 
     private void BTN_Reporte_ExistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Reporte_ExistenciasActionPerformed
-        // TODO add your handling code here:
+        FRM_ReporteExistencias ForEx = new FRM_ReporteExistencias();
+        ForEx.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_Reporte_ExistenciasActionPerformed
 
     public static void main(String args[]) {

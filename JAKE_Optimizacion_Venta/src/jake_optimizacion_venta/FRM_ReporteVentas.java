@@ -5,22 +5,28 @@
  */
 package jake_optimizacion_venta;
 
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Andy
  */
 public class FRM_ReporteVentas extends javax.swing.JFrame {
-
+    BaseDeDatos mBD = new BaseDeDatos();
     /**
      * Creates new form FRM_ReporteVentas
      */
     public FRM_ReporteVentas() {
         initComponents();
-        
-        
     }
 
     /**
@@ -33,11 +39,10 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
     private void initComponents() {
 
         BTN_Atras = new javax.swing.JButton();
-        BTN_ImprimirReporte = new javax.swing.JButton();
+        BTN_GenerarReporte = new javax.swing.JButton();
         BTN_Salir = new javax.swing.JButton();
-        TXTTotal = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        Reporte = new javax.swing.JPanel();
+        TXT_Fecha = new javax.swing.JTextField();
+        LBL_Fecha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -45,28 +50,17 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
 
         BTN_Atras.setText("Atras");
 
-        BTN_ImprimirReporte.setText("Imprimir");
-        BTN_ImprimirReporte.addActionListener(new java.awt.event.ActionListener() {
+        BTN_GenerarReporte.setText("Generar");
+        BTN_GenerarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_ImprimirReporteActionPerformed(evt);
+                BTN_GenerarReporteActionPerformed(evt);
             }
         });
 
         BTN_Salir.setText("Salir");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Total");
-
-        javax.swing.GroupLayout ReporteLayout = new javax.swing.GroupLayout(Reporte);
-        Reporte.setLayout(ReporteLayout);
-        ReporteLayout.setHorizontalGroup(
-            ReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
-        );
-        ReporteLayout.setVerticalGroup(
-            ReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
+        LBL_Fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LBL_Fecha.setText("Fecha: ");
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
         jPanel1.setForeground(new java.awt.Color(51, 255, 102));
@@ -97,50 +91,58 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(371, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(TXTTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Reporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTN_Atras)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BTN_ImprimirReporte)
-                                .addGap(154, 154, 154)
-                                .addComponent(BTN_Salir)))))
-                .addGap(64, 64, 64))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BTN_Atras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTN_Salir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LBL_Fecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTN_GenerarReporte)))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXTTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LBL_Fecha)
+                    .addComponent(TXT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_GenerarReporte))
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
-                    .addComponent(BTN_Salir)
-                    .addComponent(BTN_ImprimirReporte))
-                .addContainerGap())
+                    .addComponent(BTN_Salir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BTN_ImprimirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ImprimirReporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_ImprimirReporteActionPerformed
+    private void BTN_GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GenerarReporteActionPerformed
+        String path = "/Users/KevinCruz/OP/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
+        JasperReport jr = null;
+        Map parametros = new HashMap();
+        
+        try {   
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            parametros.put("Fecha", TXT_Fecha.getText());
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+            jv.setTitle(path);
+            this.dispose();
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BTN_GenerarReporteActionPerformed
     
     
     
@@ -180,11 +182,10 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Atras;
-    private javax.swing.JButton BTN_ImprimirReporte;
+    private javax.swing.JButton BTN_GenerarReporte;
     private javax.swing.JButton BTN_Salir;
-    private javax.swing.JPanel Reporte;
-    private javax.swing.JTextField TXTTotal;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel LBL_Fecha;
+    private javax.swing.JTextField TXT_Fecha;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

@@ -26,7 +26,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
@@ -433,5 +433,24 @@ public class BaseDeDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    //Aquí va el método que vas a usar para poder conectar el iReport con tu bd.
+    public String url = "jdbc:mysql://localhost:8889/puntoventa"; //aquí metes la dirección exacta de tu bd.
+    public String user = "root";
+    public String pass = "root";
+
+    public Connection conectare() {
+        Connection link = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(this.url, this.user, this.pass);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
     }
 }
