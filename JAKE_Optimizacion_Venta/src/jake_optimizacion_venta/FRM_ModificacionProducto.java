@@ -1,11 +1,10 @@
-
 package jake_optimizacion_venta;
 
 import javax.swing.JOptionPane;
 
 /**
- Se hizo el metodo Modificacion del producto
- * José Andrés Chávez Hernández
+ * Se hizo el metodo Modificacion del producto José Andrés Chávez Hernández
+ *
  * @author Andy
  */
 public class FRM_ModificacionProducto extends javax.swing.JFrame {
@@ -171,7 +170,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     private void BTNModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNModificarActionPerformed
         BaseDeDatos mBD = new BaseDeDatos();
         Producto mProducto = new Producto();
-        Producto mNuevoProducto = new Producto(); 
+        Producto mNuevoProducto = new Producto();        
         
         mProducto.setId_Producto(Integer.parseInt(this.TXTId_Producto.getText()));
         mNuevoProducto.setNombre(this.TXTNuevo_NombreProducto.getText());
@@ -179,9 +178,9 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         mNuevoProducto.setClasificacion(this.TXTNuevo_ClasificacionProducto.getText());
         mNuevoProducto.setPrecio(Float.parseFloat(this.TXTNuevo_PrecioProducto.getText()));
         
-         if (mBD.conectar()) {// se realiza primero la conexion
-            if (mBD.modificacionProducto(mProducto,mNuevoProducto)) {// mandamos llamar el metodo modificar perteneciente 
-                                                                     //  a la clase base de datos
+        if (mBD.conectar()) {// se realiza primero la conexion
+            if (mBD.modificacionProducto(mProducto, mNuevoProducto)) {// mandamos llamar el metodo modificar perteneciente 
+                //  a la clase base de datos
                 JOptionPane.showMessageDialog(null, "Datos del Producto Modificados Exitosamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
@@ -191,90 +190,96 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNModificarActionPerformed
 
     private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
-      setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_BTNSalirActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
-         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
+        FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTNAtrasActionPerformed
-
-     private void TXT_IdProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
-        if(ValidarIdProducto()){
+    
+    private void TXT_IdProductoFocusLost(java.awt.event.FocusEvent evt) {        
+        if (ValidarIdProducto()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTId_Producto.requestFocus();
-       }
-    } 
-     
-      private void TXT_NombreProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
-        if(ValidarProducto()){
+        }
+    }    
+    
+    private void TXT_NombreProductoFocusLost(java.awt.event.FocusEvent evt) {        
+        if (ValidarProducto()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTNuevo_NombreProducto.requestFocus();
-       }
+        }
     }
-       private void TXT_TipoProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
-        if(ValidarTipo()){
+
+    private void TXT_TipoProductoFocusLost(java.awt.event.FocusEvent evt) {        
+        if (ValidarTipo()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTNuevo_TipoProducto.requestFocus();
-       }
-    } 
-        private void TXT_ClasificacionProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
-        if(ValidarClasificacion()){
+        }
+    }    
+
+    private void TXT_ClasificacionProductoFocusLost(java.awt.event.FocusEvent evt) {        
+        if (ValidarClasificacion()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTNuevo_ClasificacionProducto.requestFocus();
-       }
-    } 
-         private void TXT_PrecioProductoFocusLost(java.awt.event.FocusEvent evt) {                                                   
-        if(ValidarPrecio()){
+        }
+    }    
+
+    private void TXT_PrecioProductoFocusLost(java.awt.event.FocusEvent evt) {        
+        if (ValidarPrecio()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTNuevo_PrecioProducto.requestFocus();
-       }
-    } 
-     public boolean ValidarIdProducto(){
-        if(TXTId_Producto.getText().equals("")){
+        }
+    }    
+
+    public boolean ValidarIdProducto() {
+        if (TXTId_Producto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-       public boolean ValidarProducto(){
-        if(TXTNuevo_NombreProducto.getText().equals("")){
+
+    public boolean ValidarProducto() {
+        if (TXTNuevo_NombreProducto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-       
-       public boolean ValidarTipo(){
-        if(TXTNuevo_TipoProducto.getText().equals("")){
+    
+    public boolean ValidarTipo() {
+        if (TXTNuevo_TipoProducto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-     public boolean ValidarClasificacion(){
-        if(TXTNuevo_ClasificacionProducto.getText().equals("")){
+
+    public boolean ValidarClasificacion() {
+        if (TXTNuevo_ClasificacionProducto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-     
-     public boolean ValidarPrecio(){
-        if(TXTNuevo_PrecioProducto.getText().equals("")){
+    
+    public boolean ValidarPrecio() {
+        if (TXTNuevo_PrecioProducto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }

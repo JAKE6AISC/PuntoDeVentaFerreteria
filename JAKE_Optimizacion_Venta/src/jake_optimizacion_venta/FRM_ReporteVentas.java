@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * José Andrés Chávez Hernández
  */
 package jake_optimizacion_venta;
 
@@ -15,6 +13,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +21,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class FRM_ReporteVentas extends javax.swing.JFrame {
     BaseDeDatos mBD = new BaseDeDatos();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
     /**
      * Creates new form FRM_ReporteVentas
      */
@@ -49,6 +49,11 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_GenerarReporte.setText("Generar");
         BTN_GenerarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +63,11 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         LBL_Fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LBL_Fecha.setText("Fecha: ");
@@ -94,7 +104,7 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -102,10 +112,10 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LBL_Fecha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TXT_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(TXT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(BTN_GenerarReporte)))
-                .addGap(29, 29, 29))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,10 +126,10 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
                     .addComponent(LBL_Fecha)
                     .addComponent(TXT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_GenerarReporte))
-                .addGap(81, 81, 81)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTN_Atras)
-                    .addComponent(BTN_Salir))
+                    .addComponent(BTN_Salir)
+                    .addComponent(BTN_Atras))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -131,10 +141,10 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         JasperReport jr = null;
         Map parametros = new HashMap();
         
-        try {   
+        try {
+            parametros.put("fech", TXT_Fecha.getText());
             jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
-            parametros.put("Fecha", TXT_Fecha.getText());
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);
             jv.setTitle(path);
@@ -143,11 +153,17 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
             Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BTN_GenerarReporteActionPerformed
-    
-    
-    
-    
-   
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        Menu mMenu = new Menu();
+        mMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

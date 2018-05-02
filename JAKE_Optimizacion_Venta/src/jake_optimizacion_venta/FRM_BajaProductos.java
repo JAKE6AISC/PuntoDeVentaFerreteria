@@ -235,7 +235,6 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
         }
         mBD.desconectar();
-
     }//GEN-LAST:event_formWindowActivated
 
     /**

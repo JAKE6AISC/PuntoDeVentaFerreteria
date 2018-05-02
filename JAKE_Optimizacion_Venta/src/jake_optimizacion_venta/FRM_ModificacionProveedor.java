@@ -175,13 +175,13 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_ModificarProveedorActionPerformed
 
     private void TXT_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_SalirActionPerformed
-        setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_TXT_SalirActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorFocusLost

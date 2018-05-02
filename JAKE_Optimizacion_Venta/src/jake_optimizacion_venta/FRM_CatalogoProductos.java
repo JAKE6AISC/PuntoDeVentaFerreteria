@@ -181,7 +181,7 @@ public class FRM_CatalogoProductos extends javax.swing.JFrame {
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         Menu mMenu = new Menu();
         mMenu.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed

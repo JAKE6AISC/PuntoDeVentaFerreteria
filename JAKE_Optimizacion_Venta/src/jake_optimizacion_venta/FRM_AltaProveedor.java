@@ -147,14 +147,12 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
-
-       BaseDeDatos mBD = new BaseDeDatos();
+        BaseDeDatos mBD = new BaseDeDatos();
         Proveedor mProveedor = new Proveedor();
 
         mProveedor.setId_proveedor(Integer.parseInt(this.TXTIDProveedor.getText()));
         mProveedor.setNombre(this.TXTNombre.getText());
         mProveedor.setEmpresa(this.TXTEmpresa.getText());
-       
 
         if (mBD.conectar()) {
             if (mBD.agregarProveedor(mProveedor)) {
@@ -164,66 +162,68 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
             }
             mBD.desconectar();
         }
-
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTNAtrasActionPerformed
 
     private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
-            this.setVisible(false);  
+        System.exit(0);
     }//GEN-LAST:event_BTNSalirActionPerformed
-        private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
-       if(ValidarIdProveedor()){
+    private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {
+        if (ValidarIdProveedor()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTNombre.requestFocus();
-       }
-    }    
-    
-    private void TXT_Nombre_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
-       if(ValidarNombreProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXTNombre.requestFocus();
-       }
-    }                                         
+        }
+    }
 
-    private void TXT_EmpresaFocusLost(java.awt.event.FocusEvent evt) {                                             
-       if(ValidarNombreProveedor()){
+    private void TXT_Nombre_ProveedorFocusLost(java.awt.event.FocusEvent evt) {
+        if (ValidarNombreProveedor()) {
             //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
+            TXTNombre.requestFocus();
+        }
+    }
+
+    private void TXT_EmpresaFocusLost(java.awt.event.FocusEvent evt) {
+        if (ValidarNombreProveedor()) {
+            //JOptionPane.showMessageDialog(null,"Valido");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo obligatorio");
             TXTEmpresa.requestFocus();
-       }
+        }
     }
-    
-    public boolean ValidarIdProveedor(){
-        if(TXTIDProveedor.getText().equals("")){
+
+    public boolean ValidarIdProveedor() {
+        if (TXTIDProveedor.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-    public boolean ValidarNombreProveedor(){
-        if(TXTNombre.getText().equals("")){
+
+    public boolean ValidarNombreProveedor() {
+        if (TXTNombre.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-    public boolean ValidarEmpresa(){
-        if(TXTEmpresa.getText().equals("")){
+
+    public boolean ValidarEmpresa() {
+        if (TXTEmpresa.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     /**
      * @param args the command line arguments
      */

@@ -99,6 +99,11 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         jScrollPane1.setViewportView(JTableReporteExistencias);
 
         BTN_Atras.setText("Atras");
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
 
         BTN_Generar.setText("Reporte");
         BTN_Generar.addActionListener(new java.awt.event.ActionListener() {
@@ -150,8 +155,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+       System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -213,18 +217,24 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         JasperReport jr = null;
         Map parametros = new HashMap();
         
-        try {   
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+        try {
             parametros.put("ID", TXT_ID.getText());
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBaseDeDatos.conectare());
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);           
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBaseDeDatos.conectare());
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);
             jv.setTitle(path);
             this.dispose();
         } catch (JRException ex) {
-            Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FRM_ReporteExistencias.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BTN_GenerarActionPerformed
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        Menu mMenu = new Menu();
+        mMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     /**
      * @param args the command line arguments

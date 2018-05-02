@@ -97,6 +97,11 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
         });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,20 +150,20 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
 
     private void BTN_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AltaActionPerformed
         FRM_AltaProveedor mAP = new FRM_AltaProveedor();
-        mAP.setVisible(true); 
+        mAP.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_AltaActionPerformed
 
     private void BTN_BajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BajaActionPerformed
-         FRM_BajaProveedores mBP = new FRM_BajaProveedores();
-         mBP.setVisible(true);
-         this.setVisible(false);
+        FRM_BajaProveedores mBP = new FRM_BajaProveedores();
+        mBP.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_BajaActionPerformed
 
     private void BTN_CambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CambiosActionPerformed
-         FRM_ModificacionProveedor mMP = new FRM_ModificacionProveedor();
-         mMP.setVisible(true);
-         this.setVisible(false);
+        FRM_ModificacionProveedor mMP = new FRM_ModificacionProveedor();
+        mMP.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTN_CambiosActionPerformed
 
     private void BTN_ConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ConsultaActionPerformed
@@ -170,8 +175,12 @@ public class FRM_CatalogoProveedor extends javax.swing.JFrame {
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         Menu mMenu = new Menu();
         mMenu.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
 
     /**
      * @param args the command line arguments

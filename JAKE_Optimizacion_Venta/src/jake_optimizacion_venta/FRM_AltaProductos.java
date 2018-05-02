@@ -1,13 +1,7 @@
 package jake_optimizacion_venta;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Juanez
@@ -161,14 +155,14 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                                     .addComponent(TXT_Clasificacion)
                                     .addComponent(TXT_Tipo)
                                     .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(27, 27, 27))
+                        .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
                         .addGap(68, 68, 68)
                         .addComponent(BTN_Agegar)
-                        .addGap(46, 46, 46)
-                        .addComponent(BTN_Salir)))
-                .addGap(27, 27, 27))
+                        .addGap(47, 47, 47)
+                        .addComponent(BTN_Salir)
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,12 +193,12 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LBL_Id_Proveedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTN_Atras)
                     .addComponent(BTN_Agegar)
-                    .addComponent(BTN_Salir)
-                    .addComponent(BTN_Atras))
-                .addGap(35, 35, 35))
+                    .addComponent(BTN_Salir))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,7 +215,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorFocusLost
@@ -249,7 +243,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_TipoFocusLost
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void TXT_PrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_PrecioFocusLost
