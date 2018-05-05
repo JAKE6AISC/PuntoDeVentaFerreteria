@@ -167,13 +167,11 @@ public class BaseDeDatos {
         Proveedor mProveedor = null;
         Statement consulta;
         ResultSet resultado;
-
         ArrayList mListaProveedor = new ArrayList();
+        
         try {
-            mProveedor = new Proveedor();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from proveedor;");
-
             while (resultado.next()) {
                 mProveedor = new Proveedor();
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
@@ -195,7 +193,6 @@ public class BaseDeDatos {
         ResultSet resultado;
         ArrayList mListaProductos = new ArrayList();
         try {
-            mProducto = new Producto();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto;");
             while (resultado.next()) {

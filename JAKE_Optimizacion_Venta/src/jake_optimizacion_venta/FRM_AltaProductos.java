@@ -3,14 +3,18 @@ package jake_optimizacion_venta;
 import javax.swing.JOptionPane;
 
 /**
+ * Luis Osvaldo Juanez Hinojosa Formulario de alta de productos
  *
  * @author Juanez
  */
 public class FRM_AltaProductos extends javax.swing.JFrame {
+
     public FRM_AltaProductos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     BaseDeDatos mBD = new BaseDeDatos();
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -22,6 +26,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         LBL_Nombre_Producto = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         LBL_Clasificacion = new javax.swing.JLabel();
         LBL_Tipo = new javax.swing.JLabel();
         TXT_Tipo = new javax.swing.JTextField();
@@ -29,34 +34,16 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         TXT_Precio = new javax.swing.JTextField();
         TXT_Id_Producto = new javax.swing.JTextField();
         LBL_Id_Proveedor = new javax.swing.JLabel();
-        BTN_Agegar = new javax.swing.JButton();
+        BTN_Agregar = new javax.swing.JButton();
         LBL_Precio = new javax.swing.JLabel();
         LBL_Id_Producto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TXT_Clasificacion.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_ClasificacionFocusLost(evt);
-            }
-        });
-
         BTN_Atras.setText("Atras");
         BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_AtrasActionPerformed(evt);
-            }
-        });
-
-        TXT_Id_Proveedor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_Id_ProveedorFocusLost(evt);
-            }
-        });
-
-        TXT_NombreProducto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_NombreProductoFocusLost(evt);
             }
         });
 
@@ -68,32 +55,34 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alta Productos");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Ferretería Juanes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         LBL_Clasificacion.setText("Clasificacion");
 
         LBL_Tipo.setText("Tipo");
-
-        TXT_Tipo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_TipoFocusLost(evt);
-            }
-        });
 
         BTN_Salir.setText("Salir");
         BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -102,24 +91,12 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             }
         });
 
-        TXT_Precio.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_PrecioFocusLost(evt);
-            }
-        });
-
-        TXT_Id_Producto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_Id_ProductoFocusLost(evt);
-            }
-        });
-
         LBL_Id_Proveedor.setText("Id_Proovedor");
 
-        BTN_Agegar.setText("Agregar");
-        BTN_Agegar.addActionListener(new java.awt.event.ActionListener() {
+        BTN_Agregar.setText("Agregar");
+        BTN_Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_AgegarActionPerformed(evt);
+                BTN_AgregarActionPerformed(evt);
             }
         });
 
@@ -159,7 +136,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
                         .addGap(68, 68, 68)
-                        .addComponent(BTN_Agegar)
+                        .addComponent(BTN_Agregar)
                         .addGap(47, 47, 47)
                         .addComponent(BTN_Salir)
                         .addGap(26, 26, 26))))
@@ -196,7 +173,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
-                    .addComponent(BTN_Agegar)
+                    .addComponent(BTN_Agregar)
                     .addComponent(BTN_Salir))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -204,132 +181,96 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TXT_ClasificacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_ClasificacionFocusLost
-        if(ValidarClasificacion()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Clasificacion.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_ClasificacionFocusLost
-
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
         FormCP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
-    private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorFocusLost
-        if(ValidarIdProveedor()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Id_Proveedor.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_Id_ProveedorFocusLost
-
-    private void TXT_NombreProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NombreProductoFocusLost
-        if(ValidarNombreProducto()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_NombreProducto.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_NombreProductoFocusLost
-
-    private void TXT_TipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_TipoFocusLost
-        if(ValidarTipo()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Tipo.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_TipoFocusLost
-
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
-    private void TXT_PrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_PrecioFocusLost
-        if(ValidarTipo()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Tipo.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_PrecioFocusLost
-
-    private void TXT_Id_ProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProductoFocusLost
-        if(ValidarId_Producto()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Id_Producto.requestFocus();
-        }
-    }//GEN-LAST:event_TXT_Id_ProductoFocusLost
-
-    private void BTN_AgegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgegarActionPerformed
+    private void BTN_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarActionPerformed
         Producto mProducto = new Producto();
         BaseDeDatos mBD = new BaseDeDatos();
-        mProducto.setId_Producto(Integer.parseInt(TXT_Id_Producto.getText()));
-        mProducto.setNombre(TXT_NombreProducto.getText());
-        mProducto.setClasificacion(TXT_Clasificacion.getText());
-        mProducto.setTipo(TXT_Tipo.getText());
-        mProducto.setPrecio(Float.parseFloat(TXT_Precio.getText()));
-        mProducto.setId_Proveedor(Integer.parseInt(TXT_Id_Proveedor.getText()));
-        if(mBD.conectar()) {
-            if (mBD.agregarProducto(mProducto)) {
-                JOptionPane.showMessageDialog(null, "Producto Agregado Exitosamente");
 
-            } else {
-                JOptionPane.showMessageDialog(null, "Error");
+        if (ValidarClasificacion() && ValidarId_Producto() && ValidarPrecio()
+                && ValidarNombreProducto() && ValidarIdProveedor() && ValidarTipo()) {
+            mProducto.setId_Producto(Integer.parseInt(TXT_Id_Producto.getText()));
+            mProducto.setNombre(TXT_NombreProducto.getText());
+            mProducto.setClasificacion(TXT_Clasificacion.getText());
+            mProducto.setTipo(TXT_Tipo.getText());
+            mProducto.setPrecio(Float.parseFloat(TXT_Precio.getText()));
+            mProducto.setId_Proveedor(Integer.parseInt(TXT_Id_Proveedor.getText()));
+            if (mBD.conectar()) {
+                if (mBD.agregarProducto(mProducto)) {
+                    JOptionPane.showMessageDialog(null, "Producto Agregado Exitosamente");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor completa los campos que faltan");
         }
-    }//GEN-LAST:event_BTN_AgegarActionPerformed
+    }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Producto
-    public boolean ValidarId_Producto(){
-        if(TXT_Id_Producto.getText().equals("")){
+    public boolean ValidarId_Producto() {
+        if (TXT_Id_Producto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     // Nombre del producto
-    public boolean ValidarNombreProducto(){
-        if(TXT_NombreProducto.getText().equals("")){
+    public boolean ValidarNombreProducto() {
+        if (TXT_NombreProducto.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     //Clsificacion
-    public boolean ValidarClasificacion(){
-        if(TXT_Clasificacion.getText().equals("")){
+    public boolean ValidarClasificacion() {
+        if (TXT_Clasificacion.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     //Tipo de producto
-    public boolean ValidarTipo(){
-        if(TXT_Tipo.getText().equals("")){
+    public boolean ValidarTipo() {
+        if (TXT_Tipo.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     ///Precio "Float"
-    public boolean ValidarPrecio(){
-        if(TXT_Precio.getText().equals("")){
+    public boolean ValidarPrecio() {
+        if (TXT_Precio.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-    public boolean ValidarIdProveedor(){
-        if(TXT_Id_Proveedor.getText().equals("")){
+
+    public boolean ValidarIdProveedor() {
+        if (TXT_Id_Proveedor.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -366,7 +307,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_Agegar;
+    private javax.swing.JButton BTN_Agregar;
     private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JLabel LBL_Clasificacion;
@@ -382,6 +323,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_Precio;
     private javax.swing.JTextField TXT_Tipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

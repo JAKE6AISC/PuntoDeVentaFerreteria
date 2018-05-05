@@ -1,12 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 //María Eneida Salas Martínez 
 //El diseño del formulario FRM_ConsultasProveedores
 //***Se agrego la codificación del Botón Buscar
-//***Se agrego el evento activar ventana para mostrar la lista de proveedores 
+//***Se agrego el evento activar ventana para mostrar la lista de proveedores
+*/
 package jake_optimizacion_venta;
 
 import java.util.ArrayList;
@@ -28,6 +25,7 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
      */
     public FRM_ConsultasProveedor() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -176,7 +174,7 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
         if (mBaseDeDatos.conectar()) {
 
             if (mBaseDeDatos.conectar()) {
-                ArrayList Catalogo = null;
+                
                 String[] Dato;
 
                 ModeloTabla.addColumn("id_proveedor");
@@ -210,11 +208,8 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         ArrayList ListaProveedores;
-        ModeloTabla.setColumnCount(0);
-        ModeloTabla.setRowCount(0);
-        mBaseDeDatos.desconectar();
         if (mBaseDeDatos.conectar()) {
-            ArrayList CatalogoBD = null;
+            
             String[] Dato;
 
             ModeloTabla.addColumn("id_proveedor");

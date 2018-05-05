@@ -28,6 +28,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         modeloTabla.addColumn("Clasificación");
         modeloTabla.addColumn("Tipo");
         modeloTabla.addColumn("Precio");
+        this.setLocationRelativeTo(null);
     }
 
     /**

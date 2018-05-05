@@ -1,3 +1,7 @@
+/*
+ * Luis Osvaldo Juanes Hinojosa
+ * Formulario para realizar la venta
+*/
 package jake_optimizacion_venta;
 import java.awt.HeadlessException;
 import java.io.BufferedWriter;
@@ -45,7 +49,7 @@ public class FRM_Venta extends javax.swing.JFrame {
         Fecha();
         LBL_ID_Venta.setText(Id_Ultim);
         LBL_Hora.setText(Hora);
-        
+        this.setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

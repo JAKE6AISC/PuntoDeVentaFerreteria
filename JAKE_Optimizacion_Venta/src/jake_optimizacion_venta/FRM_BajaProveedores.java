@@ -26,6 +26,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         modeloTabla.addColumn("ID");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Clasificación");
+        this.setLocationRelativeTo(null);
     }
 
     /**

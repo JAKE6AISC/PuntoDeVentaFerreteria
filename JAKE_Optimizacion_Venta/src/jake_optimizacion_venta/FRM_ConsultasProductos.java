@@ -1,12 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 //María Eneida Salas Martínez
 //Se añadio el formulario FRM_ConsultasProducto solo Diseño
 //***Se agrego la codificación del Botón Buscar tanto para busueda por el nombre como por el tipo
 //***Se agrego el evento activar ventana para mostrar la lista de productos
+*/
 package jake_optimizacion_venta;
 
 import java.util.ArrayList;
@@ -28,6 +25,7 @@ public class FRM_ConsultasProductos extends javax.swing.JFrame {
      */
     public FRM_ConsultasProductos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -180,7 +178,6 @@ public class FRM_ConsultasProductos extends javax.swing.JFrame {
         ModeloTabla.setRowCount(0);
         mBaseDeDatos.desconectar();
         if (mBaseDeDatos.conectar()) {
-            ArrayList CatalogoBD = null;
             String[] Dato;
 
             ModeloTabla.addColumn("id_producto");
@@ -219,12 +216,9 @@ public class FRM_ConsultasProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_BuscarMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        ArrayList ListaProductos;
-        ModeloTabla.setColumnCount(0);
-        ModeloTabla.setRowCount(0);
-        mBaseDeDatos.desconectar();
+        ArrayList ListaProductos;        
         if (mBaseDeDatos.conectar()) {
-            ArrayList CatalogoBD = null;
+            
             String[] Dato;
 
             ModeloTabla.addColumn("id_producto");

@@ -1,0 +1,45 @@
+Ferreteria Juanes 
+
+
+!!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Rio Grande  Zacateas   Mexico  Codigo postal 98400
+
+
+No. Venta 2  	Fecha 1/5/2018	 Hora 11:8
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+____________________________________________________________________________
+2		Torni		12.0		1		12.0
+
+3		Talad		125.0		1		125.0
+
+2		Torni		12.0		1		12.0
+
+2		Torni		12.0		1		12.0
+
+3		Talad		125.0		1		125.0
+
+3		Talad		125.0		1		125.0
+
+
+____________________________________________________________________________
+
+			 	   	Total a pagar: $411.0 MXN
+
+
+
+Version del Software 1.0 todos los derechos reservados a JAKE
+
+
+
+
+Software realizado por la organizacion JAKE
+
+
+
+
+!!! Gracias por su compra esperamos verlos pronto!!!

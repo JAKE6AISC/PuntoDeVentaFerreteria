@@ -1,5 +1,6 @@
 /*
  * José Andrés Chávez Hernández
+ * Formulario para generar el reporte de ventas
  */
 package jake_optimizacion_venta;
 
@@ -27,6 +28,7 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
      */
     public FRM_ReporteVentas() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +47,7 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         LBL_Fecha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         TXT_Fech2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
@@ -82,21 +85,29 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Reporte De Ventas");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Ferretería Juanes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel1.setText("al");
@@ -215,6 +226,7 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_Fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
