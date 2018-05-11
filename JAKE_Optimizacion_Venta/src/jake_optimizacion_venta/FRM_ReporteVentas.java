@@ -169,7 +169,6 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);
             jv.setTitle(path);
-            this.dispose();
         } catch (JRException ex) {
             Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
         }

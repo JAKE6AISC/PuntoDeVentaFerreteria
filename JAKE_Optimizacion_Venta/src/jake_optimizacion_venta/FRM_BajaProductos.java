@@ -160,10 +160,10 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,13 +180,15 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     private void BTN_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarActionPerformed
         mProducto.setId_Producto(Integer.parseInt(this.TXT_idProducto.getText())); //Se obtiene el id para eliminar el producto deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
-            if (mBD.eliminarProducto(mProducto)) { //Método que recibe un entero y elimina el proveedor de la base de datos
-                JOptionPane.showMessageDialog(null, "Producto Eliminado con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar");
+            if (mBD.eliminarExistencia(Integer.parseInt(TXT_idProducto.getText()))) {
+                if (mBD.eliminarProducto(mProducto)) { //Método que recibe un entero y elimina el proveedor de la base de datos
+                    JOptionPane.showMessageDialog(null, "Producto Eliminado con éxito");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar");
+                }
             }
-            mBD.desconectar();
         }
+        mBD.desconectar();
     }//GEN-LAST:event_BTN_EliminarActionPerformed
 
     private void BTN_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_atrasActionPerformed
@@ -252,16 +254,24 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRM_BajaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_BajaProductos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRM_BajaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_BajaProductos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRM_BajaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_BajaProductos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRM_BajaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_BajaProductos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -74,6 +74,7 @@ public class BaseDeDatos {
             return false;
         }
     }
+    
 
     public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor) {
         Statement consulta;
@@ -114,6 +115,20 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             consulta.execute("delete from producto "
                     + " where id_producto = " + mProducto.getId_Producto() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+     public boolean eliminarExistencia(int id) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from existencias "
+                    + " where producto_id_producto = " + id + ";");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

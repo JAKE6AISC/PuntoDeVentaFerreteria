@@ -1,113 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<parameter name="ID" class="java.lang.String"/>
-	<queryString>
-		<![CDATA[SELECT
-     *
-FROM
-     `existencias` existencias
-WHERE
-     producto_id_producto = $P{ID};]]>
+	<queryString language="SQL">
+		<![CDATA[select * from producto A inner join existencias B ON A.id_producto=B.producto_id_producto;]]>
 	</queryString>
-	<field name="id_existencias" class="java.lang.Integer">
+	<field name="id_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clasificacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="cantidad" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="producto_id_producto" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<group name="id_existencias">
-		<groupExpression><![CDATA[$F{id_existencias}]]></groupExpression>
-		<groupHeader>
-			<band height="27" splitType="Stretch">
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="139" height="27" forecolor="#FFFFFF" backcolor="#000000"/>
-					<textElement>
-						<font size="18"/>
-					</textElement>
-					<text><![CDATA[id_existencias]]></text>
-				</staticText>
-				<textField>
-					<reportElement mode="Opaque" x="139" y="0" width="416" height="27" forecolor="#FFFFFF" backcolor="#000000"/>
-					<textElement>
-						<font size="18" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_existencias}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="8" splitType="Stretch">
-				<line direction="BottomUp">
-					<reportElement key="line" x="1" y="4" width="554" height="1"/>
-				</line>
-			</band>
-		</groupFooter>
-	</group>
-	<group name="cantidad">
-		<groupExpression><![CDATA[$F{cantidad}]]></groupExpression>
-		<groupHeader>
-			<band height="28" splitType="Stretch">
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="0" width="139" height="27" backcolor="#CCCCFF"/>
-					<textElement>
-						<font size="18"/>
-					</textElement>
-					<text><![CDATA[cantidad]]></text>
-				</staticText>
-				<textField>
-					<reportElement mode="Opaque" x="139" y="0" width="416" height="27" backcolor="#CCCCFF"/>
-					<textElement>
-						<font size="18"/>
-					</textElement>
-					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantidad}]]></textFieldExpression>
-				</textField>
-				<line>
-					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1"/>
-				</line>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="8" splitType="Stretch">
-				<line direction="BottomUp">
-					<reportElement key="line" x="1" y="4" width="554" height="1"/>
-				</line>
-			</band>
-		</groupFooter>
-	</group>
-	<group name="producto_id_producto">
-		<groupExpression><![CDATA[$F{producto_id_producto}]]></groupExpression>
-		<groupHeader>
-			<band height="28" splitType="Stretch">
-				<staticText>
-					<reportElement x="0" y="0" width="139" height="27"/>
-					<textElement>
-						<font size="18"/>
-					</textElement>
-					<text><![CDATA[id_producto]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="139" y="0" width="416" height="27"/>
-					<textElement>
-						<font size="18"/>
-					</textElement>
-					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{producto_id_producto}]]></textFieldExpression>
-				</textField>
-				<line>
-					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1"/>
-				</line>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="8" splitType="Stretch">
-				<line direction="BottomUp">
-					<reportElement key="line" x="1" y="4" width="554" height="1"/>
-				</line>
-			</band>
-		</groupFooter>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -132,10 +45,96 @@ WHERE
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="18" splitType="Stretch"/>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="49" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="49" y="0" width="110" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="159" y="0" width="99" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="258" y="0" width="110" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Clasificacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="368" y="0" width="121" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="489" y="0" width="63" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="49" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="0" width="110" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="0" width="99" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="0" width="110" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{clasificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="121" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="489" y="0" width="63" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>

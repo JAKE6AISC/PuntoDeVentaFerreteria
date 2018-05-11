@@ -6,8 +6,6 @@ package jake_optimizacion_venta;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,15 +16,16 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
  *
  * @author Ene
  */
 public class FRM_ReporteExistencias extends javax.swing.JFrame {
-DefaultTableModel ModeloTabla = new DefaultTableModel();
- BaseDeDatos mBaseDeDatos = new BaseDeDatos();
- Producto mProducto = new Producto();
+
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
+    Producto mProducto = new Producto();
+
     /**
      * Creates new form FRM_ReporteExistencias
      */
@@ -52,8 +51,6 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableReporteExistencias = new javax.swing.JTable();
         BTN_Atras = new javax.swing.JButton();
-        TXT_ID = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -119,8 +116,6 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             }
         });
 
-        jLabel1.setText("ID producto: ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,19 +124,13 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
                         .addGap(93, 93, 93)
                         .addComponent(BTN_Imprimir_Reporte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_Salir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                        .addComponent(BTN_Salir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -150,11 +139,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
                     .addComponent(BTN_Imprimir_Reporte)
@@ -166,7 +151,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -174,53 +159,42 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         ArrayList ListaProductos;
         ModeloTabla.setColumnCount(0);
         ModeloTabla.setRowCount(0);
-        mBaseDeDatos.desconectar();
-        if(mBaseDeDatos.conectar()){
-            ArrayList CatalogoBD = null;
-            String [] Dato;
- 
-            
-           ModeloTabla.addColumn("id_producto");
-           ModeloTabla.addColumn("nombre");
-           ModeloTabla.addColumn("precio");
-           ModeloTabla.addColumn("cantidad");
-           
-            
-                  
-                Dato = new String[5];
-                ListaProductos = mBaseDeDatos.consultarExistencias();
-                for(int i=0; i<ListaProductos.size(); i++) { 
-                    mProducto = (Producto)ListaProductos.get(i);
-                
-                    Dato[0] = "" + (mProducto.getId_Producto());
-                    Dato[1] = mProducto.getNombre();
-                    Dato[2] = "" + (mProducto.getPrecio());
-                    Dato[3] = "" + (mProducto.getExistencias());
-                    
-                    
-                    
-                
-                    ModeloTabla.addRow(Dato);
-                }
 
-            
+        if (mBaseDeDatos.conectar()) {
+
+            String[] Dato;
+
+            ModeloTabla.addColumn("id_producto");
+            ModeloTabla.addColumn("nombre");
+            ModeloTabla.addColumn("precio");
+            ModeloTabla.addColumn("cantidad");
+
+            Dato = new String[5];
+            ListaProductos = mBaseDeDatos.consultarExistencias();
+            for (int i = 0; i < ListaProductos.size(); i++) {
+                mProducto = (Producto) ListaProductos.get(i);
+
+                Dato[0] = "" + (mProducto.getId_Producto());
+                Dato[1] = mProducto.getNombre();
+                Dato[2] = "" + (mProducto.getPrecio());
+                Dato[3] = "" + (mProducto.getExistencias());
+
+                ModeloTabla.addRow(Dato);
+            }
+
             this.JTableReporteExistencias.setModel(ModeloTabla);
             this.JTableReporteExistencias.getColumnModel().getColumn(0).setPreferredWidth(200);
             this.JTableReporteExistencias.getColumnModel().getColumn(1).setPreferredWidth(200);
             this.JTableReporteExistencias.getColumnModel().getColumn(2).setPreferredWidth(200);
             this.JTableReporteExistencias.getColumnModel().getColumn(3).setPreferredWidth(200);
-            
-            
-            
-            
 
-            if (this.JTableReporteExistencias.getRowCount() > 0)
-            {
+            if (this.JTableReporteExistencias.getRowCount() > 0) {
                 this.JTableReporteExistencias.setRowSelectionInterval(0, 0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
         }
+        mBaseDeDatos.desconectar();
     }//GEN-LAST:event_formWindowActivated
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
@@ -230,18 +204,15 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_Imprimir_ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Imprimir_ReporteActionPerformed
-                String path = "/Users/KevinCruz/OP/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeExistencias.jasper";
+        String path = "/Users/KevinCruz/OP/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeExistencias.jasper";
         JasperReport jr = null;
-        Map parametros = new HashMap();
-        
+
         try {
-            parametros.put("ID", TXT_ID.getText());
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);           
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBaseDeDatos.conectare());
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBaseDeDatos.conectare());
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);
             jv.setTitle(path);
-            this.dispose();
         } catch (JRException ex) {
             Logger.getLogger(FRM_ReporteExistencias.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -287,8 +258,6 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     private javax.swing.JButton BTN_Imprimir_Reporte;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JTable JTableReporteExistencias;
-    private javax.swing.JTextField TXT_ID;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
