@@ -26,7 +26,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {

@@ -50,6 +50,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LBL_ID = new javax.swing.JLabel();
+        BTNseleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -59,12 +60,6 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         });
 
         LBL_IdProveedor.setText("ID_Proveedor: ");
-
-        TXT_Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_NombreFocusLost(evt);
-            }
-        });
 
         JTableProveedor.setModel(modeloTabla);
         jScrollPane1.setViewportView(JTableProveedor);
@@ -125,29 +120,39 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
         LBL_ID.setText("*****");
 
+        BTNseleccionar.setText("Seleccionar");
+        BTNseleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNseleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTN_Atras)
-                        .addGap(83, 83, 83)
-                        .addComponent(BTN_Eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_Salir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(BTN_Atras)
+                            .addGap(83, 83, 83)
+                            .addComponent(BTN_Eliminar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_Salir))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(LBL_IdProveedor)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(LBL_ID)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LBL_IdProveedor)
+                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBL_ID)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(BTNseleccionar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -157,8 +162,9 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel3)
+                    .addComponent(BTNseleccionar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LBL_IdProveedor)
                     .addComponent(LBL_ID))
@@ -169,14 +175,14 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                     .addComponent(BTN_Atras)
                     .addComponent(BTN_Eliminar)
                     .addComponent(BTN_Salir))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarActionPerformed
-        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Nombre.getText())); //Se obtiene el id para eliminar el proveedor deseado
+        mProveedor.setId_proveedor(Integer.parseInt(String.valueOf(LBL_ID.getText()))); //Se obtiene el id para eliminar el proveedor deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
             if (mBD.eliminarProveedor(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                 JOptionPane.showMessageDialog(null, "Proveedor Eliminado con éxito");
@@ -232,7 +238,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
-    private void TXT_NombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NombreFocusLost
+    private void BTNseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNseleccionarActionPerformed
         modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
         int a = modeloTabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -254,17 +260,15 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(modeloTabla);
             this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(200);
-            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(200);
-            this.JTableProveedor.getColumnModel().getColumn(4).setPreferredWidth(300);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(300);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(300);
             if (this.JTableProveedor.getRowCount() > 0) {
                 this.JTableProveedor.setRowSelectionInterval(0, 0);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
         }
-    }//GEN-LAST:event_TXT_NombreFocusLost
+    }//GEN-LAST:event_BTNseleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,6 +309,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_Eliminar;
     private javax.swing.JButton BTN_Salir;
+    private javax.swing.JButton BTNseleccionar;
     private javax.swing.JTable JTableProveedor;
     private javax.swing.JLabel LBL_ID;
     private javax.swing.JLabel LBL_IdProveedor;

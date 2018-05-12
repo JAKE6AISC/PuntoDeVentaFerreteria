@@ -97,12 +97,6 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
         LBLid.setText("Nombre del Producto:");
 
-        TXT_Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_NombreFocusLost(evt);
-            }
-        });
-
         JTable_Bajas.setModel(modeloTabla);
         jScrollPane1.setViewportView(JTable_Bajas);
 
@@ -310,10 +304,6 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
         }
     }//GEN-LAST:event_BTN_SelPActionPerformed
-
-    private void TXT_NombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NombreFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TXT_NombreFocusLost
 
     /**
      * @param args the command line arguments
