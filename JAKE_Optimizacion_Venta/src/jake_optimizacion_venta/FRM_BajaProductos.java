@@ -45,12 +45,15 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         LBLid = new javax.swing.JLabel();
-        TXT_idProducto = new javax.swing.JTextField();
+        TXT_Nombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTable_Bajas = new javax.swing.JTable();
         BTN_atras = new javax.swing.JButton();
         BTN_Eliminar = new javax.swing.JButton();
         BTN_salir = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        LBL_ID = new javax.swing.JLabel();
+        BTN_SelP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(498, 408));
@@ -92,7 +95,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        LBLid.setText("ID_Producto: ");
+        LBLid.setText("Nombre del Producto:");
 
         JTable_Bajas.setModel(modeloTabla);
         jScrollPane1.setViewportView(JTable_Bajas);
@@ -118,25 +121,44 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("ID: ");
+
+        LBL_ID.setText("*****");
+
+        BTN_SelP.setText("Seleccionar");
+        BTN_SelP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SelPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(LBLid)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_idProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BTN_SelP))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(BTN_atras)
-                            .addGap(75, 75, 75)
+                            .addGap(88, 88, 88)
                             .addComponent(BTN_Eliminar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_salir))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LBL_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -145,9 +167,14 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LBLid)
-                    .addComponent(TXT_idProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_SelP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(LBL_ID))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_atras)
@@ -160,10 +187,10 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 41, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +205,9 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarActionPerformed
-        mProducto.setId_Producto(Integer.parseInt(this.TXT_idProducto.getText())); //Se obtiene el id para eliminar el producto deseado
+        mProducto.setId_Producto(Integer.parseInt(LBL_ID.getText())); //Se obtiene el id para eliminar el producto deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
-            if (mBD.eliminarExistencia(Integer.parseInt(TXT_idProducto.getText()))) {
+            if (mBD.eliminarExistencia(mProducto.getId_Producto())) {
                 if (mBD.eliminarProducto(mProducto)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                     JOptionPane.showMessageDialog(null, "Producto Eliminado con éxito");
                 } else {
@@ -202,7 +229,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_salirActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        this.TXT_idProducto.setText("");
+        this.TXT_Nombre.setText("");
         modeloTabla = (DefaultTableModel) JTable_Bajas.getModel();
         int a = modeloTabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -239,6 +266,42 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         }
         mBD.desconectar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void BTN_SelPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SelPActionPerformed
+        modeloTabla = (DefaultTableModel) JTable_Bajas.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        if (mBD.conectar()) {
+
+            String[] Datos = new String[5];
+
+            mProducto = mBD.consultarProducto(TXT_Nombre.getText(), "");
+
+            Datos[0] = "" + mProducto.getId_Producto();
+            LBL_ID.setText(String.valueOf(mProducto.getId_Producto()));
+            Datos[1] = mProducto.getNombre();
+            Datos[2] = mProducto.getClasificacion();
+            Datos[3] = mProducto.getTipo();
+            Datos[4] = "" + mProducto.getPrecio();
+            
+            modeloTabla.addRow(Datos);
+
+            this.JTable_Bajas = new javax.swing.JTable();
+            this.JTable_Bajas.setModel(modeloTabla);
+            this.JTable_Bajas.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTable_Bajas.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.JTable_Bajas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.JTable_Bajas.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.JTable_Bajas.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.JTable_Bajas.getRowCount() > 0) {
+                this.JTable_Bajas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
+        }
+    }//GEN-LAST:event_BTN_SelPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,13 +348,16 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Eliminar;
+    private javax.swing.JButton BTN_SelP;
     private javax.swing.JButton BTN_atras;
     private javax.swing.JButton BTN_salir;
     private javax.swing.JTable JTable_Bajas;
+    private javax.swing.JLabel LBL_ID;
     private javax.swing.JLabel LBLid;
-    private javax.swing.JTextField TXT_idProducto;
+    private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
