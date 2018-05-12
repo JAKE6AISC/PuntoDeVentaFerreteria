@@ -1,41 +1,21 @@
 Ferreteria Juanes 
-
-
 !!!Gracias por su preferencia!!!
-
-
-Lugar de expedicion: Rio Grande  Zacateas   Mexico  Codigo postal 98400
-
-
-No. Venta 2  	Fecha 9/5/2018	 Hora 9:9
-
-
+Lugar de expedicion: Rio Grande  Zacatecas   México  Código postal: 98400
+No. Venta 28  	Fecha 11/5/2018	 Hora 7:53
 Codigo		Descrip		Precio		Cantid		Subtotal
 
 ____________________________________________________________________________
-1		Chicl		1.5		1		1.5
-
-3		Filtr		12.0		1		12.0
-
-3		Filtr		12.0		1		12.0
-
-3		Filtr		12.0		1		12.0
+5		Clavo		2.5		1		2.5
 
 
 ____________________________________________________________________________
-
-			 	   	Total a pagar: $37.5 MXN
-
-
-
-Version del Software 1.0 todos los derechos reservados a JAKE
-
-
+			 	   	Total a pagar: $2.5 MXN
+			 	   	Efectivo: $3.0 MXN
+			 	   	Cambio: $0.5 MXN
+Version del Software 2.0 todos los derechos reservados a JAKE
 
 
 Software realizado por la organizacion JAKE
-
-
 
 
 !!! Gracias por su compra esperamos verlos pronto!!!

@@ -26,7 +26,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -94,12 +94,23 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into producto (id_producto,precio,nombre,tipo,clasificacion,proveedor_id_proveedor) "
-                    + "values ('" + mProducto.getId_Producto() + "'," + mProducto.getPrecio() + ",'" + mProducto.getNombre()
+            consulta.execute("insert into producto (precio,nombre,tipo,clasificacion,proveedor_id_proveedor) "
+                    + "values (" + mProducto.getPrecio() + ",'" + mProducto.getNombre()
                     + "','" + mProducto.getTipo() + "','" + mProducto.getClasificacion() + "','"
                     + mProducto.getId_Proveedor() + "');");
-              consulta.execute("insert into existencias (cantidad, producto_id_producto)"
-                    + "values (0,'" + mProducto.getId_Producto()+"');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean agregarExistenciaProducto(int ID) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into existencias (cantidad, producto_id_producto)"
+                    + "values (0,'" + ID +"');");
 
             return true;
         } catch (Exception e) {
@@ -201,7 +212,22 @@ public class BaseDeDatos {
         }
         return mListaProveedor;
     }
+    public int getIdProveedores() {
+         int sig = 0;
+        Statement Consulta;
+        ResultSet Resultado;
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select max(id_proveedor) as ultimo from proveedor;");
+            if (Resultado.next()) {
+                sig = (Resultado.getInt("ultimo"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return sig;
+    }
     public ArrayList consultarProductos() {
         Producto mProducto = null;
         Statement consulta;
@@ -423,6 +449,23 @@ public class BaseDeDatos {
         try {
             Consulta = conexion.createStatement();
             Resultado = Consulta.executeQuery("select max(id_venta) as ultimo from venta;");
+            if (Resultado.next()) {
+                sig = (Resultado.getInt("ultimo"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return sig;
+    }
+    
+    public int getIdProducto() {// Si se usa
+        int sig = 0;
+        Statement Consulta;
+        ResultSet Resultado;
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select max(id_producto) as ultimo from producto;");
             if (Resultado.next()) {
                 sig = (Resultado.getInt("ultimo"));
             }

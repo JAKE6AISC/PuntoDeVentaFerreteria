@@ -36,6 +36,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     String Hora = "";
     String Ruta = ""; 
     int ConsultaEx =0; 
+    double efectivo,cambio;
     ArrayList<Integer> ArregloIdProd = new ArrayList<>();
     ArrayList<Float> ArregloPrecios = new ArrayList<>(); 
     public FRM_Venta() {
@@ -58,7 +59,7 @@ public class FRM_Venta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_Venta = new javax.swing.JTable();
         TXT_Escaner = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        LBL_Efectivo = new javax.swing.JLabel();
         BTN_AgregarProducto = new javax.swing.JButton();
         BTN_Atras = new javax.swing.JButton();
         BTN_RealizarVenta = new javax.swing.JButton();
@@ -70,14 +71,18 @@ public class FRM_Venta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         LBL_Fecha = new javax.swing.JLabel();
         LBL_Total = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TXT_Efectivo = new javax.swing.JTextField();
+        LBL_Cambio = new javax.swing.JLabel();
+        LBL_Cambio_1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TBL_Venta.setModel(TablasJuanes);
         jScrollPane1.setViewportView(TBL_Venta);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel1.setText("Total   $");
+        LBL_Efectivo.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        LBL_Efectivo.setText("Efectivo $");
 
         BTN_AgregarProducto.setText("+");
         BTN_AgregarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -142,17 +147,27 @@ public class FRM_Venta extends javax.swing.JFrame {
         LBL_Total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         LBL_Total.setText("00.00");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel2.setText("Total      $");
+
+        TXT_Efectivo.setText(" ");
+        TXT_Efectivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_EfectivoKeyTyped(evt);
+            }
+        });
+
+        LBL_Cambio.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        LBL_Cambio.setText("00.00");
+
+        LBL_Cambio_1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        LBL_Cambio_1.setText("Cambio   $");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
-                .addComponent(BTN_RealizarVenta)
-                .addGap(19, 19, 19))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4)
@@ -166,21 +181,41 @@ public class FRM_Venta extends javax.swing.JFrame {
                 .addComponent(LBL_Hora)
                 .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(BTN_AgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBL_Total)
-                        .addGap(36, 36, 36)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(BTN_AgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(LBL_Efectivo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TXT_Efectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(LBL_Cambio_1)
+                                .addComponent(jLabel2))
+                            .addGap(223, 223, 223))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(LBL_Cambio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LBL_Total))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
+                        .addComponent(BTN_RealizarVenta)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,18 +234,27 @@ public class FRM_Venta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Escaner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_AgregarProducto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(LBL_Total))
-                .addGap(18, 18, 18)
+                    .addComponent(LBL_Total)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LBL_Efectivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TXT_Efectivo))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(LBL_Cambio_1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BTN_RealizarVenta)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BTN_Atras)
-                        .addGap(23, 23, 23))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LBL_Cambio)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTN_Atras, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTN_RealizarVenta, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         pack();
@@ -288,6 +332,10 @@ public class FRM_Venta extends javax.swing.JFrame {
             mVenta.setFecha(FechaActual);
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
             mVenta.setTotal((float)Total);
+            efectivo = Double.parseDouble(TXT_Efectivo.getText());
+            if (efectivo > Total) {
+             cambio = efectivo  - Total;
+            LBL_Cambio.setText(String.valueOf(cambio)); 
             if(mBD.conectar()) {
                 if (mBD.realizarVenta(mVenta)) {
                     int id_vta = mVenta.getId_Venta();
@@ -300,7 +348,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                         mBD.agregarDetalleVenta(precio, id_prod, id_vta);
                     }
                     try {
-                        Ruta = "\\Ticket_venta_" + Id_Ultim + ".txt";
+                        Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
                             ArchivoTXT.write("Ferreteria Juanes ");
                             ArchivoTXT.newLine();
@@ -310,7 +358,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("Lugar de expedicion: Rio Grande  Zacateas   Mexico  Codigo postal 98400");
+                            ArchivoTXT.write("Lugar de expedicion: Rio Grande  Zacatecas   México  Código postal: 98400");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
@@ -349,8 +397,18 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
+                             ArchivoTXT.write("\t\t\t \t   \tEfectivo: $" + efectivo + " MXN");
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("Version del Software 1.0 todos los derechos reservados a JAKE\n\n");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                             ArchivoTXT.write("\t\t\t \t   \tCambio: $" + cambio + " MXN");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
@@ -374,11 +432,25 @@ public class FRM_Venta extends javax.swing.JFrame {
                 ObternerId_Vtas();
                 LBL_ID_Venta.setText(Id_Ultim);
         }
+            }else{
+                 JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
+            }
+            
         
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
+
+    private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
+        char caracter  = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_EfectivoKeyTyped
      private void VaciarCampos() {
         TXT_Escaner.setText(""); 
         LBL_Total.setText("00.00");
+        TXT_Efectivo.setText("");
+        LBL_Cambio.setText("00.00");
+        
        for (int i = 0; i < TBL_Venta.getRowCount(); i++) {
                 TablasJuanes.removeRow(i);
                 i-=1;
@@ -421,13 +493,17 @@ public class FRM_Venta extends javax.swing.JFrame {
     private javax.swing.JButton BTN_AgregarProducto;
     private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_RealizarVenta;
+    private javax.swing.JLabel LBL_Cambio;
+    private javax.swing.JLabel LBL_Cambio_1;
+    private javax.swing.JLabel LBL_Efectivo;
     private javax.swing.JLabel LBL_Fecha;
     private javax.swing.JLabel LBL_Hora;
     private javax.swing.JLabel LBL_ID_Venta;
     private javax.swing.JLabel LBL_Total;
     private javax.swing.JTable TBL_Venta;
+    private javax.swing.JTextField TXT_Efectivo;
     private javax.swing.JTextField TXT_Escaner;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

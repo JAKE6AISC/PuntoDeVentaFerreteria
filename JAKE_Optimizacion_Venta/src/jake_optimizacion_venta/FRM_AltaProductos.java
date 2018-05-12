@@ -1,5 +1,6 @@
 package jake_optimizacion_venta;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,7 +9,8 @@ import javax.swing.JOptionPane;
  * @author Juanez
  */
 public class FRM_AltaProductos extends javax.swing.JFrame {
-
+     int [] Datos;
+     boolean Id_Prov_existe;
     public FRM_AltaProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,11 +34,9 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         TXT_Tipo = new javax.swing.JTextField();
         BTN_Salir = new javax.swing.JButton();
         TXT_Precio = new javax.swing.JTextField();
-        TXT_Id_Producto = new javax.swing.JTextField();
         LBL_Id_Proveedor = new javax.swing.JLabel();
         BTN_Agregar = new javax.swing.JButton();
         LBL_Precio = new javax.swing.JLabel();
-        LBL_Id_Producto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +68,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,6 +91,12 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             }
         });
 
+        TXT_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_PrecioKeyTyped(evt);
+            }
+        });
+
         LBL_Id_Proveedor.setText("Id_Proovedor");
 
         BTN_Agregar.setText("Agregar");
@@ -101,8 +107,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         });
 
         LBL_Precio.setText("Precio");
-
-        LBL_Id_Producto.setText("Id_Producto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,38 +124,32 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                                 .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LBL_Id_Producto)
                                     .addComponent(LBL_Nombre_Producto)
                                     .addComponent(LBL_Clasificacion)
                                     .addComponent(LBL_Tipo)
                                     .addComponent(LBL_Precio))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TXT_NombreProducto)
-                                    .addComponent(TXT_Id_Producto)
                                     .addComponent(TXT_Clasificacion)
                                     .addComponent(TXT_Tipo)
                                     .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(54, 54, 54))
+                        .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
                         .addGap(68, 68, 68)
                         .addComponent(BTN_Agregar)
                         .addGap(47, 47, 47)
-                        .addComponent(BTN_Salir)
-                        .addGap(26, 26, 26))))
+                        .addComponent(BTN_Salir)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TXT_Id_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LBL_Id_Producto))
-                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_NombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LBL_Nombre_Producto))
@@ -175,7 +173,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                     .addComponent(BTN_Atras)
                     .addComponent(BTN_Agregar)
                     .addComponent(BTN_Salir))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,11 +191,30 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
     private void BTN_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarActionPerformed
         Producto mProducto = new Producto();
+        Proveedor mProveedor = new Proveedor();
         BaseDeDatos mBD = new BaseDeDatos();
-
-        if (ValidarClasificacion() && ValidarId_Producto() && ValidarPrecio()
+        
+        if (mBD.conectar()) {
+            int tam = mBD.getIdProveedores();
+            int datos[] = new int[tam];
+            int temp = tam;
+            for (int i = 0; i<tam; i++) {
+                datos[i] = temp--;
+                System.out.println(datos[i]);
+            }
+            
+            for (int i = 0; i<tam; i++) {
+                if (Integer.parseInt(TXT_Id_Proveedor.getText()) == datos[i]) {
+                    Id_Prov_existe = true;
+                }else{
+                    Id_Prov_existe = false;
+                }
+            }
+        }
+        if (Id_Prov_existe) {
+            if (ValidarClasificacion() && ValidarPrecio()
                 && ValidarNombreProducto() && ValidarIdProveedor() && ValidarTipo()) {
-            mProducto.setId_Producto(Integer.parseInt(TXT_Id_Producto.getText()));
+            
             mProducto.setNombre(TXT_NombreProducto.getText());
             mProducto.setClasificacion(TXT_Clasificacion.getText());
             mProducto.setTipo(TXT_Tipo.getText());
@@ -205,6 +222,8 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             mProducto.setId_Proveedor(Integer.parseInt(TXT_Id_Proveedor.getText()));
             if (mBD.conectar()) {
                 if (mBD.agregarProducto(mProducto)) {
+                    int IdP = mBD.getIdProducto();
+                    mBD.agregarExistenciaProducto(IdP);
                     JOptionPane.showMessageDialog(null, "Producto Agregado Exitosamente");
 
                 } else {
@@ -215,17 +234,23 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor completa los campos que faltan");
         }
+        }else {
+             JOptionPane.showMessageDialog(null, "Proveedor inexistente");
+        }
+        
+        
     }//GEN-LAST:event_BTN_AgregarActionPerformed
+
+    private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
+       char caracter  = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_PrecioKeyTyped
 
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Producto
-    public boolean ValidarId_Producto() {
-        if (TXT_Id_Producto.getText().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+    
 
     // Nombre del producto
     public boolean ValidarNombreProducto() {
@@ -311,13 +336,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JLabel LBL_Clasificacion;
-    private javax.swing.JLabel LBL_Id_Producto;
     private javax.swing.JLabel LBL_Id_Proveedor;
     private javax.swing.JLabel LBL_Nombre_Producto;
     private javax.swing.JLabel LBL_Precio;
     private javax.swing.JLabel LBL_Tipo;
     private javax.swing.JTextField TXT_Clasificacion;
-    private javax.swing.JTextField TXT_Id_Producto;
     private javax.swing.JTextField TXT_Id_Proveedor;
     private javax.swing.JTextField TXT_NombreProducto;
     private javax.swing.JTextField TXT_Precio;
