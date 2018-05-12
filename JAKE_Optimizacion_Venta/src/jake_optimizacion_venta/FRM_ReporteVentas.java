@@ -1,12 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * José Andrés Chávez Hernández
+ * Formulario para generar el reporte de ventas
  */
 package jake_optimizacion_venta;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+=======
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,14 +26,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Andy
  */
 public class FRM_ReporteVentas extends javax.swing.JFrame {
-
+    BaseDeDatos mBD = new BaseDeDatos();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
     /**
      * Creates new form FRM_ReporteVentas
      */
     public FRM_ReporteVentas() {
         initComponents();
-        
-        
+        this.setLocationRelativeTo(null);
     }
     DefaultTableModel ModeloTabla = new DefaultTableModel();
       BaseDeDatos mBaseDeDatos= new BaseDeDatos();
@@ -34,8 +46,9 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
     private void initComponents() {
 
         BTN_Atras = new javax.swing.JButton();
-        BTN_ImprimirReporte = new javax.swing.JButton();
+        BTN_GenerarReporte = new javax.swing.JButton();
         BTN_Salir = new javax.swing.JButton();
+<<<<<<< HEAD
         TXTTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -43,22 +56,46 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         BTNMostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Reporte = new javax.swing.JTable();
+=======
+        TXT_Fecha = new javax.swing.JTextField();
+        LBL_Fecha = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        TXT_Fech2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BTN_Atras.setText("Atras");
-
-        BTN_ImprimirReporte.setText("Imprimir");
-        BTN_ImprimirReporte.addActionListener(new java.awt.event.ActionListener() {
+        BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_ImprimirReporteActionPerformed(evt);
+                BTN_AtrasActionPerformed(evt);
+            }
+        });
+
+        BTN_GenerarReporte.setText("Generar");
+        BTN_GenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_GenerarReporteActionPerformed(evt);
             }
         });
 
         BTN_Salir.setText("Salir");
+        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_SalirActionPerformed(evt);
+            }
+        });
 
+<<<<<<< HEAD
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Total");
+=======
+        LBL_Fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LBL_Fecha.setText("Fecha: ");
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
         jPanel1.setForeground(new java.awt.Color(51, 255, 102));
@@ -68,20 +105,29 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Reporte De Ventas");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Ferretería Juanes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
+<<<<<<< HEAD
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -101,12 +147,19 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(Reporte);
+=======
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jLabel1.setText("al");
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -130,30 +183,59 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LBL_Fecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(TXT_Fech2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTN_Atras))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTN_GenerarReporte)
+                    .addComponent(BTN_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+<<<<<<< HEAD
                 .addComponent(BTNMostrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+=======
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXTTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBL_Fecha)
+                    .addComponent(TXT_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_GenerarReporte)
+                    .addComponent(TXT_Fech2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+<<<<<<< HEAD
                 .addGap(24, 24, 24)
+=======
+                .addGap(62, 62, 62)
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTN_Atras)
                     .addComponent(BTN_Salir)
-                    .addComponent(BTN_ImprimirReporte))
-                .addContainerGap())
+                    .addComponent(BTN_Atras))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void BTN_ImprimirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ImprimirReporteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTN_ImprimirReporteActionPerformed
@@ -274,6 +356,36 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
     }    
     
    
+=======
+    private void BTN_GenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GenerarReporteActionPerformed
+        String path = "/Users/KevinCruz/OP/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
+        JasperReport jr = null;
+        Map parametros = new HashMap();
+        
+        try {
+            parametros.put("fech", TXT_Fecha.getText());
+            parametros.put("fech2", TXT_Fech2.getText());
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectare());
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BTN_GenerarReporteActionPerformed
+
+    private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
+        Menu mMenu = new Menu();
+        mMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BTN_AtrasActionPerformed
+
+    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BTN_SalirActionPerformed
+        
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -309,12 +421,19 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNMostrar;
     private javax.swing.JButton BTN_Atras;
-    private javax.swing.JButton BTN_ImprimirReporte;
+    private javax.swing.JButton BTN_GenerarReporte;
     private javax.swing.JButton BTN_Salir;
+<<<<<<< HEAD
     private javax.swing.JTable Reporte;
     private javax.swing.JTextField TXTTotal;
+=======
+    private javax.swing.JLabel LBL_Fecha;
+    private javax.swing.JTextField TXT_Fech2;
+    private javax.swing.JTextField TXT_Fecha;
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

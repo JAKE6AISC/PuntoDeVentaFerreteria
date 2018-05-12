@@ -75,9 +75,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="TXT_Id_Proveedor">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_Id_ProveedorActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

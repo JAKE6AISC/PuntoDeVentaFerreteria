@@ -1,12 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 //María Eneida Salas Martínez
 //Se añadio el formulario FRM_ConsultasProducto solo Diseño
 //***Se agrego la codificación del Botón Buscar tanto para busueda por el nombre como por el tipo
 //***Se agrego el evento activar ventana para mostrar la lista de productos
+*/
 package jake_optimizacion_venta;
 
 import java.util.ArrayList;
@@ -18,15 +15,24 @@ import javax.swing.table.DefaultTableModel;
  * @author Ene
  */
 public class FRM_ConsultasProductos extends javax.swing.JFrame {
+<<<<<<< HEAD
 DefaultTableModel ModeloTabla = new DefaultTableModel();
  BaseDeDatos mBaseDeDatos= new BaseDeDatos();
  Producto mProducto = new Producto();
  
+=======
+
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
+    Producto mProducto = new Producto();
+
+>>>>>>> 548000ba39a0dddd71cb38ae9d0a0eb3069e2ea3
     /**
      * Creates new form FRM_ConsultasProductos
      */
     public FRM_ConsultasProductos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -66,11 +72,6 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         BTN_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BTN_BuscarMouseClicked(evt);
-            }
-        });
-        BTN_Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_BuscarActionPerformed(evt);
             }
         });
 
@@ -144,7 +145,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
                                 .addComponent(BTN_Atras)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                                 .addComponent(BTN_Salir)))
                         .addGap(18, 18, 18)
                         .addComponent(BTN_Buscar)
@@ -178,110 +179,83 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
 
     private void BTN_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_BuscarMouseClicked
         // TODO add your handling code here:
-       String nombre = (TXT_Nombre.getText().toUpperCase());
-       String tipo = (TXT_Tipo.getText().toUpperCase());
-       ModeloTabla.setColumnCount(0);
-       ModeloTabla.setRowCount(0);
-       mBaseDeDatos.desconectar();
-        if(mBaseDeDatos.conectar()){
-            ArrayList CatalogoBD = null;
-            String [] Dato;
+        String nombre = (TXT_Nombre.getText().toUpperCase());
+        String tipo = (TXT_Tipo.getText().toUpperCase());
+        ModeloTabla.setColumnCount(0);
+        ModeloTabla.setRowCount(0);
+        mBaseDeDatos.desconectar();
+        if (mBaseDeDatos.conectar()) {
+            String[] Dato;
+
+            ModeloTabla.addColumn("id_producto");
+            ModeloTabla.addColumn("precio");
+            ModeloTabla.addColumn("nombre");
+            ModeloTabla.addColumn("tipo");
+            ModeloTabla.addColumn("clasificacion");
+
+            Dato = new String[5];
+
+            mProducto = mBaseDeDatos.consultarProducto(nombre, tipo);
+
+            Dato[0] = "" + (mProducto.getId_Producto());
+            Dato[1] = "" + (mProducto.getPrecio());
+            Dato[2] = mProducto.getNombre();
+            Dato[3] = mProducto.getTipo();
+            Dato[4] = mProducto.getClasificacion();
+
+            ModeloTabla.addRow(Dato);
+
+            this.JTableProductos.setModel(ModeloTabla);
+            this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.JTableProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.JTableProductos.getColumnModel().getColumn(2).setPreferredWidth(150);
+            this.JTableProductos.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.JTableProductos.getColumnModel().getColumn(4).setPreferredWidth(250);
+
+            if (this.JTableProductos.getRowCount() > 0) {
+                this.JTableProductos.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+        }
+
+
+    }//GEN-LAST:event_BTN_BuscarMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        ArrayList ListaProductos;        
+        if (mBaseDeDatos.conectar()) {
             
-           ModeloTabla.addColumn("id_producto");
-           ModeloTabla.addColumn("precio");
-           ModeloTabla.addColumn("nombre");
-           ModeloTabla.addColumn("tipo");
-           ModeloTabla.addColumn("clasificacion");
-           
-            
-                  
-                Dato = new String[5];
-           
-                mProducto = mBaseDeDatos.consultarProducto(nombre,tipo);
-               
-                
+            String[] Dato;
+
+            ModeloTabla.addColumn("id_producto");
+            ModeloTabla.addColumn("precio");
+            ModeloTabla.addColumn("nombre");
+            ModeloTabla.addColumn("tipo");
+            ModeloTabla.addColumn("clasificacion");
+
+            Dato = new String[5];
+            ListaProductos = mBaseDeDatos.consultarProductos();
+            for (int i = 0; i < ListaProductos.size(); i++) {
+                mProducto = (Producto) ListaProductos.get(i);
+
                 Dato[0] = "" + (mProducto.getId_Producto());
                 Dato[1] = "" + (mProducto.getPrecio());
                 Dato[2] = mProducto.getNombre();
                 Dato[3] = mProducto.getTipo();
                 Dato[4] = mProducto.getClasificacion();
-               
-                
+
                 ModeloTabla.addRow(Dato);
-
-            this.JTableProductos = new javax.swing.JTable();
-            this.JTableProductos.setModel(ModeloTabla);
-            this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.JTableProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.JTableProductos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            this.JTableProductos.getColumnModel().getColumn(3).setPreferredWidth(200);
-            this.JTableProductos.getColumnModel().getColumn(4).setPreferredWidth(250);
-            
-            
-
-            if (this.JTableProductos.getRowCount() > 0)
-            {
-                this.JTableProductos.setRowSelectionInterval(0, 0);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
-        } 
 
-
-    }//GEN-LAST:event_BTN_BuscarMouseClicked
-
-    private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_BuscarActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        ArrayList ListaProductos;
-        ModeloTabla.setColumnCount(0);
-        ModeloTabla.setRowCount(0);
-        mBaseDeDatos.desconectar();
-        if(mBaseDeDatos.conectar()){
-            ArrayList CatalogoBD = null;
-            String [] Dato;
- 
-            
-           ModeloTabla.addColumn("id_producto");
-           ModeloTabla.addColumn("precio");
-           ModeloTabla.addColumn("nombre");
-           ModeloTabla.addColumn("tipo");
-           ModeloTabla.addColumn("clasificacion");
-           
-            
-                  
-                Dato = new String[5];
-                ListaProductos = mBaseDeDatos.consultarProductos();
-                for(int i=0; i<ListaProductos.size(); i++) { 
-                    mProducto = (Producto)ListaProductos.get(i);
-                
-                    Dato[0] = "" + (mProducto.getId_Producto());
-                    Dato[1] = "" + (mProducto.getPrecio());
-                    Dato[2] = mProducto.getNombre();
-                    Dato[3] = mProducto.getTipo();
-                    Dato[4] = mProducto.getClasificacion();
-                    
-                    
-                
-                    ModeloTabla.addRow(Dato);
-                }
-
-            this.JTableProductos= new javax.swing.JTable();
             this.JTableProductos.setModel(ModeloTabla);
             this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.JTableProductos.getColumnModel().getColumn(2).setPreferredWidth(150);
             this.JTableProductos.getColumnModel().getColumn(3).setPreferredWidth(200);
             this.JTableProductos.getColumnModel().getColumn(4).setPreferredWidth(250);
-            
-            
-            
 
-            if (this.JTableProductos.getRowCount() > 0)
-            {
+            if (this.JTableProductos.getRowCount() > 0) {
                 this.JTableProductos.setRowSelectionInterval(0, 0);
             }
         } else {
@@ -290,12 +264,10 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     }//GEN-LAST:event_formWindowActivated
 
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
-        // TODO add your handling code here:
         FRM_CatalogoProductos FormCpr = new FRM_CatalogoProductos();
         FormCpr.setVisible(true);
         this.dispose();

@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * José Andrés Chávez Hernández
+ * Formulario para alta de proveedores
  */
 package jake_optimizacion_venta;
 
@@ -18,6 +17,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
      */
     public FRM_AltaProveedor() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,6 +40,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,21 +77,29 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Alta Proveedor");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Ferretería Juanes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,8 +131,8 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXTIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,90 +149,67 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
                     .addComponent(BTNAtras)
                     .addComponent(BTNGuardar)
                     .addComponent(BTNSalir))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
-
-       BaseDeDatos mBD = new BaseDeDatos();
+        BaseDeDatos mBD = new BaseDeDatos();
         Proveedor mProveedor = new Proveedor();
 
-        mProveedor.setId_proveedor(Integer.parseInt(this.TXTIDProveedor.getText()));
-        mProveedor.setNombre(this.TXTNombre.getText());
-        mProveedor.setEmpresa(this.TXTEmpresa.getText());
-       
-
-        if (mBD.conectar()) {
-            if (mBD.agregarProveedor(mProveedor)) {
-                JOptionPane.showMessageDialog(null, "Guardado Con Exito...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error Al Guardar");
+        if (ValidarIdProveedor() && ValidarNombreProveedor() && ValidarEmpresa()) {
+            mProveedor.setId_proveedor(Integer.parseInt(this.TXTIDProveedor.getText()));
+            mProveedor.setNombre(this.TXTNombre.getText());
+            mProveedor.setEmpresa(this.TXTEmpresa.getText());
+            if (mBD.conectar()) {
+                if (mBD.agregarProveedor(mProveedor)) {
+                    JOptionPane.showMessageDialog(null, "Guardado Con Exito...");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error Al Guardar");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor llena los campos faltantes");
         }
-
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTNAtrasActionPerformed
 
     private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
-            this.setVisible(false);  
+        System.exit(0);
     }//GEN-LAST:event_BTNSalirActionPerformed
-        private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
-       if(ValidarIdProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXTNombre.requestFocus();
-       }
-    }    
-    
-    private void TXT_Nombre_ProveedorFocusLost(java.awt.event.FocusEvent evt) {                                          
-       if(ValidarNombreProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXTNombre.requestFocus();
-       }
-    }                                         
 
-    private void TXT_EmpresaFocusLost(java.awt.event.FocusEvent evt) {                                             
-       if(ValidarNombreProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXTEmpresa.requestFocus();
-       }
-    }
-    
-    public boolean ValidarIdProveedor(){
-        if(TXTIDProveedor.getText().equals("")){
+    public boolean ValidarIdProveedor() {
+        if (TXTIDProveedor.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-    public boolean ValidarNombreProveedor(){
-        if(TXTNombre.getText().equals("")){
+
+    public boolean ValidarNombreProveedor() {
+        if (TXTNombre.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
-    public boolean ValidarEmpresa(){
-        if(TXTEmpresa.getText().equals("")){
+
+    public boolean ValidarEmpresa() {
+        if (TXTEmpresa.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -270,6 +256,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

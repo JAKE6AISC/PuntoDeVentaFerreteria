@@ -12,6 +12,8 @@ public class Producto {
     private String Tipo;
     private float Precio;
     private int Id_Proveedor;
+    private int Existencias;
+        
     public Producto() {
         Id_Producto = 0;
         Nombre = "";
@@ -19,6 +21,7 @@ public class Producto {
         Tipo = "";
         Precio = 0;
         Id_Proveedor = 0;
+        Existencias=0;
     }
 
     public int getId_Proveedor() {
@@ -67,6 +70,14 @@ public class Producto {
 
     public void setPrecio(float Precio) {
         this.Precio = Precio;
+    }
+
+    public int getExistencias() {
+        return Existencias;
+    }
+
+    public void setExistencias(int Existencias) {
+        this.Existencias = Existencias;
     }
 
 }

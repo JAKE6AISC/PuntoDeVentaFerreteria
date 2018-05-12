@@ -1,14 +1,27 @@
 package jake_optimizacion_venta;
+
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  * Formulario Modificacion Proveedor agregada por Juanes
+ *
  * @author Juanez
  */
 public class FRM_ModificacionProveedor extends javax.swing.JFrame {
-
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    Proveedor mProveedor = new Proveedor();
+    BaseDeDatos mBD = new BaseDeDatos();
+    
     public FRM_ModificacionProveedor() {
         initComponents();
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Clasificación");
+        this.setLocationRelativeTo(null);
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -24,26 +37,16 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         BTN_Atras = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTableProveedor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FRM_ModificacionProveedores");
         setName("Modificacion Proveedor"); // NOI18N
-
-        TXT_Id_Proveedor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_Id_ProveedorFocusLost(evt);
-            }
-        });
-
-        TXT_NuevoNombreProveedor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_NuevoNombreProveedorFocusLost(evt);
-            }
-        });
-
-        TXT_NuevaEmpresa.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_NuevaEmpresaFocusLost(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -78,15 +81,21 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Modificacion de proveedores");
+        jLabel1.setText("Ferretería Juanes");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Modificacion De Productos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,8 +103,13 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        JTableProveedor.setModel(modeloTabla);
+        jScrollPane1.setViewportView(JTableProveedor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,51 +118,55 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(LBL_NuevaEmpresaProveedor)
-                                .addComponent(LBL_NuevoNombreProveedor))
-                            .addComponent(LBL_Id_Proveedor))
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Atras)
-                        .addGap(35, 35, 35)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(TXT_ModificarProveedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TXT_Id_Proveedor)
-                    .addComponent(TXT_NuevoNombreProveedor)
-                    .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(LBL_Id_Proveedor)
+                        .addGap(49, 49, 49)
+                        .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LBL_NuevaEmpresaProveedor)
+                            .addComponent(LBL_NuevoNombreProveedor)
+                            .addComponent(BTN_Atras))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TXT_ModificarProveedor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TXT_NuevoNombreProveedor)
+                            .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBL_Id_Proveedor))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBL_NuevoNombreProveedor))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBL_NuevaEmpresaProveedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_ModificarProveedor)
-                    .addComponent(TXT_Salir)
-                    .addComponent(BTN_Atras))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBL_Id_Proveedor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBL_NuevoNombreProveedor))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBL_NuevaEmpresaProveedor))
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BTN_Atras)
+                            .addComponent(TXT_ModificarProveedor)
+                            .addComponent(TXT_Salir))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(38, Short.MAX_VALUE))))
         );
 
         pack();
@@ -159,81 +177,98 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         Proveedor mProveedor = new Proveedor();// necesitamos de los datos originales el id
         Proveedor mNuevoProveedor = new Proveedor(); // y los nuevos datos nombre y empresa
         // se asigna los nuevos valores con el id para la busueda
-        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText()));
-        mNuevoProveedor.setNombre(this.TXT_NuevoNombreProveedor.getText());
-        mNuevoProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
+        if (ValidarId_Proveedor() && ValidarNuevoNombreProveedor() && ValidarNuevaEmpresa()) {
+            mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText()));
+            mNuevoProveedor.setNombre(this.TXT_NuevoNombreProveedor.getText());
+            mNuevoProveedor.setEmpresa(this.TXT_NuevaEmpresa.getText());
 
-        if (mBD.conectar()) {// se realiza primero la conexion
-            if (mBD.modificarProveedor(mProveedor,mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
-                                                                     //  a la clase base de datos
-                JOptionPane.showMessageDialog(null, "Proveedor Modificados Exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error");
+            if (mBD.conectar()) {// se realiza primero la conexion
+                if (mBD.modificarProveedor(mProveedor, mNuevoProveedor)) {// mandamos llamar el metodo modificar perteneciente 
+                    //  a la clase base de datos
+                    JOptionPane.showMessageDialog(null, "Proveedor Modificados Exitosamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error");
+                }
+                mBD.desconectar();// se desconecta
             }
-            mBD.desconectar();// se desconecta
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor completa los campos");
+            TXT_Id_Proveedor.requestFocus();
         }
     }//GEN-LAST:event_TXT_ModificarProveedorActionPerformed
 
     private void TXT_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_SalirActionPerformed
-        setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_TXT_SalirActionPerformed
-
+   
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
-    private void TXT_Id_ProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorFocusLost
-        if(ValidarId_Proveedor()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_Id_Proveedor.requestFocus();
-       }
-    }//GEN-LAST:event_TXT_Id_ProveedorFocusLost
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
-    private void TXT_NuevoNombreProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NuevoNombreProveedorFocusLost
-        if(ValidarNuevoNombreProveedor()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_NuevoNombreProveedor.requestFocus();
-       }
-    }//GEN-LAST:event_TXT_NuevoNombreProveedorFocusLost
+        modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
 
-    private void TXT_NuevaEmpresaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NuevaEmpresaFocusLost
-         if(ValidarNuevaEmpresa()){
-            //JOptionPane.showMessageDialog(null,"Valido");
-        }else{
-            JOptionPane.showMessageDialog(null,"Campo obligatorio");
-            TXT_NuevaEmpresa.requestFocus();
-       }
-    }//GEN-LAST:event_TXT_NuevaEmpresaFocusLost
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[3];
+                mProveedor = (Proveedor) mListaProveedor;
+                Datos[0] = "" + mProveedor.getId_proveedor();
+                Datos[1] = mProveedor.getNombre();
+                Datos[2] = mProveedor.getEmpresa();
+
+                modeloTabla.addRow(Datos);
+            }
+            this.JTableProveedor = new javax.swing.JTable();
+            this.JTableProveedor.setModel(modeloTabla);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(300);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(300);
+            if (this.JTableProveedor.getRowCount() > 0) {
+                this.JTableProveedor.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar proveedor");
+        }
+        mBD.desconectar();
+    }//GEN-LAST:event_formWindowActivated
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Proveedor
-    public boolean ValidarId_Proveedor(){
-        if(TXT_Id_Proveedor.getText().equals("")){
+    public boolean ValidarId_Proveedor() {
+        if (TXT_Id_Proveedor.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     // Nuevo Nombre Proveedor
-    public boolean ValidarNuevoNombreProveedor(){
-        if(TXT_NuevoNombreProveedor.getText().equals("")){
+    public boolean ValidarNuevoNombreProveedor() {
+        if (TXT_NuevoNombreProveedor.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     //Nueva Empresa
-    public boolean ValidarNuevaEmpresa(){
-        if(TXT_NuevaEmpresa.getText().equals("")){
+    public boolean ValidarNuevaEmpresa() {
+        if (TXT_NuevaEmpresa.getText().equals("")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -268,6 +303,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Atras;
+    private javax.swing.JTable JTableProveedor;
     private javax.swing.JLabel LBL_Id_Proveedor;
     private javax.swing.JLabel LBL_NuevaEmpresaProveedor;
     private javax.swing.JLabel LBL_NuevoNombreProveedor;
@@ -277,6 +313,8 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_NuevoNombreProveedor;
     private javax.swing.JButton TXT_Salir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

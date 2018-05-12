@@ -4,10 +4,10 @@ package jake_optimizacion_venta;
  * @author Juanez
  */
 public class Venta {
-   int Id_Venta;
-    String Fecha;
-    float Total;
-    int Id_Producto; 
+    private int Id_Venta;
+    private String Fecha;
+    private float Total;
+    private int Id_Producto; 
 
     public int getId_Venta() {
         return Id_Venta;
