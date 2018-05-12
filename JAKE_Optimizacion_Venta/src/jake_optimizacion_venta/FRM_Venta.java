@@ -350,7 +350,9 @@ public class FRM_Venta extends javax.swing.JFrame {
                     try {
                         Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
-                            ArchivoTXT.write("Ferreteria Juanes ");
+                            ArchivoTXT.write("    ╬═════════════╬"
+                                           + "    ╠  Ferreteria Juanes  ╬"
+                                           + "    ╬═════════════╬");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
