@@ -12,14 +12,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class BaseDeDatos {
 
@@ -29,7 +26,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
