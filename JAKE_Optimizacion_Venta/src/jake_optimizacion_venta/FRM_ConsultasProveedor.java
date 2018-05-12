@@ -183,7 +183,7 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
 
                 Dato = new String[3];
 
-                mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor);
+                mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor, "");
 
                 Dato[0] = "" + (mProveedor.getId_proveedor());
                 Dato[1] = mProveedor.getNombre();

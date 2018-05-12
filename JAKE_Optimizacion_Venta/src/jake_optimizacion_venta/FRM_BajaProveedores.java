@@ -39,7 +39,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private void initComponents() {
 
         LBL_IdProveedor = new javax.swing.JLabel();
-        TXT_Id_Proveedor = new javax.swing.JTextField();
+        TXT_Nombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableProveedor = new javax.swing.JTable();
         BTN_Atras = new javax.swing.JButton();
@@ -48,6 +48,8 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        LBL_ID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -57,6 +59,12 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         });
 
         LBL_IdProveedor.setText("ID_Proveedor: ");
+
+        TXT_Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_NombreFocusLost(evt);
+            }
+        });
 
         JTableProveedor.setModel(modeloTabla);
         jScrollPane1.setViewportView(JTableProveedor);
@@ -113,6 +121,10 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel3.setText("Proveedor: ");
+
+        LBL_ID.setText("*****");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,9 +140,13 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                         .addComponent(BTN_Salir))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(LBL_IdProveedor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LBL_ID)))
                 .addContainerGap(45, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -138,12 +154,16 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LBL_IdProveedor)
-                    .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBL_ID))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
@@ -156,7 +176,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarActionPerformed
-        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Id_Proveedor.getText())); //Se obtiene el id para eliminar el proveedor deseado
+        mProveedor.setId_proveedor(Integer.parseInt(this.TXT_Nombre.getText())); //Se obtiene el id para eliminar el proveedor deseado
         if (mBD.conectar()) { //Método para conectar con la base de datos
             if (mBD.eliminarProveedor(mProveedor)) { //Método que recibe un entero y elimina el proveedor de la base de datos
                 JOptionPane.showMessageDialog(null, "Proveedor Eliminado con éxito");
@@ -174,7 +194,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        this.TXT_Id_Proveedor.setText("");
+        this.TXT_Nombre.setText("");
         modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
         int a = modeloTabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -211,6 +231,40 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
+
+    private void TXT_NombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NombreFocusLost
+        modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        if (mBD.conectar()) {
+
+            String[] Datos = new String[5];
+
+            mProveedor = mBD.consultarProveedor(0, TXT_Nombre.getText());
+
+            Datos[0] = "" + mProveedor.getId_proveedor();
+            LBL_ID.setText(String.valueOf(mProveedor.getId_proveedor()));
+            Datos[1] = mProveedor.getNombre();
+            Datos[2] = mProveedor.getEmpresa();
+            
+            modeloTabla.addRow(Datos);
+
+            this.JTableProveedor = new javax.swing.JTable();
+            this.JTableProveedor.setModel(modeloTabla);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.JTableProveedor.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.JTableProveedor.getRowCount() > 0) {
+                this.JTableProveedor.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
+        }
+    }//GEN-LAST:event_TXT_NombreFocusLost
 
     /**
      * @param args the command line arguments
@@ -252,10 +306,12 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Eliminar;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JTable JTableProveedor;
+    private javax.swing.JLabel LBL_ID;
     private javax.swing.JLabel LBL_IdProveedor;
-    private javax.swing.JTextField TXT_Id_Proveedor;
+    private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

@@ -150,6 +150,12 @@ public class FRM_Compra extends javax.swing.JFrame {
 
         LBL_Total.setText("    ");
 
+        TXT_Costo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_CostoKeyTyped(evt);
+            }
+        });
+
         TBL_prod.setModel(modeloTabla);
         jScrollPane1.setViewportView(TBL_prod);
 
@@ -304,10 +310,7 @@ public class FRM_Compra extends javax.swing.JFrame {
         mProducto = new Producto();
 
         if (ValidarCajas()) {
-            if (Precio <= Float.parseFloat(TXT_Costo.getText())) {
-                JOptionPane.showMessageDialog(null, "Atención el costo de compra no \n"
-                        + "puede ser mayor al precio del producto");
-            } else {
+            if (Precio > Float.parseFloat(TXT_Costo.getText()) && (Float.parseFloat(TXT_Costo.getText()) > 0)) {
                 costo = (Float.parseFloat(TXT_Costo.getText())) * (Integer.parseInt(TXT_Cantidad.getText()));
                 LBL_Sub.setText(String.valueOf(costo));
                 Cantidad = Integer.parseInt(TXT_Cantidad.getText());
@@ -325,6 +328,9 @@ public class FRM_Compra extends javax.swing.JFrame {
                 LBL_Total.setText(String.valueOf(String.format("%.2f", Total)));
 
                 mCompra.setTotal(Total);
+            } else {
+                JOptionPane.showMessageDialog(null, "Atención el costo de compra no \n"
+                        + "puede ser mayor al precio del producto");
             }
 
         } else {
@@ -419,6 +425,15 @@ public class FRM_Compra extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_TXT_CantidadKeyTyped
+
+    private void TXT_CostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CostoKeyTyped
+        if (TXT_Costo.getText().contains(".")) {
+            char c = evt.getKeyChar();
+            if (c < '0' || c > '9') {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_TXT_CostoKeyTyped
 
     /**
      * @param args the command line arguments
