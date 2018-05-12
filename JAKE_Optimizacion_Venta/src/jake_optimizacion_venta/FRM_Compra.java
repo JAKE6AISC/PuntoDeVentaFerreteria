@@ -56,7 +56,6 @@ public class FRM_Compra extends javax.swing.JFrame {
         LBL_date = new javax.swing.JLabel();
         BTN_Salir = new javax.swing.JButton();
         BTN_Comprar = new javax.swing.JButton();
-        BTN_Buscar = new javax.swing.JButton();
         TXT_Cantidad = new javax.swing.JTextField();
         LBL_Total = new javax.swing.JLabel();
         TXT_Costo = new javax.swing.JTextField();
@@ -143,20 +142,13 @@ public class FRM_Compra extends javax.swing.JFrame {
             }
         });
 
-        BTN_Buscar.setText("Seleccionar");
-        BTN_Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_BuscarActionPerformed(evt);
+        TXT_Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_CantidadKeyTyped(evt);
             }
         });
 
         LBL_Total.setText("    ");
-
-        TXT_Costo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TXT_CostoKeyReleased(evt);
-            }
-        });
 
         TBL_prod.setModel(modeloTabla);
         jScrollPane1.setViewportView(TBL_prod);
@@ -177,6 +169,12 @@ public class FRM_Compra extends javax.swing.JFrame {
         jLabel1.setText("Costo: ");
 
         LBL_Sub.setText(" ");
+
+        TXT_Nom.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_NomFocusLost(evt);
+            }
+        });
 
         jLabel6.setText("ID:");
 
@@ -213,9 +211,7 @@ public class FRM_Compra extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BTN_Atras, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BTN_Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTN_Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(113, 113, 113)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(BTN_Salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +260,6 @@ public class FRM_Compra extends javax.swing.JFrame {
                         .addComponent(BTN_Comprar))
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BTN_Buscar)
                         .addComponent(BTN_Atras)
                         .addComponent(BTN_Salir))
                     .addGap(13, 13, 13)))
@@ -307,24 +302,31 @@ public class FRM_Compra extends javax.swing.JFrame {
         float costo = 0;
         float totaltemp = 0;
         mProducto = new Producto();
+
         if (ValidarCajas()) {
-            costo = (Float.parseFloat(TXT_Costo.getText())) * (Integer.parseInt(TXT_Cantidad.getText()));
-            LBL_Sub.setText(String.valueOf(costo));
-            Cantidad = Integer.parseInt(TXT_Cantidad.getText());
-            idtemp = Integer.parseInt(LBL_ID.getText());
+            if (Precio <= Float.parseFloat(TXT_Costo.getText())) {
+                JOptionPane.showMessageDialog(null, "Atención el costo de compra no \n"
+                        + "puede ser mayor al precio del producto");
+            } else {
+                costo = (Float.parseFloat(TXT_Costo.getText())) * (Integer.parseInt(TXT_Cantidad.getText()));
+                LBL_Sub.setText(String.valueOf(costo));
+                Cantidad = Integer.parseInt(TXT_Cantidad.getText());
+                idtemp = Integer.parseInt(LBL_ID.getText());
 
-            mProducto.setId_Producto(idtemp);
-            mProducto.setPrecio(costo);
-            mProducto.setExistencias(Cantidad);
-            mListaProductos.add(mProducto);
+                mProducto.setId_Producto(idtemp);
+                mProducto.setPrecio(costo);
+                mProducto.setExistencias(Cantidad);
+                mListaProductos.add(mProducto);
 
-            mCompra.setProductos(mListaProductos);
+                mCompra.setProductos(mListaProductos);
 
-            totaltemp = Float.parseFloat(String.valueOf(LBL_Sub.getText()));
-            Total = Total + totaltemp;
-            LBL_Total.setText(String.valueOf(String.format("%.2f", Total)));
+                totaltemp = Float.parseFloat(String.valueOf(LBL_Sub.getText()));
+                Total = Total + totaltemp;
+                LBL_Total.setText(String.valueOf(String.format("%.2f", Total)));
 
-            mCompra.setTotal(Total);
+                mCompra.setTotal(Total);
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Porfavor completa los campos");
         }
@@ -374,17 +376,17 @@ public class FRM_Compra extends javax.swing.JFrame {
                 && TXT_Cantidad.getText().equals(""));
     }
 
-    private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
+    private void TXT_NomFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_NomFocusLost
         modeloTabla = (DefaultTableModel) TBL_prod.getModel();
         int a = modeloTabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
         if (mBD.conectar()) {
-            
+
             String[] Datos = new String[5];
-            
-            mProducto = mBD.consultarProducto(TXT_Nom.getText().toUpperCase(), "");
+
+            mProducto = mBD.consultarProducto(TXT_Nom.getText(), "");
 
             Datos[0] = "" + mProducto.getId_Producto();
             LBL_ID.setText(String.valueOf(mProducto.getId_Producto()));
@@ -409,19 +411,14 @@ public class FRM_Compra extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error al consultar producto");
         }
-    }//GEN-LAST:event_BTN_BuscarActionPerformed
+    }//GEN-LAST:event_TXT_NomFocusLost
 
-    private void TXT_CostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CostoKeyReleased
-        if (Precio <= Integer.parseInt(TXT_Costo.getText())) {
-            JOptionPane.showMessageDialog(null, "Atención el costo de compra no \n"
-                    + "puede ser mayor al precio del producto");
-            BTN_Comprar.setVisible(false);
-            BTN_Agregar.setVisible(false);
-        } else {
-            BTN_Comprar.setVisible(true);
-            BTN_Agregar.setVisible(true);
+    private void TXT_CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CantidadKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
         }
-    }//GEN-LAST:event_TXT_CostoKeyReleased
+    }//GEN-LAST:event_TXT_CantidadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -461,7 +458,6 @@ public class FRM_Compra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Agregar;
     private javax.swing.JButton BTN_Atras;
-    private javax.swing.JButton BTN_Buscar;
     private javax.swing.JButton BTN_Comprar;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JLabel LBL_Cantidad;

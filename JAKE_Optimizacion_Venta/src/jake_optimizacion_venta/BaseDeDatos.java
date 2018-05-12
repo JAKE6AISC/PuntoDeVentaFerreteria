@@ -229,21 +229,18 @@ public class BaseDeDatos {
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
-        List<Producto> CatalogoBD = new ArrayList<>();
 
-        try {
-            mProducto = new Producto();
+        try {    
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto "
                     + "where nombre = '" + nombre + "' OR tipo = '" + tipo + "';");
             if (resultado.next()) {
+                mProducto = new Producto();
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
-                mProducto.setPrecio(resultado.getInt("precio"));
+                mProducto.setPrecio(resultado.getFloat("precio"));
                 mProducto.setNombre(resultado.getString("nombre"));
                 mProducto.setTipo(resultado.getString("tipo"));
                 mProducto.setClasificacion(resultado.getString("clasificacion"));
-
-                CatalogoBD.add(mProducto);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -396,7 +393,6 @@ public class BaseDeDatos {
 
         ArrayList mListaProducto = new ArrayList();
         try {
-            mProducto = new Producto();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto A inner join existencias B ON A.id_producto=B.producto_id_producto;");
 
@@ -445,6 +441,28 @@ public class BaseDeDatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public ArrayList consultarDetalleVenta() {
+        DetalleVenta mDetalleVenta = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaVentas = new ArrayList();
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from detalle_venta;");
+            while (resultado.next()) {
+                mDetalleVenta = new DetalleVenta();
+                mDetalleVenta.setId_venta(resultado.getInt("id_detalle_venta"));
+                mDetalleVenta.setPrecio(resultado.getFloat("precio"));
+                mDetalleVenta.setId_venta(resultado.getInt("id_venta"));
+                mDetalleVenta.setId_producto(resultado.getInt("id_producto"));
+                mListaVentas.add(mDetalleVenta);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaVentas;
     }
     
     //Aquí va el método que vas a usar para poder conectar el iReport con tu bd.
