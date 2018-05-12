@@ -322,7 +322,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
                 Dato = new String[3];
                 if (V) {
                      int id_proveedor = Integer.parseInt(TXT_Busqueda.getText().toUpperCase());
-                    mProveedor = mBD.consultarProveedor(id_proveedor);
+                    mProveedor = mBD.consultarProveedor(id_proveedor, "");
                 }else {
                     mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
                 }

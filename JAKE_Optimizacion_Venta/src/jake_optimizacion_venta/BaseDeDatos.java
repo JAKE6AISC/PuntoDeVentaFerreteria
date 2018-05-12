@@ -165,7 +165,7 @@ public class BaseDeDatos {
 
     }
 
-    public Proveedor consultarProveedor(int id_proveedor) {
+    public Proveedor consultarProveedor(int id_proveedor, String nombre) {
         Proveedor mProveedor = null;
         Statement consulta;
         ResultSet resultado;
@@ -175,7 +175,7 @@ public class BaseDeDatos {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from proveedor "
-                    + "where id_proveedor = '" + id_proveedor + "';");
+                    + "where id_proveedor = '" + id_proveedor + "' OR nombre = '"+nombre+"';");
             if (resultado.next()) {
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));
