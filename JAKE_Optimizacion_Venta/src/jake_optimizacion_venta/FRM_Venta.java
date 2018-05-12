@@ -37,6 +37,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     String Ruta = ""; 
     int ConsultaEx =0; 
     double efectivo,cambio;
+    int Contador = 0;
     ArrayList<Integer> ArregloIdProd = new ArrayList<>();
     ArrayList<Float> ArregloPrecios = new ArrayList<>(); 
     public FRM_Venta() {
@@ -80,6 +81,20 @@ public class FRM_Venta extends javax.swing.JFrame {
 
         TBL_Venta.setModel(TablasJuanes);
         jScrollPane1.setViewportView(TBL_Venta);
+
+        TXT_Escaner.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_EscanerFocusLost(evt);
+            }
+        });
+        TXT_Escaner.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TXT_EscanerKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_EscanerKeyTyped(evt);
+            }
+        });
 
         LBL_Efectivo.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         LBL_Efectivo.setText("Efectivo $");
@@ -279,7 +294,10 @@ public class FRM_Venta extends javax.swing.JFrame {
         Hora = hora + ":" + minutos;
     }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-        if(mBD.conectar()){
+     /*   if (TXT_Escaner.getText().contains("")){       
+            JOptionPane.showMessageDialog(null,"Primero Ingresa algun producto");
+        }else {*/
+             if(mBD.conectar()){
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
             ConsultaEx =  mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
             if (ConsultaEx > 0) {
@@ -298,6 +316,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                     Total = Total + mProducto.getPrecio();
                     LBL_Total.setText(Total + "");
                     TablasJuanes.addRow(DatosTabla);
+                    Contador++;
                 }    
         
                 this.TBL_Venta = new javax.swing.JTable();
@@ -314,9 +333,11 @@ public class FRM_Venta extends javax.swing.JFrame {
                 + "especificado no tiene piezas disponibles en existencia");
             }
         }else {
-            JOptionPane.showMessageDialog(null, ".....Error.....");
+            JOptionPane.showMessageDialog(null, "Error de conexion en la base de datos");
         }
      mBD.desconectar();
+      // }
+       
      
      
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
@@ -328,7 +349,8 @@ public class FRM_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_RealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RealizarVentaActionPerformed
-            LBL_ID_Venta.setText(Id_Ultim);
+           if (Contador > 0) {
+             LBL_ID_Venta.setText(Id_Ultim);
             mVenta.setFecha(FechaActual);
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
             mVenta.setTotal((float)Total);
@@ -338,6 +360,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             LBL_Cambio.setText(String.valueOf(cambio)); 
             if(mBD.conectar()) {
                 if (mBD.realizarVenta(mVenta)) {
+                    Contador = 0;
                     int id_vta = mVenta.getId_Venta();
                     int id_prod;
                     float precio;
@@ -440,15 +463,39 @@ public class FRM_Venta extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
             }
             
+          }else{
+               JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
+           }
+            
         
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
 
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
         char caracter  = evt.getKeyChar();
-        if (caracter < '0' || caracter > '9') {
-            evt.consume();
-        }
+            if (caracter < '0' || caracter > '9') {
+                evt.consume();
+            }        
     }//GEN-LAST:event_TXT_EfectivoKeyTyped
+
+    private void TXT_EscanerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EscanerKeyTyped
+            char caracter  = evt.getKeyChar();
+            if (caracter < '0' || caracter > '9') {
+                evt.consume();
+            }
+        
+    }//GEN-LAST:event_TXT_EscanerKeyTyped
+
+    private void TXT_EscanerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EscanerKeyPressed
+        
+    }//GEN-LAST:event_TXT_EscanerKeyPressed
+
+    private void TXT_EscanerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_EscanerFocusLost
+         if(ValidarEscanner()){
+        }else{
+            JOptionPane.showMessageDialog(null,"Ingrese codigo de barras primero");
+            TXT_Escaner.requestFocus();
+        }
+    }//GEN-LAST:event_TXT_EscanerFocusLost
      private void VaciarCampos() {
         TXT_Escaner.setText(""); 
         LBL_Total.setText("00.00");
@@ -460,6 +507,15 @@ public class FRM_Venta extends javax.swing.JFrame {
                 i-=1;
         }
     }
+      public boolean ValidarEscanner() {
+        if (TXT_Escaner.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+      
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

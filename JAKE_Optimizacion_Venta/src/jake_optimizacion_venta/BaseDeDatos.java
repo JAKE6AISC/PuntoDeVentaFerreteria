@@ -26,7 +26,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -538,7 +538,7 @@ public class BaseDeDatos {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from proveedor "
-                    + "where nombre like = '%" + Nombre + "';");
+                    + "where nombre like= '%" + Nombre + "';");
             if (resultado.next()) {
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));

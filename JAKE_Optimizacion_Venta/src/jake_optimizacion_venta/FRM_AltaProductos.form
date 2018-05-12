@@ -118,6 +118,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Id_Proveedor">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_Id_ProveedorKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_NombreProducto">
     </Component>

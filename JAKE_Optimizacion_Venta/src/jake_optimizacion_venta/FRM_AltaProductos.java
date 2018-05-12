@@ -47,6 +47,12 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             }
         });
 
+        TXT_Id_Proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_Id_ProveedorKeyTyped(evt);
+            }
+        });
+
         LBL_Nombre_Producto.setText("Nombre");
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
@@ -242,11 +248,21 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
-       char caracter  = evt.getKeyChar();
+        if (TXT_Precio.getText().contains(".")) {
+            char caracter  = evt.getKeyChar();
+             if (caracter < '0' || caracter > '9') {
+                    evt.consume();
+                }
+        }
+
+    }//GEN-LAST:event_TXT_PrecioKeyTyped
+
+    private void TXT_Id_ProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorKeyTyped
+        char caracter  = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
             evt.consume();
         }
-    }//GEN-LAST:event_TXT_PrecioKeyTyped
+    }//GEN-LAST:event_TXT_Id_ProveedorKeyTyped
 
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Producto
