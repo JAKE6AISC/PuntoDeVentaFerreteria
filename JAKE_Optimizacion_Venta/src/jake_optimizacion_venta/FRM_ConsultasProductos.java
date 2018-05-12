@@ -21,6 +21,7 @@ public class FRM_ConsultasProductos extends javax.swing.JFrame {
 DefaultTableModel ModeloTabla = new DefaultTableModel();
  BaseDeDatos mBaseDeDatos= new BaseDeDatos();
  Producto mProducto = new Producto();
+ 
     /**
      * Creates new form FRM_ConsultasProductos
      */

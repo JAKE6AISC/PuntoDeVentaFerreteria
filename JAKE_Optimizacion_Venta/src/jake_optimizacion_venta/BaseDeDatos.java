@@ -11,9 +11,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class BaseDeDatos {
 
@@ -363,5 +366,42 @@ public int ConsultaExistencias(int id_p) {
         
         
         return cant;
+    }
+
+    public ArrayList reporteVenta(){
+     Producto mProducto = null;
+     Proveedor mProveedor = null;
+    Venta mVenta = null;
+    FRM_Venta mFRMV = new FRM_Venta();
+    Statement Consulta;
+    ResultSet Resultado;
+     DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+     Calendar fecha = Calendar.getInstance();
+     int Anyo = fecha.get(Calendar.YEAR);
+    int Mes = fecha.get(Calendar.MONTH) + 1;
+    int Dia = fecha.get(Calendar.DAY_OF_MONTH);
+     ArrayList mContenido = new ArrayList();
+     try{
+         Consulta = conexion.createStatement();
+         Resultado = Consulta.executeQuery("select * from ");
+         
+         while(Resultado.next()){
+             mProducto = new Producto();
+             mVenta = new Venta();
+             mVenta.setFecha(Dia + "/" + Mes + "/" + Anyo);
+             mFRMV.setEscaner;
+             mProducto.setClasificacion(Resultado.getString("Clasificacion"));
+             mProducto.setExistencias(Resultado.getInt("Cantidad"));
+             mProducto.setPrecio(Resultado.getInt("Precio"));
+             SubTotal = 
+             
+             
+         }
+         
+         
+     } catch(Exception e){
+         e.printStackTrace();
+     }
+     return mContenido;
     }
 }
