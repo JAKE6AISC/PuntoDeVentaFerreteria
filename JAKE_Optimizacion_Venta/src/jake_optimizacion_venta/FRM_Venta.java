@@ -333,7 +333,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
             mVenta.setTotal((float)Total);
             efectivo = Double.parseDouble(TXT_Efectivo.getText());
-            if (efectivo > Total) {
+            if (efectivo >= Total) {
              cambio = efectivo  - Total;
             LBL_Cambio.setText(String.valueOf(cambio)); 
             if(mBD.conectar()) {
@@ -350,13 +350,15 @@ public class FRM_Venta extends javax.swing.JFrame {
                     try {
                         Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
-                            ArchivoTXT.write("    ╬═════════════╬"
-                                           + "    ╠  Ferreteria Juanes  ╬"
-                                           + "    ╬═════════════╬");
+                            ArchivoTXT.write("       ╬═══════════════════╬");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("       ╬ Ferreteria Juanes ╬");
+                             ArchivoTXT.newLine();
+                            ArchivoTXT.write("       ╬═══════════════════╬");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("!!!Gracias por su preferencia!!!");
+                            ArchivoTXT.write("     !!!Gracias por su preferencia!!!");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
@@ -395,30 +397,30 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.write("\n____________________________________________________________________________");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("\t\t\t \t   \tTotal a pagar: $" + Total + " MXN");
+                            ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + Total + " MXN");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                             ArchivoTXT.write("\t\t\t \t   \tEfectivo: $" + efectivo + " MXN");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                             ArchivoTXT.write("\t\t\t \t   \tCambio: $" + cambio + " MXN");
+                             ArchivoTXT.write("\t\t\t \t   \t   Efectivo: $" + efectivo + " MXN");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("Software realizado por la organizacion JAKE\n\n");
+                             ArchivoTXT.write("\t\t\t \t   \t   Cambio: $" + cambio + " MXN");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("!!! Gracias por su compra esperamos verlos pronto!!!");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("   Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("   Software realizado por la organizacion JAKE\n\n");
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.newLine();
+                            ArchivoTXT.write("   !!! Gracias por su compra esperamos verlos pronto!!!");
                             ArchivoTXT.close();
                         }
                         JOptionPane.showMessageDialog(null,"Venta Realizada\nTicket de venta numero " + Id_Ultim + " Guardado");
