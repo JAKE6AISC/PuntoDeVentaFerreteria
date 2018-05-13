@@ -480,7 +480,7 @@ public class BaseDeDatos {
         try {
             Consulta = conexion.createStatement();
             Consulta.execute("insert into detalle_venta "
-                    + "(precio, producto_id_producto, venta_id_venta) "
+                    + "(precio_producto, producto_id_producto, venta_id_venta) "
                     + "values (" + pr + "," + id_p + ","
                     + id_v + ");");
         } catch (Exception e) {
@@ -499,7 +499,7 @@ public class BaseDeDatos {
             while (resultado.next()) {
                 mDetalleVenta = new DetalleVenta();
                 mDetalleVenta.setId_venta(resultado.getInt("id_detalle_venta"));
-                mDetalleVenta.setPrecio(resultado.getFloat("precio"));
+                mDetalleVenta.setPrecio(resultado.getFloat("precio_producto"));
                 mDetalleVenta.setId_venta(resultado.getInt("id_venta"));
                 mDetalleVenta.setId_producto(resultado.getInt("id_producto"));
                 mListaVentas.add(mDetalleVenta);

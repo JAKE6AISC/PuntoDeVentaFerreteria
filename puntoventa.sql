@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-05-2018 a las 21:23:45
+-- Tiempo de generación: 13-05-2018 a las 23:35:41
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -57,151 +57,27 @@ CREATE TABLE IF NOT EXISTS `detalle_compra` (
 
 CREATE TABLE IF NOT EXISTS `detalle_venta` (
   `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT,
-  `precio` float DEFAULT NULL,
+  `precio_producto` float DEFAULT NULL,
   `venta_id_venta` int(11) NOT NULL,
   `producto_id_producto` int(11) NOT NULL,
   PRIMARY KEY (`id_detalle_venta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=135 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `detalle_venta`
 --
 
-INSERT INTO `detalle_venta` (`id_detalle_venta`, `precio`, `venta_id_venta`, `producto_id_producto`) VALUES
-(1, 20, 3, 3),
-(2, 1.5, 1, 4),
-(3, 1.5, 1, 4),
-(4, 15.5, 2, 4),
-(5, 15.5, 2, 4),
-(6, 20, 3, 4),
-(7, 1.5, 1, 5),
-(8, 1.5, 1, 5),
-(9, 1.5, 1, 5),
-(10, 1.5, 1, 5),
-(11, 1.5, 1, 5),
-(12, 1.5, 1, 5),
-(13, 1.5, 1, 5),
-(14, 1.5, 1, 5),
-(15, 1.5, 1, 5),
-(16, 1.5, 1, 5),
-(17, 1.5, 1, 5),
-(18, 1.5, 1, 5),
-(19, 1.5, 1, 5),
-(20, 1.5, 1, 5),
-(21, 1.5, 1, 5),
-(22, 1.5, 1, 5),
-(23, 1.5, 1, 5),
-(24, 1.5, 1, 5),
-(25, 1.5, 1, 5),
-(26, 1.5, 1, 5),
-(27, 1.5, 1, 5),
-(28, 1.5, 1, 5),
-(29, 1.5, 1, 5),
-(30, 1.5, 1, 5),
-(31, 1.5, 1, 5),
-(32, 1.5, 1, 5),
-(33, 1.5, 1, 5),
-(34, 1.5, 1, 5),
-(35, 1.5, 1, 5),
-(36, 1.5, 1, 6),
-(37, 1.5, 1, 6),
-(38, 1.5, 1, 6),
-(39, 1.5, 1, 6),
-(40, 1.5, 1, 6),
-(41, 1.5, 1, 6),
-(42, 15.5, 2, 7),
-(43, 1.5, 1, 8),
-(44, 15.5, 2, 8),
-(45, 15.5, 2, 8),
-(46, 15.5, 2, 8),
-(47, 20, 3, 8),
-(48, 1.5, 9, 1),
-(49, 1.5, 9, 1),
-(50, 1.5, 9, 1),
-(51, 1.5, 9, 1),
-(52, 1.5, 10, 1),
-(53, 1.5, 10, 1),
-(54, 1.5, 10, 1),
-(55, 15.5, 10, 2),
-(56, 15.5, 10, 2),
-(57, 15.5, 10, 2),
-(58, 1.5, 10, 1),
-(59, 1.5, 10, 1),
-(60, 1.5, 10, 1),
-(61, 1.5, 11, 1),
-(62, 1.5, 12, 1),
-(63, 1.5, 12, 1),
-(64, 1.5, 12, 1),
-(65, 20, 12, 3),
-(66, 20, 12, 3),
-(67, 1.5, 13, 1),
-(68, 1.5, 14, 1),
-(69, 1.5, 14, 1),
-(70, 1.5, 14, 1),
-(71, 20, 3, 15),
-(72, 20, 3, 15),
-(73, 20, 3, 15),
-(74, 1.5, 1, 16),
-(75, 1.5, 1, 16),
-(76, 1.5, 1, 16),
-(77, 15.5, 2, 17),
-(78, 15.5, 2, 17),
-(79, 15.5, 2, 17),
-(80, 1.5, 1, 18),
-(81, 1.5, 1, 18),
-(82, 1.5, 1, 18),
-(83, 1.5, 1, 18),
-(84, 1.5, 1, 18),
-(85, 1.5, 1, 19),
-(86, 1.5, 1, 19),
-(87, 20, 3, 20),
-(88, 20, 3, 20),
-(89, 20, 3, 20),
-(90, 20, 3, 20),
-(91, 20, 3, 21),
-(92, 20, 3, 21),
-(93, 20, 3, 22),
-(94, 20, 3, 22),
-(95, 20, 3, 22),
-(96, 20, 3, 22),
-(97, 20, 3, 22),
-(98, 20, 3, 23),
-(99, 58.5, 4, 24),
-(100, 58.5, 4, 24),
-(101, 58.5, 4, 25),
-(102, 58.5, 4, 25),
-(103, 58.5, 4, 26),
-(104, 58.5, 4, 26),
-(105, 2.5, 5, 27),
-(106, 58.5, 4, 27),
-(107, 2.5, 5, 28),
-(108, 2.5, 5, 29),
-(109, 2.5, 5, 29),
-(110, 10, 6, 30),
-(111, 10, 6, 30),
-(112, 2.5, 5, 31),
-(113, 10, 6, 32),
-(114, 100, 7, 33),
-(115, 100, 7, 34),
-(116, 100, 7, 34),
-(117, 100, 7, 34),
-(118, 100, 7, 35),
-(119, 58.5, 4, 36),
-(120, 2.5, 5, 36),
-(121, 2.5, 5, 37),
-(122, 10, 6, 37),
-(123, 10, 6, 38),
-(124, 2.5, 5, 39),
-(125, 2.5, 5, 39),
-(126, 2.5, 5, 40),
-(127, 2.5, 5, 41),
-(128, 10, 6, 41),
-(129, 10, 6, 41),
-(130, 10, 6, 41),
-(131, 10, 42, 6),
-(132, 10, 42, 6),
-(133, 16.5, 43, 2),
-(134, 16.5, 44, 2);
+INSERT INTO `detalle_venta` (`id_detalle_venta`, `precio_producto`, `venta_id_venta`, `producto_id_producto`) VALUES
+(1, 1.5, 46, 1),
+(2, 1, 46, 9),
+(3, 16.5, 46, 2),
+(4, 16.5, 46, 2),
+(5, 20, 46, 3),
+(6, 20, 46, 3),
+(7, 1.5, 47, 1),
+(8, 1.5, 47, 1),
+(9, 16.5, 47, 2),
+(10, 20, 47, 3);
 
 -- --------------------------------------------------------
 
@@ -222,11 +98,11 @@ CREATE TABLE IF NOT EXISTS `existencias` (
 --
 
 INSERT INTO `existencias` (`id_existencias`, `cantidad`, `producto_id_producto`) VALUES
-(1, 0, 1),
-(2, 5, 2),
-(3, 0, 3),
-(4, 0, 6),
-(7, 0, 5),
+(1, 93, 1),
+(2, 97, 2),
+(3, 97, 3),
+(4, 100, 6),
+(7, 100, 5),
 (10, 0, 11),
 (11, 0, 12),
 (12, 0, 13),
@@ -262,7 +138,6 @@ INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `clasificacion`, `tip
 (3, 'Madera lija', 20, 'Unidad', 'Otros', 1002),
 (5, 'Clavos Conqreto', 2.5, 'Otros', 'Pieza', 1003),
 (6, 'Cinta aislante', 10, 'ferreteria', 'pieza', 1003),
-(9, '1', 1, '1', '1', 1000),
 (10, 'Prueba', 21, 'Pieza', 'Pieza', 1000),
 (11, 'Producto', 1.52, 'Y', 'X', 1000),
 (12, 'ziddfj', 12, 'javdjb', 'sjdnvdj', 1001),
@@ -306,21 +181,23 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `id_ticket` int(11) NOT NULL AUTO_INCREMENT,
   `id_venta` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
+  `hora` char(10) DEFAULT NULL,
   `lugar` varchar(50) DEFAULT NULL,
   `codigopostal` varchar(10) DEFAULT NULL,
   `total` float DEFAULT NULL,
   `efectivo` float DEFAULT NULL,
   `cambio` float DEFAULT NULL,
   PRIMARY KEY (`id_ticket`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `ticket`
 --
 
-INSERT INTO `ticket` (`id_ticket`, `id_venta`, `fecha`, `lugar`, `codigopostal`, `total`, `efectivo`, `cambio`) VALUES
-(1, 1, '2018-04-24', 'Rio Grande Zacatecas', '98403', 120, 200, 80),
-(2, 44, '2018-05-13', 'Rio Grande Zacatecas', '98403', 16.5, 17, 0.5);
+INSERT INTO `ticket` (`id_ticket`, `id_venta`, `fecha`, `hora`, `lugar`, `codigopostal`, `total`, `efectivo`, `cambio`) VALUES
+(1, 1, '2018-04-24', '12:24', 'Rio Grande Zacatecas', '98403', 120, 200, 80),
+(2, 46, '2018-05-13', NULL, 'Rio Grande Zacatecas', '98403', 75.5, 100, 24.5),
+(3, 47, '2018-05-13', NULL, 'Rio Grande Zacatecas', '98403', 39.5, 50, 10.5);
 
 -- --------------------------------------------------------
 
@@ -333,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `fecha` date DEFAULT NULL,
   `total` float DEFAULT NULL,
   PRIMARY KEY (`id_venta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
 
 --
 -- Volcado de datos para la tabla `venta`
@@ -383,7 +260,10 @@ INSERT INTO `venta` (`id_venta`, `fecha`, `total`) VALUES
 (41, '2018-05-12', 32.5),
 (42, '2018-05-13', 20),
 (43, '2018-05-13', 16.5),
-(44, '2018-05-13', 16.5);
+(44, '2018-05-13', 16.5),
+(45, '2018-05-13', 49.5),
+(46, '2018-05-13', 75.5),
+(47, '2018-05-13', 39.5);
 
 --
 -- Restricciones para tablas volcadas
