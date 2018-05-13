@@ -24,6 +24,8 @@ public class Menu extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         BTN_Compra = new javax.swing.JButton();
         BTN_Reporte_Existencias = new javax.swing.JButton();
+        BTN_ReporteDetalleVentas = new javax.swing.JButton();
+        BTN_ReporteDetalleCompras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -116,6 +118,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        BTN_ReporteDetalleVentas.setText("Reporte Detalle Ventas");
+        BTN_ReporteDetalleVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_ReporteDetalleVentasActionPerformed(evt);
+            }
+        });
+
+        BTN_ReporteDetalleCompras.setText("Reporte Detalle Compras");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,8 +135,12 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(306, 306, 306)
+                        .addComponent(BTN_Salir))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTN_ReporteDetalleVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_Reporte_Ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_CatalogoProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_Venta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,11 +148,9 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(BTN_Compra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_Reporte_Existencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_CatalogoProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(BTN_Salir)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                            .addComponent(BTN_CatalogoProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_ReporteDetalleCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,9 +168,13 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Reporte_Ventas)
                     .addComponent(BTN_Reporte_Existencias))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTN_ReporteDetalleVentas)
+                    .addComponent(BTN_ReporteDetalleCompras))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(BTN_Salir)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -203,6 +220,12 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BTN_Reporte_ExistenciasActionPerformed
 
+    private void BTN_ReporteDetalleVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ReporteDetalleVentasActionPerformed
+        FRM_ReporteDetalleVenta RepDet = new FRM_ReporteDetalleVenta();
+        RepDet.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_ReporteDetalleVentasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -239,6 +262,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BTN_CatalogoProductos;
     private javax.swing.JButton BTN_CatalogoProveedores;
     private javax.swing.JButton BTN_Compra;
+    private javax.swing.JButton BTN_ReporteDetalleCompras;
+    private javax.swing.JButton BTN_ReporteDetalleVentas;
     private javax.swing.JButton BTN_Reporte_Existencias;
     private javax.swing.JButton BTN_Reporte_Ventas;
     private javax.swing.JButton BTN_Salir;

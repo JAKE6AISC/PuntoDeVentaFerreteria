@@ -508,6 +508,27 @@ public class BaseDeDatos {
         return mListaVentas;
     }
     
+    public ArrayList consultarVentas() {
+        Venta mVenta = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaVentas = new ArrayList();
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from venta;");
+            while (resultado.next()) {
+                mVenta = new Venta();
+                mVenta.setId_Venta(resultado.getInt("id_venta"));
+                mVenta.setFecha(resultado.getString("fecha"));
+                mVenta.setTotal(resultado.getFloat("total"));
+                mListaVentas.add(mVenta);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaVentas;
+    }
+    
     //Aquí va el método que vas a usar para poder conectar el iReport con tu bd.
     public String url = "jdbc:mysql://localhost:8889/puntoventa"; //aquí metes la dirección exacta de tu bd.
     public String user = "root";
