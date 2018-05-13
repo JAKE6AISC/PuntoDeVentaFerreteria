@@ -19,14 +19,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BaseDeDatos {
-
+    static Connection connexion=null;
+    static Statement sentencia;
+    static ResultSet resultado;
     private Connection conexion;
-
+    static Statement sentencia_idp;
+    static ResultSet resultado_id_p;
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -51,9 +54,8 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into proveedor "
-                    + "(Id_Proveedor, Nombre, Empresa ) "
-                    + "values ('" + mProveedor.getId_proveedor()
-                    + "','" + mProveedor.getNombre() + "','" + mProveedor.getEmpresa() + "');");
+                    + "(Nombre, Empresa ) "
+                    + "values ('" + mProveedor.getNombre() + "','" + mProveedor.getEmpresa() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,8 +76,7 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
-
+   
     public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor) {
         Statement consulta;
         try {
@@ -212,6 +213,7 @@ public class BaseDeDatos {
         }
         return mListaProveedor;
     }
+    
     public int getIdProveedores() {
          int sig = 0;
         Statement Consulta;
@@ -228,6 +230,7 @@ public class BaseDeDatos {
 
         return sig;
     }
+    
     public ArrayList consultarProductos() {
         Producto mProducto = null;
         Statement consulta;
@@ -472,13 +475,12 @@ public class BaseDeDatos {
         return sig;
     }
 
-
-    public void agregarDetalleVenta(float pr, int id_v, int id_p) {
+    public void agregarDetalleVenta(float pr, int id_p, int id_v) {
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
             Consulta.execute("insert into detalle_venta "
-                    + "(precio, producto_id_producto, venta_id_venta) "
+                    + "(precio_producto, producto_id_producto, venta_id_venta) "
                     + "values (" + pr + "," + id_p + ","
                     + id_v + ");");
         } catch (Exception e) {
@@ -497,7 +499,7 @@ public class BaseDeDatos {
             while (resultado.next()) {
                 mDetalleVenta = new DetalleVenta();
                 mDetalleVenta.setId_venta(resultado.getInt("id_detalle_venta"));
-                mDetalleVenta.setPrecio(resultado.getFloat("precio"));
+                mDetalleVenta.setPrecio(resultado.getFloat("precio_producto"));
                 mDetalleVenta.setId_venta(resultado.getInt("id_venta"));
                 mDetalleVenta.setId_producto(resultado.getInt("id_producto"));
                 mListaVentas.add(mDetalleVenta);
@@ -547,9 +549,8 @@ public class BaseDeDatos {
         }
         return link;
     }
-    
-    
-    public Proveedor consultarProveedorString(String Nombre) {
+   
+    public Proveedor consultarProveedorString(String Busqueda) {
         Proveedor mProveedor = null;
         Statement consulta;
         ResultSet resultado;
@@ -558,8 +559,8 @@ public class BaseDeDatos {
         try {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from proveedor "
-                    + "where nombre like= '%" + Nombre + "';");
+            resultado = consulta.executeQuery("select * from proveedor where id_proveedor like '%" + Busqueda + "%' "
+                    + "or nombre like '%" + Busqueda + "%' or empresa like '%" + Busqueda + "%';");
             if (resultado.next()) {
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));
@@ -572,4 +573,78 @@ public class BaseDeDatos {
 
         return mProveedor;
     }
+       
+    public static ArrayList<String> getIdProv(){
+        ArrayList<String> lista = new ArrayList<String>();
+        try {
+            resultado = sentencia.executeQuery( "select * from proveedor");
+        } catch (Exception e) {
+   
+        }
+        try {
+            while(resultado.next()){
+                lista.add(resultado.getString("id_proveedor"));
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    
+    public static void conect(){
+        String ruta="jdbc:mysql://localhost/puntoventa";
+        String user="root";
+        String pass="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connexion=DriverManager.getConnection(ruta,user,pass); 
+            sentencia= connexion.createStatement();
+            System.out.println("Conectado");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("No conectado");
+        }
+    }
+    
+    public Producto consultarProductoFiltro(String Busqueda) {
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        List<Producto> ListaProd = new ArrayList<>();
+
+        try {
+            mProducto = new Producto();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from producto where id_producto like '%" + Busqueda + "%' "
+                    + "or nombre like '%" + Busqueda + "%' or clasificacion like '%" + Busqueda + "%' or tipo like '%" + Busqueda + "%'"
+                            + "or precio like '%" + Busqueda + "%';");
+            if (resultado.next()) {
+                mProducto.setId_Producto(resultado.getInt("id_producto"));
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setClasificacion(resultado.getString("clasificacion")); 
+                mProducto.setTipo(resultado.getString("tipo")); 
+                mProducto.setPrecio(resultado.getFloat("precio")); 
+                ListaProd.add(mProducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mProducto;
+    }
+    
+    public boolean agregarTicket(int id_venta, String fecha, String Lugar , String CP, float total, float efectivo, float cambio) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            /*insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio) 
+                values(1,'2018-04-24','Rio Grande Zacatecas', '98403', 120.00, 200.00, 80.00);*/
+            consulta.execute("insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio)"
+                            + "values (" + id_venta +",'" + fecha +"','" + Lugar +"','" +CP +"'," + total+"," + efectivo +"," + cambio +");");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
+

@@ -11,11 +11,21 @@ import javax.swing.JOptionPane;
 public class FRM_AltaProductos extends javax.swing.JFrame {
      int [] Datos;
      boolean Id_Prov_existe;
+     BaseDeDatos mBD = new BaseDeDatos();
+     BaseDeDatos mDB = new BaseDeDatos();
     public FRM_AltaProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        BaseDeDatos.conect();
+        jComboBox1.removeAllItems();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista = BaseDeDatos.getIdProv();
+        for(int i = 0; i<lista.size();i++){
+            jComboBox1.addItem(lista.get(i));
+        }
+        
     }
-    BaseDeDatos mBD = new BaseDeDatos();
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -23,7 +33,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
         TXT_Clasificacion = new javax.swing.JTextField();
         BTN_Atras = new javax.swing.JButton();
-        TXT_Id_Proveedor = new javax.swing.JTextField();
         TXT_NombreProducto = new javax.swing.JTextField();
         LBL_Nombre_Producto = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -37,6 +46,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         LBL_Id_Proveedor = new javax.swing.JLabel();
         BTN_Agregar = new javax.swing.JButton();
         LBL_Precio = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,12 +54,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         BTN_Atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_AtrasActionPerformed(evt);
-            }
-        });
-
-        TXT_Id_Proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TXT_Id_ProveedorKeyTyped(evt);
             }
         });
 
@@ -114,6 +118,8 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
         LBL_Precio.setText("Precio");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,23 +129,23 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LBL_Id_Proveedor)
-                                .addGap(18, 18, 18)
-                                .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(LBL_Nombre_Producto)
                                     .addComponent(LBL_Clasificacion)
                                     .addComponent(LBL_Tipo)
                                     .addComponent(LBL_Precio))
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TXT_NombreProducto)
-                                    .addComponent(TXT_Clasificacion)
-                                    .addComponent(TXT_Tipo)
-                                    .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(5, 5, 5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(LBL_Id_Proveedor)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TXT_NombreProducto)
+                            .addComponent(TXT_Clasificacion)
+                            .addComponent(TXT_Tipo)
+                            .addComponent(TXT_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
@@ -171,9 +177,9 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                         .addComponent(TXT_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(LBL_Precio, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBL_Id_Proveedor))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBL_Id_Proveedor)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
@@ -201,31 +207,14 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         BaseDeDatos mBD = new BaseDeDatos();
         
         if (mBD.conectar()) {
-            int tam = mBD.getIdProveedores();
-            int datos[] = new int[tam];
-            int temp = tam;
-            for (int i = 0; i<tam; i++) {
-                datos[i] = temp--;
-                System.out.println(datos[i]);
-            }
-            
-            for (int i = 0; i<tam; i++) {
-                if (Integer.parseInt(TXT_Id_Proveedor.getText()) == datos[i]) {
-                    Id_Prov_existe = true;
-                }else{
-                    Id_Prov_existe = false;
-                }
-            }
-        }
-        if (Id_Prov_existe) {
             if (ValidarClasificacion() && ValidarPrecio()
-                && ValidarNombreProducto() && ValidarIdProveedor() && ValidarTipo()) {
+                && ValidarNombreProducto() && ValidarTipo()) {
             
             mProducto.setNombre(TXT_NombreProducto.getText());
             mProducto.setClasificacion(TXT_Clasificacion.getText());
             mProducto.setTipo(TXT_Tipo.getText());
             mProducto.setPrecio(Float.parseFloat(TXT_Precio.getText()));
-            mProducto.setId_Proveedor(Integer.parseInt(TXT_Id_Proveedor.getText()));
+            mProducto.setId_Proveedor(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
             if (mBD.conectar()) {
                 if (mBD.agregarProducto(mProducto)) {
                     int IdP = mBD.getIdProducto();
@@ -240,11 +229,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor completa los campos que faltan");
         }
-        }else {
+      /*  }else {
              JOptionPane.showMessageDialog(null, "Proveedor inexistente");
-        }
+        }*/
         
-        
+       }
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
@@ -256,17 +245,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_TXT_PrecioKeyTyped
-
-    private void TXT_Id_ProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_Id_ProveedorKeyTyped
-        char caracter  = evt.getKeyChar();
-        if (caracter < '0' || caracter > '9') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_TXT_Id_ProveedorKeyTyped
-
-    //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
-    // Id_Producto
-    
 
     // Nombre del producto
     public boolean ValidarNombreProducto() {
@@ -303,18 +281,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             return true;
         }
     }
-
-    public boolean ValidarIdProveedor() {
-        if (TXT_Id_Proveedor.getText().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -357,10 +323,10 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JLabel LBL_Precio;
     private javax.swing.JLabel LBL_Tipo;
     private javax.swing.JTextField TXT_Clasificacion;
-    private javax.swing.JTextField TXT_Id_Proveedor;
     private javax.swing.JTextField TXT_NombreProducto;
     private javax.swing.JTextField TXT_Precio;
     private javax.swing.JTextField TXT_Tipo;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
