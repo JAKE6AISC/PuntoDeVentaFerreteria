@@ -25,6 +25,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
     Calendar fecha = Calendar.getInstance();
     float Total = 0;
+    String Lugar = "Rio Grande Zacatecas", CP = "98403";
     String Id_Ultim = "";
     int Id_Venta = 0,Anterior = 0;
     int year = 0;
@@ -36,7 +37,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     String Hora = "";
     String Ruta = ""; 
     int ConsultaEx =0; 
-    double efectivo,cambio;
+    float efectivo,cambio;
     int Contador = 0;
     ArrayList<Integer> ArregloIdProd = new ArrayList<>();
     ArrayList<Float> ArregloPrecios = new ArrayList<>(); 
@@ -354,7 +355,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             mVenta.setFecha(FechaActual);
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
             mVenta.setTotal((float)Total);
-            efectivo = Double.parseDouble(TXT_Efectivo.getText());
+            efectivo = Float.parseFloat(TXT_Efectivo.getText());
             if (efectivo >= Total) {
              cambio = efectivo  - Total;
             LBL_Cambio.setText(String.valueOf(cambio)); 
@@ -369,7 +370,10 @@ public class FRM_Venta extends javax.swing.JFrame {
                         
                         precio = ArregloPrecios.get(j);
                         mBD.agregarDetalleVenta(precio, id_prod, id_vta);
+                        
                     }
+                   
+                    mBD.agregarTicket(id_vta, FechaActual, Lugar , CP, Total, efectivo, cambio);
                     try {
                         Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
@@ -385,7 +389,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("Lugar de expedicion: Rio Grande  Zacatecas   México  Código postal: 98400");
+                            ArchivoTXT.write("Lugar de expedicion: " + Lugar + "  Código postal: " + CP);
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
