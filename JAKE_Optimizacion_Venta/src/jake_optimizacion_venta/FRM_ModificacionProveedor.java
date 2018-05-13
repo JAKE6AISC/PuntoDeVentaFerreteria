@@ -40,10 +40,8 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableProveedor = new javax.swing.JTable();
-        LBL_FS = new javax.swing.JLabel();
         TXT_Busqueda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        BTN_Busca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FRM_ModificacionProveedores");
@@ -120,22 +118,23 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JTableProveedor);
 
-        LBL_FS.setText("Fila seleccionada: ");
-
         TXT_Busqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_BusquedaActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        TXT_Busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TXT_BusquedaKeyPressed(evt);
             }
         });
 
-        jLabel2.setText("Id Proveedor");
+        BTN_Busca.setText("Buscar");
+        BTN_Busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_BuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,36 +143,34 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LBL_NuevaEmpresaProveedor)
                             .addComponent(LBL_NuevoNombreProveedor)
                             .addComponent(BTN_Atras))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
                                 .addComponent(TXT_ModificarProveedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TXT_NuevoNombreProveedor)
-                            .addComponent(TXT_NuevaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(TXT_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(LBL_Id_Proveedor)
                         .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LBL_FS)
-                            .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(BTN_Busca)))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,8 +182,6 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TXT_Id_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LBL_Id_Proveedor))
-                        .addGap(26, 26, 26)
-                        .addComponent(LBL_FS)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_NuevoNombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,11 +196,10 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
                             .addComponent(TXT_ModificarProveedor)
                             .addComponent(TXT_Salir)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 23, Short.MAX_VALUE)
+                        .addGap(0, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel2))
+                            .addComponent(BTN_Busca))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
@@ -286,10 +280,10 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     private void JTableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableProveedorMouseClicked
         TXT_Id_Proveedor.setText("");
+        TXT_Id_Proveedor.setEditable(false);
         TXT_NuevoNombreProveedor.setText("");
         TXT_NuevaEmpresa.setText("");
-        Seleccionada = JTableProveedor.getSelectedRow();
-        LBL_FS.setText("Fila seleccionada: " + Seleccionada);
+        Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
             TXT_Id_Proveedor.setEditable(true);
             TXT_Id_Proveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada,0).toString());
             TXT_Id_Proveedor.setEditable(false);
@@ -301,39 +295,28 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_TXT_BusquedaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+    private void BTN_BuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscaActionPerformed
+       if (TXT_Busqueda.getText().equals("")) {
+            
+        }else {
         modeloTabla.setColumnCount(0);
         modeloTabla.setRowCount(0);
         
-        boolean V;
-        
-        try {
-		Integer.parseInt(TXT_Busqueda.getText());
-		V = true;
-	} catch (NumberFormatException nfe){
-		V = false;
-	}
-        
+      
         if (mBD.conectar()) {
             
             if (mBD.conectar()) {
                 
                 String[] Dato;
-
+               
                 modeloTabla.addColumn("ID");
                 modeloTabla.addColumn("Nombre");
                 modeloTabla.addColumn("Clasificación");
-
+                 
                 Dato = new String[3];
-                if (V) {
-                     int id_proveedor = Integer.parseInt(TXT_Busqueda.getText().toUpperCase());
-                    mProveedor = mBD.consultarProveedor(id_proveedor, "");
-                }else {
-                    mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
-                }
-               // mProveedor = mBD.consultarProveedor(id_proveedor);
-
+             
+                 mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
+               
                 Dato[0] = "" + (mProveedor.getId_proveedor());
                 Dato[1] = mProveedor.getNombre();
                 Dato[2] = mProveedor.getEmpresa();
@@ -352,8 +335,53 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
             }
             mBD.desconectar();
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }   
+       }// TODO add your handling code here:
+    }//GEN-LAST:event_BTN_BuscaActionPerformed
+
+    private void TXT_BusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BusquedaKeyPressed
+        if (TXT_Busqueda.getText().equals("")) {
+            
+        }else {
+        modeloTabla.setColumnCount(0);
+        modeloTabla.setRowCount(0);
+        
+      
+        if (mBD.conectar()) {
+            
+            if (mBD.conectar()) {
+                
+                String[] Dato;
+
+                modeloTabla.addColumn("ID");
+                modeloTabla.addColumn("Nombre");
+                modeloTabla.addColumn("Clasificación");
+
+                Dato = new String[3];
+             
+                 mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
+               
+                Dato[0] = "" + (mProveedor.getId_proveedor());
+                Dato[1] = mProveedor.getNombre();
+                Dato[2] = mProveedor.getEmpresa();
+
+                modeloTabla.addRow(Dato);
+
+                this.JTableProveedor.setModel(modeloTabla);
+                this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+                if (this.JTableProveedor.getRowCount() > 0) {
+                    this.JTableProveedor.setRowSelectionInterval(0, 0);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+            }
+            mBD.desconectar();
+        }   
+       }// TODO add your handling code here:
+    }//GEN-LAST:event_TXT_BusquedaKeyPressed
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Proveedor
     public boolean ValidarId_Proveedor() {
@@ -416,8 +444,8 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Atras;
+    private javax.swing.JButton BTN_Busca;
     private javax.swing.JTable JTableProveedor;
-    private javax.swing.JLabel LBL_FS;
     private javax.swing.JLabel LBL_Id_Proveedor;
     private javax.swing.JLabel LBL_NuevaEmpresaProveedor;
     private javax.swing.JLabel LBL_NuevoNombreProveedor;
@@ -427,9 +455,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_NuevaEmpresa;
     private javax.swing.JTextField TXT_NuevoNombreProveedor;
     private javax.swing.JButton TXT_Salir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

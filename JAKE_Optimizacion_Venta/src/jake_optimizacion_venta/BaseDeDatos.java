@@ -54,9 +54,8 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into proveedor "
-                    + "(Id_Proveedor, Nombre, Empresa ) "
-                    + "values ('" + mProveedor.getId_proveedor()
-                    + "','" + mProveedor.getNombre() + "','" + mProveedor.getEmpresa() + "');");
+                    + "(Nombre, Empresa ) "
+                    + "values ('" + mProveedor.getNombre() + "','" + mProveedor.getEmpresa() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,8 +76,7 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
-
+   
     public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor) {
         Statement consulta;
         try {
@@ -215,6 +213,7 @@ public class BaseDeDatos {
         }
         return mListaProveedor;
     }
+    
     public int getIdProveedores() {
          int sig = 0;
         Statement Consulta;
@@ -231,6 +230,7 @@ public class BaseDeDatos {
 
         return sig;
     }
+    
     public ArrayList consultarProductos() {
         Producto mProducto = null;
         Statement consulta;
@@ -475,7 +475,6 @@ public class BaseDeDatos {
         return sig;
     }
 
-
     public void agregarDetalleVenta(float pr, int id_p, int id_v) {
         Statement Consulta;
         try {
@@ -529,9 +528,8 @@ public class BaseDeDatos {
         }
         return link;
     }
-    
-    
-    public Proveedor consultarProveedorString(String Nombre) {
+   
+    public Proveedor consultarProveedorString(String Busqueda) {
         Proveedor mProveedor = null;
         Statement consulta;
         ResultSet resultado;
@@ -540,8 +538,8 @@ public class BaseDeDatos {
         try {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from proveedor "
-                    + "where nombre like= '%" + Nombre + "';");
+            resultado = consulta.executeQuery("select * from proveedor where id_proveedor like '%" + Busqueda + "%' "
+                    + "or nombre like '%" + Busqueda + "%' or empresa like '%" + Busqueda + "%';");
             if (resultado.next()) {
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));
@@ -570,6 +568,7 @@ public class BaseDeDatos {
         }
         return lista;
     }
+    
     public static void conect(){
         String ruta="jdbc:mysql://localhost/puntoventa";
         String user="root";
@@ -583,4 +582,32 @@ public class BaseDeDatos {
             System.out.println("No conectado");
         }
     }
+    
+    public Producto consultarProductoFiltro(String Busqueda) {
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        List<Producto> ListaProd = new ArrayList<>();
+
+        try {
+            mProducto = new Producto();
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from producto where id_producto like '%" + Busqueda + "%' "
+                    + "or nombre like '%" + Busqueda + "%' or clasificacion like '%" + Busqueda + "%' or tipo like '%" + Busqueda + "%'"
+                            + "or precio like '%" + Busqueda + "%';");
+            if (resultado.next()) {
+                mProducto.setId_Producto(resultado.getInt("id_producto"));
+                mProducto.setNombre(resultado.getString("nombre"));
+                mProducto.setClasificacion(resultado.getString("clasificacion")); 
+                mProducto.setTipo(resultado.getString("tipo")); 
+                mProducto.setPrecio(resultado.getFloat("precio")); 
+                ListaProd.add(mProducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mProducto;
+    }
 }
+

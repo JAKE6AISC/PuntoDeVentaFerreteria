@@ -31,13 +31,11 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        TXTIDProveedor = new javax.swing.JTextField();
         TXTNombre = new javax.swing.JTextField();
         TXTEmpresa = new javax.swing.JTextField();
         BTNAtras = new javax.swing.JButton();
         BTNGuardar = new javax.swing.JButton();
         BTNSalir = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -68,8 +66,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
                 BTNSalirActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Id_Proveedor");
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 102));
 
@@ -106,37 +102,31 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BTNAtras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNGuardar)
+                        .addGap(55, 55, 55)
+                        .addComponent(BTNSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXTIDProveedor)
                             .addComponent(TXTNombre)
-                            .addComponent(TXTEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTNAtras)
-                        .addGap(69, 69, 69)
-                        .addComponent(BTNGuardar)
-                        .addGap(82, 82, 82)
-                        .addComponent(BTNSalir)))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TXTEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TXTIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TXTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,12 +134,12 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TXTEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNAtras)
                     .addComponent(BTNGuardar)
                     .addComponent(BTNSalir))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,13 +149,12 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         BaseDeDatos mBD = new BaseDeDatos();
         Proveedor mProveedor = new Proveedor();
 
-        if (ValidarIdProveedor() && ValidarNombreProveedor() && ValidarEmpresa()) {
-            mProveedor.setId_proveedor(Integer.parseInt(this.TXTIDProveedor.getText()));
+        if (ValidarNombreProveedor() && ValidarEmpresa()) {
             mProveedor.setNombre(this.TXTNombre.getText());
             mProveedor.setEmpresa(this.TXTEmpresa.getText());
             if (mBD.conectar()) {
                 if (mBD.agregarProveedor(mProveedor)) {
-                    JOptionPane.showMessageDialog(null, "Guardado Con Exito...");
+                    JOptionPane.showMessageDialog(null, "Guardado Con Exito");
                 } else {
                     JOptionPane.showMessageDialog(null, "Error Al Guardar");
                 }
@@ -185,15 +174,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_BTNSalirActionPerformed
-
-    public boolean ValidarIdProveedor() {
-        if (TXTIDProveedor.getText().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public boolean ValidarNombreProveedor() {
         if (TXTNombre.getText().equals("")) {
             return false;
@@ -250,9 +230,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     private javax.swing.JButton BTNGuardar;
     private javax.swing.JButton BTNSalir;
     private javax.swing.JTextField TXTEmpresa;
-    private javax.swing.JTextField TXTIDProveedor;
     private javax.swing.JTextField TXTNombre;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
