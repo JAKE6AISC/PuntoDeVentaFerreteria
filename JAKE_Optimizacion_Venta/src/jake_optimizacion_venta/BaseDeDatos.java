@@ -19,14 +19,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BaseDeDatos {
-
+    static Connection connexion=null;
+    static Statement sentencia;
+    static ResultSet resultado;
     private Connection conexion;
-
+    static Statement sentencia_idp;
+    static ResultSet resultado_id_p;
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -473,7 +476,7 @@ public class BaseDeDatos {
     }
 
 
-    public void agregarDetalleVenta(float pr, int id_v, int id_p) {
+    public void agregarDetalleVenta(float pr, int id_p, int id_v) {
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
@@ -550,5 +553,34 @@ public class BaseDeDatos {
         }
 
         return mProveedor;
+    }
+       
+    public static ArrayList<String> getIdProv(){
+        ArrayList<String> lista = new ArrayList<String>();
+        try {
+            resultado = sentencia.executeQuery( "select * from proveedor");
+        } catch (Exception e) {
+   
+        }
+        try {
+            while(resultado.next()){
+                lista.add(resultado.getString("id_proveedor"));
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public static void conect(){
+        String ruta="jdbc:mysql://localhost/puntoventa";
+        String user="root";
+        String pass="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connexion=DriverManager.getConnection(ruta,user,pass); 
+            sentencia= connexion.createStatement();
+            System.out.println("Conectado");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("No conectado");
+        }
     }
 }
