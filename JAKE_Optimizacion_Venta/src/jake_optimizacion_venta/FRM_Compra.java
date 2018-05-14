@@ -321,8 +321,10 @@ public class FRM_Compra extends javax.swing.JFrame {
                 mProducto.setExistencias(Cantidad);
                 mListaProductos.add(mProducto);
 
-                mCompra.setProductos(mListaProductos);
-
+                for (int i = 0; i < Cantidad; i++) {
+                    mCompra.setProductos(mListaProductos);
+                }
+                
                 totaltemp = Float.parseFloat(String.valueOf(LBL_Sub.getText()));
                 Total = Total + totaltemp;
                 LBL_Total.setText(String.valueOf(String.format("%.2f", Total)));
