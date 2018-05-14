@@ -598,9 +598,9 @@ public class BaseDeDatos {
             Class.forName("com.mysql.jdbc.Driver");
             connexion=DriverManager.getConnection(ruta,user,pass); 
             sentencia= connexion.createStatement();
-            System.out.println("Conectado");
+            //System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("No conectado");
+           // System.out.println("No conectado");
         }
     }
     
@@ -645,6 +645,23 @@ public class BaseDeDatos {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    
+    public Connection conectarJasper() {
+        Connection link = null;
+         String ruta="jdbc:mysql://localhost/puntoventa";
+        String u="root";
+        String p="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(ruta, u, p);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
     }
 }
 
