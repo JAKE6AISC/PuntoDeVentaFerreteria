@@ -29,7 +29,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
@@ -529,6 +529,27 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
         return mListaVentas;
+    }
+    
+    public ArrayList consultarCompras() {
+        Compra mCompra = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaCompras = new ArrayList();
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from compra;");
+            while (resultado.next()) {
+                mCompra = new Compra();
+                mCompra.setId_Compra(resultado.getInt("id_compra"));
+                mCompra.setFecha(resultado.getString("fecha"));
+                mCompra.setTotal(resultado.getFloat("total"));
+                mListaCompras.add(mCompra);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaCompras;
     }
     
     //Aquí va el método que vas a usar para poder conectar el iReport con tu bd.
