@@ -4,10 +4,12 @@
  */
 package jake_optimizacion_venta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -24,6 +26,7 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
 
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
+    Compra mCompra = new Compra();
 
     /**
      * Creates new form FRM_ReporteDetalleCompra
@@ -57,6 +60,11 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         TXT_IDCompra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel3.setText("ID Compra: ");
 
@@ -177,7 +185,7 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         Map parametros = new HashMap();
 
         try {
-            parametros.put("ID", TXT_IDCompra);
+            parametros.put("ID", TXT_IDCompra.getText());
             jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp);
@@ -204,6 +212,41 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_TXT_IDCompraKeyTyped
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.TXT_IDCompra.setText("");
+        modeloTabla = (DefaultTableModel) tblCompras.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        if (mBD.conectar()) {
+            String[] Dato;
+
+            Dato = new String[5];
+            ArrayList mListaCompras = mBD.consultarCompras();
+            for (Object mListaCompra : mListaCompras) {
+                mCompra = (Compra) mListaCompra;
+                Dato[0] = "" + (mCompra.getId_Compra());
+                Dato[1] = mCompra.getFecha();
+                Dato[2] = "" + (mCompra.getTotal());
+
+                modeloTabla.addRow(Dato);
+            }
+
+            this.tblCompras.setModel(modeloTabla);
+            this.tblCompras.getColumnModel().getColumn(0).setPreferredWidth(200);
+            this.tblCompras.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.tblCompras.getColumnModel().getColumn(2).setPreferredWidth(200);
+
+            if (this.tblCompras.getRowCount() > 0) {
+                this.tblCompras.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+        }
+        mBD.desconectar();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

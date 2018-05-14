@@ -126,6 +126,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         BTN_ReporteDetalleCompras.setText("Reporte Detalle Compras");
+        BTN_ReporteDetalleCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_ReporteDetalleComprasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,6 +230,12 @@ public class Menu extends javax.swing.JFrame {
         RepDet.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_ReporteDetalleVentasActionPerformed
+
+    private void BTN_ReporteDetalleComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ReporteDetalleComprasActionPerformed
+        FRM_ReporteDetalleCompra RepCom = new FRM_ReporteDetalleCompra();
+        RepCom.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BTN_ReporteDetalleComprasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

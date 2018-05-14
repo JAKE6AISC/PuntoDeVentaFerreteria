@@ -227,7 +227,7 @@ public class FRM_ReporteDetalleVenta extends javax.swing.JFrame {
         Map parametros = new HashMap();
         
         try {
-            parametros.put("ID",TXT_IDVenta);
+            parametros.put("ID",TXT_IDVenta.getText());
             jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp);

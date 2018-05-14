@@ -317,7 +317,7 @@ public class FRM_Compra extends javax.swing.JFrame {
                 idtemp = Integer.parseInt(LBL_ID.getText());
 
                 mProducto.setId_Producto(idtemp);
-                mProducto.setPrecio(costo);
+                mProducto.setPrecio(Float.parseFloat(TXT_Costo.getText()));
                 mProducto.setExistencias(Cantidad);
                 mListaProductos.add(mProducto);
 
