@@ -609,6 +609,8 @@ public class BaseDeDatos {
 
         return mProveedor;
     }
+    
+    
        
     public static ArrayList<String> getIdProv(){
         ArrayList<String> lista = new ArrayList<String>();
@@ -699,5 +701,9 @@ public class BaseDeDatos {
         }
         return link;
     }
+    
+    
+    
+    
 }
 

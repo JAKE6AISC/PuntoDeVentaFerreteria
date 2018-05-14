@@ -39,14 +39,13 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         TXTNuevo_PrecioProducto = new javax.swing.JTextField();
         BTNAtras = new javax.swing.JButton();
         BTNModificar = new javax.swing.JButton();
-        BTNSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableProveedor = new javax.swing.JTable();
-        BTN_Buscar = new javax.swing.JButton();
         TXT_Busqueda = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -82,13 +81,6 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         BTNModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNModificarActionPerformed(evt);
-            }
-        });
-
-        BTNSalir.setText("Salir");
-        BTNSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNSalirActionPerformed(evt);
             }
         });
 
@@ -131,23 +123,13 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JTableProveedor);
 
-        BTN_Buscar.setText("Buscar");
-        BTN_Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_BuscarActionPerformed(evt);
-            }
-        });
-        BTN_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BTN_BuscarKeyPressed(evt);
-            }
-        });
-
         TXT_Busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TXT_BusquedaKeyPressed(evt);
             }
         });
+
+        jLabel8.setText("Filtrar Resultados");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,52 +137,44 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(TXTId_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(TXTNuevo_TipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                        .addComponent(TXTNuevo_ClasificacionProducto)
-                                        .addComponent(TXTNuevo_PrecioProducto))
-                                    .addComponent(TXTNuevo_NombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(BTNAtras)
-                        .addGap(60, 60, 60)
-                        .addComponent(BTNModificar)
-                        .addGap(47, 47, 47)
-                        .addComponent(BTNSalir)))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNModificar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(96, 96, 96)
+                            .addComponent(TXTId_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3))
+                            .addGap(38, 38, 38)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TXTNuevo_TipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(TXTNuevo_ClasificacionProducto)
+                                    .addComponent(TXTNuevo_PrecioProducto))
+                                .addComponent(TXTNuevo_NombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(BTN_Buscar)
-                        .addGap(28, 28, 28))))
+                        .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -224,15 +198,13 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
                             .addComponent(TXTNuevo_PrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(BTNAtras)
-                                .addComponent(BTNSalir))
-                            .addComponent(BTNModificar)))
+                            .addComponent(BTNModificar)
+                            .addComponent(BTNAtras)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BTN_Buscar)
-                            .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                            .addComponent(TXT_Busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
         );
@@ -266,10 +238,6 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor completa los campos");
         }
     }//GEN-LAST:event_BTNModificarActionPerformed
-
-    private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_BTNSalirActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
         FRM_CatalogoProductos FormCP = new FRM_CatalogoProductos();
@@ -319,7 +287,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
             }
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(modeloTabla);
-            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(300);
             this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(300);
             this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(300);
@@ -332,10 +300,6 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         }
         mBD.desconectar();
     }//GEN-LAST:event_formWindowActivated
-
-    private void BTN_BuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BTN_BuscarKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_BuscarKeyPressed
 
     private void TXT_BusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BusquedaKeyPressed
                if (TXT_Busqueda.getText().equals("")) {
@@ -387,46 +351,6 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         }   
        }
     }//GEN-LAST:event_TXT_BusquedaKeyPressed
-
-    private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-         if (TXT_Busqueda.getText().equals("")) {
-            
-        }else{
-         
-        if (mBD.conectar()) {
-            modeloTabla.setColumnCount(0);
-            modeloTabla.setRowCount(0);
-            
-            mProducto = mBD.consultarProductoFiltro(TXT_Busqueda.getText()); 
-            String[] Datos;
-
-            
-                Datos = new String[5];
-             
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getTipo();
-                Datos[3] = mProducto.getClasificacion();
-                Datos [4] = "" + mProducto.getPrecio();
-
-                modeloTabla.addRow(Datos);
-            
-            //this.JTableProveedor = new javax.swing.JTable();
-            this.JTableProveedor.setModel(modeloTabla);
-            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(200);
-            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(200);
-            this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(200);
-            this.JTableProveedor.getColumnModel().getColumn(4).setPreferredWidth(200);
-            if (this.JTableProveedor.getRowCount() > 0) {
-                this.JTableProveedor.setRowSelectionInterval(0, 0);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar producto");
-        }
-        mBD.desconectar();
-        }
-    }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     private void TXTNuevo_PrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTNuevo_PrecioProductoKeyTyped
          char caracter  = evt.getKeyChar();
@@ -510,8 +434,6 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNAtras;
     private javax.swing.JButton BTNModificar;
-    private javax.swing.JButton BTNSalir;
-    private javax.swing.JButton BTN_Buscar;
     private javax.swing.JTable JTableProveedor;
     private javax.swing.JTextField TXTId_Producto;
     private javax.swing.JTextField TXTNuevo_ClasificacionProducto;
@@ -526,6 +448,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
