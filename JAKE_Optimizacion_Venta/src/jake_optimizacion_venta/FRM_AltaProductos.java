@@ -234,6 +234,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         }*/
         
        }
+        Limpiar();
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
@@ -331,4 +332,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpiar() {
+        TXT_NombreProducto.setText("");
+        TXT_Clasificacion.setText("");
+        TXT_Tipo.setText("");
+        TXT_Precio.setText("");
+    }
 }

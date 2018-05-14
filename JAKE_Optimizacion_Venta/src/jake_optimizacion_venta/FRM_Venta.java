@@ -11,8 +11,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author Juanez
@@ -374,6 +384,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                     }
                    
                     mBD.agregarTicket(id_vta, FechaActual, Lugar , CP, Total, efectivo, cambio);
+//                    GenerarReporteTicket(id_vta);
                     try {
                         Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
                         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
@@ -399,7 +410,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                             ArchivoTXT.newLine();
                             ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("\n____________________________________________________________________________");
+                            ArchivoTXT.write("\n══════════════════════════════════════════════");
                             ArchivoTXT.newLine();
                             String Tam = "";
                             for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){
@@ -421,7 +432,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                                 ArchivoTXT.newLine();
                                 ArchivoTXT.newLine();
                             }
-                            ArchivoTXT.write("\n____________________________________________________________________________");
+                            ArchivoTXT.write("\n══════════════════════════════════════════════");
                             ArchivoTXT.newLine();
                             ArchivoTXT.newLine();
                             ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + Total + " MXN");
@@ -471,7 +482,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
            }
             
-        
+       
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
 
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
@@ -575,5 +586,20 @@ public class FRM_Venta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-   
+   public void GenerarReporteTicket(int ID){
+    /*   String path = "\\src\\jake_optimizacion_venta\\ReporteTickets.jasper";
+        JasperReport jr = null;
+        Map parametros = new HashMap();
+        
+        try {
+            parametros.put("ID", ID);
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectarJasper());
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_ReporteDetalleVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+   }
 }

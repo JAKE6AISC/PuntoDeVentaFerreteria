@@ -163,6 +163,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor llena los campos faltantes");
         }
+        Limpiar();
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
@@ -237,4 +238,9 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpiar() {
+        TXTEmpresa.setText("");
+        TXTNombre.setText("");
+    }
 }
