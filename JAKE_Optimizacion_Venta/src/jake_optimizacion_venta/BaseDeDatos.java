@@ -25,6 +25,7 @@ public class BaseDeDatos {
     private Connection conexion;
     static Statement sentencia_idp;
     static ResultSet resultado_id_p;
+    
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -40,7 +41,22 @@ public class BaseDeDatos {
             return false;
         }
     }
-
+    
+    public boolean conectarWindows() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/puntoventa", "root", "");
+            if (conexion != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public void desconectar() {
         try {
             this.conexion.close();
@@ -594,6 +610,8 @@ public class BaseDeDatos {
 
         return mProveedor;
     }
+    
+    
        
     public static ArrayList<String> getIdProv(){
         ArrayList<String> lista = new ArrayList<String>();
@@ -619,9 +637,9 @@ public class BaseDeDatos {
             Class.forName("com.mysql.jdbc.Driver");
             connexion=DriverManager.getConnection(ruta,user,pass); 
             sentencia= connexion.createStatement();
-            System.out.println("Conectado");
+            //System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("No conectado");
+           // System.out.println("No conectado");
         }
     }
     
@@ -667,5 +685,26 @@ public class BaseDeDatos {
             return false;
         }
     }
+    
+    
+    public Connection conectarJasper() {
+        Connection link = null;
+         String ruta="jdbc:mysql://localhost/puntoventa";
+        String u="root";
+        String p="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(ruta, u, p);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
+    }
+    
+    
+    
+    
 }
 

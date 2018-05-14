@@ -4,7 +4,6 @@
  */
 package jake_optimizacion_venta;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -23,6 +22,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author KevinCruz
  */
 public class FRM_ReporteVentas extends javax.swing.JFrame {
+
     DateFormat df = DateFormat.getDateInstance();
     BaseDeDatos mBD = new BaseDeDatos();
 
@@ -129,9 +129,9 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
                         .addContainerGap(104, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(DC1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(DC2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(128, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
@@ -171,9 +171,9 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
         JasperReport jr = null;
         Map parametros = new HashMap();
-        String Fecha= new SimpleDateFormat("yyyy/MM/dd").format(DC1.getDate());
-        String Fecha2=new SimpleDateFormat("yyyy/MM/dd").format(DC2.getDate());
-        
+        String Fecha = new SimpleDateFormat("yyyy/MM/dd").format(DC1.getDate());
+        String Fecha2 = new SimpleDateFormat("yyyy/MM/dd").format(DC2.getDate());
+
         try {
             parametros.put("fech", Fecha);
             parametros.put("fech2", Fecha2);

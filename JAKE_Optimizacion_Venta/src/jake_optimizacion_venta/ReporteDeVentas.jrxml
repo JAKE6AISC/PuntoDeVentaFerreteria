@@ -12,7 +12,7 @@ FROM
      INNER JOIN `producto` p ON dv.`producto_id_producto` = p.`id_producto`
      INNER JOIN `detalle_compra` dc ON p.`id_producto` = dc.`producto_id_producto`
 WHERE
-     fecha = $P{fech} BETWEEN $P{fech2};]]>
+     fecha BETWEEN $P{fech} AND $P{fech2};]]>
 	</queryString>
 	<field name="ganancia" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>

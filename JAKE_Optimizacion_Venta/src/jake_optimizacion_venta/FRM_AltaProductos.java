@@ -41,7 +41,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         LBL_Clasificacion = new javax.swing.JLabel();
         LBL_Tipo = new javax.swing.JLabel();
         TXT_Tipo = new javax.swing.JTextField();
-        BTN_Salir = new javax.swing.JButton();
         TXT_Precio = new javax.swing.JTextField();
         LBL_Id_Proveedor = new javax.swing.JLabel();
         BTN_Agregar = new javax.swing.JButton();
@@ -94,13 +93,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
 
         LBL_Tipo.setText("Tipo");
 
-        BTN_Salir.setText("Salir");
-        BTN_Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_SalirActionPerformed(evt);
-            }
-        });
-
         TXT_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_PrecioKeyTyped(evt);
@@ -130,30 +122,26 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LBL_Nombre_Producto)
-                                    .addComponent(LBL_Clasificacion)
-                                    .addComponent(LBL_Tipo)
-                                    .addComponent(LBL_Precio))
-                                .addGap(5, 5, 5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(LBL_Id_Proveedor)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXT_NombreProducto)
-                            .addComponent(TXT_Clasificacion)
-                            .addComponent(TXT_Tipo)
-                            .addComponent(TXT_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28))
+                            .addComponent(LBL_Nombre_Producto)
+                            .addComponent(LBL_Clasificacion)
+                            .addComponent(LBL_Tipo)
+                            .addComponent(LBL_Precio))
+                        .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(LBL_Id_Proveedor)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Atras)
-                        .addGap(68, 68, 68)
-                        .addComponent(BTN_Agregar)
-                        .addGap(47, 47, 47)
-                        .addComponent(BTN_Salir)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addComponent(BTN_Agregar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(TXT_NombreProducto)
+                        .addComponent(TXT_Clasificacion)
+                        .addComponent(TXT_Tipo)
+                        .addComponent(TXT_Precio, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +171,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
-                    .addComponent(BTN_Agregar)
-                    .addComponent(BTN_Salir))
+                    .addComponent(BTN_Agregar))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -196,10 +183,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         FormCP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BTN_AtrasActionPerformed
-
-    private void BTN_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarActionPerformed
         Producto mProducto = new Producto();
@@ -234,6 +217,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         }*/
         
        }
+        Limpiar();
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
@@ -316,7 +300,6 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Agregar;
     private javax.swing.JButton BTN_Atras;
-    private javax.swing.JButton BTN_Salir;
     private javax.swing.JLabel LBL_Clasificacion;
     private javax.swing.JLabel LBL_Id_Proveedor;
     private javax.swing.JLabel LBL_Nombre_Producto;
@@ -331,4 +314,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpiar() {
+        TXT_NombreProducto.setText("");
+        TXT_Clasificacion.setText("");
+        TXT_Tipo.setText("");
+        TXT_Precio.setText("");
+    }
 }

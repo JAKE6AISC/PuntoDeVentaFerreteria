@@ -35,7 +35,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         TXTEmpresa = new javax.swing.JTextField();
         BTNAtras = new javax.swing.JButton();
         BTNGuardar = new javax.swing.JButton();
-        BTNSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -57,13 +56,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNGuardarActionPerformed(evt);
-            }
-        });
-
-        BTNSalir.setText("Salir");
-        BTNSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNSalirActionPerformed(evt);
             }
         });
 
@@ -105,21 +97,18 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTNAtras)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNGuardar)
-                        .addGap(55, 55, 55)
-                        .addComponent(BTNSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXTNombre)
-                            .addComponent(TXTEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(BTNGuardar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(TXTNombre)
+                        .addComponent(TXTEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,8 +126,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNAtras)
-                    .addComponent(BTNGuardar)
-                    .addComponent(BTNSalir))
+                    .addComponent(BTNGuardar))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -163,6 +151,7 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor llena los campos faltantes");
         }
+        Limpiar();
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
     private void BTNAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAtrasActionPerformed
@@ -170,10 +159,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
         FormCP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BTNAtrasActionPerformed
-
-    private void BTNSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_BTNSalirActionPerformed
     public boolean ValidarNombreProveedor() {
         if (TXTNombre.getText().equals("")) {
             return false;
@@ -228,7 +213,6 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNAtras;
     private javax.swing.JButton BTNGuardar;
-    private javax.swing.JButton BTNSalir;
     private javax.swing.JTextField TXTEmpresa;
     private javax.swing.JTextField TXTNombre;
     private javax.swing.JLabel jLabel2;
@@ -237,4 +221,9 @@ public class FRM_AltaProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void Limpiar() {
+        TXTEmpresa.setText("");
+        TXTNombre.setText("");
+    }
 }

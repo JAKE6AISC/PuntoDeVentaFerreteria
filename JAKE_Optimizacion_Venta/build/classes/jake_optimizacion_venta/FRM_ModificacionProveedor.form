@@ -30,40 +30,43 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="LBL_Id_Proveedor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="TXT_Id_Proveedor" min="-2" pref="144" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="LBL_NuevaEmpresaProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="LBL_NuevoNombreProveedor" min="-2" max="-2" attributes="0"/>
-                          <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TXT_NuevaEmpresa" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
-                                  <Component id="TXT_NuevoNombreProveedor" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="BTN_Atras" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="TXT_NuevoNombreProveedor" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Component id="TXT_ModificarProveedor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="TXT_Salir" min="-2" pref="68" max="-2" attributes="0"/>
+                              <Component id="TXT_NuevaEmpresa" min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="419" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="LBL_Id_Proveedor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                      <Component id="TXT_Id_Proveedor" min="-2" pref="144" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="TXT_Busqueda" min="-2" pref="186" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BTN_Busca" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="361" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="126" max="32767" attributes="0"/>
@@ -76,12 +79,12 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="TXT_Id_Proveedor" min="-2" max="-2" attributes="0"/>
-                          <Component id="LBL_Id_Proveedor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LBL_Id_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TXT_Id_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TXT_NuevoNombreProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="LBL_NuevoNombreProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -95,8 +98,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="BTN_Atras" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TXT_ModificarProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TXT_Salir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
@@ -141,14 +144,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_ModificarProveedorActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="TXT_Salir">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Salir"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_SalirActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BTN_Atras">

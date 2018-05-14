@@ -9,41 +9,29 @@
 Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
 
 
-No. Venta 1  	Fecha 14/5/2018	 Hora 1:35
+No. Venta 49  	Fecha 13/5/2018	 Hora 10:20
 
 
 Codigo		Descrip		Precio		Cantid		Subtotal
 
 ══════════════════════════════════════════════
-6		Filtr		80.0		1		80.0
+3		Mader		20.0		1		20.0
 
-6		Filtr		80.0		1		80.0
+3		Mader		20.0		1		20.0
 
-6		Filtr		80.0		1		80.0
-
-6		Filtr		80.0		1		80.0
-
-7		Filtr		90.0		1		90.0
-
-7		Filtr		90.0		1		90.0
-
-7		Filtr		90.0		1		90.0
-
-7		Filtr		90.0		1		90.0
-
-7		Filtr		90.0		1		90.0
+2		Segeta		16.5		1		16.5
 
 
 ══════════════════════════════════════════════
 
-			 	   	   Total a pagar: $770.0 MXN
+			 	   	   Total a pagar: $56.5 MXN
 
 
-			 	   	   Efectivo: $770.0 MXN
+			 	   	   Efectivo: $100.0 MXN
 
 
 
-			 	   	   Cambio: $0.0 MXN
+			 	   	   Cambio: $43.5 MXN
 
 
 
