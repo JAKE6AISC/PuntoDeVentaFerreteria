@@ -359,12 +359,10 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean realizarDetalleCompra(Compra mCompra, Producto mProducto) {
+    public boolean realizarDetalleCompra(Producto mProducto, int Cant) {
         Statement consulta;
-        ArrayList ListaProductos = mCompra.getProductos();
         try {
-            for (Object ListaProducto : ListaProductos) {
-                mProducto = (Producto) ListaProducto;
+            for (int i = 0; i < Cant; i++) {
                 consulta = conexion.createStatement();
                 consulta.execute("insert into detalle_compra (id_detalle_compra, costo,"
                         + " compra_id_compra, producto_id_producto) values "
@@ -402,7 +400,7 @@ public class BaseDeDatos {
         try {
             Consulta = conexion.createStatement();
             Consulta.execute("insert into venta (id_venta, fecha, total, ganancia) "
-                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "',"+ mVenta.getGanancia() +");");
+                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "'," + mVenta.getGanancia() + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -656,11 +654,28 @@ public class BaseDeDatos {
         }
         try {
             while (resultado.next()) {
-                lista.add(resultado.getString("id_proveedor"));
+                lista.add(resultado.getString("nombre"));
             }
         } catch (Exception e) {
         }
         return lista;
+    }
+
+    public int obtenerIDprov(String nombre) {
+        Statement consulta;
+        ResultSet resultado;
+        int id = 0;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT id_proveedor FROM proveedor "
+                    + "WHERE nombre = '" + nombre + "';");
+            while (resultado.next()) {
+                id = resultado.getInt("id_proveedor");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     public static void conect() {
@@ -704,14 +719,14 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    public boolean agregarTicket(int id_venta, String fecha, String Hora,String Lugar, String CP, float total, float efectivo, float cambio) {
+    public boolean agregarTicket(int id_venta, String fecha, String Hora, String Lugar, String CP, float total, float efectivo, float cambio) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             /*insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio) 
                 values(1,'2018-04-24','Rio Grande Zacatecas', '98403', 120.00, 200.00, 80.00);*/
             consulta.execute("insert into ticket (id_venta, fecha, hora, lugar, codigopostal, total, efectivo,cambio)"
-                    + "values (" + id_venta + ",'" + fecha + "','"+ Hora +"' ,'" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
+                    + "values (" + id_venta + ",'" + fecha + "','" + Hora + "' ,'" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
 
             return true;
         } catch (Exception e) {
