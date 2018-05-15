@@ -19,12 +19,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BaseDeDatos {
-    static Connection connexion=null;
+
+    static Connection connexion = null;
     static Statement sentencia;
     static ResultSet resultado;
     private Connection conexion;
     static Statement sentencia_idp;
     static ResultSet resultado_id_p;
+
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -40,7 +42,7 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
+
     public boolean conectarWindows() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -56,6 +58,7 @@ public class BaseDeDatos {
             return false;
         }
     }
+
     public void desconectar() {
         try {
             this.conexion.close();
@@ -91,7 +94,7 @@ public class BaseDeDatos {
             return false;
         }
     }
-   
+
     public boolean modificarProveedor(Proveedor mProveedor, Proveedor mNuevoProveedor) {
         Statement consulta;
         try {
@@ -120,13 +123,13 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
+
     public boolean agregarExistenciaProducto(int ID) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into existencias (cantidad, producto_id_producto)"
-                    + "values (0,'" + ID +"');");
+                    + "values (0,'" + ID + "');");
 
             return true;
         } catch (Exception e) {
@@ -148,8 +151,8 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
-     public boolean eliminarExistencia(int id) {
+
+    public boolean eliminarExistencia(int id) {
         Statement consulta;
 
         try {
@@ -191,7 +194,7 @@ public class BaseDeDatos {
             mProveedor = new Proveedor();
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from proveedor "
-                    + "where id_proveedor = '" + id_proveedor + "' OR nombre = '"+nombre+"';");
+                    + "where id_proveedor = '" + id_proveedor + "' OR nombre = '" + nombre + "';");
             if (resultado.next()) {
                 mProveedor.setId_proveedor(resultado.getInt("id_proveedor"));
                 mProveedor.setNombre(resultado.getString("nombre"));
@@ -210,7 +213,7 @@ public class BaseDeDatos {
         Statement consulta;
         ResultSet resultado;
         ArrayList mListaProveedor = new ArrayList();
-        
+
         try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from proveedor;");
@@ -228,9 +231,9 @@ public class BaseDeDatos {
         }
         return mListaProveedor;
     }
-    
+
     public int getIdProveedores() {
-         int sig = 0;
+        int sig = 0;
         Statement Consulta;
         ResultSet Resultado;
         try {
@@ -245,7 +248,7 @@ public class BaseDeDatos {
 
         return sig;
     }
-    
+
     public ArrayList consultarProductos() {
         Producto mProducto = null;
         Statement consulta;
@@ -274,7 +277,7 @@ public class BaseDeDatos {
         Statement consulta;
         ResultSet resultado;
 
-        try {    
+        try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto "
                     + "where nombre = '" + nombre + "' OR tipo = '" + tipo + "';");
@@ -309,6 +312,40 @@ public class BaseDeDatos {
         return id;
     }
 
+    public int consultarUltimoIDdetcom(int IDproducto) {
+        Statement consulta;
+        ResultSet resultado;
+        int id = 0;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT MAX(id_detalle_compra) "
+                    + "FROM detalle_compra WHERE producto_id_producto = " + IDproducto + ";");
+            while (resultado.next()) {
+                id = resultado.getInt("MAX(id_detalle_compra)");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public float ObtenerDetCosto(int ID) {
+        Statement consulta;
+        ResultSet resultado;
+        float costo = 0;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT costo FROM detalle_compra "
+                    + "WHERE id_detalle_compra = " + ID + ";");
+            while (resultado.next()) {
+                costo = resultado.getFloat("costo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return costo;
+    }
+
     public boolean realizarCompra(Compra mCompra) {
         Statement consulta;
         try {
@@ -322,12 +359,10 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean realizarDetalleCompra(Compra mCompra, Producto mProducto) {
+    public boolean realizarDetalleCompra(Producto mProducto, int Cant) {
         Statement consulta;
-        ArrayList ListaProductos = mCompra.getProductos();
         try {
-            for (Object ListaProducto : ListaProductos) {            
-                mProducto = (Producto) ListaProducto;
+            for (int i = 0; i < Cant; i++) {
                 consulta = conexion.createStatement();
                 consulta.execute("insert into detalle_compra (id_detalle_compra, costo,"
                         + " compra_id_compra, producto_id_producto) values "
@@ -348,9 +383,9 @@ public class BaseDeDatos {
             for (Object ListaProducto : ListaProductos) {
                 mProducto = (Producto) ListaProducto;
                 consulta = conexion.createStatement();
-            consulta.execute("update existencias set cantidad = cantidad + "
-                    + mProducto.getExistencias() + " where producto_id_producto = "
-                    + mProducto.getId_Producto() + ";");
+                consulta.execute("update existencias set cantidad = cantidad + "
+                        + mProducto.getExistencias() + " where producto_id_producto = "
+                        + mProducto.getId_Producto() + ";");
             }
             return true;
         } catch (Exception e) {
@@ -364,8 +399,8 @@ public class BaseDeDatos {
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
-            Consulta.execute("insert into venta (id_venta, fecha, total) "
-                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "');");
+            Consulta.execute("insert into venta (id_venta, fecha, total, ganancia) "
+                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "'," + mVenta.getGanancia() + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -455,7 +490,7 @@ public class BaseDeDatos {
         }
         return mListaProducto;
     }
-    
+
     public int getIdSiguienteVenta() {// Si se usa
         int sig = 0;
         Statement Consulta;
@@ -472,7 +507,7 @@ public class BaseDeDatos {
 
         return sig;
     }
-    
+
     public int getIdProducto() {// Si se usa
         int sig = 0;
         Statement Consulta;
@@ -502,7 +537,7 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
     }
-    
+
     public ArrayList consultarDetalleVenta() {
         DetalleVenta mDetalleVenta = null;
         Statement consulta;
@@ -524,7 +559,7 @@ public class BaseDeDatos {
         }
         return mListaVentas;
     }
-    
+
     public ArrayList consultarVentas() {
         Venta mVenta = null;
         Statement consulta;
@@ -545,7 +580,7 @@ public class BaseDeDatos {
         }
         return mListaVentas;
     }
-    
+
     public ArrayList consultarCompras() {
         Compra mCompra = null;
         Statement consulta;
@@ -566,7 +601,7 @@ public class BaseDeDatos {
         }
         return mListaCompras;
     }
-    
+
     //Aquí va el método que vas a usar para poder conectar el iReport con tu bd.
     public String url = "jdbc:mysql://localhost:8889/puntoventa"; //aquí metes la dirección exacta de tu bd.
     public String user = "root";
@@ -585,7 +620,7 @@ public class BaseDeDatos {
         }
         return link;
     }
-   
+
     public Proveedor consultarProveedorString(String Busqueda) {
         Proveedor mProveedor = null;
         Statement consulta;
@@ -609,39 +644,54 @@ public class BaseDeDatos {
 
         return mProveedor;
     }
-    
-    
-       
-    public static ArrayList<String> getIdProv(){
+
+    public static ArrayList<String> getIdProv() {
         ArrayList<String> lista = new ArrayList<String>();
         try {
-            resultado = sentencia.executeQuery( "select * from proveedor");
+            resultado = sentencia.executeQuery("select * from proveedor");
         } catch (Exception e) {
-   
+
         }
         try {
-            while(resultado.next()){
-                lista.add(resultado.getString("id_proveedor"));
+            while (resultado.next()) {
+                lista.add(resultado.getString("nombre"));
             }
         } catch (Exception e) {
         }
         return lista;
     }
-    
-    public static void conect(){
-        String ruta="jdbc:mysql://localhost/puntoventa";
-        String user="root";
-        String pass="";
+
+    public int obtenerIDprov(String nombre) {
+        Statement consulta;
+        ResultSet resultado;
+        int id = 0;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT id_proveedor FROM proveedor "
+                    + "WHERE nombre = '" + nombre + "';");
+            while (resultado.next()) {
+                id = resultado.getInt("id_proveedor");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static void conect() {
+        String ruta = "jdbc:mysql://localhost:8889/puntoventa";
+        String user = "root";
+        String pass = "root";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connexion=DriverManager.getConnection(ruta,user,pass); 
-            sentencia= connexion.createStatement();
+            connexion = DriverManager.getConnection(ruta, user, pass);
+            sentencia = connexion.createStatement();
             //System.out.println("Conectado");
         } catch (ClassNotFoundException | SQLException e) {
-           // System.out.println("No conectado");
+            // System.out.println("No conectado");
         }
     }
-    
+
     public Producto consultarProductoFiltro(String Busqueda) {
         Producto mProducto = null;
         Statement consulta;
@@ -653,13 +703,13 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from producto where id_producto like '%" + Busqueda + "%' "
                     + "or nombre like '%" + Busqueda + "%' or clasificacion like '%" + Busqueda + "%' or tipo like '%" + Busqueda + "%'"
-                            + "or precio like '%" + Busqueda + "%';");
+                    + "or precio like '%" + Busqueda + "%';");
             if (resultado.next()) {
                 mProducto.setId_Producto(resultado.getInt("id_producto"));
                 mProducto.setNombre(resultado.getString("nombre"));
-                mProducto.setClasificacion(resultado.getString("clasificacion")); 
-                mProducto.setTipo(resultado.getString("tipo")); 
-                mProducto.setPrecio(resultado.getFloat("precio")); 
+                mProducto.setClasificacion(resultado.getString("clasificacion"));
+                mProducto.setTipo(resultado.getString("tipo"));
+                mProducto.setPrecio(resultado.getFloat("precio"));
                 ListaProd.add(mProducto);
             }
         } catch (Exception e) {
@@ -668,15 +718,15 @@ public class BaseDeDatos {
 
         return mProducto;
     }
-    
-    public boolean agregarTicket(int id_venta, String fecha, String Lugar , String CP, float total, float efectivo, float cambio) {
+
+    public boolean agregarTicket(int id_venta, String fecha, String Hora, String Lugar, String CP, float total, float efectivo, float cambio) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             /*insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio) 
                 values(1,'2018-04-24','Rio Grande Zacatecas', '98403', 120.00, 200.00, 80.00);*/
-            consulta.execute("insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio)"
-                            + "values (" + id_venta +",'" + fecha +"','" + Lugar +"','" +CP +"'," + total+"," + efectivo +"," + cambio +");");
+            consulta.execute("insert into ticket (id_venta, fecha, hora, lugar, codigopostal, total, efectivo,cambio)"
+                    + "values (" + id_venta + ",'" + fecha + "','" + Hora + "' ,'" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
 
             return true;
         } catch (Exception e) {
@@ -684,13 +734,12 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
-    
+
     public Connection conectarJasper() {
         Connection link = null;
-         String ruta="jdbc:mysql://localhost/puntoventa";
-        String u="root";
-        String p="";
+        String ruta = "jdbc:mysql://localhost/puntoventa";
+        String u = "root";
+        String p = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             link = DriverManager.getConnection(ruta, u, p);
@@ -720,5 +769,5 @@ public class BaseDeDatos {
         return Total;
     }
     
-}
 
+}

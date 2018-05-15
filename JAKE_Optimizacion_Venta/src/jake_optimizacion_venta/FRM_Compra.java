@@ -288,7 +288,7 @@ public class FRM_Compra extends javax.swing.JFrame {
         if (mBD.conectar()) {
             if (ValidarCajas()) {
                 if (mBD.realizarCompra(mCompra)) {
-                    if (mBD.realizarDetalleCompra(mCompra, mProducto)) {
+                    if (mBD.realizarDetalleCompra(mProducto, Cantidad)) {
                         if (mBD.incrementarProductos(mListaProductos)) {
                             JOptionPane.showMessageDialog(null, "Compra realizada con éxito!");
                         } else {
@@ -320,7 +320,6 @@ public class FRM_Compra extends javax.swing.JFrame {
                 mProducto.setPrecio(Float.parseFloat(TXT_Costo.getText()));
                 mProducto.setExistencias(Cantidad);
                 mListaProductos.add(mProducto);
-
                 mCompra.setProductos(mListaProductos);
 
                 totaltemp = Float.parseFloat(String.valueOf(LBL_Sub.getText()));
@@ -336,46 +335,8 @@ public class FRM_Compra extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Porfavor completa los campos");
         }
+        consultarTabla();
     }//GEN-LAST:event_BTN_AgregarActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        LBL_date.setText(mCompra.getFecha());
-        modeloTabla = (DefaultTableModel) TBL_prod.getModel();
-        int a = modeloTabla.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
-        }
-
-        if (mBD.conectar()) {
-
-            ArrayList mLista = mBD.consultarProductos();
-            String[] Datos;
-
-            for (Object mListaProducto : mLista) {
-                Datos = new String[5];
-                mProducto = (Producto) mListaProducto;
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getClasificacion();
-                Datos[3] = mProducto.getTipo();
-                Datos[4] = "" + mProducto.getPrecio();
-
-                modeloTabla.addRow(Datos);
-            }
-            this.TBL_prod = new javax.swing.JTable();
-            this.TBL_prod.setModel(modeloTabla);
-            this.TBL_prod.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.TBL_prod.getColumnModel().getColumn(1).setPreferredWidth(200);
-            this.TBL_prod.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.TBL_prod.getColumnModel().getColumn(3).setPreferredWidth(200);
-            this.TBL_prod.getColumnModel().getColumn(4).setPreferredWidth(300);
-            if (this.TBL_prod.getRowCount() > 0) {
-                this.TBL_prod.setRowSelectionInterval(0, 0);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar producto");
-        }
-    }//GEN-LAST:event_formWindowActivated
 
     public boolean ValidarCajas() {
         return !(TXT_Nom.getText().equals("") && TXT_Costo.getText().equals("")
@@ -419,6 +380,43 @@ public class FRM_Compra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TXT_NomFocusLost
 
+    public void consultarTabla() {
+        LBL_date.setText(mCompra.getFecha());
+        modeloTabla = (DefaultTableModel) TBL_prod.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        if (mBD.conectar()) {
+
+            ArrayList mLista = mBD.consultarProductos();
+            String[] Datos;
+
+            for (Object mListaProducto : mLista) {
+                Datos = new String[5];
+                mProducto = (Producto) mListaProducto;
+                Datos[0] = "" + mProducto.getId_Producto();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = mProducto.getClasificacion();
+                Datos[3] = mProducto.getTipo();
+                Datos[4] = "" + mProducto.getPrecio();
+
+                modeloTabla.addRow(Datos);
+            }
+            this.TBL_prod = new javax.swing.JTable();
+            this.TBL_prod.setModel(modeloTabla);
+            this.TBL_prod.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.TBL_prod.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.TBL_prod.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.TBL_prod.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.TBL_prod.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.TBL_prod.getRowCount() > 0) {
+                this.TBL_prod.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
+        }
+    }
     private void TXT_CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CantidadKeyTyped
         char c = evt.getKeyChar();
         if (c < '0' || c > '9') {
@@ -434,6 +432,44 @@ public class FRM_Compra extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TXT_CostoKeyTyped
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        LBL_date.setText(mCompra.getFecha());
+        modeloTabla = (DefaultTableModel) TBL_prod.getModel();
+        int a = modeloTabla.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
+        }
+        if (mBD.conectar()) {
+
+            ArrayList mLista = mBD.consultarProductos();
+            String[] Datos;
+
+            for (Object mListaProducto : mLista) {
+                Datos = new String[5];
+                mProducto = (Producto) mListaProducto;
+                Datos[0] = "" + mProducto.getId_Producto();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = mProducto.getClasificacion();
+                Datos[3] = mProducto.getTipo();
+                Datos[4] = "" + mProducto.getPrecio();
+
+                modeloTabla.addRow(Datos);
+            }
+            this.TBL_prod = new javax.swing.JTable();
+            this.TBL_prod.setModel(modeloTabla);
+            this.TBL_prod.getColumnModel().getColumn(0).setPreferredWidth(100);
+            this.TBL_prod.getColumnModel().getColumn(1).setPreferredWidth(200);
+            this.TBL_prod.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.TBL_prod.getColumnModel().getColumn(3).setPreferredWidth(200);
+            this.TBL_prod.getColumnModel().getColumn(4).setPreferredWidth(300);
+            if (this.TBL_prod.getRowCount() > 0) {
+                this.TBL_prod.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar producto");
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

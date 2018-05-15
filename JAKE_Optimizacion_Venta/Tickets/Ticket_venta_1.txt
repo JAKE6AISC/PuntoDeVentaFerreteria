@@ -6,34 +6,40 @@
      !!!Gracias por su preferencia!!!
 
 
-Lugar de expedicion: Rio Grande  Zacatecas   México  Código postal: 98400
+Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
 
 
-No. Venta 1  	Fecha 12/5/2018	 Hora 5:38
+No. Venta 1  	Fecha 15/5/2018	 Hora 0:15
 
 
 Codigo		Descrip		Precio		Cantid		Subtotal
 
-____________________________________________________________________________
-6		Filtr		80.0		1		80.0
+══════════════════════════════════════════════
+1		Talad		125.0		1		125.0
 
-6		Filtr		80.0		1		80.0
+2		Filtr		80.0		1		80.0
 
-6		Filtr		80.0		1		80.0
+2		Filtr		80.0		1		80.0
 
-7		Filtr		90.0		1		90.0
+3		Torni		35.0		1		35.0
 
-7		Filtr		90.0		1		90.0
+3		Torni		35.0		1		35.0
 
-7		Filtr		90.0		1		90.0
+3		Torni		35.0		1		35.0
+
+3		Torni		35.0		1		35.0
+
+4		Aceite		95.0		1		95.0
+
+4		Aceite		95.0		1		95.0
 
 
-____________________________________________________________________________
+══════════════════════════════════════════════
 
-			 	   	   Total a pagar: $510.0 MXN
+			 	   	   Total a pagar: $615.0 MXN
 
 
-			 	   	   Efectivo: $510.0 MXN
+			 	   	   Efectivo: $615.0 MXN
 
 
 

@@ -17,6 +17,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     Proveedor mProveedor = new Proveedor();
+    private int Seleccionada;
 
     /**
      * Creates new form FRM_BajaProveedores
@@ -27,6 +28,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Clasificación");
         this.setLocationRelativeTo(null);
+        Seleccionada = 0;
     }
 
     /**
@@ -50,7 +52,6 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LBL_ID = new javax.swing.JLabel();
-        BTNseleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,6 +63,11 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         LBL_IdProveedor.setText("ID_Proveedor: ");
 
         JTableProveedor.setModel(modeloTabla);
+        JTableProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTableProveedorMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTableProveedor);
 
         BTN_Atras.setText("Atrás");
@@ -116,44 +122,35 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setText("Proveedor: ");
+        jLabel3.setText("Nombre Proveedor: ");
 
         LBL_ID.setText("*****");
-
-        BTNseleccionar.setText("Seleccionar");
-        BTNseleccionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNseleccionarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(BTN_Atras)
-                            .addGap(83, 83, 83)
-                            .addComponent(BTN_Eliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTN_Salir))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(LBL_IdProveedor)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(LBL_ID)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LBL_IdProveedor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LBL_ID))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTNseleccionar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BTN_Eliminar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(BTN_Atras)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTN_Salir))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,17 +160,16 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(BTNseleccionar))
+                    .addComponent(BTN_Eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LBL_IdProveedor)
                     .addComponent(LBL_ID))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Atras)
-                    .addComponent(BTN_Eliminar)
                     .addComponent(BTN_Salir))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -238,37 +234,12 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
-    private void BTNseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNseleccionarActionPerformed
-        modeloTabla = (DefaultTableModel) JTableProveedor.getModel();
-        int a = modeloTabla.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
-        }
-        if (mBD.conectar()) {
-
-            String[] Datos = new String[5];
-
-            mProveedor = mBD.consultarProveedor(0, TXT_Nombre.getText());
-
-            Datos[0] = "" + mProveedor.getId_proveedor();
-            LBL_ID.setText(String.valueOf(mProveedor.getId_proveedor()));
-            Datos[1] = mProveedor.getNombre();
-            Datos[2] = mProveedor.getEmpresa();
-            
-            modeloTabla.addRow(Datos);
-
-            this.JTableProveedor = new javax.swing.JTable();
-            this.JTableProveedor.setModel(modeloTabla);
-            this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(300);
-            this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(300);
-            if (this.JTableProveedor.getRowCount() > 0) {
-                this.JTableProveedor.setRowSelectionInterval(0, 0);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar producto");
-        }
-    }//GEN-LAST:event_BTNseleccionarActionPerformed
+    private void JTableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableProveedorMouseClicked
+        TXT_Nombre.setText("");
+        Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
+        LBL_ID.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 0).toString());
+        TXT_Nombre.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 1).toString());
+    }//GEN-LAST:event_JTableProveedorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -309,7 +280,6 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Atras;
     private javax.swing.JButton BTN_Eliminar;
     private javax.swing.JButton BTN_Salir;
-    private javax.swing.JButton BTNseleccionar;
     private javax.swing.JTable JTableProveedor;
     private javax.swing.JLabel LBL_ID;
     private javax.swing.JLabel LBL_IdProveedor;
