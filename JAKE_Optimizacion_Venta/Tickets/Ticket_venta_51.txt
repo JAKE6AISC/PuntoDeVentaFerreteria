@@ -1,0 +1,61 @@
+       ╬═══════════════════╬
+       ╬ Ferreteria Juanes ╬
+       ╬═══════════════════╬
+
+
+     !!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
+
+
+No. Venta 51  	Fecha 13/5/2018	 Hora 11:4
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+══════════════════════════════════════════════
+23		cerea		78.0		1		78.0
+
+88		pasta		128.0		1		128.0
+
+1		Torni		1.5		1		1.5
+
+119		Caja 		78.0		1		78.0
+
+79		sandw		20.0		1		20.0
+
+77		stews		192.0		1		192.0
+
+2		Segeta		16.5		1		16.5
+
+21		salads		149.0		1		149.0
+
+21		salads		149.0		1		149.0
+
+
+══════════════════════════════════════════════
+
+			 	   	   Total a pagar: $812.0 MXN
+
+
+			 	   	   Efectivo: $900.0 MXN
+
+
+
+			 	   	   Cambio: $88.0 MXN
+
+
+
+
+   Version del Software 2.0 todos los derechos reservados a JAKE
+
+
+
+
+   Software realizado por la organizacion JAKE
+
+
+
+
+   !!! Gracias por su compra esperamos verlos pronto!!!

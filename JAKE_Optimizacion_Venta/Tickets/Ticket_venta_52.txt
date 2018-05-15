@@ -1,0 +1,45 @@
+       ╬═══════════════════╬
+       ╬ Ferreteria Juanes ╬
+       ╬═══════════════════╬
+
+
+     !!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
+
+
+No. Venta 52  	Fecha 14/5/2018	 Hora 8:50
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+══════════════════════════════════════════════
+94		soups		165.0		1		165.0
+
+
+══════════════════════════════════════════════
+
+			 	   	   Total a pagar: $165.0 MXN
+
+
+			 	   	   Efectivo: $200.0 MXN
+
+
+
+			 	   	   Cambio: $35.0 MXN
+
+
+
+
+   Version del Software 2.0 todos los derechos reservados a JAKE
+
+
+
+
+   Software realizado por la organizacion JAKE
+
+
+
+
+   !!! Gracias por su compra esperamos verlos pronto!!!

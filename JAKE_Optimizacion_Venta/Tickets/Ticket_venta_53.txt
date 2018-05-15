@@ -1,0 +1,55 @@
+       ╬═══════════════════╬
+       ╬ Ferreteria Juanes ╬
+       ╬═══════════════════╬
+
+
+     !!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
+
+
+No. Venta 53  	Fecha 14/5/2018	 Hora 8:52
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+══════════════════════════════════════════════
+86		salads		93.0		1		93.0
+
+86		salads		93.0		1		93.0
+
+86		salads		93.0		1		93.0
+
+1		Torni		1.5		1		1.5
+
+111		desse		15.0		1		15.0
+
+6		Cinta		10.0		1		10.0
+
+
+══════════════════════════════════════════════
+
+			 	   	   Total a pagar: $305.5 MXN
+
+
+			 	   	   Efectivo: $400.0 MXN
+
+
+
+			 	   	   Cambio: $94.5 MXN
+
+
+
+
+   Version del Software 2.0 todos los derechos reservados a JAKE
+
+
+
+
+   Software realizado por la organizacion JAKE
+
+
+
+
+   !!! Gracias por su compra esperamos verlos pronto!!!

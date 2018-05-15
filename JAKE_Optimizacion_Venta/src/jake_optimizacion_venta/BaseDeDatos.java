@@ -29,7 +29,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
@@ -702,8 +702,23 @@ public class BaseDeDatos {
         return link;
     }
     
-    
-    
+    //select total from venta where fecha between '2018-05-15' and '2018-05-15';
+     public float getTotal(String FechaInicio, String FechaFin) {// Si se usa
+        float Total = 0;
+        Statement Consulta;
+        ResultSet Resultado;
+        try {
+            Consulta = conexion.createStatement();
+            Resultado = Consulta.executeQuery("select total from venta where fecha between " + FechaInicio + " and " + FechaFin + ";");
+            if (Resultado.next()) {
+                Total = Total + (Resultado.getInt("total"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Total;
+    }
     
 }
 
