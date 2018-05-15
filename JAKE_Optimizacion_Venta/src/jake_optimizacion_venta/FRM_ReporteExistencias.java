@@ -208,7 +208,7 @@ public class FRM_ReporteExistencias extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBaseDeDatos.conectare());
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);

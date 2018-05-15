@@ -4,7 +4,7 @@
 	<parameter name="fech2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-     (dv.precio-dc.costo)as ganancia,
+     (dv.precio_producto-dc.costo)as ganancia,
      v.`fecha` AS v_fecha,
      v.`total` AS v_total
 FROM

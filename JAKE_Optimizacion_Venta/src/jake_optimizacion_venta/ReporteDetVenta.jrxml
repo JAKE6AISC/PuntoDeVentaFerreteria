@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM venta INNER JOIN detalle_venta ON venta.id_venta=detalle_venta.venta_id_venta INNER JOIN producto on producto.id_producto = detalle_venta.producto_id_producto WHERE id_venta = 1;]]>
+	<parameter name="ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM venta INNER JOIN detalle_venta ON venta.id_venta=detalle_venta.venta_id_venta INNER JOIN producto on producto.id_producto = detalle_venta.producto_id_producto WHERE id_venta = $P{ID};]]>
 	</queryString>
 	<field name="id_venta" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>

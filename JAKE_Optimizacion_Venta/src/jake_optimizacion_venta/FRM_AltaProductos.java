@@ -9,10 +9,12 @@ import javax.swing.JOptionPane;
  * @author Juanez
  */
 public class FRM_AltaProductos extends javax.swing.JFrame {
-     int [] Datos;
-     boolean Id_Prov_existe;
-     BaseDeDatos mBD = new BaseDeDatos();
-     BaseDeDatos mDB = new BaseDeDatos();
+
+    int[] Datos;
+    boolean Id_Prov_existe;
+    BaseDeDatos mBD = new BaseDeDatos();
+    BaseDeDatos mDB = new BaseDeDatos();
+
     public FRM_AltaProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -20,12 +22,11 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         jComboBox1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
         lista = BaseDeDatos.getIdProv();
-        for(int i = 0; i<lista.size();i++){
+        for (int i = 0; i < lista.size(); i++) {
             jComboBox1.addItem(lista.get(i));
         }
-        
+
     }
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -188,44 +189,44 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         Producto mProducto = new Producto();
         Proveedor mProveedor = new Proveedor();
         BaseDeDatos mBD = new BaseDeDatos();
-        
+
         if (mBD.conectar()) {
             if (ValidarClasificacion() && ValidarPrecio()
-                && ValidarNombreProducto() && ValidarTipo()) {
-            
-            mProducto.setNombre(TXT_NombreProducto.getText());
-            mProducto.setClasificacion(TXT_Clasificacion.getText());
-            mProducto.setTipo(TXT_Tipo.getText());
-            mProducto.setPrecio(Float.parseFloat(TXT_Precio.getText()));
-            mProducto.setId_Proveedor(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
-            if (mBD.conectar()) {
-                if (mBD.agregarProducto(mProducto)) {
-                    int IdP = mBD.getIdProducto();
-                    mBD.agregarExistenciaProducto(IdP);
-                    JOptionPane.showMessageDialog(null, "Producto Agregado Exitosamente");
+                    && ValidarNombreProducto() && ValidarTipo()) {
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error");
+                mProducto.setNombre(TXT_NombreProducto.getText());
+                mProducto.setClasificacion(TXT_Clasificacion.getText());
+                mProducto.setTipo(TXT_Tipo.getText());
+                mProducto.setPrecio(Float.parseFloat(TXT_Precio.getText()));
+                mProducto.setId_Proveedor(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+                if (mBD.conectar()) {
+                    if (mBD.agregarProducto(mProducto)) {
+                        int IdP = mBD.getIdProducto();
+                        mBD.agregarExistenciaProducto(IdP);
+                        JOptionPane.showMessageDialog(null, "Producto Agregado Exitosamente");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error");
+                    }
+                    mBD.desconectar();
                 }
-                mBD.desconectar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor completa los campos que faltan");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor completa los campos que faltan");
-        }
-      /*  }else {
+            /*  }else {
              JOptionPane.showMessageDialog(null, "Proveedor inexistente");
         }*/
-        
-       }
+
+        }
         Limpiar();
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
         if (TXT_Precio.getText().contains(".")) {
-            char caracter  = evt.getKeyChar();
-             if (caracter < '0' || caracter > '9') {
-                    evt.consume();
-                }
+            char caracter = evt.getKeyChar();
+            if (caracter < '0' || caracter > '9') {
+                evt.consume();
+            }
         }
 
     }//GEN-LAST:event_TXT_PrecioKeyTyped
@@ -265,6 +266,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
             return true;
         }
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
