@@ -12,8 +12,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -28,7 +38,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
     Calendar fecha = Calendar.getInstance();
     float Total = 0;
-    String Lugar = "Rio Grande Zacatecas", CP = "98403";
+    String Lugar = "Río Grande Zacatecas", CP = "98403";
     String Id_Ultim = "";
     int Id_Venta = 0, Anterior = 0;
     int year = 0;
@@ -384,7 +394,7 @@ public class FRM_Venta extends javax.swing.JFrame {
 
                         }
 
-                        mBD.agregarTicket(id_vta, FechaActual, Lugar, CP, Total, efectivo, cambio);
+                        mBD.agregarTicket(id_vta, FechaActual, Hora, Lugar, CP, Total, efectivo, cambio);
 //                    GenerarReporteTicket(id_vta);
                         try {
                             Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
@@ -482,8 +492,20 @@ public class FRM_Venta extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
         }
+        String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
+        JasperReport jr = null;
+        Map parametros = new HashMap();
 
-
+        try {
+            parametros.put("ID", mVenta.getId_Venta());
+            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+            JasperViewer jv = new JasperViewer(jp);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
 
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped

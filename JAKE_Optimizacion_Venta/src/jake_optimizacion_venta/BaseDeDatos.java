@@ -704,14 +704,14 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    public boolean agregarTicket(int id_venta, String fecha, String Lugar, String CP, float total, float efectivo, float cambio) {
+    public boolean agregarTicket(int id_venta, String fecha, String Hora,String Lugar, String CP, float total, float efectivo, float cambio) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             /*insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio) 
                 values(1,'2018-04-24','Rio Grande Zacatecas', '98403', 120.00, 200.00, 80.00);*/
-            consulta.execute("insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio)"
-                    + "values (" + id_venta + ",'" + fecha + "','" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
+            consulta.execute("insert into ticket (id_venta, fecha, hora, lugar, codigopostal, total, efectivo,cambio)"
+                    + "values (" + id_venta + ",'" + fecha + "','"+ Hora +"' ,'" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
 
             return true;
         } catch (Exception e) {

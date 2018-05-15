@@ -4,23 +4,21 @@
 	<parameter name="fech2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-     (dv.precio_producto-dc.costo)as ganancia,
-     v.`fecha` AS v_fecha,
-     v.`total` AS v_total
+     venta.`fecha` AS venta_fecha,
+     venta.`total` AS venta_total,
+     venta.`ganancia` AS venta_ganancia
 FROM
-     `venta` v INNER JOIN `detalle_venta` dv ON v.`id_venta` = dv.`venta_id_venta`
-     INNER JOIN `producto` p ON dv.`producto_id_producto` = p.`id_producto`
-     INNER JOIN `detalle_compra` dc ON p.`id_producto` = dc.`producto_id_producto`
-WHERE
-     fecha BETWEEN $P{fech} AND $P{fech2};]]>
+     `venta` venta
+WHERE 
+	fecha BETWEEN $P{fech} AND $P{fech2};]]>
 	</queryString>
-	<field name="ganancia" class="java.lang.Double">
+	<field name="venta_fecha" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="v_fecha" class="java.sql.Date">
+	<field name="venta_total" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="v_total" class="java.lang.Float">
+	<field name="venta_ganancia" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -53,21 +51,21 @@ WHERE
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[v_fecha]]></text>
+				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="185" y="0" width="185" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[v_total]]></text>
+				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="370" y="0" width="185" height="18" forecolor="#FFFFFF" backcolor="#003399"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[ganancia]]></text>
+				<text><![CDATA[Ganancia]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -78,21 +76,21 @@ WHERE
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{v_fecha}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{venta_fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="185" y="0" width="185" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{v_total}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{venta_total}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="370" y="0" width="185" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ganancia}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{venta_ganancia}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

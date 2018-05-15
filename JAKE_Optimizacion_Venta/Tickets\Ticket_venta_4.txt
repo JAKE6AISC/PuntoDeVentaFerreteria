@@ -1,0 +1,45 @@
+       ╬═══════════════════╬
+       ╬ Ferreteria Juanes ╬
+       ╬═══════════════════╬
+
+
+     !!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Rio Grande Zacatecas  Código postal: 98403
+
+
+No. Venta 4  	Fecha 15/5/2018	 Hora 0:55
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+══════════════════════════════════════════════
+1		Talad		125.0		1		125.0
+
+
+══════════════════════════════════════════════
+
+			 	   	   Total a pagar: $125.0 MXN
+
+
+			 	   	   Efectivo: $500.0 MXN
+
+
+
+			 	   	   Cambio: $375.0 MXN
+
+
+
+
+   Version del Software 2.0 todos los derechos reservados a JAKE
+
+
+
+
+   Software realizado por la organizacion JAKE
+
+
+
+
+   !!! Gracias por su compra esperamos verlos pronto!!!
