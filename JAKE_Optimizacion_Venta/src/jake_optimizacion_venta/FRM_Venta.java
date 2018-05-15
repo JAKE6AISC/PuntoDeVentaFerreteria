@@ -1,8 +1,9 @@
 /*
  * Luis Osvaldo Juanes Hinojosa
  * Formulario para realizar la venta
-*/
+ */
 package jake_optimizacion_venta;
+
 import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Juanez
  */
 public class FRM_Venta extends javax.swing.JFrame {
+
     BaseDeDatos mBD = new BaseDeDatos();
     Venta mVenta = new Venta();
     DefaultTableModel TablasJuanes = new DefaultTableModel();
@@ -28,7 +30,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     float Total = 0;
     String Lugar = "Rio Grande Zacatecas", CP = "98403";
     String Id_Ultim = "";
-    int Id_Venta = 0,Anterior = 0;
+    int Id_Venta = 0, Anterior = 0;
     int year = 0;
     int mes = 0;
     int dia = 0;
@@ -36,12 +38,14 @@ public class FRM_Venta extends javax.swing.JFrame {
     int minutos = 0;
     String FechaActual = year + "-" + mes + "-" + dia;
     String Hora = "";
-    String Ruta = ""; 
-    int ConsultaEx =0; 
-    float efectivo,cambio;
+    String Ruta = "";
+    int ConsultaEx = 0;
+    float efectivo, cambio;
     int Contador = 0;
     ArrayList<Integer> ArregloIdProd = new ArrayList<>();
-    ArrayList<Float> ArregloPrecios = new ArrayList<>(); 
+    ArrayList<Float> ArregloPrecios = new ArrayList<>();
+    private float Ganancia;
+
     public FRM_Venta() {
         TablasJuanes.addColumn("Codigo de barras");
         TablasJuanes.addColumn("Nombre");
@@ -54,7 +58,9 @@ public class FRM_Venta extends javax.swing.JFrame {
         LBL_ID_Venta.setText(Id_Ultim);
         LBL_Hora.setText(Hora);
         this.setLocationRelativeTo(null);
+        Ganancia = 0;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -278,40 +284,40 @@ public class FRM_Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ObternerId_Vtas() {
-       if(mBD.conectar()) {
-           Anterior = mBD.getIdSiguienteVenta() + 1;
-           int var = Anterior;
-           Id_Ultim = var + "";
-         }
-      mBD.desconectar();
-}
-    private void Fecha(){
+        if (mBD.conectar()) {
+            Anterior = mBD.getIdSiguienteVenta() + 1;
+            int var = Anterior;
+            Id_Ultim = var + "";
+        }
+        mBD.desconectar();
+    }
+
+    private void Fecha() {
         year = fecha.get(Calendar.YEAR);
         mes = fecha.get(Calendar.MONTH) + 1;
         dia = fecha.get(Calendar.DAY_OF_MONTH);
-        hora =fecha.get(Calendar.HOUR);
-        minutos =fecha.get(Calendar.MINUTE);
+        hora = fecha.get(Calendar.HOUR);
+        minutos = fecha.get(Calendar.MINUTE);
         FechaActual = year + "-" + mes + "-" + dia;
         LBL_Fecha.setText(dia + "/" + mes + "/" + year);
         Hora = hora + ":" + minutos;
     }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
-     /*   if (TXT_Escaner.getText().contains("")){       
-            JOptionPane.showMessageDialog(null,"Primero Ingresa algun producto");
-        }else {*/
-             if(mBD.conectar()){
+        float costo = 0;
+        int idDetCom = 0;
+        if (mBD.conectar()) {
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
-            ConsultaEx =  mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
+            ConsultaEx = mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
             if (ConsultaEx > 0) {
-                String [] DatosTabla;
+                String[] DatosTabla;
                 for (Object ListaProductos : ListaProductoss) {
                     DatosTabla = new String[5];
-                    mProducto = (Producto)ListaProductos;
+                    mProducto = (Producto) ListaProductos;
                     DatosTabla[0] = mProducto.getId_Producto() + "";
                     DatosTabla[1] = mProducto.getNombre();
                     DatosTabla[2] = mProducto.getPrecio() + "";
                     DatosTabla[3] = "1";
-                    DatosTabla[4] = mProducto.getPrecio()+ "";
+                    DatosTabla[4] = mProducto.getPrecio() + "";
                     mBD.modificarExistencias(mProducto.getId_Producto());
                     ArregloIdProd.add(mProducto.getId_Producto());
                     ArregloPrecios.add(mProducto.getPrecio());
@@ -319,8 +325,12 @@ public class FRM_Venta extends javax.swing.JFrame {
                     LBL_Total.setText(Total + "");
                     TablasJuanes.addRow(DatosTabla);
                     Contador++;
-                }    
-        
+                    idDetCom = mBD.consultarUltimoIDdetcom(mProducto.getId_Producto());
+                    costo = mBD.ObtenerDetCosto(idDetCom);
+                    Ganancia =  Ganancia + (mProducto.getPrecio() - costo);
+                    mVenta.setGanancia(Ganancia);
+                }
+
                 this.TBL_Venta = new javax.swing.JTable();
                 this.TBL_Venta.setModel(TablasJuanes);
                 this.TBL_Venta.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -330,18 +340,18 @@ public class FRM_Venta extends javax.swing.JFrame {
                 if (this.TBL_Venta.getRowCount() > 0) {
                     this.TBL_Venta.setRowSelectionInterval(0, 0);
                 }
-            } else if (ConsultaEx <= 0){
+            } else if (ConsultaEx <= 0) {
                 JOptionPane.showMessageDialog(null, "El producto "
-                + "especificado no tiene piezas disponibles en existencia");
+                        + "especificado no tiene piezas disponibles en existencia");
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Error de conexion en la base de datos");
         }
-     mBD.desconectar();
-      // }
-       
-     
-     
+
+        mBD.desconectar();
+        // }
+
+
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
@@ -351,176 +361,176 @@ public class FRM_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_RealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RealizarVentaActionPerformed
-           if (Contador > 0) {
-             LBL_ID_Venta.setText(Id_Ultim);
+        if (Contador > 0) {
+            LBL_ID_Venta.setText(Id_Ultim);
             mVenta.setFecha(FechaActual);
             mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
-            mVenta.setTotal((float)Total);
+            mVenta.setTotal((float) Total);
             efectivo = Float.parseFloat(TXT_Efectivo.getText());
             if (efectivo >= Total) {
-             cambio = efectivo  - Total;
-            LBL_Cambio.setText(String.valueOf(cambio)); 
-            if(mBD.conectar()) {
-                if (mBD.realizarVenta(mVenta)) {
-                    Contador = 0;
-                    int id_vta = mVenta.getId_Venta();
-                    int id_prod;
-                    float precio;
-                    for(int j = 0; j< ArregloPrecios.size(); j++){
-                        id_prod = ArregloIdProd.get(j);
-                        
-                        precio = ArregloPrecios.get(j);
-                        mBD.agregarDetalleVenta(precio, id_prod, id_vta);
-                        
-                    }
-                   
-                    mBD.agregarTicket(id_vta, FechaActual, Lugar , CP, Total, efectivo, cambio);
-//                    GenerarReporteTicket(id_vta);
-                    try {
-                        Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
-                        try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
-                            ArchivoTXT.write("       ╬═══════════════════╬");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("       ╬ Ferreteria Juanes ╬");
-                             ArchivoTXT.newLine();
-                            ArchivoTXT.write("       ╬═══════════════════╬");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("     !!!Gracias por su preferencia!!!");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("Lugar de expedicion: " + Lugar + "  Código postal: " + CP);
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia +"/"+mes+"/"+year + "\t Hora " + Hora);
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("\n══════════════════════════════════════════════");
-                            ArchivoTXT.newLine();
-                            String Tam = "";
-                            for (int i = 0 ; i < TablasJuanes.getRowCount(); i++){
-                                for(int j = 0 ; j < TablasJuanes.getColumnCount();j++){
-                                    if (((String)(TablasJuanes.getValueAt(i,j))).length() > 6) {
-                                        Tam =(String)(TablasJuanes.getValueAt(i,j)).toString().substring(0,5);
-                                        ArchivoTXT.write(Tam);
-                                        if (j < TablasJuanes.getColumnCount() -1) {
-                                            ArchivoTXT.write("\t\t");
-                                        }
-                                    }else{
-                                        ArchivoTXT.write((String)(TablasJuanes.getValueAt(i,j)));
-                                        if (j < TablasJuanes.getColumnCount() -1) { 
-                                            ArchivoTXT.write("\t\t");
-                                        }
-                                    }
+                cambio = efectivo - Total;
+                LBL_Cambio.setText(String.valueOf(cambio));
+                if (mBD.conectar()) {
+                    if (mBD.realizarVenta(mVenta)) {
+                        Contador = 0;
+                        int id_vta = mVenta.getId_Venta();
+                        int id_prod;
+                        float precio;
+                        for (int j = 0; j < ArregloPrecios.size(); j++) {
+                            id_prod = ArregloIdProd.get(j);
 
-                                }
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                            }
-                            ArchivoTXT.write("\n══════════════════════════════════════════════");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + Total + " MXN");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                             ArchivoTXT.write("\t\t\t \t   \t   Efectivo: $" + efectivo + " MXN");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                             ArchivoTXT.write("\t\t\t \t   \t   Cambio: $" + cambio + " MXN");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("   Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("   Software realizado por la organizacion JAKE\n\n");
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.newLine();
-                            ArchivoTXT.write("   !!! Gracias por su compra esperamos verlos pronto!!!");
-                            ArchivoTXT.close();
+                            precio = ArregloPrecios.get(j);
+                            mBD.agregarDetalleVenta(precio, id_prod, id_vta);
+
                         }
-                        JOptionPane.showMessageDialog(null,"Venta Realizada\nTicket de venta numero " + Id_Ultim + " Guardado");
-                    } catch (IOException | HeadlessException e) {
-                        JOptionPane.showMessageDialog(null,"ERROR: " + e.getMessage());
-                    } 
-                    VaciarCampos();
-                
-                } else {
-                     JOptionPane.showMessageDialog(null, "Error");
-             mBD.desconectar();
-             }
-                ObternerId_Vtas();
-                LBL_ID_Venta.setText(Id_Ultim);
-        }
-            }else{
-                 JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
+
+                        mBD.agregarTicket(id_vta, FechaActual, Lugar, CP, Total, efectivo, cambio);
+//                    GenerarReporteTicket(id_vta);
+                        try {
+                            Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
+                            try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
+                                ArchivoTXT.write("       ╬═══════════════════╬");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("       ╬ Ferreteria Juanes ╬");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("       ╬═══════════════════╬");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("     !!!Gracias por su preferencia!!!");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("Lugar de expedicion: " + Lugar + "  Código postal: " + CP);
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia + "/" + mes + "/" + year + "\t Hora " + Hora);
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("\n══════════════════════════════════════════════");
+                                ArchivoTXT.newLine();
+                                String Tam = "";
+                                for (int i = 0; i < TablasJuanes.getRowCount(); i++) {
+                                    for (int j = 0; j < TablasJuanes.getColumnCount(); j++) {
+                                        if (((String) (TablasJuanes.getValueAt(i, j))).length() > 6) {
+                                            Tam = (String) (TablasJuanes.getValueAt(i, j)).toString().substring(0, 5);
+                                            ArchivoTXT.write(Tam);
+                                            if (j < TablasJuanes.getColumnCount() - 1) {
+                                                ArchivoTXT.write("\t\t");
+                                            }
+                                        } else {
+                                            ArchivoTXT.write((String) (TablasJuanes.getValueAt(i, j)));
+                                            if (j < TablasJuanes.getColumnCount() - 1) {
+                                                ArchivoTXT.write("\t\t");
+                                            }
+                                        }
+
+                                    }
+                                    ArchivoTXT.newLine();
+                                    ArchivoTXT.newLine();
+                                }
+                                ArchivoTXT.write("\n══════════════════════════════════════════════");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + Total + " MXN");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("\t\t\t \t   \t   Efectivo: $" + efectivo + " MXN");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("\t\t\t \t   \t   Cambio: $" + cambio + " MXN");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("   Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("   Software realizado por la organizacion JAKE\n\n");
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.newLine();
+                                ArchivoTXT.write("   !!! Gracias por su compra esperamos verlos pronto!!!");
+                                ArchivoTXT.close();
+                            }
+                            JOptionPane.showMessageDialog(null, "Venta Realizada\nTicket de venta numero " + Id_Ultim + " Guardado");
+                        } catch (IOException | HeadlessException e) {
+                            JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage());
+                        }
+                        VaciarCampos();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error");
+                        mBD.desconectar();
+                    }
+                    ObternerId_Vtas();
+                    LBL_ID_Venta.setText(Id_Ultim);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
             }
-            
-          }else{
-               JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
-           }
-            
-       
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
+        }
+
+
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
 
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
-        char caracter  = evt.getKeyChar();
-            if (caracter < '0' || caracter > '9') {
-                evt.consume();
-            }        
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_EfectivoKeyTyped
 
     private void TXT_EscanerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EscanerKeyTyped
-            char caracter  = evt.getKeyChar();
-            if (caracter < '0' || caracter > '9') {
-                evt.consume();
-            }
-        
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_TXT_EscanerKeyTyped
 
     private void TXT_EscanerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EscanerKeyPressed
-        
+
     }//GEN-LAST:event_TXT_EscanerKeyPressed
 
     private void TXT_EscanerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_EscanerFocusLost
-         if(ValidarEscanner()){
-        }else{
-            JOptionPane.showMessageDialog(null,"Ingrese codigo de barras primero");
+        if (ValidarEscanner()) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese codigo de barras primero");
             TXT_Escaner.requestFocus();
         }
     }//GEN-LAST:event_TXT_EscanerFocusLost
-     private void VaciarCampos() {
-        TXT_Escaner.setText(""); 
+    private void VaciarCampos() {
+        TXT_Escaner.setText("");
         LBL_Total.setText("00.00");
         TXT_Efectivo.setText("");
         LBL_Cambio.setText("00.00");
-        
-       for (int i = 0; i < TBL_Venta.getRowCount(); i++) {
-                TablasJuanes.removeRow(i);
-                i-=1;
+
+        for (int i = 0; i < TBL_Venta.getRowCount(); i++) {
+            TablasJuanes.removeRow(i);
+            i -= 1;
         }
     }
-      public boolean ValidarEscanner() {
+
+    public boolean ValidarEscanner() {
         if (TXT_Escaner.getText().equals("")) {
             return false;
         } else {
             return true;
         }
     }
-      
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -553,7 +563,7 @@ public class FRM_Venta extends javax.swing.JFrame {
             }
         });
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_AgregarProducto;
@@ -577,8 +587,8 @@ public class FRM_Venta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-   public void GenerarReporteTicket(int ID){
-    /*   String path = "\\src\\jake_optimizacion_venta\\ReporteTickets.jasper";
+    public void GenerarReporteTicket(int ID) {
+        /*   String path = "\\src\\jake_optimizacion_venta\\ReporteTickets.jasper";
         JasperReport jr = null;
         Map parametros = new HashMap();
         
@@ -592,5 +602,5 @@ public class FRM_Venta extends javax.swing.JFrame {
         } catch (JRException ex) {
             Logger.getLogger(FRM_ReporteDetalleVenta.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-   }
+    }
 }

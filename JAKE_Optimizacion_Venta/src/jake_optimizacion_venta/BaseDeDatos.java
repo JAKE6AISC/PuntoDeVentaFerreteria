@@ -322,11 +322,28 @@ public class BaseDeDatos {
                     + "FROM detalle_compra WHERE producto_id_producto = " + IDproducto + ";");
             while (resultado.next()) {
                 id = resultado.getInt("MAX(id_detalle_compra)");
-            }   
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public float ObtenerDetCosto(int ID) {
+        Statement consulta;
+        ResultSet resultado;
+        float costo = 0;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT costo FROM detalle_compra "
+                    + "WHERE id_detalle_compra = " + ID + ";");
+            while (resultado.next()) {
+                costo = resultado.getFloat("costo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return costo;
     }
 
     public boolean realizarCompra(Compra mCompra) {
@@ -384,8 +401,8 @@ public class BaseDeDatos {
         Statement Consulta;
         try {
             Consulta = conexion.createStatement();
-            Consulta.execute("insert into venta (id_venta, fecha, total) "
-                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "');");
+            Consulta.execute("insert into venta (id_venta, fecha, total, ganancia) "
+                    + "values ('" + mVenta.getId_Venta() + "','" + mVenta.getFecha() + "','" + mVenta.getTotal() + "',"+ mVenta.getGanancia() +");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -647,9 +664,9 @@ public class BaseDeDatos {
     }
 
     public static void conect() {
-        String ruta = "jdbc:mysql://localhost/puntoventa";
+        String ruta = "jdbc:mysql://localhost:8889/puntoventa";
         String user = "root";
-        String pass = "";
+        String pass = "root";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connexion = DriverManager.getConnection(ruta, user, pass);

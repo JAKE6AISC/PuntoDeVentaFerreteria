@@ -7,7 +7,16 @@ public class Venta {
     private int Id_Venta;
     private String Fecha;
     private float Total;
-    private int Id_Producto; 
+    private int Id_Producto;
+    private float Ganancia;
+
+    public float getGanancia() {
+        return Ganancia;
+    }
+
+    public void setGanancia(float Ganancia) {
+        this.Ganancia = Ganancia;
+    }
 
     public int getId_Venta() {
         return Id_Venta;
@@ -40,7 +49,4 @@ public class Venta {
     public void setId_Producto(int Id_Producto) {
         this.Id_Producto = Id_Producto;
     }
-    
-    
-    
 }
