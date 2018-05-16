@@ -57,7 +57,7 @@ public class FRM_Grafica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JChart.setBackground(new java.awt.Color(0, 153, 153));
+        JChart.setBackground(new java.awt.Color(204, 255, 255));
         JChart.setLayout(new java.awt.BorderLayout());
 
         BTN_Graficar.setText("Graficar");
@@ -136,7 +136,8 @@ public class FRM_Grafica extends javax.swing.JFrame {
             }
         }
 
-        JFreeChart barChart = ChartFactory.createBarChart("Ferreteria Juanes", "Día", "Ventas", barCharData, PlotOrientation.VERTICAL, false, true, false);
+        JFreeChart barChart = ChartFactory.createBarChart("Ferreteria Juanes", "Día", "Ventas", 
+                barCharData, PlotOrientation.VERTICAL, false, true, false);
         CategoryPlot barchrt = barChart.getCategoryPlot();
         barchrt.setRangeGridlinePaint(Color.BLACK);
 

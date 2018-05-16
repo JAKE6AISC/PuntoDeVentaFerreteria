@@ -723,8 +723,6 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            /*insert into ticket (id_venta, fecha, lugar, codigopostal, total, efectivo,cambio) 
-                values(1,'2018-04-24','Rio Grande Zacatecas', '98403', 120.00, 200.00, 80.00);*/
             consulta.execute("insert into ticket (id_venta, fecha, hora, lugar, codigopostal, total, efectivo,cambio)"
                     + "values (" + id_venta + ",'" + fecha + "','" + Hora + "' ,'" + Lugar + "','" + CP + "'," + total + "," + efectivo + "," + cambio + ");");
 
@@ -735,22 +733,6 @@ public class BaseDeDatos {
         }
     }
 
-    public Connection conectarJasper() {
-        Connection link = null;
-        String ruta = "jdbc:mysql://localhost/puntoventa";
-        String u = "root";
-        String p = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            link = DriverManager.getConnection(ruta, u, p);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showConfirmDialog(null, e);
-
-        }
-        return link;
-    }
-    
     public ArrayList VentasFecha(String FechaInicio, String FechaFinal) {
         Venta mVenta = null;
         Statement consulta;
@@ -758,7 +740,8 @@ public class BaseDeDatos {
         ArrayList mListaVentas = new ArrayList();
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select sum(total), fecha, total from venta where fecha >= '" + FechaInicio + "' and fecha  <= '"+ FechaFinal + "' group by Fecha;");
+            resultado = consulta.executeQuery("select sum(total), fecha, total from venta where fecha >= "
+                    + "'" + FechaInicio + "' and fecha  <= '" + FechaFinal + "' group by Fecha;");
             while (resultado.next()) {
                 mVenta = new Venta();
                 mVenta.setFecha(resultado.getString("fecha"));

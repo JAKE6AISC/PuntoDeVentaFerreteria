@@ -169,7 +169,7 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
         ModeloTabla.setRowCount(0);
         mBaseDeDatos.desconectar();
         if (mBaseDeDatos.conectar()) {
-            String[] Dato;
+            String[] dato;
 
             ModeloTabla.addColumn("id_producto");
             ModeloTabla.addColumn("precio");
@@ -177,17 +177,17 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
             ModeloTabla.addColumn("tipo");
             ModeloTabla.addColumn("clasificacion");
 
-            Dato = new String[5];
+            dato = new String[5];
 
             mProducto = mBaseDeDatos.consultarProducto(nombre, tipo);
 
-            Dato[0] = "" + (mProducto.getId_Producto());
-            Dato[1] = "" + (mProducto.getPrecio());
-            Dato[2] = mProducto.getNombre();
-            Dato[3] = mProducto.getTipo();
-            Dato[4] = mProducto.getClasificacion();
+            dato[0] = "" + (mProducto.getId_Producto());
+            dato[1] = "" + (mProducto.getPrecio());
+            dato[2] = mProducto.getNombre();
+            dato[3] = mProducto.getTipo();
+            dato[4] = mProducto.getClasificacion();
 
-            ModeloTabla.addRow(Dato);
+            ModeloTabla.addRow(dato);
 
             this.JTableProductos.setModel(ModeloTabla);
             this.JTableProductos.getColumnModel().getColumn(0).setPreferredWidth(100);
