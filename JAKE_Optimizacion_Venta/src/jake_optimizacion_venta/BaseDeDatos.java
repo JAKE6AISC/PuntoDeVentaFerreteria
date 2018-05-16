@@ -751,23 +751,24 @@ public class BaseDeDatos {
         return link;
     }
     
-    //select total from venta where fecha between '2018-05-15' and '2018-05-15';
-     public float getTotal(String FechaInicio, String FechaFin) {// Si se usa
-        float Total = 0;
-        Statement Consulta;
-        ResultSet Resultado;
+    public ArrayList VentasFecha(String FechaInicio, String FechaFinal) {
+        Venta mVenta = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaVentas = new ArrayList();
         try {
-            Consulta = conexion.createStatement();
-            Resultado = Consulta.executeQuery("select total from venta where fecha between " + FechaInicio + " and " + FechaFin + ";");
-            if (Resultado.next()) {
-                Total = Total + (Resultado.getInt("total"));
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select sum(total), fecha, total from venta where fecha >= '" + FechaInicio + "' and fecha  <= '"+ FechaFinal + "' group by Fecha;");
+            while (resultado.next()) {
+                mVenta = new Venta();
+                mVenta.setFecha(resultado.getString("fecha"));
+                mVenta.setTotal(resultado.getFloat("total"));
+                mListaVentas.add(mVenta);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return Total;
+        return mListaVentas;
     }
-    
 
 }
