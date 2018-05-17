@@ -175,21 +175,21 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
 
             if (mBaseDeDatos.conectar()) {
                 
-                String[] Dato;
+                String[] dato;
 
                 ModeloTabla.addColumn("id_proveedor");
                 ModeloTabla.addColumn("nombre");
                 ModeloTabla.addColumn("empresa");
 
-                Dato = new String[3];
+                dato = new String[3];
 
                 mProveedor = mBaseDeDatos.consultarProveedor(id_proveedor, "");
 
-                Dato[0] = "" + (mProveedor.getId_proveedor());
-                Dato[1] = mProveedor.getNombre();
-                Dato[2] = mProveedor.getEmpresa();
+                dato[0] = "" + (mProveedor.getId_proveedor());
+                dato[1] = mProveedor.getNombre();
+                dato[2] = mProveedor.getEmpresa();
 
-                ModeloTabla.addRow(Dato);
+                ModeloTabla.addRow(dato);
 
                 this.JTableProveedor.setModel(ModeloTabla);
                 this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -210,23 +210,23 @@ public class FRM_ConsultasProveedor extends javax.swing.JFrame {
         ArrayList ListaProveedores;
         if (mBaseDeDatos.conectar()) {
             
-            String[] Dato;
+            String[] dato;
 
             ModeloTabla.addColumn("id_proveedor");
             ModeloTabla.addColumn("nombre");
             ModeloTabla.addColumn("empresa");
             //ModeloTabla.addColumn("id_producto");
 
-            Dato = new String[3];
+            dato = new String[3];
             ListaProveedores = mBaseDeDatos.consultarProveedores();
             for (int i = 0; i < ListaProveedores.size(); i++) {
                 mProveedor = (Proveedor) ListaProveedores.get(i);
 
-                Dato[0] = "" + (mProveedor.getId_proveedor());
-                Dato[1] = mProveedor.getNombre();
-                Dato[2] = mProveedor.getEmpresa();
+                dato[0] = "" + (mProveedor.getId_proveedor());
+                dato[1] = mProveedor.getNombre();
+                dato[2] = mProveedor.getEmpresa();
 
-                ModeloTabla.addRow(Dato);
+                ModeloTabla.addRow(dato);
             }
 
             this.JTableProveedor.setModel(ModeloTabla);

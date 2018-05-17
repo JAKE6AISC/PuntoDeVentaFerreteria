@@ -351,19 +351,19 @@ public class FRM_Compra extends javax.swing.JFrame {
         }
         if (mBD.conectar()) {
 
-            String[] Datos = new String[5];
+            String[] datos = new String[5];
 
             mProducto = mBD.consultarProducto(TXT_Nom.getText(), "");
 
-            Datos[0] = "" + mProducto.getId_Producto();
+            datos[0] = "" + mProducto.getId_Producto();
             LBL_ID.setText(String.valueOf(mProducto.getId_Producto()));
-            Datos[1] = mProducto.getNombre();
-            Datos[2] = mProducto.getClasificacion();
-            Datos[3] = mProducto.getTipo();
-            Datos[4] = "" + mProducto.getPrecio();
+            datos[1] = mProducto.getNombre();
+            datos[2] = mProducto.getClasificacion();
+            datos[3] = mProducto.getTipo();
+            datos[4] = "" + mProducto.getPrecio();
             Precio = mProducto.getPrecio();
 
-            modeloTabla.addRow(Datos);
+            modeloTabla.addRow(datos);
 
             this.TBL_prod = new javax.swing.JTable();
             this.TBL_prod.setModel(modeloTabla);
@@ -390,18 +390,18 @@ public class FRM_Compra extends javax.swing.JFrame {
         if (mBD.conectar()) {
 
             ArrayList mLista = mBD.consultarProductos();
-            String[] Datos;
+            String[] datos;
 
             for (Object mListaProducto : mLista) {
-                Datos = new String[5];
+                datos = new String[5];
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getClasificacion();
-                Datos[3] = mProducto.getTipo();
-                Datos[4] = "" + mProducto.getPrecio();
+                datos[0] = "" + mProducto.getId_Producto();
+                datos[1] = mProducto.getNombre();
+                datos[2] = mProducto.getClasificacion();
+                datos[3] = mProducto.getTipo();
+                datos[4] = "" + mProducto.getPrecio();
 
-                modeloTabla.addRow(Datos);
+                modeloTabla.addRow(datos);
             }
             this.TBL_prod = new javax.swing.JTable();
             this.TBL_prod.setModel(modeloTabla);
@@ -443,18 +443,18 @@ public class FRM_Compra extends javax.swing.JFrame {
         if (mBD.conectar()) {
 
             ArrayList mLista = mBD.consultarProductos();
-            String[] Datos;
+            String[] datos;
 
             for (Object mListaProducto : mLista) {
-                Datos = new String[5];
+                datos = new String[5];
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getClasificacion();
-                Datos[3] = mProducto.getTipo();
-                Datos[4] = "" + mProducto.getPrecio();
+                datos[0] = "" + mProducto.getId_Producto();
+                datos[1] = mProducto.getNombre();
+                datos[2] = mProducto.getClasificacion();
+                datos[3] = mProducto.getTipo();
+                datos[4] = "" + mProducto.getPrecio();
 
-                modeloTabla.addRow(Datos);
+                modeloTabla.addRow(datos);
             }
             this.TBL_prod = new javax.swing.JTable();
             this.TBL_prod.setModel(modeloTabla);

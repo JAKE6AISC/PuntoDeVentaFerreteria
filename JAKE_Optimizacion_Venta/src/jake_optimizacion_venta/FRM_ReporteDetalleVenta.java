@@ -194,17 +194,17 @@ public class FRM_ReporteDetalleVenta extends javax.swing.JFrame {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
         if (mBD.conectar()) {
-            String[] Dato;
+            String[] dato;
 
-            Dato = new String[5];
+            dato = new String[5];
             ArrayList mListaVentas = mBD.consultarVentas();
             for (Object mListaVenta : mListaVentas) {
                 mVenta = (Venta) mListaVenta;
-                Dato[0] = "" + (mVenta.getId_Venta());
-                Dato[1] = mVenta.getFecha();
-                Dato[2] = "" + (mVenta.getTotal());
+                dato[0] = "" + (mVenta.getId_Venta());
+                dato[1] = mVenta.getFecha();
+                dato[2] = "" + (mVenta.getTotal());
 
-                modeloTabla.addRow(Dato);
+                modeloTabla.addRow(dato);
             }
 
             this.tblVentas.setModel(modeloTabla);

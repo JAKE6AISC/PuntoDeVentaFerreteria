@@ -10,10 +10,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Andy
  */
 public class FRM_ModificacionProducto extends javax.swing.JFrame {
+
     int Seleccionada = 0;
     BaseDeDatos mBD = new BaseDeDatos();
     DefaultTableModel modeloTabla = new DefaultTableModel();
     Producto mProducto = new Producto();
+
     public FRM_ModificacionProducto() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -23,6 +25,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         modeloTabla.addColumn("Clasificación");
         modeloTabla.addColumn("Precio");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +220,7 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         Producto mProducto = new Producto();
         Producto mNuevoProducto = new Producto();
 
-        if (ValidarIdProducto() && ValidarProducto() && ValidarTipo() 
+        if (ValidarIdProducto() && ValidarProducto() && ValidarTipo()
                 && ValidarClasificacion() && ValidarPrecio()) {
             mProducto.setId_Producto(Integer.parseInt(this.TXTId_Producto.getText()));
             mNuevoProducto.setNombre(this.TXTNuevo_NombreProducto.getText());
@@ -252,15 +255,15 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
         TXTNuevo_TipoProducto.setText("");
         TXTNuevo_ClasificacionProducto.setText("");
         TXTNuevo_PrecioProducto.setText("");
-        
+
         Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
         TXTId_Producto.setEditable(true);
-        TXTId_Producto.setText(JTableProveedor.getModel().getValueAt(Seleccionada,0).toString());
+        TXTId_Producto.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 0).toString());
         TXTId_Producto.setEditable(false);
-        TXTNuevo_NombreProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada,1).toString());
-        TXTNuevo_TipoProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada,2).toString());
-        TXTNuevo_ClasificacionProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada,3).toString());
-        TXTNuevo_PrecioProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada,4).toString());
+        TXTNuevo_NombreProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 1).toString());
+        TXTNuevo_TipoProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 2).toString());
+        TXTNuevo_ClasificacionProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 3).toString());
+        TXTNuevo_PrecioProducto.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 4).toString());
     }//GEN-LAST:event_JTableProveedorMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -272,18 +275,18 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
 
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.consultarProductos();
-            String[] Datos;
-            
-            for (Object mListaProveedor : mListaProductos) {
-                Datos = new String[5];
-                mProducto = (Producto) mListaProveedor;
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getTipo();
-                Datos[3] = mProducto.getClasificacion();
-                Datos [4] = "" + mProducto.getPrecio();
+            String[] datos;
 
-                modeloTabla.addRow(Datos);
+            for (Object mListaProveedor : mListaProductos) {
+                datos = new String[5];
+                mProducto = (Producto) mListaProveedor;
+                datos[0] = "" + mProducto.getId_Producto();
+                datos[1] = mProducto.getNombre();
+                datos[2] = mProducto.getTipo();
+                datos[3] = mProducto.getClasificacion();
+                datos[4] = "" + mProducto.getPrecio();
+
+                modeloTabla.addRow(datos);
             }
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(modeloTabla);
@@ -302,61 +305,59 @@ public class FRM_ModificacionProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void TXT_BusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BusquedaKeyPressed
-               if (TXT_Busqueda.getText().equals("")) {
-            
-        }else {
-        modeloTabla.setColumnCount(0);
-        modeloTabla.setRowCount(0);
-        
-      
-        if (mBD.conectar()) {
-            
+        if (TXT_Busqueda.getText().equals("")) {
+
+        } else {
+            modeloTabla.setColumnCount(0);
+            modeloTabla.setRowCount(0);
+
             if (mBD.conectar()) {
-                
-                String[] Dato;
 
-                modeloTabla.addColumn("Id producto");
-                modeloTabla.addColumn("Nombre");
-                modeloTabla.addColumn("Tipo");
-                modeloTabla.addColumn("Clasificación");
-                modeloTabla.addColumn("Precio");
+                if (mBD.conectar()) {
 
-                Dato = new String[5];
-             
-                 mProducto = mBD.consultarProductoFiltro(TXT_Busqueda.getText());
-               
-                
-                Dato[0] = "" + mProducto.getId_Producto();
-                Dato[1] = mProducto.getNombre();
-                Dato[2] = mProducto.getTipo();
-                Dato[3] = mProducto.getClasificacion();
-                Dato[4] = "" + mProducto.getPrecio();
+                    String[] dato;
 
-                modeloTabla.addRow(Dato);
+                    modeloTabla.addColumn("Id producto");
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Tipo");
+                    modeloTabla.addColumn("Clasificación");
+                    modeloTabla.addColumn("Precio");
 
-                this.JTableProveedor.setModel(modeloTabla);
-                this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
-                this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
-                this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
-                this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(150);
-                this.JTableProveedor.getColumnModel().getColumn(4).setPreferredWidth(150);
+                    dato = new String[5];
 
-                if (this.JTableProveedor.getRowCount() > 0) {
-                    this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    mProducto = mBD.consultarProductoFiltro(TXT_Busqueda.getText());
+
+                    dato[0] = "" + mProducto.getId_Producto();
+                    dato[1] = mProducto.getNombre();
+                    dato[2] = mProducto.getTipo();
+                    dato[3] = mProducto.getClasificacion();
+                    dato[4] = "" + mProducto.getPrecio();
+
+                    modeloTabla.addRow(dato);
+
+                    this.JTableProveedor.setModel(modeloTabla);
+                    this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+                    this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+                    this.JTableProveedor.getColumnModel().getColumn(3).setPreferredWidth(150);
+                    this.JTableProveedor.getColumnModel().getColumn(4).setPreferredWidth(150);
+
+                    if (this.JTableProveedor.getRowCount() > 0) {
+                        this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+                mBD.desconectar();
             }
-            mBD.desconectar();
-        }   
-       }
+        }
     }//GEN-LAST:event_TXT_BusquedaKeyPressed
 
     private void TXTNuevo_PrecioProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTNuevo_PrecioProductoKeyTyped
-         char caracter  = evt.getKeyChar();
-            if (caracter < '0' || caracter > '9') {
-                evt.consume();
-            }         // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }         // TODO add your handling code here:
     }//GEN-LAST:event_TXTNuevo_PrecioProductoKeyTyped
 
     public boolean ValidarIdProducto() {

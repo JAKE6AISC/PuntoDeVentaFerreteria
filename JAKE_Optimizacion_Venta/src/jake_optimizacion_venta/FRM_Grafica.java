@@ -126,7 +126,7 @@ public class FRM_Grafica extends javax.swing.JFrame {
     private void BTN_GraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GraficarActionPerformed
         Fecha = new SimpleDateFormat("yyyy-MM-dd").format(DateChooser1.getDate());
         Fecha2 = new SimpleDateFormat("yyyy-MM-dd").format(DateChooser2.getDate());
-        
+
         DefaultCategoryDataset barCharData = new DefaultCategoryDataset();
         if (mBD.conectar()) {
             ArrayList mListaVentas = mBD.VentasFecha(Fecha, Fecha2);
@@ -136,7 +136,7 @@ public class FRM_Grafica extends javax.swing.JFrame {
             }
         }
 
-        JFreeChart barChart = ChartFactory.createBarChart("Ferreteria Juanes", "Día", "Ventas", 
+        JFreeChart barChart = ChartFactory.createBarChart("Ferreteria Juanes", "Día", "Ventas",
                 barCharData, PlotOrientation.VERTICAL, false, true, false);
         CategoryPlot barchrt = barChart.getCategoryPlot();
         barchrt.setRangeGridlinePaint(Color.BLACK);
@@ -149,12 +149,12 @@ public class FRM_Grafica extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_GraficarActionPerformed
 
     private void BTNsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNsalirActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_BTNsalirActionPerformed
 
     private void BTNatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNatrasActionPerformed
-       Menu mMenu = new Menu();
-       mMenu.setVisible(true);
+        Menu mMenu = new Menu();
+        mMenu.setVisible(true);
     }//GEN-LAST:event_BTNatrasActionPerformed
 
     /**

@@ -237,18 +237,18 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
 
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.consultarProductos();
-            String[] Datos;
+            String[] datos;
 
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[5];
+                datos = new String[5];
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = "" + mProducto.getId_Producto();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = mProducto.getClasificacion();
-                Datos[3] = mProducto.getTipo();
-                Datos[4] = "" + mProducto.getPrecio();
+                datos[0] = "" + mProducto.getId_Producto();
+                datos[1] = mProducto.getNombre();
+                datos[2] = mProducto.getClasificacion();
+                datos[3] = mProducto.getTipo();
+                datos[4] = "" + mProducto.getPrecio();
 
-                modeloTabla.addRow(Datos);
+                modeloTabla.addRow(datos);
             }
             this.JTable_Bajas = new javax.swing.JTable();
             this.JTable_Bajas.setModel(modeloTabla);

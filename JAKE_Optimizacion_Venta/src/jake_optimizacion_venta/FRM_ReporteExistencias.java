@@ -162,24 +162,24 @@ public class FRM_ReporteExistencias extends javax.swing.JFrame {
 
         if (mBaseDeDatos.conectar()) {
 
-            String[] Dato;
+            String[] dato;
 
             ModeloTabla.addColumn("id_producto");
             ModeloTabla.addColumn("nombre");
             ModeloTabla.addColumn("precio");
             ModeloTabla.addColumn("cantidad");
 
-            Dato = new String[5];
+            dato = new String[5];
             ListaProductos = mBaseDeDatos.consultarExistencias();
             for (int i = 0; i < ListaProductos.size(); i++) {
                 mProducto = (Producto) ListaProductos.get(i);
 
-                Dato[0] = "" + (mProducto.getId_Producto());
-                Dato[1] = mProducto.getNombre();
-                Dato[2] = "" + (mProducto.getPrecio());
-                Dato[3] = "" + (mProducto.getExistencias());
+                dato[0] = "" + (mProducto.getId_Producto());
+                dato[1] = mProducto.getNombre();
+                dato[2] = "" + (mProducto.getPrecio());
+                dato[3] = "" + (mProducto.getExistencias());
 
-                ModeloTabla.addRow(Dato);
+                ModeloTabla.addRow(dato);
             }
 
             this.JTableReporteExistencias.setModel(ModeloTabla);

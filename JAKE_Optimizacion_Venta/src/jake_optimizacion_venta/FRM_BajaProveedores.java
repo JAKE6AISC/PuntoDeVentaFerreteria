@@ -205,16 +205,16 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
-            String[] Datos;
+            String[] datos;
 
             for (Object mListaProveedor : mListaProveedores) {
-                Datos = new String[3];
+                datos = new String[3];
                 mProveedor = (Proveedor) mListaProveedor;
-                Datos[0] = "" + mProveedor.getId_proveedor();
-                Datos[1] = mProveedor.getNombre();
-                Datos[2] = mProveedor.getEmpresa();
+                datos[0] = "" + mProveedor.getId_proveedor();
+                datos[1] = mProveedor.getNombre();
+                datos[2] = mProveedor.getEmpresa();
 
-                modeloTabla.addRow(Datos);
+                modeloTabla.addRow(datos);
             }
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(modeloTabla);

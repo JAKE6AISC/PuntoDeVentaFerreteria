@@ -221,17 +221,17 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
             modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
         }
         if (mBD.conectar()) {
-            String[] Dato;
+            String[] dato;
 
-            Dato = new String[5];
+            dato = new String[5];
             ArrayList mListaCompras = mBD.consultarCompras();
             for (Object mListaCompra : mListaCompras) {
                 mCompra = (Compra) mListaCompra;
-                Dato[0] = "" + (mCompra.getId_Compra());
-                Dato[1] = mCompra.getFecha();
-                Dato[2] = "" + (mCompra.getTotal());
+                dato[0] = "" + (mCompra.getId_Compra());
+                dato[1] = mCompra.getFecha();
+                dato[2] = "" + (mCompra.getTotal());
 
-                modeloTabla.addRow(Dato);
+                modeloTabla.addRow(dato);
             }
 
             this.tblCompras.setModel(modeloTabla);

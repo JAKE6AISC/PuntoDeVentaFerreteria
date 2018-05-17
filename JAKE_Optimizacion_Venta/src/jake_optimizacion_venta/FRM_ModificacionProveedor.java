@@ -10,10 +10,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Juanez
  */
 public class FRM_ModificacionProveedor extends javax.swing.JFrame {
+
     DefaultTableModel modeloTabla = new DefaultTableModel();
     Proveedor mProveedor = new Proveedor();
     BaseDeDatos mBD = new BaseDeDatos();
     int Seleccionada = 0;
+
     public FRM_ModificacionProveedor() {
         initComponents();
         modeloTabla.addColumn("ID");
@@ -21,7 +23,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         modeloTabla.addColumn("Clasificación");
         this.setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,7 +227,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
             TXT_Id_Proveedor.requestFocus();
         }
     }//GEN-LAST:event_TXT_ModificarProveedorActionPerformed
-   
+
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
         FRM_CatalogoProveedor FormCP = new FRM_CatalogoProveedor();
         FormCP.setVisible(true);
@@ -242,16 +244,16 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
 
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
-            String[] Datos;
+            String[] datos;
 
             for (Object mListaProveedor : mListaProveedores) {
-                Datos = new String[3];
+                datos = new String[3];
                 mProveedor = (Proveedor) mListaProveedor;
-                Datos[0] = "" + mProveedor.getId_proveedor();
-                Datos[1] = mProveedor.getNombre();
-                Datos[2] = mProveedor.getEmpresa();
+                datos[0] = "" + mProveedor.getId_proveedor();
+                datos[1] = mProveedor.getNombre();
+                datos[2] = mProveedor.getEmpresa();
 
-                modeloTabla.addRow(Datos);
+                modeloTabla.addRow(datos);
             }
             this.JTableProveedor = new javax.swing.JTable();
             this.JTableProveedor.setModel(modeloTabla);
@@ -273,103 +275,101 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         TXT_NuevoNombreProveedor.setText("");
         TXT_NuevaEmpresa.setText("");
         Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
-            TXT_Id_Proveedor.setEditable(true);
-            TXT_Id_Proveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada,0).toString());
-            TXT_Id_Proveedor.setEditable(false);
-            TXT_NuevoNombreProveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada,1).toString());
-            TXT_NuevaEmpresa.setText(JTableProveedor.getModel().getValueAt(Seleccionada,2).toString());  
+        TXT_Id_Proveedor.setEditable(true);
+        TXT_Id_Proveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 0).toString());
+        TXT_Id_Proveedor.setEditable(false);
+        TXT_NuevoNombreProveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 1).toString());
+        TXT_NuevaEmpresa.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 2).toString());
     }//GEN-LAST:event_JTableProveedorMouseClicked
 
     private void TXT_BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_BusquedaActionPerformed
-        
+
     }//GEN-LAST:event_TXT_BusquedaActionPerformed
 
     private void BTN_BuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscaActionPerformed
-       if (TXT_Busqueda.getText().equals("")) {
-            
-        }else {
-        modeloTabla.setColumnCount(0);
-        modeloTabla.setRowCount(0);
-        
-      
-        if (mBD.conectar()) {
-            
+        if (TXT_Busqueda.getText().equals("")) {
+
+        } else {
+            modeloTabla.setColumnCount(0);
+            modeloTabla.setRowCount(0);
+
             if (mBD.conectar()) {
-                
-                String[] Dato;
-               
-                modeloTabla.addColumn("ID");
-                modeloTabla.addColumn("Nombre");
-                modeloTabla.addColumn("Clasificación");
-                 
-                Dato = new String[3];
-             
-                 mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
-               
-                Dato[0] = "" + (mProveedor.getId_proveedor());
-                Dato[1] = mProveedor.getNombre();
-                Dato[2] = mProveedor.getEmpresa();
 
-                modeloTabla.addRow(Dato);
+                if (mBD.conectar()) {
 
-                this.JTableProveedor.setModel(modeloTabla);
-                this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
-                this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
-                this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+                    String[] dato;
 
-                if (this.JTableProveedor.getRowCount() > 0) {
-                    this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    modeloTabla.addColumn("ID");
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Clasificación");
+
+                    dato = new String[3];
+
+                    mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
+
+                    dato[0] = "" + (mProveedor.getId_proveedor());
+                    dato[1] = mProveedor.getNombre();
+                    dato[2] = mProveedor.getEmpresa();
+
+                    modeloTabla.addRow(dato);
+
+                    this.JTableProveedor.setModel(modeloTabla);
+                    this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+                    this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+                    if (this.JTableProveedor.getRowCount() > 0) {
+                        this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+                mBD.desconectar();
             }
-            mBD.desconectar();
-        }   
-       }// TODO add your handling code here:
+        }// TODO add your handling code here:
     }//GEN-LAST:event_BTN_BuscaActionPerformed
 
     private void TXT_BusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BusquedaKeyPressed
         if (TXT_Busqueda.getText().equals("")) {
-            
-        }else {
-        modeloTabla.setColumnCount(0);
-        modeloTabla.setRowCount(0);
-        
-      
-        if (mBD.conectar()) {
-            
+
+        } else {
+            modeloTabla.setColumnCount(0);
+            modeloTabla.setRowCount(0);
+
             if (mBD.conectar()) {
-                
-                String[] Dato;
 
-                modeloTabla.addColumn("ID");
-                modeloTabla.addColumn("Nombre");
-                modeloTabla.addColumn("Clasificación");
+                if (mBD.conectar()) {
 
-                Dato = new String[3];
-             
-                 mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
-               
-                Dato[0] = "" + (mProveedor.getId_proveedor());
-                Dato[1] = mProveedor.getNombre();
-                Dato[2] = mProveedor.getEmpresa();
+                    String[] dato;
 
-                modeloTabla.addRow(Dato);
+                    modeloTabla.addColumn("ID");
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Clasificación");
 
-                this.JTableProveedor.setModel(modeloTabla);
-                this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
-                this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
-                this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+                    dato = new String[3];
 
-                if (this.JTableProveedor.getRowCount() > 0) {
-                    this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    mProveedor = mBD.consultarProveedorString(TXT_Busqueda.getText());
+
+                    dato[0] = "" + (mProveedor.getId_proveedor());
+                    dato[1] = mProveedor.getNombre();
+                    dato[2] = mProveedor.getEmpresa();
+
+                    modeloTabla.addRow(dato);
+
+                    this.JTableProveedor.setModel(modeloTabla);
+                    this.JTableProveedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    this.JTableProveedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+                    this.JTableProveedor.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+                    if (this.JTableProveedor.getRowCount() > 0) {
+                        this.JTableProveedor.setRowSelectionInterval(0, 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+                mBD.desconectar();
             }
-            mBD.desconectar();
-        }   
-       }// TODO add your handling code here:
+        }// TODO add your handling code here:
     }//GEN-LAST:event_TXT_BusquedaKeyPressed
     //metodos para valiadar cajas de texto es uno para cada caja de texto... Juanes
     // Id_Proveedor
@@ -449,5 +449,4 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    
 }
