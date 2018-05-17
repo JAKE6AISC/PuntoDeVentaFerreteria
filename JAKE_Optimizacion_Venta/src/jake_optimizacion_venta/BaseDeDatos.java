@@ -43,22 +43,6 @@ public class BaseDeDatos {
         }
     }
 
-    public boolean conectarWindows() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
-            if (conexion != null) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public void desconectar() {
         try {
             this.conexion.close();
