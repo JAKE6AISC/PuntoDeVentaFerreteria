@@ -17,7 +17,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     Proveedor mProveedor = new Proveedor();
-    private int Seleccionada;
+    private int seleccionada;
 
     /**
      * Creates new form FRM_BajaProveedores
@@ -28,7 +28,7 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Clasificación");
         this.setLocationRelativeTo(null);
-        Seleccionada = 0;
+        seleccionada = 0;
     }
 
     /**
@@ -236,9 +236,9 @@ public class FRM_BajaProveedores extends javax.swing.JFrame {
 
     private void JTableProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTableProveedorMouseClicked
         TXT_Nombre.setText("");
-        Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
-        LBL_ID.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 0).toString());
-        TXT_Nombre.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 1).toString());
+        seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
+        LBL_ID.setText(JTableProveedor.getModel().getValueAt(seleccionada, 0).toString());
+        TXT_Nombre.setText(JTableProveedor.getModel().getValueAt(seleccionada, 1).toString());
     }//GEN-LAST:event_JTableProveedorMouseClicked
 
     /**

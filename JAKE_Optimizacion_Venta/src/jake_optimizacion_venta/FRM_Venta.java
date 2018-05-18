@@ -31,44 +31,65 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class FRM_Venta extends javax.swing.JFrame {
 
+    //Instancias
     BaseDeDatos mBD = new BaseDeDatos();
     Venta mVenta = new Venta();
     DefaultTableModel TablasJuanes = new DefaultTableModel();
     Producto mProducto = new Producto();
     DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
     Calendar fecha = Calendar.getInstance();
-    float Total = 0;
-    String Lugar = "Río Grande Zacatecas", CP = "98403";
-    String Id_Ultim = "";
-    int Id_Venta = 0, Anterior = 0;
-    int year = 0;
-    int mes = 0;
-    int dia = 0;
-    int hora = 0;
-    int minutos = 0;
-    String FechaActual = year + "-" + mes + "-" + dia;
-    String Hora = "";
-    String Ruta = "";
-    int ConsultaEx = 0;
-    float efectivo, cambio;
-    int Contador = 0;
     ArrayList<Integer> ArregloIdProd = new ArrayList<>();
     ArrayList<Float> ArregloPrecios = new ArrayList<>();
-    private float Ganancia;
+
+    // Variables licales
+    String lugar;
+    String cp;
+    String id_ultim;
+    String hora_string;
+    String ruta;
+    int id_venta;
+    int anterior;
+    int year;
+    int mes;
+    int dia;
+    int hora;
+    int minutos;
+    int consulta_exist;
+    int contador;
+    float efectivo, cambio;
+    private float ganancia;
+    float total;
+    String fecha_actual;
 
     public FRM_Venta() {
+        fecha_actual = year + "-" + mes + "-" + dia;
         TablasJuanes.addColumn("Codigo de barras");
         TablasJuanes.addColumn("Nombre");
         TablasJuanes.addColumn("Precio");
         TablasJuanes.addColumn("Cantidad");
         TablasJuanes.addColumn("Sub Total");
         initComponents();
-        ObternerId_Vtas();
+        ObternerIdVtas();
         Fecha();
-        LBL_ID_Venta.setText(Id_Ultim);
-        LBL_Hora.setText(Hora);
+        LBL_ID_Venta.setText(id_ultim);
+        LBL_Hora.setText(hora_string);
         this.setLocationRelativeTo(null);
-        Ganancia = 0;
+        ganancia = 0;
+        ruta = "";
+        hora_string = "";
+        lugar = "Río Grande Zacatecas";
+        cp = "98403";
+        id_ultim = "";
+        id_venta = 0;
+        anterior = 0;
+        year = 0;
+        mes = 0;
+        dia = 0;
+        hora = 0;
+        minutos = 0;
+        consulta_exist = 0;
+        contador = 0;
+        total = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -185,6 +206,11 @@ public class FRM_Venta extends javax.swing.JFrame {
 
         TXT_Efectivo.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         TXT_Efectivo.setText(" ");
+        TXT_Efectivo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_EfectivoFocusLost(evt);
+            }
+        });
         TXT_Efectivo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_EfectivoKeyTyped(evt);
@@ -293,11 +319,11 @@ public class FRM_Venta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ObternerId_Vtas() {
+    private void ObternerIdVtas() {
         if (mBD.conectar()) {
-            Anterior = mBD.getIdSiguienteVenta() + 1;
-            int var = Anterior;
-            Id_Ultim = var + "";
+            anterior = mBD.getIdSiguienteVenta() + 1;
+            int var = anterior;
+            id_ultim = var + "";
         }
         mBD.desconectar();
     }
@@ -308,17 +334,17 @@ public class FRM_Venta extends javax.swing.JFrame {
         dia = fecha.get(Calendar.DAY_OF_MONTH);
         hora = fecha.get(Calendar.HOUR);
         minutos = fecha.get(Calendar.MINUTE);
-        FechaActual = year + "-" + mes + "-" + dia;
+        fecha_actual = year + "-" + mes + "-" + dia;
         LBL_Fecha.setText(dia + "/" + mes + "/" + year);
-        Hora = hora + ":" + minutos;
+        hora_string = hora + ":" + minutos;
     }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
         float costo = 0;
         int idDetCom = 0;
         if (mBD.conectar()) {
             ArrayList ListaProductoss = mBD.listaProductos(TXT_Escaner.getText());
-            ConsultaEx = mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
-            if (ConsultaEx > 0) {
+            consulta_exist = mBD.consultaExistencias(Integer.parseInt(TXT_Escaner.getText()));
+            if (consulta_exist > 0) {
                 String[] DatosTabla;
                 for (Object ListaProductos : ListaProductoss) {
                     DatosTabla = new String[5];
@@ -331,14 +357,14 @@ public class FRM_Venta extends javax.swing.JFrame {
                     mBD.modificarExistencias(mProducto.getId_Producto());
                     ArregloIdProd.add(mProducto.getId_Producto());
                     ArregloPrecios.add(mProducto.getPrecio());
-                    Total = Total + mProducto.getPrecio();
-                    LBL_Total.setText(Total + "");
+                    total = total + mProducto.getPrecio();
+                    LBL_Total.setText(total + "");
                     TablasJuanes.addRow(DatosTabla);
-                    Contador++;
+                    contador++;
                     idDetCom = mBD.consultarUltimoIDdetcom(mProducto.getId_Producto());
                     costo = mBD.ObtenerDetCosto(idDetCom);
-                    Ganancia =  Ganancia + (mProducto.getPrecio() - costo);
-                    mVenta.setGanancia(Ganancia);
+                    ganancia = ganancia + (mProducto.getPrecio() - costo);
+                    mVenta.setGanancia(ganancia);
                 }
 
                 this.TBL_Venta = new javax.swing.JTable();
@@ -350,7 +376,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                 if (this.TBL_Venta.getRowCount() > 0) {
                     this.TBL_Venta.setRowSelectionInterval(0, 0);
                 }
-            } else if (ConsultaEx <= 0) {
+            } else if (consulta_exist <= 0) {
                 JOptionPane.showMessageDialog(null, "El producto "
                         + "especificado no tiene piezas disponibles en existencia");
             }
@@ -371,18 +397,18 @@ public class FRM_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AtrasActionPerformed
 
     private void BTN_RealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RealizarVentaActionPerformed
-        if (Contador > 0) {
-            LBL_ID_Venta.setText(Id_Ultim);
-            mVenta.setFecha(FechaActual);
-            mVenta.setId_Venta(Integer.parseInt(Id_Ultim));
-            mVenta.setTotal((float) Total);
+        if (contador > 0) {
+            LBL_ID_Venta.setText(id_ultim);
+            mVenta.setFecha(fecha_actual);
+            mVenta.setId_Venta(Integer.parseInt(id_ultim));
+            mVenta.setTotal((float) total);
             efectivo = Float.parseFloat(TXT_Efectivo.getText());
-            if (efectivo >= Total) {
-                cambio = efectivo - Total;
+            if (efectivo >= total) {
+                cambio = efectivo - total;
                 LBL_Cambio.setText(String.valueOf(cambio));
                 if (mBD.conectar()) {
                     if (mBD.realizarVenta(mVenta)) {
-                        Contador = 0;
+                        contador = 0;
                         int id_vta = mVenta.getId_Venta();
                         int id_prod;
                         float precio;
@@ -394,87 +420,15 @@ public class FRM_Venta extends javax.swing.JFrame {
 
                         }
 
-                        mBD.agregarTicket(id_vta, FechaActual, Hora, Lugar, CP, Total, efectivo, cambio);
-//                    GenerarReporteTicket(id_vta);
+                        mBD.agregarTicket(id_vta, fecha_actual, hora_string, lugar, cp, total, efectivo, cambio);
                         try {
-                            Ruta = "Tickets\\Ticket_venta_" + Id_Ultim + ".txt";
-                            try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(Ruta))) {
-                                ArchivoTXT.write("       ╬═══════════════════╬");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("       ╬ Ferreteria Juanes ╬");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("       ╬═══════════════════╬");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("     !!!Gracias por su preferencia!!!");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("Lugar de expedicion: " + Lugar + "  Código postal: " + CP);
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("No. Venta " + Id_Ultim + "  \tFecha " + dia + "/" + mes + "/" + year + "\t Hora " + Hora);
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("\n══════════════════════════════════════════════");
-                                ArchivoTXT.newLine();
-                                String Tam = "";
-                                for (int i = 0; i < TablasJuanes.getRowCount(); i++) {
-                                    for (int j = 0; j < TablasJuanes.getColumnCount(); j++) {
-                                        if (((String) (TablasJuanes.getValueAt(i, j))).length() > 6) {
-                                            Tam = (String) (TablasJuanes.getValueAt(i, j)).toString().substring(0, 5);
-                                            ArchivoTXT.write(Tam);
-                                            if (j < TablasJuanes.getColumnCount() - 1) {
-                                                ArchivoTXT.write("\t\t");
-                                            }
-                                        } else {
-                                            ArchivoTXT.write((String) (TablasJuanes.getValueAt(i, j)));
-                                            if (j < TablasJuanes.getColumnCount() - 1) {
-                                                ArchivoTXT.write("\t\t");
-                                            }
-                                        }
-
-                                    }
-                                    ArchivoTXT.newLine();
-                                    ArchivoTXT.newLine();
-                                }
-                                ArchivoTXT.write("\n══════════════════════════════════════════════");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + Total + " MXN");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("\t\t\t \t   \t   Efectivo: $" + efectivo + " MXN");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("\t\t\t \t   \t   Cambio: $" + cambio + " MXN");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("   Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("   Software realizado por la organizacion JAKE\n\n");
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.newLine();
-                                ArchivoTXT.write("   !!! Gracias por su compra esperamos verlos pronto!!!");
-                                ArchivoTXT.close();
-                            }
-                            JOptionPane.showMessageDialog(null, "Venta Realizada\nTicket de venta numero " + Id_Ultim + " Guardado");
-                        } catch (IOException | HeadlessException e) {
+                            ruta = "Tickets\\Ticket_venta_" + id_ultim + ".txt";
+                            GenerarTicketTxt(ruta, lugar, cp, id_ultim, dia, mes, year, hora_string, total, efectivo, cambio);
+                            JOptionPane.showMessageDialog(null, "Venta Realizada\nTicket de venta numero " + id_ultim + " Guardado");
+                        } catch (HeadlessException e) {
                             JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage());
+                        } catch (IOException ex) {
+                            Logger.getLogger(FRM_Venta.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         VaciarCampos();
 
@@ -482,8 +436,8 @@ public class FRM_Venta extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Error");
                         mBD.desconectar();
                     }
-                    ObternerId_Vtas();
-                    LBL_ID_Venta.setText(Id_Ultim);
+                    ObternerIdVtas();
+                    LBL_ID_Venta.setText(id_ultim);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
@@ -507,7 +461,83 @@ public class FRM_Venta extends javax.swing.JFrame {
             Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
+    public void GenerarTicketTxt(String ruta, String lugar, String cp, String id_ultim, int dia, int mes, int year, String hora_string, float total, float efectivo, float cambio) throws IOException {
+        try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(ruta))) {
+            ArchivoTXT.write("       ╬═══════════════════╬");
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("       ╬ Ferreteria Juanes ╬");
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("       ╬═══════════════════╬");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("     !!!Gracias por su preferencia!!!");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("Lugar de expedicion: " + lugar + "  Código postal: " + cp);
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("No. Venta " + id_ultim + "  \tFecha " + dia + "/" + mes + "/" + year + "\t Hora " + hora_string);
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("Codigo\t\tDescrip\t\tPrecio\t\tCantid\t\tSubtotal");
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("\n══════════════════════════════════════════════");
+            ArchivoTXT.newLine();
+            String tam = "";
+            for (int i = 0; i < TablasJuanes.getRowCount(); i++) {
+                for (int j = 0; j < TablasJuanes.getColumnCount(); j++) {
+                    if (((String) (TablasJuanes.getValueAt(i, j))).length() > 6) {
+                        tam = (String) (TablasJuanes.getValueAt(i, j)).toString().substring(0, 5);
+                        ArchivoTXT.write(tam);
+                        if (j < TablasJuanes.getColumnCount() - 1) {
+                            ArchivoTXT.write("\t\t");
+                        }
+                    } else {
+                        ArchivoTXT.write((String) (TablasJuanes.getValueAt(i, j)));
+                        if (j < TablasJuanes.getColumnCount() - 1) {
+                            ArchivoTXT.write("\t\t");
+                        }
+                    }
 
+                }
+                ArchivoTXT.newLine();
+                ArchivoTXT.newLine();
+            }
+            ArchivoTXT.write("\n══════════════════════════════════════════════");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("\t\t\t \t   \t   Total a pagar: $" + total + " MXN");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("\t\t\t \t   \t   Efectivo: $" + efectivo + " MXN");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("\t\t\t \t   \t   Cambio: $" + cambio + " MXN");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("   Version del Software 2.0 todos los derechos reservados a JAKE\n\n");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("   Software realizado por la organizacion JAKE\n\n");
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.newLine();
+            ArchivoTXT.write("   !!! Gracias por su compra esperamos verlos pronto!!!");
+            ArchivoTXT.close();
+        }
+
+    }
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
         char caracter = evt.getKeyChar();
         if (caracter < '0' || caracter > '9') {
@@ -534,6 +564,14 @@ public class FRM_Venta extends javax.swing.JFrame {
             TXT_Escaner.requestFocus();
         }
     }//GEN-LAST:event_TXT_EscanerFocusLost
+
+    private void TXT_EfectivoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_EfectivoFocusLost
+        if (ValidarEfectivo()) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese codigo de barras primero");
+            TXT_Efectivo.requestFocus();
+        }
+    }//GEN-LAST:event_TXT_EfectivoFocusLost
     private void VaciarCampos() {
         TXT_Escaner.setText("");
         LBL_Total.setText("00.00");
@@ -548,6 +586,14 @@ public class FRM_Venta extends javax.swing.JFrame {
 
     public boolean ValidarEscanner() {
         if (TXT_Escaner.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean ValidarEfectivo() {
+        if (TXT_Efectivo.getText().equals("")) {
             return false;
         } else {
             return true;
@@ -609,20 +655,4 @@ public class FRM_Venta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public void GenerarReporteTicket(int ID) {
-        /*   String path = "\\src\\jake_optimizacion_venta\\ReporteTickets.jasper";
-        JasperReport jr = null;
-        Map parametros = new HashMap();
-        
-        try {
-            parametros.put("ID", ID);
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectarJasper());
-            JasperViewer jv = new JasperViewer(jp);
-            jv.setVisible(true);
-            jv.setTitle(path);
-        } catch (JRException ex) {
-            Logger.getLogger(FRM_ReporteDetalleVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }
 }

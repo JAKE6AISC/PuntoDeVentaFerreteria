@@ -3,7 +3,7 @@
 //Se añadio el formulario FRM_ConsultasProducto solo Diseño
 //***Se agrego la codificación del Botón Buscar tanto para busueda por el nombre como por el tipo
 //***Se agrego el evento activar ventana para mostrar la lista de productos
-*/
+ */
 package jake_optimizacion_venta;
 
 import java.util.ArrayList;
@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Ene
  */
 public class FRM_ConsultasProductos extends javax.swing.JFrame {
-DefaultTableModel ModeloTabla = new DefaultTableModel();
- BaseDeDatos mBaseDeDatos= new BaseDeDatos();
- Producto mProducto = new Producto();
+
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
+    Producto mProducto = new Producto();
 
     public FRM_ConsultasProductos() {
         initComponents();
@@ -207,9 +208,9 @@ DefaultTableModel ModeloTabla = new DefaultTableModel();
     }//GEN-LAST:event_BTN_BuscarMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        ArrayList ListaProductos;        
+        ArrayList ListaProductos;
         if (mBaseDeDatos.conectar()) {
-            
+
             String[] dato;
 
             ModeloTabla.addColumn("id_producto");

@@ -28,7 +28,7 @@ public class Menu extends javax.swing.JFrame {
         BTN_Reporte_Existencias = new javax.swing.JButton();
         BTN_ReporteDetalleVentas = new javax.swing.JButton();
         BTN_ReporteDetalleCompras = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BTN_VolumenVentas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -100,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         BTN_Compra.setText("Compra");
@@ -131,10 +131,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Volumen de Ventas");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BTN_VolumenVentas.setText("Volumen de Ventas");
+        BTN_VolumenVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BTN_VolumenVentasActionPerformed(evt);
             }
         });
 
@@ -151,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(BTN_CatalogoProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BTN_Venta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(72, 72, 72)
-                .addComponent(jButton2)
+                .addComponent(BTN_VolumenVentas)
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BTN_Compra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,7 +188,7 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(BTN_ReporteDetalleCompras)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(BTN_VolumenVentas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTN_Salir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,11 +249,11 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BTN_ReporteDetalleComprasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BTN_VolumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VolumenVentasActionPerformed
         FRM_Grafica Graf = new FRM_Grafica();
         Graf.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BTN_VolumenVentasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -297,7 +297,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Reporte_Ventas;
     private javax.swing.JButton BTN_Salir;
     private javax.swing.JButton BTN_Venta;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BTN_VolumenVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;

@@ -192,7 +192,7 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
         if (mBD.conectar()) {
             if (ValidarClasificacion() && ValidarPrecio()
                     && ValidarNombreProducto() && ValidarTipo()) {
-                int idtemp = mBD.obtenerIDprov(jComboBox1.getSelectedItem().toString());            
+                int idtemp = mBD.obtenerIDprov(jComboBox1.getSelectedItem().toString());
                 mProducto.setNombre(TXT_NombreProducto.getText());
                 mProducto.setClasificacion(TXT_Clasificacion.getText());
                 mProducto.setTipo(TXT_Tipo.getText());

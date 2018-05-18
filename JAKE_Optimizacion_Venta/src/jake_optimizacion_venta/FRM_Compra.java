@@ -19,9 +19,9 @@ public class FRM_Compra extends javax.swing.JFrame {
     Producto mProducto = new Producto();
     DefaultTableModel modeloTabla = new DefaultTableModel();
     ArrayList mListaProductos = new ArrayList();
-    private float Total;
-    private int Cantidad;
-    private float Precio;
+    private float total;
+    private int cantidad;
+    private float precio;
 
     /**
      * Creates new form FRM_Compra
@@ -33,9 +33,9 @@ public class FRM_Compra extends javax.swing.JFrame {
         modeloTabla.addColumn("Clasificación");
         modeloTabla.addColumn("Tipo");
         modeloTabla.addColumn("Precio");
-        Total = 0;
-        Cantidad = 0;
-        Precio = 0;
+        total = 0;
+        cantidad = 0;
+        precio = 0;
         this.setLocationRelativeTo(null);
     }
 
@@ -288,7 +288,7 @@ public class FRM_Compra extends javax.swing.JFrame {
         if (mBD.conectar()) {
             if (ValidarCajas()) {
                 if (mBD.realizarCompra(mCompra)) {
-                    if (mBD.realizarDetalleCompra(mProducto, Cantidad)) {
+                    if (mBD.realizarDetalleCompra(mProducto, cantidad)) {
                         if (mBD.incrementarProductos(mListaProductos)) {
                             JOptionPane.showMessageDialog(null, "Compra realizada con éxito!");
                         } else {
@@ -310,23 +310,23 @@ public class FRM_Compra extends javax.swing.JFrame {
         mProducto = new Producto();
 
         if (ValidarCajas()) {
-            if (Precio > Float.parseFloat(TXT_Costo.getText()) && (Float.parseFloat(TXT_Costo.getText()) > 0)) {
+            if (precio > Float.parseFloat(TXT_Costo.getText()) && (Float.parseFloat(TXT_Costo.getText()) > 0)) {
                 costo = (Float.parseFloat(TXT_Costo.getText())) * (Integer.parseInt(TXT_Cantidad.getText()));
                 LBL_Sub.setText(String.valueOf(costo));
-                Cantidad = Integer.parseInt(TXT_Cantidad.getText());
+                cantidad = Integer.parseInt(TXT_Cantidad.getText());
                 idtemp = Integer.parseInt(LBL_ID.getText());
 
                 mProducto.setId_Producto(idtemp);
                 mProducto.setPrecio(Float.parseFloat(TXT_Costo.getText()));
-                mProducto.setExistencias(Cantidad);
+                mProducto.setExistencias(cantidad);
                 mListaProductos.add(mProducto);
                 mCompra.setProductos(mListaProductos);
 
                 totaltemp = Float.parseFloat(String.valueOf(LBL_Sub.getText()));
-                Total = Total + totaltemp;
-                LBL_Total.setText(String.valueOf(String.format("%.2f", Total)));
+                total = total + totaltemp;
+                LBL_Total.setText(String.valueOf(String.format("%.2f", total)));
 
-                mCompra.setTotal(Total);
+                mCompra.setTotal(total);
             } else {
                 JOptionPane.showMessageDialog(null, "Atención el costo de compra no \n"
                         + "puede ser mayor al precio del producto");
@@ -361,7 +361,7 @@ public class FRM_Compra extends javax.swing.JFrame {
             datos[2] = mProducto.getClasificacion();
             datos[3] = mProducto.getTipo();
             datos[4] = "" + mProducto.getPrecio();
-            Precio = mProducto.getPrecio();
+            precio = mProducto.getPrecio();
 
             modeloTabla.addRow(datos);
 

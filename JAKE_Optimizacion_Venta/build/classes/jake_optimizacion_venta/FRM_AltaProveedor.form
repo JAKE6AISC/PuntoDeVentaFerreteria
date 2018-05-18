@@ -37,10 +37,8 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="BTNGuardar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="TXTNombre" alignment="0" max="32767" attributes="0"/>
-                      <Component id="TXTEmpresa" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="TXTNombre" alignment="0" max="32767" attributes="0"/>
+                  <Component id="TXTEmpresa" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>

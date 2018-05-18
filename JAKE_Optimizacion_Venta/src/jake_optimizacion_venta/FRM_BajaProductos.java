@@ -17,7 +17,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
     Producto mProducto = new Producto();
     BaseDeDatos mBD = new BaseDeDatos();
     DefaultTableModel modeloTabla = new DefaultTableModel();
-    private int Seleccionada;
+    private int seleccionada;
     /**
      * Creates new form FRM_BajaProductos
      */
@@ -29,7 +29,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         modeloTabla.addColumn("Tipo");
         modeloTabla.addColumn("Precio");
         this.setLocationRelativeTo(null);
-        Seleccionada = 0;
+        seleccionada = 0;
     }
 
     /**
@@ -92,7 +92,7 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         LBLid.setText("Nombre del Producto:");
@@ -270,10 +270,10 @@ public class FRM_BajaProductos extends javax.swing.JFrame {
         TXT_Nombre.setText("");
         LBL_ID.setText(""); 
         
-        Seleccionada = JTable_Bajas.rowAtPoint(evt.getPoint());
+        seleccionada = JTable_Bajas.rowAtPoint(evt.getPoint());
         
-        TXT_Nombre.setText(JTable_Bajas.getModel().getValueAt(Seleccionada, 1).toString());
-        LBL_ID.setText(JTable_Bajas.getModel().getValueAt(Seleccionada, 0).toString()); 
+        TXT_Nombre.setText(JTable_Bajas.getModel().getValueAt(seleccionada, 1).toString());
+        LBL_ID.setText(JTable_Bajas.getModel().getValueAt(seleccionada, 0).toString()); 
         
     }//GEN-LAST:event_JTable_BajasMouseClicked
 

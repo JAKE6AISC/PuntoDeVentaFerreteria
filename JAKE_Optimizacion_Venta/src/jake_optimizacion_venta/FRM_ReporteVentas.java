@@ -25,8 +25,8 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
 
     DateFormat df = DateFormat.getDateInstance();
     BaseDeDatos mBD = new BaseDeDatos();
-    private String Fecha = "";
-    private String Fecha2 = "";
+    private String fecha = "";
+    private String fecha2 = "";
 
     /**
      * Creates new form FRM_ReporteVentas
@@ -172,12 +172,12 @@ public class FRM_ReporteVentas extends javax.swing.JFrame {
         String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
         JasperReport jr = null;
         Map parametros = new HashMap();
-        Fecha = new SimpleDateFormat("yyyy-MM-dd").format(DC1.getDate());
-        Fecha2 = new SimpleDateFormat("yyyy-MM-dd").format(DC2.getDate());
+        fecha = new SimpleDateFormat("yyyy-MM-dd").format(DC1.getDate());
+        fecha2 = new SimpleDateFormat("yyyy-MM-dd").format(DC2.getDate());
 
         try {
-            parametros.put("fech", Fecha);
-            parametros.put("fech2", Fecha2);
+            parametros.put("fech", fecha);
+            parametros.put("fech2", fecha2);
             jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, parametros, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp);

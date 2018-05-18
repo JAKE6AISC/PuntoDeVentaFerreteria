@@ -14,7 +14,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     Proveedor mProveedor = new Proveedor();
     BaseDeDatos mBD = new BaseDeDatos();
-    int Seleccionada = 0;
+    private int seleccionada = 0;
 
     public FRM_ModificacionProveedor() {
         initComponents();
@@ -274,12 +274,12 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
         TXT_Id_Proveedor.setEditable(false);
         TXT_NuevoNombreProveedor.setText("");
         TXT_NuevaEmpresa.setText("");
-        Seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
+        seleccionada = JTableProveedor.rowAtPoint(evt.getPoint());
         TXT_Id_Proveedor.setEditable(true);
-        TXT_Id_Proveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 0).toString());
+        TXT_Id_Proveedor.setText(JTableProveedor.getModel().getValueAt(seleccionada, 0).toString());
         TXT_Id_Proveedor.setEditable(false);
-        TXT_NuevoNombreProveedor.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 1).toString());
-        TXT_NuevaEmpresa.setText(JTableProveedor.getModel().getValueAt(Seleccionada, 2).toString());
+        TXT_NuevoNombreProveedor.setText(JTableProveedor.getModel().getValueAt(seleccionada, 1).toString());
+        TXT_NuevaEmpresa.setText(JTableProveedor.getModel().getValueAt(seleccionada, 2).toString());
     }//GEN-LAST:event_JTableProveedorMouseClicked
 
     private void TXT_BusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_BusquedaActionPerformed
@@ -326,7 +326,7 @@ public class FRM_ModificacionProveedor extends javax.swing.JFrame {
                 }
                 mBD.desconectar();
             }
-        }// TODO add your handling code here:
+        }
     }//GEN-LAST:event_BTN_BuscaActionPerformed
 
     private void TXT_BusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BusquedaKeyPressed
