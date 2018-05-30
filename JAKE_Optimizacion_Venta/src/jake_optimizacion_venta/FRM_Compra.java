@@ -193,6 +193,11 @@ public class FRM_Compra extends javax.swing.JFrame {
         jLabel7.setText("Precio de Venta:");
 
         TXTpv.setText(" ");
+        TXTpv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTpvKeyTyped(evt);
+            }
+        });
 
         BTNprecio.setText("Cambiar");
         BTNprecio.addActionListener(new java.awt.event.ActionListener() {
@@ -388,40 +393,8 @@ public class FRM_Compra extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         LBL_date.setText(mCompra.getFecha());
         TXT_Nom.setEditable(false);
-        modeloTabla = (DefaultTableModel) TBL_prod.getModel();
-        int a = modeloTabla.getRowCount() - 1;
-        for (int i = a; i >= 0; i--) {
-            modeloTabla.removeRow(modeloTabla.getRowCount() - 1);
-        }
-        if (mBD.conectar()) {
-
-            ArrayList mLista = mBD.consultarProductos();
-            String[] datos;
-
-            for (Object mListaProducto : mLista) {
-                datos = new String[5];
-                mProducto = (Producto) mListaProducto;
-                datos[0] = "" + mProducto.getId_Producto();
-                datos[1] = mProducto.getNombre();
-                datos[2] = mProducto.getClasificacion();
-                datos[3] = mProducto.getTipo();
-                datos[4] = "" + mProducto.getPrecio();
-
-                modeloTabla.addRow(datos);
-            }
-            this.TBL_prod = new javax.swing.JTable();
-            this.TBL_prod.setModel(modeloTabla);
-            this.TBL_prod.getColumnModel().getColumn(0).setPreferredWidth(100);
-            this.TBL_prod.getColumnModel().getColumn(1).setPreferredWidth(200);
-            this.TBL_prod.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.TBL_prod.getColumnModel().getColumn(3).setPreferredWidth(200);
-            this.TBL_prod.getColumnModel().getColumn(4).setPreferredWidth(300);
-            if (this.TBL_prod.getRowCount() > 0) {
-                this.TBL_prod.setRowSelectionInterval(0, 0);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar producto");
-        }
+        
+        consultarTabla();
     }//GEN-LAST:event_formWindowActivated
 
     public void consultarTabla() {
@@ -479,6 +452,15 @@ public class FRM_Compra extends javax.swing.JFrame {
         }
         consultarTabla();
     }//GEN-LAST:event_BTNprecioActionPerformed
+
+    private void TXTpvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTpvKeyTyped
+       if (TXT_Costo.getText().contains(".")) {
+            char c = evt.getKeyChar();
+            if (c < '0' || c > '9') {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_TXTpvKeyTyped
 
     /**
      * @param args the command line arguments
