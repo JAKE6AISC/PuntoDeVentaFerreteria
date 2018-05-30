@@ -378,6 +378,20 @@ public class BaseDeDatos {
         }
     }
 
+    public boolean modificarPrecio(int ID, float PrecioN) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update producto set precio = " + PrecioN + " where id_producto = "
+                    + ID+ ";");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean realizarVenta(Venta mVenta) {//Sirve para guardar los datos de la
         // Venta en la base de datos
         Statement Consulta;
