@@ -752,4 +752,31 @@ public class BaseDeDatos {
         return mListaVentas;
     }
 
+    
+    
+    // Se Agrego Filtro busqueda para Reporte detalle compra
+     public Compra consultarCompraFiltro(String Busqueda) {
+       Compra mCompra = null;
+        Statement consulta;
+        ResultSet res;
+        List<Compra> ListaCompra = new ArrayList<>();
+
+        try {
+            mCompra = new Compra();
+            consulta = conexion.createStatement();
+            res = consulta.executeQuery("select * from compra where id_compra like '%" + Busqueda + "%' "
+                    + "or fecha like '%" + Busqueda + "%' or total like '%" + Busqueda + "%';");
+         
+            if (res.next()) {
+                mCompra.setId_Compra(res.getInt("id_compra"));
+                mCompra.setFecha(res.getString("fecha"));
+                mCompra.setTotal(res.getFloat("total"));
+                ListaCompra.add(mCompra);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mCompra;
+    }
 }

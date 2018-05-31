@@ -24,6 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
 
+    int seleccionada = 0;
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     Compra mCompra = new Compra();
@@ -38,6 +39,7 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         modeloTabla.addColumn("Fecha");
         modeloTabla.addColumn("Total");
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,6 +54,8 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         BTNsalir = new javax.swing.JButton();
         TXT_IDCompra = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        TXT_Filtro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,6 +74,11 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         });
 
         tblCompras.setModel(modeloTabla);
+        tblCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblComprasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCompras);
 
         BTNatras.setText("Atrás");
@@ -108,7 +117,7 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         BTNsalir.setText("Salir");
@@ -125,32 +134,40 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Filtrar resultados");
+
+        TXT_Filtro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TXT_FiltroKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TXT_IDCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BTNseleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTNatras)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BTNsalir)))
-                        .addGap(28, 28, 28))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TXT_IDCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTNseleccionar)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(TXT_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BTNatras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNsalir)))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,20 +177,23 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_IDCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(BTNseleccionar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNseleccionar)
+                    .addComponent(jLabel4)
+                    .addComponent(TXT_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNsalir)
                     .addComponent(BTNatras))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNseleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNseleccionarActionPerformed
+        //String path = "C:\\Users\\Juanez\\Documents\\Github\\PuntoDeVenta\\14\\PuntoDeVentaFerreteria\\JAKE_Optimizacion_Venta\\src\\jake_optimizacion_venta\\ReporteDetCompra.jasper";
         String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDetCompra.jasper";
         JasperReport jr = null;
         Map parametros = new HashMap();
@@ -242,11 +262,59 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
         mBD.desconectar();
     }//GEN-LAST:event_formWindowActivated
 
-    /**
-     * @param args the command line arguments
-     */
+    private void tblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblComprasMouseClicked
+        TXT_IDCompra.setEditable(false);
+        seleccionada = tblCompras.rowAtPoint(evt.getPoint());
+        TXT_IDCompra.setEditable(true);
+        TXT_IDCompra.setText(tblCompras.getModel().getValueAt(seleccionada, 0).toString());
+        TXT_IDCompra.setEditable(false);
+    }//GEN-LAST:event_tblComprasMouseClicked
+
+    private void TXT_FiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FiltroKeyPressed
+        if (TXT_Filtro.getText().equals("")) {
+
+        } else {
+            modeloTabla.setColumnCount(0);
+            modeloTabla.setRowCount(0);
+
+            if (mBD.conectar()) {
+
+                if (mBD.conectar()) {
+
+                    String[] dato;
+
+                    modeloTabla.addColumn("Id Compra");
+                    modeloTabla.addColumn("Fecha");
+                    modeloTabla.addColumn("Total");
+
+                    dato = new String[3];
+
+                    mCompra = mBD.consultarCompraFiltro(TXT_Filtro.getText());
+
+                    dato[0] = "" + (mCompra.getId_Compra());
+                    dato[1] = mCompra.getFecha();
+                    dato[2] = mCompra.getTotal() + "";
+
+                    modeloTabla.addRow(dato);
+
+                    this.tblCompras.setModel(modeloTabla);
+                    this.tblCompras.getColumnModel().getColumn(0).setPreferredWidth(50);
+                    this.tblCompras.getColumnModel().getColumn(1).setPreferredWidth(100);
+                    this.tblCompras.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+                    if (this.tblCompras.getRowCount() > 0) {
+                        this.tblCompras.setRowSelectionInterval(0, 0);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la Base de Datos");
+                }
+                mBD.desconectar();
+            }
+        }
+    }//GEN-LAST:event_TXT_FiltroKeyPressed
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -281,10 +349,12 @@ public class FRM_ReporteDetalleCompra extends javax.swing.JFrame {
     private javax.swing.JButton BTNatras;
     private javax.swing.JButton BTNsalir;
     private javax.swing.JButton BTNseleccionar;
+    private javax.swing.JTextField TXT_Filtro;
     private javax.swing.JTextField TXT_IDCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCompras;
