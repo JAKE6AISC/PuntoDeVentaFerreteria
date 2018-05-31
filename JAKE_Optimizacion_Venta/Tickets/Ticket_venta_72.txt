@@ -1,0 +1,49 @@
+       ╬═══════════════════╬
+       ╬ Ferreteria Juanes ╬
+       ╬═══════════════════╬
+
+
+     !!!Gracias por su preferencia!!!
+
+
+Lugar de expedicion: Río Grande Zacatecas  Código postal: 98403
+
+
+No. Venta 72  	Fecha 30/5/2018	 Hora 8:13
+
+
+Codigo		Descrip		Precio		Cantid		Subtotal
+
+══════════════════════════════════════════════
+1		Torni		1.5		1		1.5
+
+2		Segeta		16.5		1		16.5
+
+3		Mader		20.0		1		20.0
+
+
+══════════════════════════════════════════════
+
+			 	   	   Total a pagar: $38.0 MXN
+
+
+			 	   	   Efectivo: $40.0 MXN
+
+
+
+			 	   	   Cambio: $2.0 MXN
+
+
+
+
+   Version del Software 2.0 todos los derechos reservados a JAKE
+
+
+
+
+   Software realizado por la organizacion JAKE
+
+
+
+
+   !!! Gracias por su compra esperamos verlos pronto!!!

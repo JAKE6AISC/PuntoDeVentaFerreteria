@@ -221,12 +221,23 @@ public class FRM_AltaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AgregarActionPerformed
 
     private void TXT_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioKeyTyped
-       // if (TXT_Precio.getText().contains(".")) {
+/*       // if (TXT_Precio.getText().contains(".")) {
             char caracter = evt.getKeyChar();
             if (caracter < '0' || caracter > '9') {
                 evt.consume();
             }
-        //}
+        //}*/
+
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!= '.')  
+        {
+            evt.consume();
+        }
+        if(evt.getKeyChar() == '.' && TXT_Precio.getText().contains("."))
+        {
+	
+        evt.consume();
+
+        }
 
     }//GEN-LAST:event_TXT_PrecioKeyTyped
 

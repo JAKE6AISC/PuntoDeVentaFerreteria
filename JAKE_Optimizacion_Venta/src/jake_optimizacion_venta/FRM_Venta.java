@@ -550,9 +550,15 @@ public class FRM_Venta extends javax.swing.JFrame {
 
     }
     private void TXT_EfectivoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_EfectivoKeyTyped
-        char caracter = evt.getKeyChar();
-        if (caracter < '0' || caracter > '9') {
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!= '.')  
+        {
             evt.consume();
+        }
+        if(evt.getKeyChar() == '.' && TXT_Efectivo.getText().contains("."))
+        {
+	
+        evt.consume();
+
         }
     }//GEN-LAST:event_TXT_EfectivoKeyTyped
 

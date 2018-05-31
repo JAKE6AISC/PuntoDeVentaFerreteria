@@ -31,7 +31,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/puntoventa", "root", "");
+                    "jdbc:mysql://localhost:8889/puntoventa", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
@@ -677,9 +677,9 @@ public class BaseDeDatos {
     }
 
     public static void conect() {
-        String ruta = "jdbc:mysql://localhost/puntoventa";
+        String ruta = "jdbc:mysql://localhost:8889/puntoventa";
         String user = "root";
-        String pass = "";
+        String pass = "root";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connexion = DriverManager.getConnection(ruta, user, pass);

@@ -153,8 +153,9 @@ public class FRM_Grafica extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNsalirActionPerformed
 
     private void BTNatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNatrasActionPerformed
-        Menu mMenu = new Menu();
-        mMenu.setVisible(true);
+        Menu FormMenu = new Menu();
+        FormMenu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BTNatrasActionPerformed
 
     /**
