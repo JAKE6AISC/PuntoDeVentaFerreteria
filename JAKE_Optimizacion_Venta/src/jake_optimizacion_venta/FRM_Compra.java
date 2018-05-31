@@ -382,11 +382,15 @@ public class FRM_Compra extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_CantidadKeyTyped
 
     private void TXT_CostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CostoKeyTyped
-        if (TXT_Costo.getText().contains(".")) {
-            char c = evt.getKeyChar();
-            if (c < '0' || c > '9') {
-                evt.consume();
-            }
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!= '.')  
+        {
+            evt.consume();
+        }
+        if(evt.getKeyChar() == '.' && TXT_Costo.getText().contains("."))
+        {
+	
+        evt.consume();
+
         }
     }//GEN-LAST:event_TXT_CostoKeyTyped
 
