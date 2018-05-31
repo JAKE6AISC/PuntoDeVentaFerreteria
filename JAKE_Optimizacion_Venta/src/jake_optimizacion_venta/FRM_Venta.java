@@ -56,7 +56,7 @@ public class FRM_Venta extends javax.swing.JFrame {
     private int minutos;
     private int consulta_exist;
     private int contador;
-    float efectivo, cambio;
+    float efectivo = 0, cambio = 0;
     private float ganancia;
     private float total;
     private String fecha_actual;
@@ -208,7 +208,6 @@ public class FRM_Venta extends javax.swing.JFrame {
         jLabel2.setText("Total      $");
 
         TXT_Efectivo.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        TXT_Efectivo.setText(" ");
         TXT_Efectivo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 TXT_EfectivoFocusLost(evt);
@@ -272,9 +271,7 @@ public class FRM_Venta extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(7, 7, 7)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(LBL_Total))
+                            .addComponent(LBL_Total)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(TXT_Efectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -344,6 +341,9 @@ public class FRM_Venta extends javax.swing.JFrame {
         hora_string = hora + ":" + minutos;
     }
     private void BTN_AgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarProductoActionPerformed
+        if (TXT_Escaner.getText().equals("")) {
+            JOptionPane.showMessageDialog(null ,"Ingresa el código del producto");
+        }else {
         float costo = 0;
         int idDetCom = 0;
         if (mBD.conectar()) {
@@ -390,9 +390,8 @@ public class FRM_Venta extends javax.swing.JFrame {
         }
 
         mBD.desconectar();
-        // }
 
-
+        }
     }//GEN-LAST:event_BTN_AgregarProductoActionPerformed
 
     private void BTN_AtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AtrasActionPerformed
@@ -403,68 +402,75 @@ public class FRM_Venta extends javax.swing.JFrame {
 
     private void BTN_RealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RealizarVentaActionPerformed
         if (contador > 0) {
-            LBL_ID_Venta.setText(id_ultim);
-            mVenta.setFecha(fecha_actual);
-            mVenta.setId_Venta(Integer.parseInt(id_ultim));
-            mVenta.setTotal((float) total);
-            efectivo = Float.parseFloat(TXT_Efectivo.getText());
-            if (efectivo >= total) {
-                cambio = efectivo - total;
-                LBL_Cambio.setText(String.valueOf(cambio));
-                if (mBD.conectar()) {
-                    if (mBD.realizarVenta(mVenta)) {
-                        contador = 0;
-                        int id_vta = mVenta.getId_Venta();
-                        int id_prod;
-                        float precio;
-                        for (int j = 0; j < ArregloPrecios.size(); j++) {
-                            id_prod = ArregloIdProd.get(j);
-
-                            precio = ArregloPrecios.get(j);
-                            mBD.agregarDetalleVenta(precio, id_prod, id_vta);
-
+        
+        if ("".equals(TXT_Efectivo.getText())) {
+            JOptionPane.showMessageDialog(null, "Ingresa el efectivo");
+        }else {
+                LBL_ID_Venta.setText(id_ultim);
+                mVenta.setFecha(fecha_actual);
+                mVenta.setId_Venta(Integer.parseInt(id_ultim));
+                mVenta.setTotal((float) total);
+                efectivo = Float.parseFloat(TXT_Efectivo.getText());
+                if (efectivo >= total) {
+                    cambio = efectivo - total;
+                    LBL_Cambio.setText(String.valueOf(cambio));
+                    if (mBD.conectar()) {
+                        if (mBD.realizarVenta(mVenta)) {
+                            contador = 0;
+                            int id_vta = mVenta.getId_Venta();
+                            int id_prod;
+                            float precio;
+                            for (int j = 0; j < ArregloPrecios.size(); j++) {
+                                id_prod = ArregloIdProd.get(j);
+                                
+                                precio = ArregloPrecios.get(j);
+                                mBD.agregarDetalleVenta(precio, id_prod, id_vta);
+                                
+                            }
+                            
+                            mBD.agregarTicket(id_vta, fecha_actual, hora_string, lugar, cp, total, efectivo, cambio);
+                            try {
+                                ruta = "Tickets\\Ticket_venta_" + id_ultim + ".txt";
+                                GenerarTicketTxt(ruta, lugar, cp, id_ultim, dia, mes, year, hora_string, total, efectivo, cambio);
+                                JOptionPane.showMessageDialog(null, "Venta Realizada\nTicket de venta numero " + id_ultim + " Guardado");
+                            } catch (HeadlessException e) {
+                                JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage());
+                            } catch (IOException ex) {
+                                Logger.getLogger(FRM_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            VaciarCampos();
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error");
+                            mBD.desconectar();
                         }
-
-                        mBD.agregarTicket(id_vta, fecha_actual, hora_string, lugar, cp, total, efectivo, cambio);
-                        try {
-                            ruta = "Tickets\\Ticket_venta_" + id_ultim + ".txt";
-                            GenerarTicketTxt(ruta, lugar, cp, id_ultim, dia, mes, year, hora_string, total, efectivo, cambio);
-                            JOptionPane.showMessageDialog(null, "Venta Realizada\nTicket de venta numero " + id_ultim + " Guardado");
-                        } catch (HeadlessException e) {
-                            JOptionPane.showMessageDialog(null, "ERROR: " + e.getMessage());
-                        } catch (IOException ex) {
-                            Logger.getLogger(FRM_Venta.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        VaciarCampos();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error");
-                        mBD.desconectar();
+                        ObternerIdVtas();
+                        LBL_ID_Venta.setText(id_ultim);
                     }
-                    ObternerIdVtas();
-                    LBL_ID_Venta.setText(id_ultim);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El efectivo debe ser mayor al total");
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
-        }
-        String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
-        JasperReport jr = null;
-        Map parametros = new HashMap();
-
-        try {
+                
+            } 
+             //String path = "C:\\Users\\Juanez\\Documents\\Github\\PuntoDeVenta\\14\\PuntoDeVentaFerreteria\\JAKE_Optimizacion_Venta\\src\\jake_optimizacion_venta\\ReporteDeVentas.jasper";
+             String path = "/Users/KevinCruz/PV/PuntoDeVentaFerreteria/JAKE_Optimizacion_Venta/src/jake_optimizacion_venta/ReporteDeVentas.jasper";
+            JasperReport jr = null;
+            Map parametros = new HashMap();
+            
+            try {
             parametros.put("ID", mVenta.getId_Venta());
             jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            //jr = (JasperReport) JRLoader.loadObject(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp);
             jv.setVisible(true);
             jv.setTitle(path);
-        } catch (JRException ex) {
+            } catch (JRException ex) {
             Logger.getLogger(FRM_ReporteVentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
+        }else {
+                JOptionPane.showMessageDialog(null, "No se puede realizar una venta vacia");
+            }
     }//GEN-LAST:event_BTN_RealizarVentaActionPerformed
     public void GenerarTicketTxt(String ruta, String lugar, String cp, String id_ultim, int dia, int mes, int year, String hora_string, float total, float efectivo, float cambio) throws IOException {
         try (BufferedWriter ArchivoTXT = new BufferedWriter(new FileWriter(ruta))) {
@@ -563,19 +569,19 @@ public class FRM_Venta extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_EscanerKeyPressed
 
     private void TXT_EscanerFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_EscanerFocusLost
-        if (ValidarEscanner()) {
+       /* if (ValidarEscanner()) {
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese codigo de barras primero");
+           // JOptionPane.showMessageDialog(null, "Ingrese codigo de barras primero");
             TXT_Escaner.requestFocus();
-        }
+        }*/
     }//GEN-LAST:event_TXT_EscanerFocusLost
 
     private void TXT_EfectivoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_EfectivoFocusLost
-        if (ValidarEfectivo()) {
+     /*   if (ValidarEfectivo()) {
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese codigo de barras primero");
+           // JOptionPane.showMessageDialog(null, "Ingrese efevtivo primero");
             TXT_Efectivo.requestFocus();
-        }
+        }*/
     }//GEN-LAST:event_TXT_EfectivoFocusLost
     private void VaciarCampos() {
         TXT_Escaner.setText("");
